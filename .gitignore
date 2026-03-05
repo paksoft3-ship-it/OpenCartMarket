@@ -24,6 +24,9 @@
 .DS_Store
 *.pem
 _stitch_extract/
+stitch.zip
+stitch_opencart_extension_marketplace_home.zip
+stitch_opencart_extension_marketplace_home (1).zip
 
 # debug
 npm-debug.log*
