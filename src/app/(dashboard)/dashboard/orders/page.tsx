@@ -1,64 +1,54 @@
 "use client";
 
+import Link from "next/link";
 import { useMockData } from "@/lib/hooks/useMockData";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
 
 export default function OrdersPage() {
-    const { orders, isLoaded } = useMockData();
+  const { orders, isLoaded } = useMockData();
 
-    if (!isLoaded) return <div className="space-y-4"><h1 className="text-2xl font-bold">Orders</h1><div className="h-[400px] bg-muted/20 animate-pulse rounded-md" /></div>;
+  if (!isLoaded) {
+    return <div className="h-[300px] animate-pulse rounded-2xl bg-slate-100 dark:bg-slate-800" />;
+  }
 
-    return (
-        <div className="space-y-6">
-            <div>
-                <h1 className="text-3xl font-bold tracking-tight">Order History</h1>
-                <p className="text-muted-foreground mt-1">View your previous purchases and invoices.</p>
-            </div>
-
-            <div className="rounded-md border bg-card">
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Order ID</TableHead>
-                            <TableHead>Date</TableHead>
-                            <TableHead>Status</TableHead>
-                            <TableHead>Items</TableHead>
-                            <TableHead className="text-right">Total</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {orders.length === 0 ? (
-                            <TableRow>
-                                <TableCell colSpan={5} className="text-center h-24 text-muted-foreground">
-                                    No orders found.
-                                </TableCell>
-                            </TableRow>
-                        ) : (
-                            orders.map((order) => (
-                                <TableRow key={order.id}>
-                                    <TableCell className="font-medium">{order.id}</TableCell>
-                                    <TableCell>{new Date(order.date).toLocaleDateString()}</TableCell>
-                                    <TableCell>
-                                        <Badge variant={order.status === 'completed' ? 'default' : 'secondary'} className="capitalize">
-                                            {order.status}
-                                        </Badge>
-                                    </TableCell>
-                                    <TableCell>
-                                        <div className="flex flex-col gap-1">
-                                            {order.items.map((item, i) => (
-                                                <span key={i} className="text-sm truncate max-w-[200px]">{item.productName}</span>
-                                            ))}
-                                        </div>
-                                    </TableCell>
-                                    <TableCell className="text-right font-medium">${order.total.toFixed(2)}</TableCell>
-                                </TableRow>
-                            ))
-                        )}
-                    </TableBody>
-                </Table>
-            </div>
+  return (
+    <div className="mx-auto max-w-7xl space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white">Sipariş Geçmişi</h1>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Yeni tasarımdaki liste görünümü ve invoice detay akışı entegre edildi.</p>
         </div>
-    );
+      </div>
+
+      <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+        <table className="w-full text-left">
+          <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500 dark:bg-slate-800/60">
+            <tr>
+              <th className="px-5 py-3">Sipariş ID</th>
+              <th className="px-5 py-3">Tarih</th>
+              <th className="px-5 py-3">Durum</th>
+              <th className="px-5 py-3">Toplam</th>
+              <th className="px-5 py-3">İşlem</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orders.map((order) => (
+              <tr key={order.id} className="border-t border-slate-100 dark:border-slate-800">
+                <td className="px-5 py-4 text-sm font-semibold text-slate-900 dark:text-slate-100">{order.id}</td>
+                <td className="px-5 py-4 text-sm text-slate-500">{new Date(order.date).toLocaleDateString()}</td>
+                <td className="px-5 py-4">
+                  <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${order.status === "completed" ? "bg-emerald-100 text-emerald-700" : "bg-slate-200 text-slate-700"}`}>
+                    {order.status}
+                  </span>
+                </td>
+                <td className="px-5 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200">${order.total.toFixed(2)}</td>
+                <td className="px-5 py-4 text-sm">
+                  <Link href={`/dashboard/orders/${order.id}`} className="font-semibold text-primary hover:underline">Detayları Gör</Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }

@@ -1,97 +1,65 @@
 "use client";
 
 import { useAppStore } from "@/lib/store";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState } from "react";
 import { toast } from "sonner";
-import { Separator } from "@/components/ui/separator";
 
 export default function SettingsPage() {
-    const { user } = useAppStore();
+  const { user } = useAppStore();
+  const [marketingEmails, setMarketingEmails] = useState(true);
+  const [securityEmails, setSecurityEmails] = useState(true);
+  const [productUpdates, setProductUpdates] = useState(false);
 
-    const handleSave = (e: React.FormEvent) => {
-        e.preventDefault();
-        toast.success("Settings saved successfully! (Mock)");
-    };
+  const handleSave = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    toast.success("Ayarlar kaydedildi (mock)");
+  };
 
-    return (
-        <div className="space-y-6 max-w-3xl">
-            <div>
-                <h1 className="text-3xl font-bold tracking-tight">Account Settings</h1>
-                <p className="text-muted-foreground mt-1">Manage your account profile, email preferences, and billing information.</p>
-            </div>
+  return (
+    <div className="mx-auto max-w-4xl space-y-6">
+      <div>
+        <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white">Hesap Ayarları</h1>
+        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Yeni design dosyasındaki profile/security/preferences düzeni uygulandı.</p>
+      </div>
 
-            <Card>
-                <CardHeader>
-                    <CardTitle>Profile Information</CardTitle>
-                    <CardDescription>Update your contact details and display name.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <form id="profile-form" onSubmit={handleSave} className="space-y-6">
-                        <div className="grid gap-2">
-                            <Label htmlFor="name">Full Name</Label>
-                            <Input id="name" defaultValue={user?.name} required />
-                        </div>
-                        <div className="grid gap-2">
-                            <Label htmlFor="email">Email Address</Label>
-                            <Input id="email" type="email" defaultValue={user?.email} required />
-                        </div>
-                        <div className="grid gap-2">
-                            <Label htmlFor="company">Company Name (Optional)</Label>
-                            <Input id="company" placeholder="e.g. Acme Corp" />
-                        </div>
-                    </form>
-                </CardContent>
-                <CardFooter className="border-t px-6 py-4 flex justify-end">
-                    <Button type="submit" form="profile-form">Save Changes</Button>
-                </CardFooter>
-            </Card>
+      <form onSubmit={handleSave} className="space-y-6">
+        <section className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white">Profil Ayarları</h2>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <input defaultValue={user?.name || ""} placeholder="Ad Soyad" className="rounded-lg border border-slate-200 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-800" />
+            <input defaultValue={user?.email || ""} type="email" placeholder="ornek@email.com" className="rounded-lg border border-slate-200 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-800" />
+          </div>
+        </section>
 
-            <Card>
-                <CardHeader>
-                    <CardTitle>Security</CardTitle>
-                    <CardDescription>Update your password and secure your account.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <form id="security-form" onSubmit={handleSave} className="space-y-6">
-                        <div className="grid gap-2">
-                            <Label htmlFor="current_password">Current Password</Label>
-                            <Input id="current_password" type="password" />
-                        </div>
-                        <div className="grid gap-2">
-                            <Label htmlFor="new_password">New Password</Label>
-                            <Input id="new_password" type="password" />
-                        </div>
-                        <div className="grid gap-2">
-                            <Label htmlFor="confirm_password">Confirm New Password</Label>
-                            <Input id="confirm_password" type="password" />
-                        </div>
-                    </form>
-                </CardContent>
-                <CardFooter className="border-t px-6 py-4 flex justify-between items-center">
-                    <p className="text-sm text-muted-foreground">Requires re-login after password change.</p>
-                    <Button type="submit" form="security-form" variant="secondary">Update Password</Button>
-                </CardFooter>
-            </Card>
+        <section className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white">Güvenlik</h2>
+          <div className="mt-4 grid gap-4 sm:grid-cols-3">
+            <input type="password" placeholder="Mevcut şifre" className="rounded-lg border border-slate-200 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-800" />
+            <input type="password" placeholder="Yeni şifre" className="rounded-lg border border-slate-200 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-800" />
+            <input type="password" placeholder="Yeni şifre tekrar" className="rounded-lg border border-slate-200 px-4 py-2.5 dark:border-slate-700 dark:bg-slate-800" />
+          </div>
+        </section>
 
-            <div className="py-4">
-                <h3 className="text-lg font-medium text-destructive mb-2">Danger Zone</h3>
-                <Separator className="mb-4" />
-                <Card className="border-destructive/20 bg-destructive/5">
-                    <CardContent className="flex flex-col md:flex-row items-start md:items-center justify-between p-6 gap-4">
-                        <div>
-                            <h4 className="font-semibold text-foreground">Delete Account</h4>
-                            <p className="text-sm text-muted-foreground">Permanently remove your account and all data. This action is irreversible.</p>
-                        </div>
-                        <Button variant="destructive" className="shrink-0" onClick={() => window.confirm("Are you sure? This is irreversible.") && toast.error("Cannot delete demo account.")}>
-                            Delete Account
-                        </Button>
-                    </CardContent>
-                </Card>
-            </div>
+        <section className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white">Bildirimler ve Tercihler</h2>
+          <div className="mt-4 space-y-3 text-sm">
+            <label className="flex items-center justify-between rounded-lg border border-slate-100 p-3 dark:border-slate-800">
+              <span>Pazarlama e-postaları</span>
+              <input type="checkbox" checked={marketingEmails} onChange={(e) => setMarketingEmails(e.target.checked)} />
+            </label>
+            <label className="flex items-center justify-between rounded-lg border border-slate-100 p-3 dark:border-slate-800">
+              <span>Güvenlik bildirimleri</span>
+              <input type="checkbox" checked={securityEmails} onChange={(e) => setSecurityEmails(e.target.checked)} />
+            </label>
+            <label className="flex items-center justify-between rounded-lg border border-slate-100 p-3 dark:border-slate-800">
+              <span>Ürün güncellemeleri</span>
+              <input type="checkbox" checked={productUpdates} onChange={(e) => setProductUpdates(e.target.checked)} />
+            </label>
+          </div>
+        </section>
 
-        </div>
-    );
+        <button type="submit" className="rounded-xl bg-primary px-7 py-3 text-sm font-bold text-white hover:bg-primary/90">Değişiklikleri Kaydet</button>
+      </form>
+    </div>
+  );
 }
