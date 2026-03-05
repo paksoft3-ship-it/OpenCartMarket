@@ -23,6 +23,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
     const developer = await getDeveloperById(product.developerId);
     const reviews = await getReviewsByProduct(product.id);
+    const numericRating = Number(product.rating);
 
     return (
         <div className="flex-grow max-w-[1280px] mx-auto px-6 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -121,7 +122,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                         <div className="flex items-center gap-4 mb-8">
                             <div className="flex items-center text-amber-400">
                                 {Array.from({ length: 5 }).map((_, i) => (
-                                    <span key={i} className="material-symbols-outlined" style={{ fontVariationSettings: i < product.rating ? "'FILL' 1" : "'FILL' 0" }}>star</span>
+                                    <span key={i} className="material-symbols-outlined" style={{ fontVariationSettings: i < numericRating ? "'FILL' 1" : "'FILL' 0" }}>star</span>
                                 ))}
                             </div>
                             <span className="text-sm font-medium text-slate-600 dark:text-slate-300">{product.rating} ({reviews.length} Değerlendirme)</span>

@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+_stitch_extract/
 
 # debug
 npm-debug.log*
