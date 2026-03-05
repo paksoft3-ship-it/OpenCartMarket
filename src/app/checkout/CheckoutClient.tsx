@@ -4,7 +4,7 @@ import { useAppStore } from "@/lib/store";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
-import { CheckCircle2, ShoppingCart, Trash2 } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -12,7 +12,6 @@ import Image from "next/image";
 
 export default function CheckoutClient() {
     const { cart, removeFromCart, clearCart } = useAppStore();
-    const [isSuccess, setIsSuccess] = useState(false);
     const router = useRouter();
 
     // To avoid hydration mismatch for cart state
@@ -59,35 +58,11 @@ export default function CheckoutClient() {
         localStorage.setItem('mock_licenses', JSON.stringify([...newLicenses, ...existingLicenses]));
 
         clearCart();
-        setIsSuccess(true);
         toast.success("Ödeme başarıyla tamamlandı!");
+        router.push('/checkout/success');
     };
 
     if (!mounted) return null;
-
-    if (isSuccess) {
-        return (
-            <Container className="py-24 text-center max-w-2xl">
-                <div className="flex justify-center mb-6">
-                    <div className="h-24 w-24 bg-green-100 rounded-full flex items-center justify-center">
-                        <CheckCircle2 className="h-12 w-12 text-green-600" />
-                    </div>
-                </div>
-                <h1 className="text-4xl font-bold tracking-tight mb-4 text-slate-900 dark:text-white">Ödeme Başarılı!</h1>
-                <p className="text-lg text-slate-500 dark:text-slate-400 mb-8">
-                    Satın aldığınız için teşekkür ederiz. Dijital ürünleriniz ve lisans anahtarlarınız artık panelinizde mevcuttur.
-                </p>
-                <div className="flex justify-center gap-4">
-                    <Link href="/dashboard/downloads">
-                        <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold h-12 px-6 rounded-xl">İndirmelere Git</Button>
-                    </Link>
-                    <Link href="/dashboard/licenses">
-                        <Button variant="outline" size="lg" className="font-bold h-12 px-6 rounded-xl border-slate-200 dark:border-slate-700">Lisansları Görüntüle</Button>
-                    </Link>
-                </div>
-            </Container>
-        );
-    }
 
     if (cart.length === 0) {
         return (

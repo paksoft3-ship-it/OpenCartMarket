@@ -40,7 +40,7 @@ export function Header() {
                             <Link href="/login" className="flex items-center justify-center rounded-lg h-10 px-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-sm font-semibold">
                                 <span>Giriş Yap</span>
                             </Link>
-                            <Link href="/login" className="flex items-center justify-center rounded-lg h-10 px-5 bg-primary text-white hover:bg-primary/90 transition-colors text-sm font-semibold shadow-sm">
+                            <Link href="/register" className="flex items-center justify-center rounded-lg h-10 px-5 bg-primary text-white hover:bg-primary/90 transition-colors text-sm font-semibold shadow-sm">
                                 <span>Kayıt Ol</span>
                             </Link>
                         </>
