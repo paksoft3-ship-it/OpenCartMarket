@@ -1,0 +1,62 @@
+[
+  {
+    "id": "dev-1",
+    "name": "Stitch Themes",
+    "avatar": "https://i.pravatar.cc/150?u=dev-1",
+    "rating": 4.9,
+    "reviews": 340,
+    "products": 12,
+    "joined": "2023-01-15",
+    "description": "Premium OpenCart themes for modern stores."
+  },
+  {
+    "id": "dev-2",
+    "name": "Opentify Solutions",
+    "avatar": "https://i.pravatar.cc/150?u=dev-2",
+    "rating": 4.7,
+    "reviews": 120,
+    "products": 5,
+    "joined": "2022-11-20",
+    "description": "We build the best marketing tools."
+  },
+  {
+    "id": "dev-3",
+    "name": "Codex Masters",
+    "avatar": "https://i.pravatar.cc/150?u=dev-3",
+    "rating": 4.8,
+    "reviews": 290,
+    "products": 8,
+    "joined": "2021-05-10",
+    "description": "Payment and shipping integrations."
+  },
+  {
+    "id": "dev-4",
+    "name": "Nova Modules",
+    "avatar": "https://i.pravatar.cc/150?u=dev-4",
+    "rating": 4.5,
+    "reviews": 85,
+    "products": 15,
+    "joined": "2023-08-05",
+    "description": "Affordable utility modules for every store."
+  },
+  {
+    "id": "dev-5",
+    "name": "XML Sync Pro",
+    "avatar": "https://i.pravatar.cc/150?u=dev-5",
+    "rating": 4.6,
+    "reviews": 150,
+    "products": 3,
+    "joined": "2020-03-22",
+    "description": "High performance XML dropshipping tools."
+  },
+  {
+    "id": "dev-6",
+    "name": "Design Ninja",
+    "avatar": "https://i.pravatar.cc/150?u=dev-6",
+    "rating": 5,
+    "reviews": 45,
+    "products": 2,
+    "joined": "2024-01-10",
+    "description": "Handcrafted themes with extreme attention to detail."
+  }
+]

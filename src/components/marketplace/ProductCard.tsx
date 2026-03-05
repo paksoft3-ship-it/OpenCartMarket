@@ -1,0 +1,62 @@
+import Link from "next/link";
+import { Product } from "@/lib/types";
+import { Star, Download } from "lucide-react";
+import Image from "next/image";
+
+interface ProductCardProps {
+    product: Product;
+}
+
+export function ProductCard({ product }: ProductCardProps) {
+    return (
+        <div className="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-soft hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 dark:border-slate-700 flex flex-col h-full relative">
+            {/* Image Container */}
+            <Link href={`/product/${product.slug}`} className="block aspect-[4/3] bg-slate-100 dark:bg-slate-700 relative overflow-hidden">
+                <Image
+                    src={product.images[0] || "https://picsum.photos/seed/placeholder/800/600"}
+                    alt={product.name}
+                    fill
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-3 left-3 flex gap-2">
+                    <span className="px-2 py-1 bg-white/90 dark:bg-slate-900/90 backdrop-blur text-xs font-bold text-slate-800 dark:text-slate-100 rounded shadow-sm border border-white/20 capitalize">
+                        {product.categoryId.replace('-', ' ')}
+                    </span>
+                    {Number(product.rating) >= 4.5 && (
+                        <span className="px-2 py-1 bg-accent/90 backdrop-blur text-xs font-bold text-white rounded shadow-sm border border-white/20">YENİ</span>
+                    )}
+                </div>
+                {/* Hover Overlay Actions */}
+                <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 p-4">
+                    <button className="flex-1 bg-white text-slate-900 hover:bg-slate-50 font-medium py-2 px-4 rounded-lg text-sm shadow-sm transition-colors border border-transparent">Canlı Demo</button>
+                    <button className="flex-1 bg-primary text-white hover:bg-primary/90 font-medium py-2 px-4 rounded-lg text-sm shadow-sm transition-colors">Detayları Gör</button>
+                </div>
+            </Link>
+
+            {/* Content */}
+            <div className="p-5 flex flex-col flex-1">
+                <div className="flex justify-between items-start mb-2 gap-2">
+                    <h3 className="font-bold text-lg leading-tight text-primary line-clamp-2">
+                        <Link href={`/product/${product.slug}`} className="hover:underline">{product.name}</Link>
+                    </h3>
+                    <span className="text-accent font-bold text-lg shrink-0">
+                        {product.price === 0 ? "Ücretsiz" : `₺${product.price.toFixed(2)}`}
+                    </span>
+                </div>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">{product.shortDescription}</p>
+
+                <div className="mt-auto pt-4 border-t border-slate-100 dark:border-slate-700 flex items-center justify-between">
+                    <div className="flex items-center gap-1 text-amber-400">
+                        <span className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                        <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{product.rating}</span>
+                        <span className="text-xs text-slate-400">({Math.floor(Math.random() * 200 + 10)})</span>
+                    </div>
+                    <div className="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-sm">
+                        <span className="material-symbols-outlined text-[16px]">download</span>
+                        <span>{product.installs >= 1000 ? `${(product.installs / 1000).toFixed(1)}k+` : product.installs} Kurulum</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}

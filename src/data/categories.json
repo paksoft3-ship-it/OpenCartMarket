@@ -1,0 +1,32 @@
+[
+  {
+    "id": "themes",
+    "name": "Themes",
+    "slug": "themes",
+    "description": "OpenCart themes with modern designs."
+  },
+  {
+    "id": "modules",
+    "name": "Modules",
+    "slug": "modules",
+    "description": "Extend OpenCart functionality."
+  },
+  {
+    "id": "xml-integrations",
+    "name": "XML Integrations",
+    "slug": "xml-integrations",
+    "description": "Product feeds and stock synchronization."
+  },
+  {
+    "id": "payment",
+    "name": "Payment Modules",
+    "slug": "payment",
+    "description": "Gateways like Stripe, PayPal, and more."
+  },
+  {
+    "id": "marketing",
+    "name": "Marketing Tools",
+    "slug": "marketing",
+    "description": "SEO, newsletters, and promo tools."
+  }
+]

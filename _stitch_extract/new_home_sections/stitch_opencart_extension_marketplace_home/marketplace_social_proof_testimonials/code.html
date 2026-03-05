@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Marketplace Social Proof &amp; Testimonials</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B6CFF",
+                        "background-light": "#F8FAFC",
+                        "background-dark": "#0f1123",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1E293B",
+                        "text-primary-light": "#0F172A",
+                        "text-primary-dark": "#F8FAFC",
+                        "text-secondary-light": "#64748B",
+                        "text-secondary-dark": "#94A3B8",
+                        "accent": "#00C2A8"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1.25rem", // 20px
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .masonry-grid { column-count: 2; }
+        }
+        @media (min-width: 1024px) {
+            .masonry-grid { column-count: 3; }
+        }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-primary-light dark:text-text-primary-dark transition-colors duration-300 antialiased selection:bg-primary/30 selection:text-primary">
+<section class="py-[120px] px-4 md:px-8 lg:px-12 w-full max-w-[1280px] mx-auto overflow-hidden">
+<div class="mb-20 text-center">
+<h4 class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-semibold leading-normal tracking-widest uppercase mb-8">Güvenilen Markalar</h4>
+<div class="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16 opacity-60">
+<div class="w-32 h-12 bg-center bg-no-repeat bg-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100" data-alt="Trusted brand logo placeholder 1" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBA_FMRRVlTsSjwf_LUK0kqWdgaBz47Y-zM7AyTw0hbBqPT30h8AGmhKyM3sO1-W6SEV4psPhs6tEmmlgiOUfOCO_y289Ao5wW2MOo2h9-xwQNo6JHUSW9z2xc4LrYAOlIPrGdQLZtGbwK0IpnbNaUBSLlaPMzOB2QzSkl3Ne6-_cFBr-kPVxAMsmZ_jnVr5Fq3-CF5QijK6fS4Lf_nyRWW03hDsulkhugLu-NzwuU9sHMjHM_hCEUGtBO3TkxBr9rx_CQ_EqXSnvM");'></div>
+<div class="w-32 h-12 bg-center bg-no-repeat bg-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100" data-alt="Trusted brand logo placeholder 2" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD3C3ZbBqf8Cw9xVVoDYrdvm60bRyz4XhgKOJ_H07Ux-OPRJ_kg0UJbnrf4xYJdYovJ9yXV357_idpJh-wekukS8mfqrOkqLHX138n7_h4d6eLsJqqNzVQriYeZdtgFKHtSxq52dpfUF9W-qi1cET-23qSwygcFDzpD6-K0D9H1kzIp1RuKH-ZlApt4qD0S4MTBuUtsxzYgtjxKeG_JANnWtWRcz3ZKb0cwUUEkktSRNC1rEiIkuYtZKLc_c2Fg1PlVNnjQKr8TjtY");'></div>
+<div class="w-32 h-12 bg-center bg-no-repeat bg-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100" data-alt="Trusted brand logo placeholder 3" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDTNJGPIvesbBRyp-TN5EG_n1Dbzz0PmFLFSnF5c-onkfGjkahsJypeglRfbc0B7kWy2_6CAWXaFQpKTa-QWgi61Sr4YCqL5PfBjuMwc9taES1IO4Z07s_mLGL85clAds3bea30fF3-OlN5SPUW_XSAbkx4GHh09NVTXuIREGfswbjLbQamZztCNx3vPqZBFgB19MLUiHI6QTLCHScgDdbzyoD9NNnMK3PQhvd-FNeHcRAJNHgNZZFNNbjycabA21TOIRSCYwudeos");'></div>
+<div class="w-32 h-12 bg-center bg-no-repeat bg-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100 hidden sm:block" data-alt="Trusted brand logo placeholder 4" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAKmeFxMLlVck7vyHwICO2i--lmsE9QkyGAZsLRkgP2_HDtFG7ikNJ1cIq19ThMN-iSRBsJllmo43clzN_tydruGpBV5QCgStY_ra8QJXDT2a-g3o0vKr7ENED2kQkC4UGnbk5LqQ3AOZcq7Kmt0rEnMZfloln6ju2OC95qWIy1uJxZ1S3NoHn48gICFD9PK5hD4Rtofssn3v6w4GBR0SEeE_fJxGovJULhv0sqhdBm2E9Z67S_EOAcubcYLLtbbqfc2QxXHNTxaa0");'></div>
+<div class="w-32 h-12 bg-center bg-no-repeat bg-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100 hidden md:block" data-alt="Trusted brand logo placeholder 5" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBL4bdVIK58kXHlZyLbFFGjiT7WsGSvH0skxeDokGMQzazlg3xB7UqjGCGrm6tEAO7rficsdoUVgBp-y0qZbWqD3np4e4u9NNt6UkWs1x8OvqI-bnu_LLiLl4erkACdW44jwjLIB4Gk3S_UTaUxICxRE203f5dN4S2yLTW-fkoOtPagEisyeVyaI0hhcC2WpcvGUEL4LULPGEb6mgT23-bZJw3SmRAL78ycwhJz4gYm9qLyT7fK1gE_oxHzBiO5Hiu1no0JcDy7K14");'></div>
+<div class="w-32 h-12 bg-center bg-no-repeat bg-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100 hidden lg:block" data-alt="Trusted brand logo placeholder 6" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBfcz6DesB-xdoiDoYqc7KZWcOVKN5cBzEqvTqYn-yS35_JtpjC53511NqIUjBmG2_7f-ddo-KQILfOWjS28y1TI0yMnuD0PWroehvKbJHGy_Ed3WIbSPThxbkDkBNW9Pn12MKP_TeiDK09hLEefVedaDC_P7TpMauE5-nTS5gMM8bOvghKNPaKLptPfce-1OOE0jLMIvG7u3BAEjVEV3vnIqOi5Kt_i1Ath_8_b34gCuEcaOGjaRPtpBLfu2R5rCTRPQZOeYMz1ys");'></div>
+</div>
+</div>
+<div class="masonry-grid w-full">
+<div class="masonry-item bg-surface-light dark:bg-surface-dark rounded-xl shadow-soft p-8 flex flex-col gap-6 border border-slate-100 dark:border-slate-800 transition-transform hover:-translate-y-1 hover:shadow-lg duration-300">
+<div class="flex gap-1 text-accent">
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+</div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-medium leading-relaxed">
+                    "Bu OpenCart teması mağazamızın görünümünü tamamen değiştirdi. Çok modern ve hızlı çalışıyor. Müşteri desteği de harika!"
+                </p>
+<div class="flex items-center gap-4 mt-auto pt-4 border-t border-slate-100 dark:border-slate-800/50">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-12 shadow-sm" data-alt="Avatar placeholder for Emre Can" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDeA9cbYou4WjRLu7IIEJuCA0qjgLx-gC5xhDncu_SCAgZKFcalTuFrG-V7Pin7L2s0zWA0-DbM2daLNVPCuMPaZy5GJVsyL6By8q26n5hIvvZKKdNmqfPKRvLBuRHSItu8NZt2L_6sYRpdHpKuhUZqhaGY-f_QIHUcXJpAoey_VxC8RXo_vMmgYChBGzvz9iMipLOu5oGFuQWqmHJXO0uPHbZA-ehj0G2VuRHQoocpQCFzNbzmG2kDSra5YDkaeTa1mRr8CKdJ-A4");'></div>
+<div class="flex-1">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-semibold leading-tight">Emre Can</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal mt-0.5">Can Pet Market • Pet Shop</p>
+</div>
+</div>
+</div>
+<div class="masonry-item bg-surface-light dark:bg-surface-dark rounded-xl shadow-soft p-8 flex flex-col gap-6 border border-slate-100 dark:border-slate-800 transition-transform hover:-translate-y-1 hover:shadow-lg duration-300">
+<div class="flex gap-1 text-accent">
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star_half</span>
+</div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-medium leading-relaxed">
+                    "Modüller tam istediğimiz gibi. Kurulumu çok kolay oldu ve satışlarımızı gözle görülür şekilde artırdı. Kesinlikle tavsiye ederim."
+                </p>
+<div class="flex items-center gap-4 mt-auto pt-4 border-t border-slate-100 dark:border-slate-800/50">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-12 shadow-sm" data-alt="Avatar placeholder for Ayşe Yılmaz" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDyZcak55AVMPEPT79feD408wEvvyqA7LI5hpCGZKZ6dDgWJm0fXEUSlPK7K4hj3HCL7Jtsw1wHdtCYv45B0ydA5ZDvT8290aQg1oSJcGI_0rQLepf9CACGfXKXOBf9XrprVUPW6orZuNS_jC2xvwI6nrAEA2x0i71ZRmlbvKty8o0c-1tpqkMrVpfW0kYX1QrQ0fLIHtTlIBAI1eaEdq5wcStiVJuOe4TTIsAWmQAC7sfKIWHgbkp0zB-_MbSg_Ga4n5Ee5-YfqIg");'></div>
+<div class="flex-1">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-semibold leading-tight">Ayşe Yılmaz</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal mt-0.5">Moda Butik • Giyim</p>
+</div>
+</div>
+</div>
+<div class="masonry-item bg-surface-light dark:bg-surface-dark rounded-xl shadow-soft p-8 flex flex-col gap-6 border border-slate-100 dark:border-slate-800 transition-transform hover:-translate-y-1 hover:shadow-lg duration-300">
+<div class="flex gap-1 text-accent">
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+</div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-medium leading-relaxed">
+                    "Türkiye pazarı için özel geliştirilmiş eklentileri bulmak harika. Hem kaliteli hem de çok uygun fiyatlı çözümler sunuyorlar."
+                </p>
+<div class="flex items-center gap-4 mt-auto pt-4 border-t border-slate-100 dark:border-slate-800/50">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-12 shadow-sm" data-alt="Avatar placeholder for Ahmet Demir" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBIXbN3EfGikFfM93s6Tu9IfH5R5GkhiZG6kOcIYnxYFrm9pin59vJov5h_JiqmpfAIUbs6NFrGftYWV8s3Idgqb86hwwnArb5ep824pdpbthXQS_GFbJlfutehJxbw1GX-fVuSfCpxlk55UvZPFTQSoz9rvF9k_3XOFztc2THASZL1GOyYaoM4EAGW29ox5ivIRL0xZN3AgVVbUuTj7W3kFRGmIwOxykhyVRLK5kJpwedKOUw0mV73pNMtc7pnfnwSHsZ-1waaOH4");'></div>
+<div class="flex-1">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-semibold leading-tight">Ahmet Demir</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal mt-0.5">Tekno Mağaza • Elektronik</p>
+</div>
+</div>
+</div>
+<div class="masonry-item bg-surface-light dark:bg-surface-dark rounded-xl shadow-soft p-8 flex flex-col gap-6 border border-slate-100 dark:border-slate-800 transition-transform hover:-translate-y-1 hover:shadow-lg duration-300">
+<div class="flex gap-1 text-accent">
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+</div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-medium leading-relaxed">
+                    "SEO modülünü aldıktan sonra organik trafiğimizde ciddi bir artış oldu. Arayüzü çok temiz ve kullanımı çok pratik."
+                </p>
+<div class="flex items-center gap-4 mt-auto pt-4 border-t border-slate-100 dark:border-slate-800/50">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-12 shadow-sm" data-alt="Avatar placeholder for Elif Kaya" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDqZNiRfaIR4WZIDyACHBsk_kNMnAbielRvhE0HmkHIFBqYSOCtl4lRbPodH2X7LymE0lCqsuE5gLNhSyUKjGMAa8VaLzS1IfjDNTDAMrF7x24HGB_wmiDOKdTUKhKL3a9o75zvJgbz36FQ1MM1sypAyHJHtiiSzLYfsr94zbbPvKrtujDvDeErSf5sr5kHgIcgTRAkUvGROD5R2FZGvss0B7J6mYNMoktz-vDF5r2VtGIFphApaXcGQ0g50t9jCT_5KFWfFBoWf1Y");'></div>
+<div class="flex-1">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-semibold leading-tight">Elif Kaya</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal mt-0.5">Evim Dekor • Mobilya</p>
+</div>
+</div>
+</div>
+<div class="masonry-item bg-surface-light dark:bg-surface-dark rounded-xl shadow-soft p-8 flex flex-col gap-6 border border-slate-100 dark:border-slate-800 transition-transform hover:-translate-y-1 hover:shadow-lg duration-300">
+<div class="flex gap-1 text-accent">
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star_border</span>
+</div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-medium leading-relaxed">
+                    "Pet shop sitemiz için aldığımız tema harika. Mobil uyumluluğu mükemmel ve sayfa yüklenme hızları çok iyi."
+                </p>
+<div class="flex items-center gap-4 mt-auto pt-4 border-t border-slate-100 dark:border-slate-800/50">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-12 shadow-sm" data-alt="Avatar placeholder for Mehmet Şahin" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD1HZ7bjnYV7LnPJ6LG7uyBSz0knAHG-NwSe5Ts9KuwacY368Ye5dYJ_NKc0hpWr3B2v-_zfVW58X_I7KATbViR9baYiNyuwVyKBhyfZlnk8EUUqsTi-SH2S0blDFj93ROIvAQWUj0AlswRik6jqthCXHUPam3zm7ztkuiWOIOatE2UGI45cd71rMrt6aDzWB8-7exyZthnEiKKFTlU1db-bNpfQlOXlyT2gxejdGMQqzrH4SRE0UPWIw5in0lbVRGL01rCH1tLAhY");'></div>
+<div class="flex-1">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-semibold leading-tight">Mehmet Şahin</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal mt-0.5">Spor Dünyası • Spor</p>
+</div>
+</div>
+</div>
+<div class="masonry-item bg-surface-light dark:bg-surface-dark rounded-xl shadow-soft p-8 flex flex-col gap-6 border border-slate-100 dark:border-slate-800 transition-transform hover:-translate-y-1 hover:shadow-lg duration-300">
+<div class="flex gap-1 text-accent">
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+</div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-medium leading-relaxed">
+                    "Kozmetik mağazamız için harika bir tasarım oldu. Hem çok şık hem de müşterilerimiz için alışveriş deneyimini çok kolaylaştırdı."
+                </p>
+<div class="flex items-center gap-4 mt-auto pt-4 border-t border-slate-100 dark:border-slate-800/50">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-12 shadow-sm" data-alt="Avatar placeholder for Zeynep Çelik" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCaMPfF9FKcpNwCW_jSOr_DeR1f7wSOAi9KFLjMpwTuzi6XogkvOnYG13F3ptjkrXdKD7vaGMp3npUCHBJobgZSASVnG5yOWuLwtSHEc_YzGAmOMY9rNjP49cxV0DzdCzMcqSANOEVt2JEUrVGlilUCk5Y8AUEpL8jTMOwyyZX3YdOFy3m55K76nEdzBgcnOI7PIn02Q5R0cCGFYme6A5DMp5xc5g5h_RSnTeXDl3Fi2p6CL1DglRw4jQpTa9AvdIFfeDDcy1blqLs");'></div>
+<div class="flex-1">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-semibold leading-tight">Zeynep Çelik</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal mt-0.5">Kozmetik Evi • Kozmetik</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-16 flex justify-center w-full">
+<button class="inline-flex items-center justify-center h-12 px-8 rounded-lg border-2 border-primary text-primary bg-transparent hover:bg-primary/5 dark:hover:bg-primary/10 text-base font-semibold tracking-wide transition-colors duration-200">
+                Tüm Yorumları Oku
+            </button>
+</div>
+</section>
+</body></html>

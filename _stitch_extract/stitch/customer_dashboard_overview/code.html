@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Customer Dashboard Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B6CFF",
+                        "success": "#00C2A8",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f1123",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1e2139",
+                        "text-main": "#0f172a",
+                        "text-muted": "#64748b",
+                        "border-light": "#e2e8f0"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "heading": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-slate-100 antialiased h-screen overflow-hidden flex">
+<!-- Sidebar -->
+<aside class="w-64 bg-surface-light dark:bg-surface-dark border-r border-border-light dark:border-slate-700/50 flex flex-col h-full flex-shrink-0 relative z-20">
+<!-- Logo -->
+<div class="h-16 flex items-center px-6 border-b border-border-light dark:border-slate-700/50">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined filled text-[20px]">storefront</span>
+</div>
+<div class="flex flex-col">
+<span class="font-heading text-lg font-bold leading-none tracking-tight">Marketplace</span>
+<span class="text-xs text-text-muted font-medium">Customer Portal</span>
+</div>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex-1 overflow-y-auto py-6 px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-medium transition-colors" href="#">
+<span class="material-symbols-outlined filled">space_dashboard</span>
+<span class="text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-text-main dark:hover:text-slate-200 font-medium transition-colors" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="text-sm">Satın Alımlarım</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-text-main dark:hover:text-slate-200 font-medium transition-colors" href="#">
+<span class="material-symbols-outlined">download</span>
+<span class="text-sm">İndirmeler</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-text-main dark:hover:text-slate-200 font-medium transition-colors" href="#">
+<span class="material-symbols-outlined">key</span>
+<span class="text-sm">Lisanslar</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-text-main dark:hover:text-slate-200 font-medium transition-colors" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="text-sm">Destek Talepleri</span>
+</a>
+<div class="pt-6 pb-2">
+<div class="px-3 text-xs font-semibold text-text-muted uppercase tracking-wider">Ayarlar</div>
+</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-text-main dark:hover:text-slate-200 font-medium transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm">Hesap Ayarları</span>
+</a>
+</nav>
+<!-- Bottom User Area -->
+<div class="p-4 border-t border-border-light dark:border-slate-700/50">
+<div class="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer transition-colors">
+<img alt="User Profile" class="w-9 h-9 rounded-full object-cover ring-2 ring-white dark:ring-slate-800" data-alt="Profile picture of Ahmet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZaqvFFWuYbjcbMmcSkdFlfloCB8589Sm-Z84uqvSn3gMU7bT-sNBdcnpx0cX5hZb03VJpOYQ-kJ_5DdMEFnXBUzYr8De-2TBEV1D3lPIzPtzwSQ9pO9jXqz3o5u5GsrukDGMceaGy1HJiTlHxQDhmjz3JysYfju8qEPMpF0hzBxNeOYAt6MV5KUQAg7wBtm5ndkW_nh6ccLcANngWMX-DHA4C35FK7mo9O7puqzHOHYD9dOdXiblWYMeEYKu0m5Z-MgtJAxqebX8"/>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold text-text-main dark:text-slate-200 truncate">Ahmet Yılmaz</p>
+<p class="text-xs text-text-muted truncate">ahmet@example.com</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden">
+<!-- Topbar -->
+<header class="h-16 flex items-center justify-between px-8 bg-surface-light/80 dark:bg-surface-dark/80 backdrop-blur-md border-b border-border-light dark:border-slate-700/50 sticky top-0 z-10">
+<!-- Search -->
+<div class="flex-1 max-w-md">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-muted text-[20px] group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg leading-5 bg-slate-50 dark:bg-slate-800/50 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary dark:text-slate-200 transition-all sm:text-sm" placeholder="Search themes, modules, orders..." type="text"/>
+<div class="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none">
+<span class="text-xs text-slate-400 font-medium px-1.5 py-0.5 rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800">⌘K</span>
+</div>
+</div>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center gap-4 ml-4">
+<button class="relative p-2 text-text-muted hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 block w-2 h-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-surface-dark"></span>
+</button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 overflow-y-auto p-8">
+<div class="max-w-7xl mx-auto space-y-8">
+<!-- Welcome Section -->
+<div>
+<h1 class="font-heading text-3xl text-text-main dark:text-white mb-2">Hoş geldin, Ahmet 👋</h1>
+<p class="text-text-muted text-base">Manage your OpenCart themes and modules.</p>
+</div>
+<!-- Metrics Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Metric Card 1 -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 border border-border-light dark:border-slate-700/50 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-sm font-medium text-text-muted">Total Purchases</h3>
+<div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold text-text-main dark:text-white">12</span>
+</div>
+</div>
+<!-- Metric Card 2 -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 border border-border-light dark:border-slate-700/50 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-sm font-medium text-text-muted">Active Licenses</h3>
+<div class="w-8 h-8 rounded-lg bg-success/10 flex items-center justify-center text-success">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold text-text-main dark:text-white">8</span>
+</div>
+</div>
+<!-- Metric Card 3 -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 border border-border-light dark:border-slate-700/50 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-sm font-medium text-text-muted">Available Updates</h3>
+<div class="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-500">
+<span class="material-symbols-outlined text-[20px]">update</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold text-text-main dark:text-white">3</span>
+</div>
+</div>
+<!-- Metric Card 4 -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 border border-border-light dark:border-slate-700/50 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-sm font-medium text-text-muted">Support Tickets</h3>
+<div class="w-8 h-8 rounded-lg bg-slate-500/10 flex items-center justify-center text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-[20px]">forum</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold text-text-main dark:text-white">1</span>
+<span class="text-xs font-medium text-orange-500 bg-orange-500/10 px-2 py-0.5 rounded-full">Open</span>
+</div>
+</div>
+</div>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column (Wider) -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Recent Purchases Table -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-slate-700/50 shadow-sm overflow-hidden">
+<div class="px-6 py-5 border-b border-border-light dark:border-slate-700/50 flex justify-between items-center">
+<h2 class="text-lg font-semibold text-text-main dark:text-white">Recent Purchases</h2>
+<button class="text-sm text-primary hover:text-primary/80 font-medium transition-colors">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-border-light dark:border-slate-700/50">
+<th class="px-6 py-3 text-xs font-medium text-text-muted uppercase tracking-wider">Product</th>
+<th class="px-6 py-3 text-xs font-medium text-text-muted uppercase tracking-wider">Date</th>
+<th class="px-6 py-3 text-xs font-medium text-text-muted uppercase tracking-wider">Status</th>
+<th class="px-6 py-3 text-xs font-medium text-text-muted uppercase tracking-wider text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light dark:divide-slate-700/50">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+<span class="material-symbols-outlined">palette</span>
+</div>
+<div>
+<div class="text-sm font-semibold text-text-main dark:text-slate-200">Journal 3 - Advanced Theme</div>
+<div class="text-xs text-text-muted">v3.1.12 • Theme</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-text-muted">
+                                                Oct 24, 2023
+                                            </td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+                                                    Active
+                                                </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<button class="text-slate-400 hover:text-primary transition-colors px-3 py-1.5 rounded-md hover:bg-primary/5">Manage</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
+<span class="material-symbols-outlined">extension</span>
+</div>
+<div>
+<div class="text-sm font-semibold text-text-main dark:text-slate-200">Ajax Smart Checkout Pro</div>
+<div class="text-xs text-text-muted">v2.4.0 • Module</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-text-muted">
+                                                Sep 12, 2023
+                                            </td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+                                                    Active
+                                                </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<button class="text-slate-400 hover:text-primary transition-colors px-3 py-1.5 rounded-md hover:bg-primary/5">Manage</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 dark:text-amber-400">
+<span class="material-symbols-outlined">search_insights</span>
+</div>
+<div>
+<div class="text-sm font-semibold text-text-main dark:text-slate-200">Advanced SEO Pack</div>
+<div class="text-xs text-text-muted">v4.1.2 • Module</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-text-muted">
+                                                Aug 05, 2023
+                                            </td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600">
+                                                    Expired
+                                                </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<button class="text-slate-400 hover:text-primary transition-colors px-3 py-1.5 rounded-md hover:bg-primary/5">Manage</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Column (Sidebar) -->
+<div class="space-y-8">
+<!-- Product Updates Card -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-slate-700/50 shadow-sm p-6 relative overflow-hidden">
+<!-- Background accent -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -z-10"></div>
+<div class="flex items-center gap-3 mb-4">
+<div class="w-8 h-8 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
+<span class="material-symbols-outlined text-[18px]">new_releases</span>
+</div>
+<h3 class="text-base font-semibold text-text-main dark:text-white">New Updates Available</h3>
+</div>
+<div class="space-y-4">
+<div class="p-3 rounded-lg border border-border-light dark:border-slate-700/50 hover:border-primary/30 transition-colors">
+<div class="flex justify-between items-start mb-2">
+<div>
+<div class="text-sm font-semibold text-text-main dark:text-slate-200">Journal 3 Theme</div>
+<div class="text-xs text-text-muted">v3.2.0 is now available</div>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 px-3 py-2 bg-primary text-white text-sm font-medium rounded-md hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                                        Download Update
+                                    </button>
+</div>
+</div>
+</div>
+<!-- License Keys Section -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-slate-700/50 shadow-sm p-6">
+<div class="flex items-center justify-between mb-5">
+<h3 class="text-base font-semibold text-text-main dark:text-white">Active Licenses</h3>
+<a class="text-sm text-primary hover:underline" href="#">View All</a>
+</div>
+<div class="space-y-4">
+<!-- License 1 -->
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="text-sm font-medium text-text-main dark:text-slate-200">Journal 3 Theme</span>
+<span class="text-xs text-text-muted">mystore.com</span>
+</div>
+<div class="flex gap-2">
+<div class="flex-1 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-md px-3 py-2 flex items-center justify-between font-mono text-xs text-text-muted">
+<span>J3-XXXX-YYYY-ZZZZ-1234</span>
+</div>
+<button class="px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-md hover:bg-slate-50 dark:hover:bg-slate-800 text-text-muted transition-colors flex items-center" title="Copy">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+</div>
+</div>
+<!-- License 2 -->
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="text-sm font-medium text-text-main dark:text-slate-200">Ajax Smart Checkout Pro</span>
+<span class="text-xs text-text-muted">mystore.com</span>
+</div>
+<div class="flex gap-2">
+<div class="flex-1 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-md px-3 py-2 flex items-center justify-between font-mono text-xs text-text-muted">
+<span>ASC-XXXX-YYYY-ZZZZ-5678</span>
+</div>
+<button class="px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-md hover:bg-slate-50 dark:hover:bg-slate-800 text-text-muted transition-colors flex items-center" title="Copy">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
