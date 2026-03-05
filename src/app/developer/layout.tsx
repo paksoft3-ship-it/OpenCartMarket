@@ -9,7 +9,8 @@ const sidebarLinks = [
     { href: "/developer", icon: "dashboard", label: "Genel Bakış" },
     { href: "/developer/products", icon: "inventory_2", label: "Ürünlerim" },
     { href: "/developer/add", icon: "add_circle", label: "Yeni Ekle" },
-    { href: "/developer/analytics", icon: "analytics", label: "Analizler" },
+    { href: "/developer/analytics", icon: "payments", label: "Ödemeler" },
+    { href: "/developer/apply", icon: "task_alt", label: "Başvuru" },
 ];
 
 export default function DeveloperLayout({ children }: { children: React.ReactNode }) {
@@ -31,7 +32,7 @@ export default function DeveloperLayout({ children }: { children: React.ReactNod
 
                 <nav className="flex-1 overflow-y-auto py-6 px-3 space-y-1 flex flex-col gap-2">
                     {sidebarLinks.map((link) => {
-                        const isActive = pathname === link.href || (link.href === '/developer/add' && pathname.includes('add')); // just a simple match for the demo
+                        const isActive = pathname === link.href || (link.href === '/developer/add' && pathname.includes('add'));
                         return (
                             <Link
                                 key={link.href}
