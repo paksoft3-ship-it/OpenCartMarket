@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OCMarket Marketplace (MVP)
+
+A modern, production-quality Next.js marketplace web app for selling OpenCart themes and modules. Built for speed, SEO, and great developer experience with a "modern SaaS marketplace" feel.
+
+## Tech Stack
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript 
+- **Styling:** Tailwind CSS & shadcn/ui
+- **State Management:** Zustand (Cart & Auth)
+- **Data:** JSON based (mock database)
 
 ## Getting Started
 
-First, run the development server:
+1. **Install dependencies**
+   ```bash
+   pnpm install
+   ```
+   *(npm or yarn will also work if you prefer)*
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. **Run the development server**
+   ```bash
+   pnpm dev
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. **Open the app**
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Route Map
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/` - Homepage (Hero, Featured products, Trending)
+- `/browse` - Browse Marketplace (Search, Filter by Category/Price, Sort)
+- `/product/[slug]` - Product details, Screenshots, Reviews, and Add to Cart
+- `/developer/[id]` - Developer profile and their products
+- `/checkout` - Mock secure checkout
+- `/login` - Demo login selector for Customer / Admin
+- `/dashboard/*` - Customer Portal (Orders, Downloads, Licenses, Settings)
+- `/admin/*` - Admin Portal (Sales Overview, Product CRUD mock, Orders)
+- `/docs`, `/support` - Static informational pages
 
-## Learn More
+## How it works (Mock MVP)
 
-To learn more about Next.js, take a look at the following resources:
+**Data Layer:** 
+Products, categories, developers, and reviews are statically read from `src/data/*.json`. This gives you a robust local API feel using React Server Components.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Authentication:** 
+The `/login` route demonstrates a "Fake Auth" where you choose between Customer and Admin. It sets a local cookie (`market_session`) and saves user details into Zustand `localStorage`. The `src/middleware.ts` protects `/dashboard` and `/admin` routes based on this cookie.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**State & Cart:**
+Zustand handles the global cart and user state, persisting automatically via `localStorage`. The `/checkout` route saves mockup purchase data (Orders & Licenses) into `localStorage`, so your Dashboard actually reflects what you bought!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Admin CRUD:**
+Navigating to Admin > Products allows you to create new themes and modules dynamically using a form. These are appended to a mock array stored in `localStorage` in the browser, showing up immediately in the tables.
+# OpenCartMarket
