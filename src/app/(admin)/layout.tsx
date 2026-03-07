@@ -7,23 +7,23 @@ import { cn } from "@/lib/utils";
 import { AdminAccessProvider, AdminView } from "@/components/admin/AdminAccessContext";
 type NavItem = { href: string; icon: string; label: string; views: AdminView[] };
 
-const adminLinks = [
+const adminLinks: NavItem[] = [
     { href: "/admin", icon: "dashboard", label: "Dashboard", views: ["super", "ops", "finance", "content", "growth"] },
     { href: "/admin/products", icon: "inventory_2", label: "Products", views: ["super", "ops", "content", "growth"] },
     { href: "/admin/orders", icon: "shopping_cart", label: "Orders", views: ["super", "ops", "finance"] },
     { href: "/admin/customers", icon: "group", label: "Customers", views: ["super", "ops", "growth"] },
-] satisfies NavItem[];
+];
 
-const ecosystemLinks = [
+const ecosystemLinks: NavItem[] = [
     { href: "/admin/developers", icon: "code", label: "Developers", views: ["super", "ops"] },
     { href: "/admin/modules", icon: "deployed_code", label: "Modules Lab", views: ["super", "ops", "content"] },
     { href: "/admin/xml", icon: "sync_alt", label: "XML Hub", views: ["super", "ops", "finance"] },
     { href: "/admin/licenses", icon: "vpn_key", label: "Licenses", views: ["super", "ops", "finance"] },
     { href: "/admin/blog", icon: "article", label: "Blog", views: ["super", "content", "growth"] },
     { href: "/admin/reviews", icon: "rule", label: "Moderation", views: ["super", "ops", "content"] },
-] satisfies NavItem[];
+];
 
-const managementLinks = [
+const managementLinks: NavItem[] = [
     { href: "/admin/analytics", icon: "bar_chart", label: "Analytics", views: ["super", "finance", "growth", "ops"] },
     { href: "/admin/risk", icon: "gpp_maybe", label: "Risk Center", views: ["super", "ops", "finance"] },
     { href: "/admin/marketing", icon: "campaign", label: "Marketing", views: ["super", "growth", "content"] },
@@ -35,7 +35,7 @@ const managementLinks = [
     { href: "/admin/support", icon: "support_agent", label: "Support", views: ["super", "ops"] },
     { href: "/admin/refunds", icon: "request_quote", label: "Refunds", views: ["super", "ops", "finance"] },
     { href: "/admin/settings", icon: "settings", label: "Settings", views: ["super", "finance", "ops"] },
-] satisfies NavItem[];
+];
 
 const viewOptions: { value: AdminView; label: string }[] = [
     { value: "super", label: "Super Admin" },

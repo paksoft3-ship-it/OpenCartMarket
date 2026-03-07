@@ -131,7 +131,7 @@ export const fileRepository = {
     const updated: AdminProduct = { ...current, ...patch, id: current.id, updatedAt: nowIso() };
     const changes = Object.entries(patch).map(([field, value]) => ({
       field,
-      before: String((current as Record<string, unknown>)[field] ?? ""),
+      before: String((current as unknown as Record<string, unknown>)[field] ?? ""),
       after: String(value ?? ""),
     }));
 
@@ -215,11 +215,11 @@ export const fileRepository = {
     const next: PolicySettings = { ...nextPolicies, updatedAt: nowIso() };
 
     const changes = Object.keys(nextPolicies)
-      .filter((field) => (current as Record<string, unknown>)[field] !== (nextPolicies as Record<string, unknown>)[field])
+      .filter((field) => (current as unknown as Record<string, unknown>)[field] !== (nextPolicies as unknown as Record<string, unknown>)[field])
       .map((field) => ({
         field,
-        before: String((current as Record<string, unknown>)[field] ?? ""),
-        after: String((nextPolicies as Record<string, unknown>)[field] ?? ""),
+        before: String((current as unknown as Record<string, unknown>)[field] ?? ""),
+        after: String((nextPolicies as unknown as Record<string, unknown>)[field] ?? ""),
       }));
 
     let dbNext: DbState = { ...db, policySettings: next };

@@ -376,8 +376,8 @@ export const useAdminOpsStore = create<AdminOpsState>()(
           if (!current) return state;
 
           const { snapshot, restorePoint } = makeSnapshot(state, actor, `Rule toggle ${id}`);
-          const nextStatus = current.status === "active" ? "paused" : "active";
-          const rules = state.rules.map((item) => (item.id === id ? { ...item, status: nextStatus } : item));
+          const nextStatus: AutomationRule["status"] = current.status === "active" ? "paused" : "active";
+          const rules: AutomationRule[] = state.rules.map((item) => (item.id === id ? { ...item, status: nextStatus } : item));
           const audit = makeAuditEntry({
             actor,
             action: "automation.rule.toggled",
@@ -487,7 +487,9 @@ export const useAdminOpsStore = create<AdminOpsState>()(
           if (releasable.length === 0) return state;
 
           const { snapshot, restorePoint } = makeSnapshot(state, actor, "Modules release batch");
-          const moduleSubmissions = state.moduleSubmissions.map((item) => (item.stage === "release" ? { ...item, stage: "released", risk: "low" as ModuleRisk } : item));
+          const moduleSubmissions: ModuleSubmission[] = state.moduleSubmissions.map((item) =>
+            item.stage === "release" ? { ...item, stage: "released", risk: "low" } : item
+          );
           const audit = makeAuditEntry({
             actor,
             action: "module.release.batch.created",

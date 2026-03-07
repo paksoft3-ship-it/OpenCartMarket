@@ -117,6 +117,13 @@ export default function AdminSettingsPage() {
     toast.success("Settings saved and queued for policy deployment.");
   };
 
+  const applyRestorePoint = (restorePointId: string | undefined) => {
+    if (!restorePointId) return;
+    if (!window.confirm(`Apply restore point ${restorePointId}?`)) return;
+    restoreFromPoint(restorePointId, "Admin");
+    toast.success("Policy restore point applied.");
+  };
+
   return (
     <div className="flex-1 overflow-y-auto p-4 sm:p-8">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
@@ -247,11 +254,7 @@ export default function AdminSettingsPage() {
                     {entry.restorePointId && (
                       <button
                         className="rounded-md border border-slate-200 px-2.5 py-1 text-xs font-semibold hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800"
-                        onClick={() => {
-                          if (!window.confirm(`Apply restore point ${entry.restorePointId}?`)) return;
-                          restoreFromPoint(entry.restorePointId, "Admin");
-                          toast.success("Policy restore point applied.");
-                        }}
+                        onClick={() => applyRestorePoint(entry.restorePointId)}
                         type="button"
                       >
                         Restore
