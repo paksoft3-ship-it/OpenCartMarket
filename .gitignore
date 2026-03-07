@@ -14,3 +14,9 @@ public/logo1_v2.png
 public/favicon_backup.png
 public/favicon1.png
 public/fa.png
+_stitch_extract/
+stitch.zip
+stitch_opencart_extension_marketplace_home*.zip
+stitch_opencart_extension_marketplace_home5.zip
+tsconfig.tsbuildinfo
+public/.DS_Store
