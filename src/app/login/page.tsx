@@ -74,7 +74,10 @@ export default function LoginPage() {
             <div>
               <div className="mb-2 flex items-center justify-between">
                 <label htmlFor="password" className="block text-sm font-semibold text-slate-700 dark:text-slate-300">Şifre</label>
-                <Link href="/forgot-password" className="text-xs font-semibold text-primary hover:underline">Şifremi unuttum</Link>
+                <div className="flex items-center gap-3">
+                  <Link href="/verify-2fa" className="text-xs font-semibold text-primary hover:underline">2FA Doğrula</Link>
+                  <Link href="/forgot-password" className="text-xs font-semibold text-primary hover:underline">Şifremi unuttum</Link>
+                </div>
               </div>
               <input
                 id="password"

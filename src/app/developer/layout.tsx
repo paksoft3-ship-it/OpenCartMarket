@@ -9,7 +9,8 @@ const sidebarLinks = [
     { href: "/developer", icon: "dashboard", label: "Genel Bakış" },
     { href: "/developer/products", icon: "inventory_2", label: "Ürünlerim" },
     { href: "/developer/add", icon: "add_circle", label: "Yeni Ekle" },
-    { href: "/developer/analytics", icon: "payments", label: "Ödemeler" },
+    { href: "/developer/analytics", icon: "analytics", label: "Satış Analitiği" },
+    { href: "/developer/wallet", icon: "account_balance_wallet", label: "Cüzdan" },
     { href: "/developer/apply", icon: "task_alt", label: "Başvuru" },
 ];
 

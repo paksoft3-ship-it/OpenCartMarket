@@ -1,13 +1,19 @@
 import Link from "next/link";
 import { Product } from "@/lib/types";
-import { Star, Download } from "lucide-react";
 import Image from "next/image";
 
 interface ProductCardProps {
     product: Product;
 }
 
+function getStableReviewCount(product: Product): number {
+    const numericId = Number.parseInt(product.id.replace(/\D/g, ""), 10) || 0;
+    return 10 + ((numericId * 37 + product.installs + Math.round(Number(product.rating) * 10)) % 200);
+}
+
 export function ProductCard({ product }: ProductCardProps) {
+    const reviewCount = getStableReviewCount(product);
+
     return (
         <div className="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-soft hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 dark:border-slate-700 flex flex-col h-full relative">
             {/* Image Container */}
@@ -49,7 +55,7 @@ export function ProductCard({ product }: ProductCardProps) {
                     <div className="flex items-center gap-1 text-amber-400">
                         <span className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
                         <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{product.rating}</span>
-                        <span className="text-xs text-slate-400">({Math.floor(Math.random() * 200 + 10)})</span>
+                        <span className="text-xs text-slate-400">({reviewCount})</span>
                     </div>
                     <div className="flex items-center gap-1 text-slate-500 dark:text-slate-400 text-sm">
                         <span className="material-symbols-outlined text-[16px]">download</span>

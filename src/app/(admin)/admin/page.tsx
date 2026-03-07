@@ -1,11 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { useMemo } from "react";
 import { useMockData } from "@/lib/hooks/useMockData";
+import { useAdminOpsStore } from "@/lib/store/adminOpsStore";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function AdminDashboardOverview() {
-    const { orders, isLoaded } = useMockData();
+    const { isLoaded } = useMockData();
+    const auditTrail = useAdminOpsStore((state) => state.auditTrail);
+    const restorePoints = useAdminOpsStore((state) => state.restorePoints);
+    const automationLogs = useAdminOpsStore((state) => state.automationLogs);
+    const recentOpsActivity = useMemo(() => auditTrail.slice(0, 4), [auditTrail]);
 
     if (!isLoaded) {
         return <div className="p-8"><Skeleton className="h-[200px] w-full rounded-xl" /></div>;
@@ -16,7 +22,7 @@ export default function AdminDashboardOverview() {
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-8 gap-4">
                 <div>
                     <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">Overview</h1>
-                    <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Here's what's happening with your marketplace today.</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Here is what is happening with your marketplace today.</p>
                 </div>
                 <div className="flex gap-3">
                     <button className="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-900 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm flex items-center gap-2">
@@ -187,38 +193,80 @@ export default function AdminDashboardOverview() {
                     {/* Recent Activity */}
                     <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-5">
                         <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-4">Recent Activity</h3>
-                        <div className="space-y-4">
-                            <div className="flex gap-3">
-                                <div className="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                    <span className="material-symbols-outlined text-emerald-600 dark:text-emerald-400 text-sm">shopping_cart</span>
+                        <div className="space-y-3">
+                            {recentOpsActivity.map((entry) => (
+                                <div key={entry.id} className="rounded-lg border border-slate-100 p-3 dark:border-slate-800">
+                                    <p className="text-xs font-semibold uppercase tracking-wider text-primary">{entry.action}</p>
+                                    <p className="mt-1 text-sm text-slate-900 dark:text-slate-200">{entry.details}</p>
+                                    <p className="mt-1 text-xs text-slate-500">{entry.actor} • {new Date(entry.at).toLocaleString("tr-TR")}</p>
                                 </div>
-                                <div>
-                                    <p className="text-sm text-slate-900 dark:text-slate-300"><span className="font-semibold">New Sale:</span> Mega Theme Bundle</p>
-                                    <p className="text-xs text-slate-500 dark:text-slate-500 mt-0.5">2 mins ago • $149.00</p>
-                                </div>
-                            </div>
-                            <div className="flex gap-3">
-                                <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                    <span className="material-symbols-outlined text-blue-600 dark:text-blue-400 text-sm">person_add</span>
-                                </div>
-                                <div>
-                                    <p className="text-sm text-slate-900 dark:text-slate-300"><span className="font-semibold">New Developer</span> registration</p>
-                                    <p className="text-xs text-slate-500 dark:text-slate-500 mt-0.5">15 mins ago • TechVision Inc</p>
-                                </div>
-                            </div>
-                            <div className="flex gap-3">
-                                <div className="w-8 h-8 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                    <span className="material-symbols-outlined text-yellow-600 dark:text-yellow-400 text-sm">star</span>
-                                </div>
-                                <div>
-                                    <p className="text-sm text-slate-900 dark:text-slate-300"><span className="font-semibold">5-star Review</span> on Auto Backup Pro</p>
-                                    <p className="text-xs text-slate-500 dark:text-slate-500 mt-0.5">1 hour ago</p>
-                                </div>
-                            </div>
+                            ))}
+                            {recentOpsActivity.length === 0 && <p className="text-sm text-slate-500">No live activity yet.</p>}
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div className="mt-8 grid gap-6 xl:grid-cols-[1.6fr_1fr]">
+                <section className="rounded-xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+                    <div className="mb-5 flex items-center justify-between">
+                        <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">Marketplace Portfolio Mix</h3>
+                        <Link href="/admin/products" className="text-sm font-semibold text-primary hover:underline">Manage Catalog</Link>
+                    </div>
+                    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                        <PortfolioCard label="Themes" value="148" icon="palette" />
+                        <PortfolioCard label="Modules" value="236" icon="extension" />
+                        <PortfolioCard label="XML Integrations" value="74" icon="sync_alt" />
+                        <PortfolioCard label="Payment" value="39" icon="payments" />
+                        <PortfolioCard label="Marketing" value="112" icon="campaign" />
+                        <PortfolioCard label="SEO Packs" value="57" icon="travel_explore" />
+                    </div>
+                </section>
+
+                <section className="rounded-xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+                    <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">Growth Shortcuts</h3>
+                    <div className="mt-4 space-y-2">
+                        <QuickLink href="/admin/blog" label="Blog Editorial Queue" icon="article" />
+                        <QuickLink href="/admin/marketing" label="Campaign Hub" icon="campaign" />
+                        <QuickLink href="/admin/seo" label="SEO Control Center" icon="travel_explore" />
+                        <QuickLink href="/admin/products" label="Product Pipeline" icon="inventory_2" />
+                        <QuickLink href="/admin/modules" label="Modules Release Lab" icon="deployed_code" />
+                        <QuickLink href="/admin/xml" label="XML Integration Hub" icon="sync_alt" />
+                    </div>
+                    <div className="mt-5 rounded-lg border border-slate-100 p-3 text-xs dark:border-slate-800">
+                        <p className="font-semibold uppercase tracking-wider text-slate-500">Ops Signals</p>
+                        <div className="mt-2 space-y-1 text-slate-700 dark:text-slate-300">
+                            <p>Restore Points: {restorePoints.length}</p>
+                            <p>Automation Logs: {automationLogs.length}</p>
+                            <p>Audit Entries: {auditTrail.length}</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
+    );
+}
+
+function PortfolioCard({ label, value, icon }: { label: string; value: string; icon: string }) {
+    return (
+        <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800/50">
+            <div className="flex items-center justify-between">
+                <p className="text-sm font-medium text-slate-700 dark:text-slate-200">{label}</p>
+                <span className="material-symbols-outlined text-slate-500">{icon}</span>
+            </div>
+            <p className="mt-2 text-2xl font-bold text-slate-900 dark:text-slate-100">{value}</p>
+        </div>
+    );
+}
+
+function QuickLink({ href, label, icon }: { href: string; label: string; icon: string }) {
+    return (
+        <Link href={href} className="flex items-center justify-between rounded-lg border border-slate-200 px-3 py-2.5 text-sm hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800">
+            <span className="flex items-center gap-2 text-slate-700 dark:text-slate-200">
+                <span className="material-symbols-outlined text-[18px]">{icon}</span>
+                {label}
+            </span>
+            <span className="material-symbols-outlined text-[18px] text-slate-400">chevron_right</span>
+        </Link>
     );
 }

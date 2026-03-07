@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>İki Faktörlü Doğrulama - SaaS Marketplace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B6CFF",
+                        "accent": "#00C2A8",
+                        "background-light": "#F8FAFC",
+                        "background-dark": "#0f1123",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Hide arrows in number inputs */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex items-center justify-center p-4">
+<div class="max-w-md w-full">
+<!-- Back Link -->
+<div class="mb-6">
+<a class="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-lg">arrow_back</span>
+                Giriş yap sayfasına dön
+            </a>
+</div>
+<!-- Main Card -->
+<div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-800 p-8 md:p-10">
+<!-- Icon/Illustration -->
+<div class="flex justify-center mb-8">
+<div class="relative">
+<div class="absolute inset-0 bg-primary/10 rounded-full scale-150 blur-xl"></div>
+<div class="relative size-16 bg-primary/10 dark:bg-primary/20 rounded-2xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1">shield_lock</span>
+</div>
+</div>
+</div>
+<!-- Header Text -->
+<div class="text-center mb-8">
+<h1 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">İki Faktörlü Doğrulama</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed px-4">
+                    Güvenliğiniz için lütfen telefonunuza gönderilen <span class="font-semibold text-slate-700 dark:text-slate-200">6 haneli kodu</span> girin.
+                </p>
+</div>
+<!-- Verification Form -->
+<form action="#" class="space-y-8" method="POST">
+<div class="flex justify-between gap-2 sm:gap-3">
+<input class="w-12 h-14 sm:w-14 sm:h-16 text-center text-xl font-bold rounded-xl border-2 border-slate-100 dark:border-slate-800 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white" maxlength="1" required="" type="number"/>
+<input class="w-12 h-14 sm:w-14 sm:h-16 text-center text-xl font-bold rounded-xl border-2 border-slate-100 dark:border-slate-800 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white" maxlength="1" required="" type="number"/>
+<input class="w-12 h-14 sm:w-14 sm:h-16 text-center text-xl font-bold rounded-xl border-2 border-slate-100 dark:border-slate-800 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white" maxlength="1" required="" type="number"/>
+<input class="w-12 h-14 sm:w-14 sm:h-16 text-center text-xl font-bold rounded-xl border-2 border-slate-100 dark:border-slate-800 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white" maxlength="1" required="" type="number"/>
+<input class="w-12 h-14 sm:w-14 sm:h-16 text-center text-xl font-bold rounded-xl border-2 border-slate-100 dark:border-slate-800 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white" maxlength="1" required="" type="number"/>
+<input class="w-12 h-14 sm:w-14 sm:h-16 text-center text-xl font-bold rounded-xl border-2 border-slate-100 dark:border-slate-800 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white" maxlength="1" required="" type="number"/>
+</div>
+<!-- Primary Action -->
+<button class="w-full py-4 bg-primary hover:bg-primary/90 text-white font-semibold rounded-xl shadow-lg shadow-primary/25 transition-all active:scale-[0.98] flex items-center justify-center gap-2" type="submit">
+                    Doğrula
+                </button>
+</form>
+<!-- Footer Links -->
+<div class="mt-8 text-center space-y-4">
+<p class="text-slate-500 dark:text-slate-400 text-sm">
+                    Kodu almadınız mı? 
+                    <button class="text-primary font-semibold hover:underline decoration-2 underline-offset-4 ml-1">
+                        Kodu Tekrar Gönder
+                    </button>
+</p>
+<div class="inline-flex items-center gap-2 px-4 py-2 bg-slate-50 dark:bg-slate-800 rounded-full">
+<span class="material-symbols-outlined text-sm text-accent">timer</span>
+<span class="text-xs font-medium text-slate-600 dark:text-slate-300">Yeni kod için kalan süre: 01:54</span>
+</div>
+</div>
+</div>
+<!-- Trust Badge -->
+<div class="mt-10 flex flex-col items-center gap-4 opacity-60">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 grayscale group-hover:grayscale-0 transition-all cursor-default">
+<span class="material-symbols-outlined text-slate-400">verified_user</span>
+<span class="text-xs font-bold tracking-widest text-slate-400 uppercase">Secure Cloud</span>
+</div>
+<div class="h-4 w-px bg-slate-300 dark:bg-slate-700"></div>
+<div class="flex items-center gap-2 grayscale group-hover:grayscale-0 transition-all cursor-default">
+<span class="material-symbols-outlined text-slate-400">encrypted</span>
+<span class="text-xs font-bold tracking-widest text-slate-400 uppercase">256-bit AES</span>
+</div>
+</div>
+<p class="text-[10px] text-slate-400 text-center max-w-[280px]">
+                Bu oturum uçtan uca şifrelenmiştir ve kişisel verileriniz KVKK kapsamında korunmaktadır.
+            </p>
+</div>
+</div>
+</body></html>

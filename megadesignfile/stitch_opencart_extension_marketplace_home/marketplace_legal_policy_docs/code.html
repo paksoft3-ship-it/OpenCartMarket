@@ -1,0 +1,207 @@
+<html><head><meta charset="utf-8"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#5c5cff",
+          "background-light": "#f8fafc",
+          "background-dark": "#0f0f23",
+          "slate-text": "#0f172a",
+        },
+        fontFamily: {
+          "display": ["Inter", "sans-serif"]
+        },
+        borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+      },
+    },
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+</style>
+</head><body class="bg-background-light dark:bg-background-dark font-display text-slate-text dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen flex-col">
+<!-- Top Nav Bar Component -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-3xl">shopping_cart_checkout</span>
+<h1 class="text-xl font-bold tracking-tight text-slate-text dark:text-white">OpenCart Pazaryeri</h1>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors" href="#">Temalar</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors" href="#">Modüller</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors" href="#">Geliştiriciler</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors" href="#">Destek</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="h-9 w-64 rounded-lg border-slate-200 bg-slate-100 pl-10 text-sm focus:border-primary focus:ring-primary dark:border-slate-700 dark:bg-slate-800 dark:text-white" placeholder="Dokümanlarda ara..." type="text"/>
+</div>
+<button class="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90 transition-colors">Giriş Yap</button>
+</div>
+</div>
+</header>
+<div class="mx-auto w-full max-w-7xl grow lg:flex">
+<!-- Left Sidebar: Navigation -->
+<aside class="hidden lg:block w-64 shrink-0 border-r border-slate-200 dark:border-slate-800 py-10 pr-6 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto">
+<nav class="space-y-1">
+<p class="px-3 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4">Hukuki Belgeler</p>
+<a class="flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-2 text-sm font-medium text-primary border-l-2 border-primary" href="#">
+<span class="material-symbols-outlined text-xl">gavel</span>
+            Kullanım Koşulları
+          </a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined text-xl">shield_person</span>
+            Gizlilik Politikası
+          </a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined text-xl">assignment_return</span>
+            İade Politikası
+          </a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined text-xl">cookie</span>
+            Çerez Politikası
+          </a>
+<div class="pt-8">
+<p class="px-3 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4">Geliştirici Sözleşmeleri</p>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-all" href="#">
+              Satıcı Sözleşmesi
+            </a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-all" href="#">
+              Telif Hakları (DMCA)
+            </a>
+</div>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="min-w-0 flex-1 px-4 py-10 sm:px-6 lg:px-12">
+<div class="mx-auto max-w-3xl">
+<nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-8">
+<a class="hover:text-primary" href="#">Ana Sayfa</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-slate-900 dark:text-slate-200 font-medium">Kullanım Koşulları</span>
+</nav>
+<header class="mb-10">
+<h1 class="text-4xl font-extrabold text-slate-text dark:text-white tracking-tight mb-4">Kullanım Koşulları</h1>
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm italic">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+              Son Güncelleme: 24 Mayıs 2024
+            </div>
+</header>
+<article class="prose prose-slate prose-lg dark:prose-invert max-w-none">
+<section class="mb-12" id="giris">
+<h2 class="text-2xl font-bold text-slate-text dark:text-white border-b border-slate-100 dark:border-slate-800 pb-2 mb-6">1. Giriş ve Kabul</h2>
+<p class="leading-relaxed text-slate-600 dark:text-slate-300 mb-4">
+                OpenCart Pazaryeri ("Platform") hoş geldiniz. İşbu Kullanım Koşulları, Platform üzerinden sunulan hizmetlerin kullanımına ilişkin usul ve esasları belirlemektedir. Platforma erişerek veya hizmetleri kullanarak, bu koşulların tamamını kabul etmiş sayılırsınız.
+              </p>
+<p class="leading-relaxed text-slate-600 dark:text-slate-300">
+                Eğer bu şartların herhangi birini kabul etmiyorsanız, lütfen Platformu kullanmayı derhal durdurun.
+              </p>
+</section>
+<section class="mb-12" id="hesap-olusturma">
+<h2 class="text-2xl font-bold text-slate-text dark:text-white border-b border-slate-100 dark:border-slate-800 pb-2 mb-6">2. Hesap Oluşturma ve Güvenlik</h2>
+<p class="leading-relaxed text-slate-600 dark:text-slate-300 mb-6">
+                Platformun belirli özelliklerine erişmek için bir hesap oluşturmanız gerekebilir. Hesap oluştururken aşağıdaki kurallara uymayı taahhüt edersiniz:
+              </p>
+<ul class="space-y-4 list-none pl-0">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span class="text-slate-600 dark:text-slate-300">Verdiğiniz tüm bilgilerin doğru, güncel ve eksiksiz olması zorunludur.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span class="text-slate-600 dark:text-slate-300">Hesap şifrenizin gizliliğinden ve hesabınız altındaki tüm etkinliklerden siz sorumlusunuz.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span class="text-slate-600 dark:text-slate-300">Hesabınızın yetkisiz kullanımı durumunda derhal destek birimimize bildirimde bulunmalısınız.</span>
+</li>
+</ul>
+</section>
+<section class="mb-12" id="lisans-sartlari">
+<h2 class="text-2xl font-bold text-slate-text dark:text-white border-b border-slate-100 dark:border-slate-800 pb-2 mb-6">3. Lisans ve Fikri Mülkiyet</h2>
+<div class="rounded-xl bg-slate-50 dark:bg-slate-800/50 p-6 border border-slate-100 dark:border-slate-800">
+<p class="text-slate-600 dark:text-slate-300 leading-relaxed italic">
+                  "Platform üzerinde satılan tüm modül ve temalar, aksi belirtilmedikçe 'Tekil Alan Adı Lisansı' ile sunulmaktadır. Yazılımların izinsiz kopyalanması, dağıtılması veya tersine mühendislik işlemlerine tabi tutulması kesinlikle yasaktır."
+                </p>
+</div>
+<p class="mt-6 text-slate-600 dark:text-slate-300 leading-relaxed">
+                Tüm içerik, grafikler, logolar ve yazılım kodları Platformun veya içerik sağlayıcılarının mülkiyetindedir ve uluslararası telif hakkı yasaları ile korunmaktadır.
+              </p>
+</section>
+<section class="mb-12" id="odeme-iadeler">
+<h2 class="text-2xl font-bold text-slate-text dark:text-white border-b border-slate-100 dark:border-slate-800 pb-2 mb-6">4. Ödemeler ve İade Koşulları</h2>
+<p class="leading-relaxed text-slate-600 dark:text-slate-300 mb-4">
+                Dijital ürünlerin doğası gereği, indirme işlemi gerçekleştikten sonra iade talepleri yalnızca ürünün vadedilen özellikleri taşımaması veya teknik kusurlu olması durumunda değerlendirilir.
+              </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+<div class="p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+<h4 class="font-bold text-slate-900 dark:text-white mb-2">Ödeme Yöntemleri</h4>
+<p class="text-sm text-slate-500">Kredi kartı, Banka kartı ve Havale/EFT seçenekleri mevcuttur.</p>
+</div>
+<div class="p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+<h4 class="font-bold text-slate-900 dark:text-white mb-2">Güvenlik</h4>
+<p class="text-sm text-slate-500">Tüm ödemeler 256-bit SSL sertifikalı güvenli altyapı üzerinden gerçekleşir.</p>
+</div>
+</div>
+</section>
+</article>
+</div>
+</main>
+<!-- Right Sidebar: Table of Contents -->
+<aside class="hidden xl:block w-64 shrink-0 py-10 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto pl-6">
+<h5 class="text-sm font-bold text-slate-text dark:text-white mb-4">BU SAYFADA</h5>
+<ul class="space-y-3 text-sm border-l border-slate-200 dark:border-slate-800">
+<li>
+<a class="block pl-4 py-1 text-primary border-l-2 border-primary -ml-px font-medium" href="#giris">Giriş ve Kabul</a>
+</li>
+<li>
+<a class="block pl-4 py-1 text-slate-500 hover:text-slate-900 dark:hover:text-slate-300 transition-colors" href="#hesap-olusturma">Hesap Güvenliği</a>
+</li>
+<li>
+<a class="block pl-4 py-1 text-slate-500 hover:text-slate-900 dark:hover:text-slate-300 transition-colors" href="#lisans-sartlari">Lisans Şartları</a>
+</li>
+<li>
+<a class="block pl-4 py-1 text-slate-500 hover:text-slate-900 dark:hover:text-slate-300 transition-colors" href="#odeme-iadeler">Ödeme ve İadeler</a>
+</li>
+</ul>
+<div class="mt-12 rounded-xl bg-primary/5 p-6 border border-primary/10">
+<h6 class="text-xs font-bold text-primary uppercase mb-2">Yardıma mı ihtiyacınız var?</h6>
+<p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-4">Hukuki şartlar hakkında sorularınız için destek ekibimizle iletişime geçin.</p>
+<button class="w-full rounded-lg bg-white dark:bg-slate-800 py-2 text-xs font-bold text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 hover:bg-slate-50 transition-colors">Destek Talebi Aç</button>
+</div>
+</aside>
+</div>
+<!-- Footer Area -->
+<footer class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark py-12">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2 opacity-50">
+<span class="material-symbols-outlined text-2xl">shopping_cart_checkout</span>
+<span class="text-sm font-semibold">OpenCart Pazaryeri</span>
+</div>
+<p class="text-sm text-slate-400">© 2024 OpenCart Pazaryeri. Tüm hakları saklıdır.</p>
+<div class="flex gap-4">
+<a class="text-slate-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-slate-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">mail</span></a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+
+```</body></html>

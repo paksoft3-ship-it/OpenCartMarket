@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Modular Product Page Components</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B6CFF",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#0f1123",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-6">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em]">SaaS Marketplace</h2>
+</div>
+<label class="flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-slate-400 dark:text-slate-500 flex border-none bg-slate-100 dark:bg-slate-800 items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined text-[24px]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-slate-100 focus:outline-0 focus:ring-0 border-none bg-slate-100 dark:bg-slate-800 focus:border-none h-full placeholder:text-slate-400 dark:placeholder:text-slate-500 px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Search" value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9 hidden md:flex">
+<a class="text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Themes</a>
+<a class="text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Modules</a>
+<a class="text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Docs</a>
+<a class="text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Pricing</a>
+</div>
+<div class="flex gap-2">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Login</span>
+</button>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white hover:bg-primary/90 transition-colors text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Sign Up</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col lg:flex-row gap-8">
+<!-- Main Content -->
+<div class="flex-1 flex flex-col gap-12">
+<!-- Breadcrumbs -->
+<nav class="flex flex-wrap gap-2 text-sm">
+<a class="text-slate-500 hover:text-primary transition-colors font-medium" href="#">Home</a>
+<span class="text-slate-400">/</span>
+<a class="text-slate-500 hover:text-primary transition-colors font-medium" href="#">Themes</a>
+<span class="text-slate-400">/</span>
+<span class="text-slate-900 dark:text-slate-100 font-medium">Nexus OpenCart Theme</span>
+</nav>
+<!-- Header -->
+<div>
+<h1 class="text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100 mb-2">Nexus - Premium OpenCart Theme</h1>
+<p class="text-lg text-slate-600 dark:text-slate-400">The ultimate multipurpose theme for modern e-commerce stores.</p>
+</div>
+<!-- Gallery -->
+<div class="flex flex-col gap-4">
+<div class="w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-800">
+<div class="w-full h-full bg-cover bg-center" data-alt="Main product preview showing e-commerce layout" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDJ-xSvtJsvNtm2PBP81faqgYVIU1cDtYBpnXVSWnLQmP2M6RbG3Z987KKHhvFZBd6g0D12gSFTPLm4ZhLdnnVidDhynlkkA9Jq3xN7KOjhtJyRhNYhqad_AVHXS-T8XAXfEVKBmsM4XRMcf5awo8YC5XhdfMbu_VvhDgCoatuMijFuTGKs2i4MqV49voPPRK1L9Z_chvzei_YBu3r8TN78KCLYrOug9x9063HGQzKfIfwSR-FAG1i73JWzwdEF-XMefzuGUtkEvnk')"></div>
+</div>
+<div class="flex overflow-x-auto gap-4 pb-2 snap-x">
+<button class="flex-none w-32 aspect-video rounded-xl overflow-hidden border-2 border-primary snap-start">
+<div class="w-full h-full bg-cover bg-center" data-alt="Thumbnail 1: Homepage" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA_jheE1ANhw1mkaWu8AE88lO0ibR5oltMwQ8q4XqD5IZzFZnCMJwAx46DPD3eLSo5RpAtoU1qoSCoPG_aksWzwifv8Me1iRr8vpwIrdXmsloU6tzSN4G6ZmM32NBE23O0S8RCAEaJ1FRNCEVyytCVvmdMBItmr17oKVO8kvLgyqBHM4C8I0imDHLLF63p0AfIAfLUM5dlclWlxdDDU1A9Pp7H4U8r7xP1SVHBPLiq1OmRGYqQ9IcyWJQRbwwYuYtq_GR8OhE2YBq8')"></div>
+</button>
+<button class="flex-none w-32 aspect-video rounded-xl overflow-hidden border-2 border-transparent hover:border-primary/50 transition-colors snap-start">
+<div class="w-full h-full bg-cover bg-center" data-alt="Thumbnail 2: Product Page" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDYaRVzVuqXpWpGwi5Q08vXrB5J6saORd5p4_EAe8ZFgUtxEUXpsVAdn1WD32cUBpHNoXsi5whM6plKfEtA6B8iBcaVbk4HzSBZ5TA0UynWNcLZqtRE_ihqidcyCDAHcBeoR80c7zFvi1iKf5mzeYjpfo9dVnafcE8sQhf1EHh6Ot41ti_-ezb8wSrCTVWy5YZl9BFmUEHq0SYNP1CwmARwK8LRTwrzSxVUvNUzilXr8QfHfknI00zhxAEaRR9GVQrfA8kxyuWYL7M')"></div>
+</button>
+<button class="flex-none w-32 aspect-video rounded-xl overflow-hidden border-2 border-transparent hover:border-primary/50 transition-colors snap-start">
+<div class="w-full h-full bg-cover bg-center" data-alt="Thumbnail 3: Category Page" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDGncUfnx8kSG51YG-UVmwy86GcMcf8jiEbhK1u5Jc6XMus1GX1JjCUrN6p9yFBTMVLPc5qozKEyVuUN6F-HV5Gl_yYI0VECUoDgWtyiei-lsXmJAApo_3QP05V_mKUxhl3q0z82NgwWw_4YKxUNx5DPT4Wzdo8zl0wWoAvmt7LazZuEpzehfbgVkFq1ipDPLp0tyb_mQbnMKchhYPf9mOBI8-mrDXViQ0LmtgWfcyCgaKf3fgHC4PqaI89N_o76ckMLQTHPtfpYJU')"></div>
+</button>
+<button class="flex-none w-32 aspect-video rounded-xl overflow-hidden border-2 border-transparent hover:border-primary/50 transition-colors snap-start">
+<div class="w-full h-full bg-cover bg-center" data-alt="Thumbnail 4: Checkout" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBA7R5sk48dka2wnyjy9WXkUaf3PA6AAJvOxutDN5p77OMCNSwUYenD9zMLxYgr1MRYQOQ7nEtyO1npAvl4xhV5C47719J2VVlA6_rWFM3Aga0ciRsiSwaXL9idcJIJjZ0Cscfnni2thwrN0I3KzuRPR8kV5-FOSJbT3rJxiRGlu71VKsl01IzUGmup0zAN4WTrKfv73bJtDlG7Ra_Uj6l1dlaEcbMbkGTfNmU2WbT5GDNXBG6j-XG6nQ_cOkfxSk7E-hY4zZMSNOM')"></div>
+</button>
+</div>
+</div>
+<!-- Features -->
+<section>
+<h2 class="text-2xl font-bold mb-6">Key Features</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex flex-col gap-3 p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="size-12 rounded-xl bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 flex items-center justify-center">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<h3 class="text-lg font-bold">Hızlı Kurulum</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm">One-click demo import to get your store up and running in minutes.</p>
+</div>
+<div class="flex flex-col gap-3 p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="size-12 rounded-xl bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 flex items-center justify-center">
+<span class="material-symbols-outlined">search</span>
+</div>
+<h3 class="text-lg font-bold">SEO Dostu</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm">Optimized markup and structure for better search engine rankings.</p>
+</div>
+<div class="flex flex-col gap-3 p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="size-12 rounded-xl bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 flex items-center justify-center">
+<span class="material-symbols-outlined">smartphone</span>
+</div>
+<h3 class="text-lg font-bold">Mobil Uyumlu</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm">Fully responsive design looks great on all devices and screen sizes.</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Sidebar / Sticky Panel -->
+<aside class="w-full lg:w-80 flex-none">
+<div class="sticky top-24 flex flex-col gap-6">
+<div class="bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<span class="text-4xl font-bold text-slate-900 dark:text-slate-100">$59</span>
+<span class="text-sm text-slate-500">Regular License</span>
+</div>
+<div class="flex flex-col gap-3">
+<button class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-bold py-3 px-6 rounded-xl transition-colors">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                                    Satın Al
+                                </button>
+<button class="w-full flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100 font-medium py-3 px-6 rounded-xl transition-colors border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+                                    Canlı Demo
+                                </button>
+</div>
+<div class="border-t border-slate-200 dark:border-slate-800 pt-6 flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-500">check_circle</span>
+<span class="text-sm font-medium">OpenCart 3.x &amp; 4.x Compatible</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-500">check_circle</span>
+<span class="text-sm font-medium">6 Months Support</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-500">check_circle</span>
+<span class="text-sm font-medium">Free Future Updates</span>
+</div>
+</div>
+</div>
+<!-- Documentation Callout -->
+<div class="bg-primary rounded-2xl shadow-lg p-6 flex flex-col items-center text-center gap-4 text-white">
+<span class="material-symbols-outlined text-4xl">menu_book</span>
+<div>
+<h3 class="font-bold text-lg">Need Help?</h3>
+<p class="text-primary-100 text-sm mt-1 opacity-90">Read our comprehensive documentation before buying.</p>
+</div>
+<button class="w-full bg-white text-primary hover:bg-slate-50 font-bold py-2 px-4 rounded-lg transition-colors mt-2">
+                                Dokümantasyonu Gör
+                            </button>
+</div>
+</div>
+</aside>
+</main>
+</div>
+</div>
+</body></html>

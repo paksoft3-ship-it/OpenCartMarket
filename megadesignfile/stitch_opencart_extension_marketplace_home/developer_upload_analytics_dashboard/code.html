@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Developer Upload &amp; Analytics Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#5B6CFF",
+          "accent": "#00C2A8",
+          "background-light": "#F8FAFC",
+          "background-dark": "#0f1123",
+          "surface-light": "#FFFFFF",
+          "surface-dark": "#1A1D36",
+          "border-light": "#E2E8F0",
+          "border-dark": "#2D3748",
+          "text-main-light": "#0F172A",
+          "text-muted-light": "#64748B",
+        },
+        fontFamily: {
+          "display": ["Plus Jakarta Sans", "sans-serif"]
+        },
+        borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1rem", "full": "9999px"},
+        boxShadow: {
+            'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+        }
+      },
+    },
+  }
+</script>
+<style>
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main-light dark:text-slate-100 font-display antialiased min-h-screen flex">
+<!-- Sidebar -->
+<aside class="w-64 bg-surface-light dark:bg-surface-dark border-r border-border-light dark:border-border-dark flex flex-col fixed h-full z-10 hidden md:flex">
+<div class="h-16 flex items-center px-6 border-b border-border-light dark:border-border-dark">
+<div class="flex items-center gap-3 text-text-main-light dark:text-slate-100">
+<div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">shopping_bag</span>
+</div>
+<h2 class="text-lg font-bold tracking-tight">OpenCart Dev</h2>
+</div>
+</div>
+<div class="flex-1 py-6 px-4 flex flex-col gap-2 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted-light hover:bg-border-light hover:text-text-main-light dark:hover:bg-border-dark dark:hover:text-slate-100 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium">Genel Bakış</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted-light hover:bg-border-light hover:text-text-main-light dark:hover:bg-border-dark dark:hover:text-slate-100 transition-colors" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-medium">Ürünlerim</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:bg-primary/20 transition-colors" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-medium">Yeni Ekle</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted-light hover:bg-border-light hover:text-text-main-light dark:hover:bg-border-dark dark:hover:text-slate-100 transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-medium">Analizler</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted-light hover:bg-border-light hover:text-text-main-light dark:hover:bg-border-dark dark:hover:text-slate-100 transition-colors mt-auto" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium">Ayarlar</span>
+</a>
+</div>
+<div class="p-4 border-t border-border-light dark:border-border-dark">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-cover bg-center border-2 border-primary/20" data-alt="User profile avatar placeholder" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBtsTGAM_SjkbkPVwOGWdlyaByIW46F6E55zoj-2m5sxlEJ6LUh7d3XgA999cBhIMQtH-O5LsxFndRBOsonb_MhJ6XEBVTjXAKg--lx1y6WzK_t-YLny04orI68-Nx7Cvg20DZWkiJ7KeEbB-9_rv_AM7y2PchXc9PDJr7OmbQFnBQELJzkUSkGg76zyeLCG3_55cVsbNQiE6oEpO1znr4EOGVO88nDog5snWiBWQz9RwdTAitNAztD9SiJjE8Glmm26tOEfRVoESE');"></div>
+<div>
+<p class="text-sm font-semibold text-text-main-light dark:text-slate-100">Ahmet Yılmaz</p>
+<p class="text-xs text-text-muted-light">Premium Geliştirici</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- Top Header -->
+<header class="h-16 bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark flex items-center justify-between px-6 sticky top-0 z-20">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-text-muted-light">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="text-xl font-bold text-text-main-light dark:text-slate-100">Yeni Ürün Ekle</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light">search</span>
+<input class="pl-10 pr-4 py-2 bg-background-light dark:bg-background-dark border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:outline-none w-64 text-text-main-light dark:text-slate-100 placeholder:text-text-muted-light" placeholder="Ara..." type="text"/>
+</div>
+<button class="w-10 h-10 rounded-lg bg-background-light dark:bg-background-dark flex items-center justify-center text-text-muted-light hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-soft">
+                Yayına Al
+            </button>
+</div>
+</header>
+<div class="flex-1 p-6 lg:p-8 max-w-7xl mx-auto w-full flex flex-col gap-8">
+<!-- Analytics Overview -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Downloads -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-5 border border-border-light dark:border-border-dark shadow-soft relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-sm font-medium text-text-muted-light mb-1">Toplam İndirme</p>
+<h3 class="text-2xl font-bold text-text-main-light dark:text-slate-100">1,245</h3>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">download</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="flex items-center text-accent text-sm font-medium">
+<span class="material-symbols-outlined text-sm">trending_up</span> +15%
+                    </span>
+<span class="text-xs text-text-muted-light">geçen aya göre</span>
+</div>
+<!-- Abstract Sparkline -->
+<div class="mt-4 h-10 w-full rounded" data-alt="Downloads sparkline chart" style="background: linear-gradient(90deg, rgba(91,108,255,0.1) 0%, rgba(91,108,255,0.3) 50%, rgba(91,108,255,0.1) 100%); clip-path: polygon(0 100%, 0 80%, 20% 60%, 40% 70%, 60% 30%, 80% 50%, 100% 20%, 100% 100%);"></div>
+</div>
+<!-- Revenue -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-5 border border-border-light dark:border-border-dark shadow-soft relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-sm font-medium text-text-muted-light mb-1">Toplam Kazanç</p>
+<h3 class="text-2xl font-bold text-text-main-light dark:text-slate-100">$4,500</h3>
+</div>
+<div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent">
+<span class="material-symbols-outlined">attach_money</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="flex items-center text-accent text-sm font-medium">
+<span class="material-symbols-outlined text-sm">trending_up</span> +22%
+                    </span>
+<span class="text-xs text-text-muted-light">geçen aya göre</span>
+</div>
+<!-- Abstract Sparkline -->
+<div class="mt-4 h-10 w-full rounded" data-alt="Revenue sparkline chart" style="background: linear-gradient(90deg, rgba(0,194,168,0.1) 0%, rgba(0,194,168,0.3) 50%, rgba(0,194,168,0.1) 100%); clip-path: polygon(0 100%, 0 90%, 20% 70%, 40% 80%, 60% 40%, 80% 20%, 100% 10%, 100% 100%);"></div>
+</div>
+<!-- Rating -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-5 border border-border-light dark:border-border-dark shadow-soft relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-sm font-medium text-text-muted-light mb-1">Ortalama Puan</p>
+<h3 class="text-2xl font-bold text-text-main-light dark:text-slate-100">4.8</h3>
+</div>
+<div class="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center text-yellow-500">
+<span class="material-symbols-outlined">star</span>
+</div>
+</div>
+<div class="flex items-center gap-1 text-yellow-500 mb-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm">star_half</span>
+<span class="text-xs text-text-muted-light ml-2">(124 değerlendirme)</span>
+</div>
+<div class="mt-2 h-10 w-full rounded flex items-end" data-alt="Rating bar chart">
+<div class="w-1/5 h-2 bg-border-light dark:bg-border-dark rounded-t mx-0.5"></div>
+<div class="w-1/5 h-4 bg-border-light dark:bg-border-dark rounded-t mx-0.5"></div>
+<div class="w-1/5 h-8 bg-yellow-500/40 rounded-t mx-0.5"></div>
+<div class="w-1/5 h-10 bg-yellow-500/70 rounded-t mx-0.5"></div>
+<div class="w-1/5 h-full bg-yellow-500 rounded-t mx-0.5"></div>
+</div>
+</div>
+</div>
+<div class="mb-2">
+<h2 class="text-2xl font-bold text-text-main-light dark:text-slate-100">Ürün Detayları</h2>
+<p class="text-sm text-text-muted-light mt-1">OpenCart temanızı veya modülünüzü pazaryerine yükleyin.</p>
+</div>
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Left Panel: Form -->
+<div class="flex-1 space-y-6">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 border border-border-light dark:border-border-dark shadow-soft">
+<div class="space-y-5">
+<div>
+<label class="block text-sm font-semibold text-text-main-light dark:text-slate-100 mb-2">Ürün Başlığı</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark text-text-main-light dark:text-slate-100 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Örn: Modern E-Ticaret Teması" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div>
+<label class="block text-sm font-semibold text-text-main-light dark:text-slate-100 mb-2">Fiyat ($)</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light font-medium">$</span>
+<input class="w-full pl-8 pr-4 py-2.5 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark text-text-main-light dark:text-slate-100 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="49.00" type="number"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-semibold text-text-main-light dark:text-slate-100 mb-2">Kategori</label>
+<select class="w-full px-4 py-2.5 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark text-text-main-light dark:text-slate-100 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all appearance-none">
+<option>Tema</option>
+<option>Modül - Ödeme</option>
+<option>Modül - Kargo</option>
+<option>Modül - SEO</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-sm font-semibold text-text-main-light dark:text-slate-100 mb-2">Açıklama</label>
+<div class="border border-border-light dark:border-border-dark rounded-lg overflow-hidden flex flex-col">
+<div class="bg-background-light dark:bg-background-dark border-b border-border-light dark:border-border-dark p-2 flex gap-2">
+<button class="p-1.5 rounded hover:bg-border-light dark:hover:bg-border-dark text-text-muted-light"><span class="material-symbols-outlined text-[18px]">format_bold</span></button>
+<button class="p-1.5 rounded hover:bg-border-light dark:hover:bg-border-dark text-text-muted-light"><span class="material-symbols-outlined text-[18px]">format_italic</span></button>
+<button class="p-1.5 rounded hover:bg-border-light dark:hover:bg-border-dark text-text-muted-light"><span class="material-symbols-outlined text-[18px]">format_list_bulleted</span></button>
+<button class="p-1.5 rounded hover:bg-border-light dark:hover:bg-border-dark text-text-muted-light"><span class="material-symbols-outlined text-[18px]">link</span></button>
+</div>
+<textarea class="w-full h-40 p-4 bg-surface-light dark:bg-surface-dark border-none resize-none focus:ring-0 text-sm text-text-main-light dark:text-slate-100" placeholder="Ürününüzün özelliklerini ve detaylarını buraya yazın..."></textarea>
+</div>
+</div>
+</div>
+</div>
+<!-- Version Management -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 border border-border-light dark:border-border-dark shadow-soft">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold text-text-main-light dark:text-slate-100">Versiyon Yönetimi</h3>
+<span class="px-2.5 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">Versiyon 1.0.0</span>
+</div>
+<div>
+<label class="block text-sm font-semibold text-text-main-light dark:text-slate-100 mb-2">Değişiklik Günlüğü (Changelog)</label>
+<textarea class="w-full h-24 p-4 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark text-sm text-text-main-light dark:text-slate-100 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none" placeholder="- İlk sürüm yayınlandı."></textarea>
+</div>
+<div class="mt-4 flex justify-end">
+<button class="flex items-center gap-2 px-4 py-2 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark text-text-main-light dark:text-slate-100 text-sm font-semibold rounded-lg hover:bg-border-light dark:hover:bg-border-dark transition-colors">
+<span class="material-symbols-outlined text-[18px]">update</span>
+                            Güncelleme Yükle
+                        </button>
+</div>
+</div>
+</div>
+<!-- Right Panel: Uploads -->
+<div class="lg:w-96 space-y-6">
+<!-- Dropzone: ZIP -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 border border-border-light dark:border-border-dark shadow-soft">
+<h3 class="text-sm font-bold text-text-main-light dark:text-slate-100 mb-3">ZIP Dosyası</h3>
+<div class="border-2 border-dashed border-border-light dark:border-border-dark rounded-xl p-8 flex flex-col items-center justify-center text-center hover:border-primary hover:bg-primary/5 transition-colors cursor-pointer group">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">folder_zip</span>
+</div>
+<p class="text-sm font-medium text-text-main-light dark:text-slate-100">Dosyayı buraya sürükleyin</p>
+<p class="text-xs text-text-muted-light mt-1">veya seçmek için tıklayın (Max 50MB)</p>
+</div>
+</div>
+<!-- Dropzone: Screenshots -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 border border-border-light dark:border-border-dark shadow-soft">
+<h3 class="text-sm font-bold text-text-main-light dark:text-slate-100 mb-3">Ekran Görüntüleri</h3>
+<div class="border-2 border-dashed border-border-light dark:border-border-dark rounded-xl p-8 flex flex-col items-center justify-center text-center hover:border-primary hover:bg-primary/5 transition-colors cursor-pointer group mb-4">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">image</span>
+</div>
+<p class="text-sm font-medium text-text-main-light dark:text-slate-100">Görselleri sürükleyin</p>
+<p class="text-xs text-text-muted-light mt-1">1920x1080px önerilir</p>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-2">
+<!-- Preview Thumbnails -->
+<div class="w-16 h-16 rounded border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark flex-shrink-0 relative group">
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity rounded">
+<span class="material-symbols-outlined text-white text-[16px]">delete</span>
+</div>
+</div>
+<div class="w-16 h-16 rounded border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark flex-shrink-0 relative group">
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity rounded">
+<span class="material-symbols-outlined text-white text-[16px]">delete</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Dropzone: Documentation -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 border border-border-light dark:border-border-dark shadow-soft">
+<h3 class="text-sm font-bold text-text-main-light dark:text-slate-100 mb-3">Dokümantasyon (Opsiyonel)</h3>
+<div class="border-2 border-dashed border-border-light dark:border-border-dark rounded-xl p-6 flex flex-col items-center justify-center text-center hover:border-primary hover:bg-primary/5 transition-colors cursor-pointer group">
+<div class="w-10 h-10 rounded-full bg-background-light dark:bg-background-dark flex items-center justify-center text-text-muted-light mb-2 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">description</span>
+</div>
+<p class="text-xs font-medium text-text-main-light dark:text-slate-100">PDF yükle</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

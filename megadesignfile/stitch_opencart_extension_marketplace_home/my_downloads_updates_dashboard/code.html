@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Downloads &amp; Updates Dashboard</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B6CFF",
+                        "background-light": "#F8FAFC",
+                        "background-dark": "#0f1123",
+                        "slate-50": "#f8fafc",
+                        "slate-100": "#f1f5f9",
+                        "slate-200": "#e2e8f0",
+                        "slate-300": "#cbd5e1",
+                        "slate-400": "#94a3b8",
+                        "slate-500": "#64748b",
+                        "slate-600": "#475569",
+                        "slate-700": "#334155",
+                        "slate-800": "#1e293b",
+                        "slate-900": "#0f172a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "md": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+                        'glow': '0 0 15px -3px rgba(91, 108, 255, 0.4)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light text-slate-900 font-display min-h-screen antialiased">
+<!-- Top Navigation -->
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+<div class="max-w-[1200px] mx-auto px-6">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-2 text-primary" href="#">
+<span class="material-symbols-outlined text-3xl">storefront</span>
+<span class="font-bold text-xl tracking-tight text-slate-900">MarketHub</span>
+</a>
+<div class="hidden md:flex relative group w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full bg-slate-100 border-transparent focus:border-primary focus:bg-white focus:ring-0 rounded-lg pl-10 pr-4 py-2 text-sm text-slate-700 placeholder:text-slate-400 transition-colors" placeholder="Search downloads..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="#">Marketplace</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="#">Themes</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="#">Modules</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="#">Support</a>
+</nav>
+<div class="flex items-center gap-3 border-l border-slate-200 pl-6">
+<button class="text-slate-500 hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
+</button>
+<button class="text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<button class="flex items-center gap-2 ml-2 hover:opacity-80 transition-opacity">
+<img alt="User Avatar" class="w-8 h-8 rounded-full border border-slate-200 object-cover" data-alt="User Avatar Profile Picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGa84ihKnpCjqg8JcWjkX_Cwa9hsAH4qnoBfB_eTR9VItu4fVChaBmoRpBnsRDtaqC6R0dzS3EQ7bh0u2Tp78yLFdkNz4hz57gAOgszdOaQWzZgURhifHRZ28lgI2kJUJ6r0cKfLfwBx4uMjpABHwk9DdAwvYhhsAKi61PNpzv-ScKLHWhTXqg0eBC_1z_5lfGx5mBq8RrZ2fQQndaPgD9BDatuMJ3VyfrKMslPmXS_bKSFojfOKjdQyLYxR8zmO77P1QuFLqSouc"/>
+<span class="text-sm font-medium text-slate-700 hidden sm:block">Alex D.</span>
+<span class="material-symbols-outlined text-slate-400 text-sm hidden sm:block">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-6 py-8">
+<!-- Page Header -->
+<div class="mb-8">
+<h1 class="text-3xl font-bold text-slate-900">My Downloads</h1>
+<p class="text-slate-500 mt-2">Manage your purchased themes, modules, and access updates.</p>
+</div>
+<!-- Updates Banner (Gündem) -->
+<div class="bg-primary text-white rounded-lg p-6 mb-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-glow relative overflow-hidden">
+<!-- Decorative background element -->
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex items-start gap-4 z-10">
+<div class="bg-white/20 p-3 rounded-lg">
+<span class="material-symbols-outlined text-3xl">update</span>
+</div>
+<div>
+<h2 class="text-xl font-bold mb-1">Gündem: Updates Available</h2>
+<p class="text-primary-100 text-sm opacity-90">2 of your purchased themes have new versions available. Update now to get the latest features and security patches.</p>
+</div>
+</div>
+<button class="whitespace-nowrap bg-white text-primary hover:bg-slate-50 font-semibold py-2.5 px-6 rounded-md transition-colors shadow-sm flex items-center gap-2 z-10">
+                View Updates
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<!-- Filters / Tabs (Optional context for a dashboard) -->
+<div class="flex items-center justify-between mb-6">
+<div class="flex gap-2 bg-white p-1 rounded-lg shadow-sm border border-slate-200 inline-flex">
+<button class="px-4 py-2 text-sm font-medium bg-slate-100 text-slate-900 rounded-md">All Products</button>
+<button class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 rounded-md transition-colors">Themes</button>
+<button class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 rounded-md transition-colors">Modules</button>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-sm text-slate-500">Sort by:</span>
+<select class="text-sm border-slate-200 rounded-md text-slate-700 focus:ring-primary focus:border-primary py-1.5 pl-3 pr-8">
+<option>Date Purchased</option>
+<option>Recently Updated</option>
+<option>Alphabetical</option>
+</select>
+</div>
+</div>
+<!-- Downloads Table/List -->
+<div class="space-y-4">
+<!-- Table Header (Desktop only) -->
+<div class="hidden lg:grid grid-cols-12 gap-4 px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+<div class="col-span-4">Ürün (Product)</div>
+<div class="col-span-2">Mevcut Versiyon</div>
+<div class="col-span-2">Geçmiş Versiyonlar</div>
+<div class="col-span-2 text-center">Dokümantasyon</div>
+<div class="col-span-2 text-right">İndir</div>
+</div>
+<!-- Item 1: Theme with Update -->
+<div class="bg-white rounded-lg shadow-soft border border-slate-200 p-4 lg:p-6 transition-shadow hover:shadow-md group">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+<!-- Product Info -->
+<div class="col-span-1 lg:col-span-4 flex items-center gap-4">
+<div class="w-16 h-16 rounded-lg bg-slate-100 flex-shrink-0 border border-slate-200 overflow-hidden relative">
+<img alt="Theme Thumbnail" class="w-full h-full object-cover" data-alt="Dashboard Admin Theme Preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmYzTXz6Cnl3p04Hi6P337Yx62C77n_qMMZ-H53kwQWN3myyW81quV6lJNTFvRNtxx3Z1AoUDDJuLMK2GWoh0y8v34YhthM3SCtlM8U4RZOcq3WgXmWa2m99rv9mvYrQzpKh6hXTgw3qOS9-GMstC--2mI87_VJUwmq82nicJ8SUaj7Rol84TyqIYzDt5l1b2YkgK7Ra9ii8G-eRm4l4M2mlTLV36Q7fljHG17do5BCddgZh0bDJwsqalJfDm4rCf9Sck2icsnoKM"/>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h3 class="font-semibold text-slate-900 text-base">Nexus Admin Theme</h3>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">Update</span>
+</div>
+<p class="text-xs text-slate-500">Purchased: Oct 12, 2023</p>
+</div>
+</div>
+<!-- Current Version -->
+<div class="col-span-1 lg:col-span-2 flex justify-between lg:block">
+<span class="lg:hidden text-sm text-slate-500">Current Version:</span>
+<div class="inline-flex items-center gap-1.5 bg-slate-100 px-3 py-1 rounded-md text-sm font-semibold text-slate-700 border border-slate-200">
+                            v4.2.0
+                        </div>
+</div>
+<!-- Previous Versions -->
+<div class="col-span-1 lg:col-span-2 flex justify-between lg:block relative">
+<span class="lg:hidden text-sm text-slate-500">Previous Versions:</span>
+<select class="text-sm border-slate-200 rounded-md text-slate-600 bg-slate-50 focus:ring-primary focus:border-primary py-1.5 pl-3 pr-8 w-full max-w-[140px]">
+<option value="">Legacy...</option>
+<option value="v4.1.5">v4.1.5</option>
+<option value="v4.1.0">v4.1.0</option>
+<option value="v4.0.0">v4.0.0</option>
+</select>
+</div>
+<!-- Docs & Changelog -->
+<div class="col-span-1 lg:col-span-2 flex justify-start lg:justify-center gap-3">
+<span class="lg:hidden text-sm text-slate-500 mr-2">Resources:</span>
+<button class="p-2 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-md transition-colors" title="Documentation">
+<span class="material-symbols-outlined">description</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-md transition-colors" title="Changelog">
+<span class="material-symbols-outlined">history</span>
+</button>
+</div>
+<!-- Download Action -->
+<div class="col-span-1 lg:col-span-2 flex justify-end mt-4 lg:mt-0">
+<button class="w-full lg:w-auto bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-md transition-colors flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-lg">download</span>
+                            Download
+                        </button>
+</div>
+</div>
+</div>
+<!-- Item 2: Module, Up to date -->
+<div class="bg-white rounded-lg shadow-soft border border-slate-200 p-4 lg:p-6 transition-shadow hover:shadow-md">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+<!-- Product Info -->
+<div class="col-span-1 lg:col-span-4 flex items-center gap-4">
+<div class="w-16 h-16 rounded-lg bg-indigo-50 flex-shrink-0 border border-indigo-100 overflow-hidden flex items-center justify-center text-indigo-500">
+<span class="material-symbols-outlined text-3xl">extension</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h3 class="font-semibold text-slate-900 text-base">Advanced SEO Pack</h3>
+</div>
+<p class="text-xs text-slate-500">Purchased: Aug 05, 2023</p>
+</div>
+</div>
+<!-- Current Version -->
+<div class="col-span-1 lg:col-span-2 flex justify-between lg:block">
+<span class="lg:hidden text-sm text-slate-500">Current Version:</span>
+<div class="inline-flex items-center gap-1.5 bg-slate-50 px-3 py-1 rounded-md text-sm font-medium text-slate-600 border border-slate-200">
+                            v2.1.0
+                        </div>
+</div>
+<!-- Previous Versions -->
+<div class="col-span-1 lg:col-span-2 flex justify-between lg:block relative">
+<span class="lg:hidden text-sm text-slate-500">Previous Versions:</span>
+<select class="text-sm border-slate-200 rounded-md text-slate-600 bg-slate-50 focus:ring-primary focus:border-primary py-1.5 pl-3 pr-8 w-full max-w-[140px]">
+<option value="">Legacy...</option>
+<option value="v2.0.5">v2.0.5</option>
+<option value="v2.0.0">v2.0.0</option>
+</select>
+</div>
+<!-- Docs & Changelog -->
+<div class="col-span-1 lg:col-span-2 flex justify-start lg:justify-center gap-3">
+<span class="lg:hidden text-sm text-slate-500 mr-2">Resources:</span>
+<button class="p-2 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-md transition-colors" title="Documentation">
+<span class="material-symbols-outlined">description</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-md transition-colors" title="Changelog">
+<span class="material-symbols-outlined">history</span>
+</button>
+</div>
+<!-- Download Action -->
+<div class="col-span-1 lg:col-span-2 flex justify-end mt-4 lg:mt-0">
+<button class="w-full lg:w-auto bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 font-medium py-2 px-4 rounded-md transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg text-slate-500">download</span>
+                            Download
+                        </button>
+</div>
+</div>
+</div>
+<!-- Item 3: Theme -->
+<div class="bg-white rounded-lg shadow-soft border border-slate-200 p-4 lg:p-6 transition-shadow hover:shadow-md group">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+<!-- Product Info -->
+<div class="col-span-1 lg:col-span-4 flex items-center gap-4">
+<div class="w-16 h-16 rounded-lg bg-slate-100 flex-shrink-0 border border-slate-200 overflow-hidden relative">
+<img alt="Store Theme Thumbnail" class="w-full h-full object-cover" data-alt="E-commerce Storefront Theme Design Preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvR00Zq_5EoXrGbMgBsGGo3zmKQK7qzj1MzqiRRbtG7hbBclzGjdshJYALZhVZfDeEoaGiHxXN-KnncrRl5GZ2-VyKhz6XnMh_thXf3Iw7pTfwl11uMvjpYZNubPosChkdf0N4TI_lmfgZBzZ-fZbHF1AKgH5qzMlxUBGAzZZlD1ucak4xpPLBMrNb6PoJdWl4bfsObgc1w5REwC5f7uYt03KrbQSQn6FB1T3856jUpV0YDYDN55ZnCptWIDksYvg4v93w_i49FIY"/>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h3 class="font-semibold text-slate-900 text-base">Elegance Storefront</h3>
+</div>
+<p class="text-xs text-slate-500">Purchased: Jan 22, 2023</p>
+</div>
+</div>
+<!-- Current Version -->
+<div class="col-span-1 lg:col-span-2 flex justify-between lg:block">
+<span class="lg:hidden text-sm text-slate-500">Current Version:</span>
+<div class="inline-flex items-center gap-1.5 bg-slate-50 px-3 py-1 rounded-md text-sm font-medium text-slate-600 border border-slate-200">
+                            v3.5.2
+                        </div>
+</div>
+<!-- Previous Versions -->
+<div class="col-span-1 lg:col-span-2 flex justify-between lg:block relative">
+<span class="lg:hidden text-sm text-slate-500">Previous Versions:</span>
+<select class="text-sm border-slate-200 rounded-md text-slate-600 bg-slate-50 focus:ring-primary focus:border-primary py-1.5 pl-3 pr-8 w-full max-w-[140px]">
+<option value="">Legacy...</option>
+<option value="v3.5.0">v3.5.0</option>
+<option value="v3.4.1">v3.4.1</option>
+</select>
+</div>
+<!-- Docs & Changelog -->
+<div class="col-span-1 lg:col-span-2 flex justify-start lg:justify-center gap-3">
+<span class="lg:hidden text-sm text-slate-500 mr-2">Resources:</span>
+<button class="p-2 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-md transition-colors" title="Documentation">
+<span class="material-symbols-outlined">description</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-md transition-colors" title="Changelog">
+<span class="material-symbols-outlined">history</span>
+</button>
+</div>
+<!-- Download Action -->
+<div class="col-span-1 lg:col-span-2 flex justify-end mt-4 lg:mt-0">
+<button class="w-full lg:w-auto bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 font-medium py-2 px-4 rounded-md transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg text-slate-500">download</span>
+                            Download
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination (Optional context) -->
+<div class="mt-8 flex items-center justify-between border-t border-slate-200 pt-6">
+<p class="text-sm text-slate-500">Showing <span class="font-medium text-slate-900">1</span> to <span class="font-medium text-slate-900">3</span> of <span class="font-medium text-slate-900">12</span> results</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 border border-slate-200 rounded-md text-slate-500 hover:bg-slate-50 disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1 border border-slate-200 rounded-md text-slate-700 hover:bg-slate-50 bg-white">Next</button>
+</div>
+</div>
+</main>
+</body></html>

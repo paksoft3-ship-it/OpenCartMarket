@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Developer Wallet &amp; Payouts | OpenCart Market</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,FILL@0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5c6cff",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f1123",
+                        "success": "#00c2a8",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="flex min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 fixed h-full z-20">
+<div class="flex flex-col h-full p-6">
+<div class="flex flex-col mb-10">
+<h1 class="text-xl font-bold tracking-tight text-primary">OpenCart Market</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider">Geliştirici Paneli</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-semibold">Panel</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-sm font-semibold">Ürünlerim</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="text-sm font-semibold">Satışlar</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary/10 text-primary rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">account_balance_wallet</span>
+<span class="text-sm font-bold">Cüzdan</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-semibold">Ayarlar</span>
+</a>
+</nav>
+<div class="mt-auto">
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-white py-3 rounded-xl font-bold text-sm shadow-lg shadow-primary/20 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+                        Yeni Modül Ekle
+                    </button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 flex-1">
+<!-- Top Header -->
+<header class="h-20 flex items-center justify-between px-10 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md sticky top-0 z-10">
+<div class="flex items-center gap-4">
+<h2 class="text-2xl font-bold tracking-tight">Cüzdan ve Ödemeler</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+<span class="material-symbols-outlined text-xl">search</span>
+</span>
+<input class="pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary w-64" placeholder="İşlem ara..." type="text"/>
+</div>
+<button class="bg-primary text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-primary/25 hover:scale-[1.02] active:scale-[0.98] transition-all">
+                        Ödeme Al
+                    </button>
+<div class="h-10 w-10 rounded-full bg-slate-200 overflow-hidden ring-2 ring-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Developer profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC64jtuSmiqXKoAX2DSnRpjaQuq6s5ISOq6AhvbuxDxe5WROTOjqxFvgp_Bzj1AWDLdL2BZZvUWUmAAVSVCyLb5k1hRT5GF3boSKLb1epWyK27n7LUbY1XVMWr7c6FKJMwkZc894gakTac7CLDXzMnjuUR48vV2lyF7uUb6Z9cGhgPmlrJUbqfHHEWsU1OqmOz-MXhfGeCJ6SXexLCjQmrvT2RWyWpEpfRwkaaGvr8zV-yeRvwkWGi6T4gbgbrQUnhMX7UZosZ1fjo"/>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-10 space-y-8">
+<!-- Balance Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Available Balance -->
+<div class="bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-6xl text-primary">payments</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-semibold mb-2 uppercase tracking-wide">Kullanılabilir Bakiye</p>
+<h3 class="text-4xl font-black text-primary tracking-tight">₺42,850.00</h3>
+<div class="mt-4 flex items-center text-success text-sm font-bold">
+<span class="material-symbols-outlined text-sm mr-1">trending_up</span>
+<span>Bu ay %14 arttı</span>
+</div>
+</div>
+<!-- Pending Earnings -->
+<div class="bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-semibold mb-2 uppercase tracking-wide">Bekleyen Kazanç</p>
+<h3 class="text-4xl font-black text-slate-400 dark:text-slate-500 tracking-tight">₺8,200.00</h3>
+<div class="mt-4 flex items-center text-slate-400 text-sm">
+<span class="material-symbols-outlined text-sm mr-1">schedule</span>
+<span>Onay bekleyen 4 işlem</span>
+</div>
+</div>
+<!-- Payout Date -->
+<div class="bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-semibold mb-2 uppercase tracking-wide">Gelecek Ödeme Tarihi</p>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">calendar_today</span>
+<h3 class="text-2xl font-bold text-slate-700 dark:text-slate-200">15 Ağustos 2024</h3>
+</div>
+<div class="mt-4 flex items-center text-slate-400 text-sm font-medium">
+<span>Otomatik transfer aktif</span>
+</div>
+</div>
+</div>
+<!-- Bank Info Card -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="h-12 w-12 rounded-lg bg-primary/5 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="font-bold text-slate-900 dark:text-slate-100">Banka Hesabı (IBAN)</h4>
+<span class="bg-success/10 text-success text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 uppercase tracking-wide">
+<span class="material-symbols-outlined text-[12px]">verified</span> Onaylı
+                                </span>
+</div>
+<p class="text-slate-500 text-sm font-mono mt-1">TR62 0006 2000 0000 1234 5678 90 • Akbank A.Ş.</p>
+</div>
+</div>
+<button class="px-5 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                        Düzenle
+                    </button>
+</div>
+<!-- Transaction Table Container -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="px-8 py-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<h3 class="text-lg font-bold">İşlem Geçmişi</h3>
+<button class="text-primary text-sm font-bold hover:underline">Tümünü İndir (CSV)</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-slate-50 dark:bg-slate-800/50">
+<tr>
+<th class="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">İşlem</th>
+<th class="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">Tarih</th>
+<th class="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">Tutar</th>
+<th class="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">Durum</th>
+<th class="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="h-9 w-9 rounded bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">shopping_bag</span>
+</div>
+<span class="font-semibold">Satış: Ultima Pro Theme v2.0</span>
+</div>
+</td>
+<td class="px-8 py-5 text-sm text-slate-500">12 Tem 2024, 14:20</td>
+<td class="px-8 py-5 font-bold text-success">+₺1,250.00</td>
+<td class="px-8 py-5">
+<span class="px-3 py-1 bg-success/10 text-success text-xs font-bold rounded-full">Tamamlandı</span>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="material-symbols-outlined text-slate-300 hover:text-slate-600">more_horiz</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="h-9 w-9 rounded bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">outbound</span>
+</div>
+<span class="font-semibold">Para Çekme: Banka Hesabına</span>
+</div>
+</td>
+<td class="px-8 py-5 text-sm text-slate-500">10 Tem 2024, 09:15</td>
+<td class="px-8 py-5 font-bold text-slate-900 dark:text-slate-100">-₺5,000.00</td>
+<td class="px-8 py-5">
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">İşleniyor</span>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="material-symbols-outlined text-slate-300 hover:text-slate-600">more_horiz</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="h-9 w-9 rounded bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">extension</span>
+</div>
+<span class="font-semibold">Satış: Advanced SEO Module</span>
+</div>
+</td>
+<td class="px-8 py-5 text-sm text-slate-500">08 Tem 2024, 18:45</td>
+<td class="px-8 py-5 font-bold text-success">+₺450.00</td>
+<td class="px-8 py-5">
+<span class="px-3 py-1 bg-amber-100 text-amber-600 text-xs font-bold rounded-full">Beklemede</span>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="material-symbols-outlined text-slate-300 hover:text-slate-600">more_horiz</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="h-9 w-9 rounded bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">shopping_bag</span>
+</div>
+<span class="font-semibold">Satış: Ultima Pro Theme v2.0</span>
+</div>
+</td>
+<td class="px-8 py-5 text-sm text-slate-500">05 Tem 2024, 11:30</td>
+<td class="px-8 py-5 font-bold text-success">+₺1,250.00</td>
+<td class="px-8 py-5">
+<span class="px-3 py-1 bg-success/10 text-success text-xs font-bold rounded-full">Tamamlandı</span>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="material-symbols-outlined text-slate-300 hover:text-slate-600">more_horiz</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="h-9 w-9 rounded bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">outbound</span>
+</div>
+<span class="font-semibold">Para Çekme: Banka Hesabına</span>
+</div>
+</td>
+<td class="px-8 py-5 text-sm text-slate-500">01 Tem 2024, 09:00</td>
+<td class="px-8 py-5 font-bold text-slate-900 dark:text-slate-100">-₺3,500.00</td>
+<td class="px-8 py-5">
+<span class="px-3 py-1 bg-success/10 text-success text-xs font-bold rounded-full">Tamamlandı</span>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="material-symbols-outlined text-slate-300 hover:text-slate-600">more_horiz</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-8 py-6 flex items-center justify-between border-t border-slate-100 dark:border-slate-800">
+<p class="text-sm text-slate-500">Gösteriliyor: 1-5 / 42 İşlem</p>
+<div class="flex gap-2">
+<button class="p-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

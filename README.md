@@ -3,11 +3,11 @@
 A modern, production-quality Next.js marketplace web app for selling OpenCart themes and modules. Built for speed, SEO, and great developer experience with a "modern SaaS marketplace" feel.
 
 ## Tech Stack
-- **Framework:** Next.js 14 (App Router)
+- **Framework:** Next.js 16 (App Router)
 - **Language:** TypeScript 
 - **Styling:** Tailwind CSS & shadcn/ui
 - **State Management:** Zustand (Cart & Auth)
-- **Data:** JSON based (mock database)
+- **Data:** File-backed admin API datastore + PostgreSQL schema for production
 
 ## Getting Started
 
@@ -48,6 +48,20 @@ The `/login` route demonstrates a "Fake Auth" where you choose between Customer 
 **State & Cart:**
 Zustand handles the global cart and user state, persisting automatically via `localStorage`. The `/checkout` route saves mockup purchase data (Orders & Licenses) into `localStorage`, so your Dashboard actually reflects what you bought!
 
-**Admin CRUD:**
-Navigating to Admin > Products allows you to create new themes and modules dynamically using a form. These are appended to a mock array stored in `localStorage` in the browser, showing up immediately in the tables.
+## Admin API Layer
+
+Implemented API routes:
+
+- `GET/POST /api/admin/products`
+- `GET/PATCH/DELETE /api/admin/products/:id`
+- `GET/POST /api/admin/product-files`
+- `GET/POST /api/admin/policies`
+- `GET /api/admin/audit`
+
+Current runtime persistence is file-backed in `.data/admin-db.json` for immediate local/dev functionality.
+
+Production database/storage plan is documented here:
+
+- `database/schema.sql` (PostgreSQL DDL)
+- `database/DEPLOYMENT.md` (Vercel deploy architecture and env vars)
 # OpenCartMarket

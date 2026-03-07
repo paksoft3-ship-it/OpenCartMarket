@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5c6cff",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f1123",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .soft-glow:focus-within {
+            box-shadow: 0 0 0 4px rgba(92, 108, 255, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display">
+<!-- Top Navigation Placeholder (Simplified for Auth) -->
+<header class="w-full px-6 py-6 flex justify-between items-center max-w-7xl mx-auto">
+<div class="flex items-center gap-2 text-slate-900 dark:text-slate-100">
+<div class="bg-primary p-1.5 rounded-lg text-white">
+<span class="material-symbols-outlined text-2xl block">grid_view</span>
+</div>
+<span class="text-xl font-bold tracking-tight">OpenCart Marketplace</span>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#">Temalar</a>
+<a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#">Modüller</a>
+</div>
+</header>
+<main class="flex-1 flex items-center justify-center p-4">
+<!-- Forgot Password Card -->
+<div class="w-full max-w-[400px] bg-white dark:bg-slate-900 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.05),0_1px_2px_rgba(0,0,0,0.02)] border border-slate-100 dark:border-slate-800 p-8 md:p-10">
+<!-- Icon/Branding -->
+<div class="flex justify-center mb-8">
+<div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">lock_reset</span>
+</div>
+</div>
+<!-- Header Text -->
+<div class="text-center mb-8">
+<h1 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">Şifrenizi mi Unuttunuz?</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed px-2">
+                    E-posta adresinizi girin, size şifre sıfırlama bağlantısı gönderelim.
+                </p>
+</div>
+<!-- Recovery Form -->
+<form class="space-y-6">
+<div class="soft-glow rounded-lg transition-all">
+<label class="block mb-2">
+<span class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider ml-1">E-posta Adresi</span>
+<div class="relative mt-1">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+<span class="material-symbols-outlined text-xl">mail</span>
+</div>
+<input class="w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-0 transition-all placeholder:text-slate-400 text-sm" placeholder="ornek@eposta.com" required="" type="email"/>
+</div>
+</label>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-4 px-6 rounded-lg shadow-lg shadow-primary/25 transition-all active:scale-[0.98] flex items-center justify-center gap-2" type="submit">
+<span>Sıfırlama Bağlantısı Gönder</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</form>
+<!-- Footer Links -->
+<div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 text-center">
+<a class="inline-flex items-center gap-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-lg group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                    Giriş Yap'a Dön
+                </a>
+</div>
+</div>
+</main>
+<!-- Support Footer -->
+<footer class="py-8 text-center">
+<p class="text-xs text-slate-400 dark:text-slate-600">
+            Yardıma mı ihtiyacınız var? <a class="underline hover:text-primary" href="#">Destek Ekibiyle İletişime Geçin</a>
+</p>
+</footer>
+<!-- Abstract Decorative Elements -->
+<div class="fixed top-0 right-0 -z-10 w-1/3 h-1/2 opacity-20 pointer-events-none overflow-hidden">
+<div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary/20 blur-[100px] rounded-full" data-alt="Soft blue abstract background glow"></div>
+</div>
+<div class="fixed bottom-0 left-0 -z-10 w-1/4 h-1/4 opacity-10 pointer-events-none overflow-hidden">
+<div class="absolute bottom-[-10%] left-[-10%] w-[300px] h-[300px] bg-primary/30 blur-[80px] rounded-full" data-alt="Soft indigo abstract background pattern"></div>
+</div>
+</body></html>

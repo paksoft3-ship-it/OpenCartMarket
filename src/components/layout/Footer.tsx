@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { Container } from "./Container";
 import Link from "next/link";
+import Image from "next/image";
 
 export function Footer() {
     const pathname = usePathname();
@@ -18,11 +19,10 @@ export function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 mb-16">
                     {/* Brand Column */}
                     <div className="lg:col-span-4 flex flex-col gap-6">
-                        <div className="flex items-center gap-3">
-                            <div className="text-primary">
-                                <span className="material-symbols-outlined text-4xl">storefront</span>
+                        <div className="flex items-center">
+                            <div className="text-primary flex items-center">
+                                <Image src="/logo1_v2.png" alt="OpenCart Marketplace Logo" width={260} height={44} className="object-contain w-auto h-10" />
                             </div>
-                            <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">OpenCart Marketplace</h2>
                         </div>
                         <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed max-w-sm">
                             Türkiye&apos;nin en kapsamlı OpenCart pazaryeri. Geliştiricileri ve mağaza sahiplerini güvenilir bir ekosistemde buluşturuyoruz. E-ticaret sitenizi bir üst seviyeye taşıyın.
@@ -82,7 +82,7 @@ export function Footer() {
                         <a href="#" className="text-slate-400 hover:text-primary transition-colors font-bold text-sm">GH</a>
                     </div>
                     <p className="text-slate-500 text-sm">
-                        &copy; {new Date().getFullYear()} OpenCart TR Pazaryeri. Tüm hakları saklıdır.
+                        &copy; {new Date().getFullYear()} Tüm hakları saklıdır.
                     </p>
                     <div className="flex gap-4 text-xs font-semibold text-slate-400">
                         <Link href="/privacy" className="hover:text-primary transition-colors">Gizlilik</Link>
