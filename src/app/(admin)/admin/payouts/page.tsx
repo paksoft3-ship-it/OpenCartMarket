@@ -4,8 +4,11 @@ import { useMemo, useState } from "react";
 import { PayoutQueue, PayoutStatus } from "@/lib/data/adminOps";
 import { useCan } from "@/components/admin/AdminAccessContext";
 import { useAdminOpsStore } from "@/lib/store/adminOpsStore";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export default function AdminPayoutsPage() {
+  const language = useAdminLanguage();
+  const tr = language === "tr";
   const canApprove = useCan("approve_payout");
   const canRunSettlement = useCan("run_settlement");
   const payouts = useAdminOpsStore((state) => state.payouts);
@@ -35,26 +38,26 @@ export default function AdminPayoutsPage() {
     <div className="flex-1 overflow-y-auto p-4 sm:p-8">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Payout Engine Console</h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Queue-based odeme yonetimi, reconciliation ve exception handling.</p>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">{tr ? "Ödeme Motoru Konsolu" : "Payout Engine Console"}</h1>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{tr ? "Kuyruk tabanlı ödeme yönetimi, mutabakat ve istisna yönetimi." : "Queue-based payout operations, reconciliation and exception handling."}</p>
         </div>
         <button className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90 disabled:opacity-50" disabled={!canRunSettlement}>
-          Run Settlement Batch
+          {tr ? "Mutabakat Toplu İşlemini Çalıştır" : "Run Settlement Batch"}
         </button>
       </div>
 
       <div className="mb-6 grid gap-4 md:grid-cols-4">
         <Kpi label="Bekleyen Tutar" value={`₺${metrics.pendingAmount.toLocaleString()}`} />
-        <Kpi label="Exception Queue" value={metrics.exceptionCount.toString()} />
-        <Kpi label="Toplam Islem Ucreti" value={`₺${metrics.fees.toLocaleString()}`} />
-        <Kpi label="Auto Settlement Ratio" value="71%" />
+        <Kpi label={tr ? "İstisna Kuyruğu" : "Exception Queue"} value={metrics.exceptionCount.toString()} />
+        <Kpi label={tr ? "Toplam İşlem Ücreti" : "Total Processing Fee"} value={`₺${metrics.fees.toLocaleString()}`} />
+        <Kpi label={tr ? "Otomatik Mutabakat Oranı" : "Auto Settlement Ratio"} value="71%" />
       </div>
 
       <div className="mb-4 flex flex-wrap gap-2">
-        <QueuePill active={queueFilter === "all"} label="All Queue" onClick={() => setQueueFilter("all")} />
-        <QueuePill active={queueFilter === "manual"} label="Manual Review" onClick={() => setQueueFilter("manual")} />
-        <QueuePill active={queueFilter === "auto"} label="Auto Approved" onClick={() => setQueueFilter("auto")} />
-        <QueuePill active={queueFilter === "exception"} label="Exception" onClick={() => setQueueFilter("exception")} />
+        <QueuePill active={queueFilter === "all"} label={tr ? "Tüm Kuyruklar" : "All Queue"} onClick={() => setQueueFilter("all")} />
+        <QueuePill active={queueFilter === "manual"} label={tr ? "Manuel İnceleme" : "Manual Review"} onClick={() => setQueueFilter("manual")} />
+        <QueuePill active={queueFilter === "auto"} label={tr ? "Otomatik Onay" : "Auto Approved"} onClick={() => setQueueFilter("auto")} />
+        <QueuePill active={queueFilter === "exception"} label={tr ? "İstisna" : "Exception"} onClick={() => setQueueFilter("exception")} />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.4fr_1fr]">
@@ -65,9 +68,9 @@ export default function AdminPayoutsPage() {
                 <th className="px-4 py-3">Talep</th>
                 <th className="px-4 py-3">Geliştirici</th>
                 <th className="px-4 py-3">Tutar</th>
-                <th className="px-4 py-3">Queue</th>
+                <th className="px-4 py-3">{tr ? "Kuyruk" : "Queue"}</th>
                 <th className="px-4 py-3">Durum</th>
-                <th className="px-4 py-3">Retry</th>
+                <th className="px-4 py-3">{tr ? "Yeniden Deneme" : "Retry"}</th>
               </tr>
             </thead>
             <tbody>
@@ -79,7 +82,7 @@ export default function AdminPayoutsPage() {
                   </td>
                   <td className="px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{request.developer}</td>
                   <td className="px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-100">₺{request.amount.toLocaleString()}</td>
-                  <td className="px-4 py-3"><QueueTag queue={request.queue} /></td>
+                  <td className="px-4 py-3"><QueueTag queue={request.queue} tr={tr} /></td>
                   <td className="px-4 py-3"><StatusTag status={request.status} /></td>
                   <td className="px-4 py-3 text-sm text-slate-500">{request.retries}</td>
                 </tr>
@@ -93,44 +96,44 @@ export default function AdminPayoutsPage() {
             <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">{selected.id}</h2>
             <p className="mt-1 text-sm text-slate-500">{selected.developer}</p>
             <div className="mt-4 grid grid-cols-2 gap-2">
-              <SmallMetric label="Amount" value={`₺${selected.amount.toLocaleString()}`} />
-              <SmallMetric label="Fee" value={`₺${selected.fee}`} />
-              <SmallMetric label="Status" value={selected.status} />
-              <SmallMetric label="Queue" value={selected.queue} />
+              <SmallMetric label={tr ? "Tutar" : "Amount"} value={`₺${selected.amount.toLocaleString()}`} />
+              <SmallMetric label={tr ? "Ücret" : "Fee"} value={`₺${selected.fee}`} />
+              <SmallMetric label={tr ? "Durum" : "Status"} value={selected.status} />
+              <SmallMetric label={tr ? "Kuyruk" : "Queue"} value={queueText(selected.queue, tr)} />
             </div>
             <div className="mt-4 rounded-lg border border-slate-100 p-3 text-sm text-slate-600 dark:border-slate-800 dark:text-slate-300">
-              Exception reason: {selected.reason}
+              {tr ? "İstisna sebebi" : "Exception reason"}: {selected.reason}
             </div>
             <div className="mt-3 grid grid-cols-2 gap-2">
               <button
                 className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold hover:bg-slate-50 disabled:opacity-50 dark:border-slate-700 dark:hover:bg-slate-800"
                 disabled={!canApprove}
                 onClick={() => {
-                  if (!window.confirm(`Retry payout ${selected.id}?`)) return;
+                  if (!window.confirm(tr ? `${selected.id} ödemesi yeniden denensin mi?` : `Retry payout ${selected.id}?`)) return;
                   retryPayout(selected.id, "Admin");
                 }}
               >
-                Retry
+                {tr ? "Yeniden Dene" : "Retry"}
               </button>
               <button
                 className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90 disabled:opacity-50"
                 disabled={!canApprove}
                 onClick={() => {
-                  if (!window.confirm(`Approve payout ${selected.id}?`)) return;
+                  if (!window.confirm(tr ? `${selected.id} ödemesi onaylansın mı?` : `Approve payout ${selected.id}?`)) return;
                   updatePayoutStatus(selected.id, "Onaylandı", "Admin");
                 }}
               >
-                Approve
+                {tr ? "Onayla" : "Approve"}
               </button>
             </div>
           </div>
 
           <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-            <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Reconciliation Checklist</h3>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">{tr ? "Mutabakat Kontrol Listesi" : "Reconciliation Checklist"}</h3>
             <ul className="mt-3 space-y-2 text-sm text-slate-600 dark:text-slate-300">
-              <li className="rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800">Net payout equals ledger balance.</li>
-              <li className="rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800">Tax withholding applied for jurisdiction.</li>
-              <li className="rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800">Failed transfers auto retried by policy.</li>
+              <li className="rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800">{tr ? "Net ödeme defter bakiyesi ile eşleşiyor." : "Net payout equals ledger balance."}</li>
+              <li className="rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800">{tr ? "Yasal bölgeye göre vergi kesintisi uygulandı." : "Tax withholding applied for jurisdiction."}</li>
+              <li className="rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800">{tr ? "Başarısız transferler politika gereği otomatik tekrarlandı." : "Failed transfers auto retried by policy."}</li>
             </ul>
           </div>
         </aside>
@@ -160,14 +163,22 @@ function QueuePill({ active, label, onClick }: { active: boolean; label: string;
   );
 }
 
-function QueueTag({ queue }: { queue: PayoutQueue }) {
+function queueText(queue: PayoutQueue, tr: boolean) {
+  if (!tr) return queue;
+  if (queue === "manual") return "manuel";
+  if (queue === "auto") return "otomatik";
+  if (queue === "exception") return "istisna";
+  return "tümü";
+}
+
+function QueueTag({ queue, tr }: { queue: PayoutQueue; tr: boolean }) {
   const style =
     queue === "exception"
       ? "bg-red-100 text-red-700"
       : queue === "manual"
       ? "bg-amber-100 text-amber-700"
       : "bg-emerald-100 text-emerald-700";
-  return <span className={`rounded-full px-2.5 py-1 text-xs font-semibold capitalize ${style}`}>{queue}</span>;
+  return <span className={`rounded-full px-2.5 py-1 text-xs font-semibold capitalize ${style}`}>{queueText(queue, tr)}</span>;
 }
 
 function StatusTag({ status }: { status: PayoutStatus }) {

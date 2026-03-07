@@ -2,8 +2,10 @@
 
 import { useMemo, useState } from "react";
 import { useAdminOpsStore } from "@/lib/store/adminOpsStore";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export default function AdminAuditPage() {
+  const tr = useAdminLanguage() === "tr";
   const auditTrail = useAdminOpsStore((state) => state.auditTrail);
   const restorePoints = useAdminOpsStore((state) => state.restorePoints);
   const refunds = useAdminOpsStore((state) => state.refunds);
@@ -51,38 +53,38 @@ export default function AdminAuditPage() {
     <div className="flex-1 overflow-y-auto p-4 sm:p-8">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Audit Timeline</h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">All admin actions are recorded here with rollback support.</p>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">{tr ? "Denetim Zaman Çizelgesi" : "Audit Timeline"}</h1>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{tr ? "Tüm yönetici işlemleri geri alma desteğiyle burada kayıt altına alınır." : "All admin actions are recorded here with rollback support."}</p>
         </div>
         <button
           className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90 disabled:opacity-50"
           disabled={historyCount === 0}
           onClick={() => {
-            if (!window.confirm("Undo last admin operation?")) return;
+            if (!window.confirm(tr ? "Son yönetici işlemi geri alınsın mı?" : "Undo last admin operation?")) return;
             undoLast("Admin");
           }}
         >
-          Undo Last Action
+          {tr ? "Son İşlemi Geri Al" : "Undo Last Action"}
         </button>
       </div>
 
       <div className="mb-6 grid gap-4 md:grid-cols-3">
-        <Metric label="Logged Actions" value={auditTrail.length.toString()} />
-        <Metric label="Undo Snapshots" value={historyCount.toString()} />
-        <Metric label="Last 24h Actors" value={String(new Set(auditTrail.map((a) => a.actor)).size)} />
+        <Metric label={tr ? "Kaydedilen İşlem" : "Logged Actions"} value={auditTrail.length.toString()} />
+        <Metric label={tr ? "Geri Alma Snapshotları" : "Undo Snapshots"} value={historyCount.toString()} />
+        <Metric label={tr ? "Son 24s Aktör" : "Last 24h Actors"} value={String(new Set(auditTrail.map((a) => a.actor)).size)} />
       </div>
 
       {undoPreview && (
         <section className="mb-6 rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-          <h2 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Undo Preview</h2>
+          <h2 className="text-sm font-semibold text-slate-900 dark:text-slate-100">{tr ? "Geri Alma Önizleme" : "Undo Preview"}</h2>
           <div className="mt-3 grid gap-3 sm:grid-cols-4">
-            <Delta label="Refunds" delta={undoPreview.refundsDelta} />
-            <Delta label="Payouts" delta={undoPreview.payoutsDelta} />
-            <Delta label="Rules" delta={undoPreview.rulesDelta} />
-            <Delta label="Logs" delta={undoPreview.logsDelta} />
-            <Delta label="Modules" delta={undoPreview.modulesDelta} />
-            <Delta label="Feeds" delta={undoPreview.feedsDelta} />
-            <Delta label="Templates" delta={undoPreview.templatesDelta} />
+            <Delta label={tr ? "İadeler" : "Refunds"} delta={undoPreview.refundsDelta} />
+            <Delta label={tr ? "Ödemeler" : "Payouts"} delta={undoPreview.payoutsDelta} />
+            <Delta label={tr ? "Kurallar" : "Rules"} delta={undoPreview.rulesDelta} />
+            <Delta label={tr ? "Kayıtlar" : "Logs"} delta={undoPreview.logsDelta} />
+            <Delta label={tr ? "Modüller" : "Modules"} delta={undoPreview.modulesDelta} />
+            <Delta label={tr ? "Beslemeler" : "Feeds"} delta={undoPreview.feedsDelta} />
+            <Delta label={tr ? "Şablonlar" : "Templates"} delta={undoPreview.templatesDelta} />
           </div>
         </section>
       )}
@@ -105,17 +107,17 @@ export default function AdminAuditPage() {
           <table className="w-full text-left">
             <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500 dark:bg-slate-800/50">
               <tr>
-                <th className="px-4 py-3">Time</th>
-                <th className="px-4 py-3">Actor</th>
-                <th className="px-4 py-3">Action</th>
+                <th className="px-4 py-3">{tr ? "Zaman" : "Time"}</th>
+                <th className="px-4 py-3">{tr ? "Aktör" : "Actor"}</th>
+                <th className="px-4 py-3">{tr ? "İşlem" : "Action"}</th>
                 <th className="px-4 py-3">Target</th>
-                <th className="px-4 py-3">Details</th>
+                <th className="px-4 py-3">{tr ? "Detay" : "Details"}</th>
               </tr>
             </thead>
             <tbody>
               {grouped.map((entry) => (
                 <tr key={entry.id} className="cursor-pointer border-t border-slate-100 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-800/50" onClick={() => setSelectedId(entry.id)}>
-                  <td className="px-4 py-3 text-xs text-slate-500">{new Date(entry.at).toLocaleString("tr-TR")}</td>
+                  <td className="px-4 py-3 text-xs text-slate-500">{new Date(entry.at).toLocaleString(tr ? "tr-TR" : "en-US")}</td>
                   <td className="px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-100">{entry.actor}</td>
                   <td className="px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{entry.action}</td>
                   <td className="px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{entry.target}</td>
@@ -124,7 +126,7 @@ export default function AdminAuditPage() {
               ))}
               {grouped.length === 0 && (
                 <tr>
-                  <td className="h-24 px-4 text-center text-sm text-slate-500" colSpan={5}>No audit entries yet.</td>
+                  <td className="h-24 px-4 text-center text-sm text-slate-500" colSpan={5}>{tr ? "Henüz denetim kaydı yok." : "No audit entries yet."}</td>
                 </tr>
               )}
             </tbody>
@@ -133,46 +135,46 @@ export default function AdminAuditPage() {
 
         <aside className="space-y-4">
           <section className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-            <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Restore Points</h3>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">{tr ? "Geri Yükleme Noktaları" : "Restore Points"}</h3>
             <div className="mt-3 space-y-2">
               {restorePoints.slice(0, 5).map((point) => (
                 <div key={point.id} className="rounded-lg border border-slate-100 p-3 dark:border-slate-800">
                   <div className="flex items-start justify-between gap-2">
                     <div>
                       <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{point.label}</p>
-                      <p className="text-xs text-slate-500">{new Date(point.createdAt).toLocaleString("tr-TR")} • {point.actor}</p>
+                      <p className="text-xs text-slate-500">{new Date(point.createdAt).toLocaleString(tr ? "tr-TR" : "en-US")} • {point.actor}</p>
                     </div>
                     <button
                       className="rounded-md border border-slate-200 px-2.5 py-1 text-xs font-semibold hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800"
                       onClick={() => {
-                        if (!window.confirm(`Apply restore point ${point.id}?`)) return;
+                        if (!window.confirm(tr ? `${point.id} geri yükleme noktası uygulansın mı?` : `Apply restore point ${point.id}?`)) return;
                         restoreFromPoint(point.id, "Admin");
                       }}
                       type="button"
                     >
-                      Apply
+                      {tr ? "Uygula" : "Apply"}
                     </button>
                   </div>
                   <p className="mt-2 text-xs text-slate-600 dark:text-slate-300">
-                    Refunds {point.counts.refunds} • Payouts {point.counts.payouts} • Rules {point.counts.rules} • Logs {point.counts.logs} • Modules {point.counts.modules ?? 0} • Feeds {point.counts.feeds ?? 0} • Policies {point.counts.policies ?? 0}
+                    {tr ? "İadeler" : "Refunds"} {point.counts.refunds} • {tr ? "Ödemeler" : "Payouts"} {point.counts.payouts} • {tr ? "Kurallar" : "Rules"} {point.counts.rules} • {tr ? "Kayıtlar" : "Logs"} {point.counts.logs} • {tr ? "Modüller" : "Modules"} {point.counts.modules ?? 0} • {tr ? "Beslemeler" : "Feeds"} {point.counts.feeds ?? 0} • {tr ? "Politikalar" : "Policies"} {point.counts.policies ?? 0}
                   </p>
                 </div>
               ))}
-              {restorePoints.length === 0 && <p className="text-sm text-slate-500">No restore points yet.</p>}
+              {restorePoints.length === 0 && <p className="text-sm text-slate-500">{tr ? "Henüz geri yükleme noktası yok." : "No restore points yet."}</p>}
             </div>
           </section>
 
           <section className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-            <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Entry Detail</h3>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">{tr ? "Kayıt Detayı" : "Entry Detail"}</h3>
             {selectedEntry ? (
               <div className="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-300">
                 <p><span className="font-semibold">ID:</span> {selectedEntry.id}</p>
-                <p><span className="font-semibold">Time:</span> {new Date(selectedEntry.at).toLocaleString("tr-TR")}</p>
-                <p><span className="font-semibold">Actor:</span> {selectedEntry.actor}</p>
-                <p><span className="font-semibold">Action:</span> {selectedEntry.action}</p>
-                <p><span className="font-semibold">Target:</span> {selectedEntry.target}</p>
-                <p><span className="font-semibold">Details:</span> {selectedEntry.details}</p>
-                {selectedEntry.restorePointId && <p><span className="font-semibold">Restore Point:</span> {selectedEntry.restorePointId}</p>}
+                <p><span className="font-semibold">{tr ? "Zaman" : "Time"}:</span> {new Date(selectedEntry.at).toLocaleString(tr ? "tr-TR" : "en-US")}</p>
+                <p><span className="font-semibold">{tr ? "Aktör" : "Actor"}:</span> {selectedEntry.actor}</p>
+                <p><span className="font-semibold">{tr ? "İşlem" : "Action"}:</span> {selectedEntry.action}</p>
+                <p><span className="font-semibold">{tr ? "Hedef" : "Target"}:</span> {selectedEntry.target}</p>
+                <p><span className="font-semibold">{tr ? "Detay" : "Details"}:</span> {selectedEntry.details}</p>
+                {selectedEntry.restorePointId && <p><span className="font-semibold">{tr ? "Geri Yükleme Noktası" : "Restore Point"}:</span> {selectedEntry.restorePointId}</p>}
 
                 {selectedEntry.changes.length > 0 && (
                   <div className="mt-3 rounded-lg border border-slate-100 p-3 dark:border-slate-800">
@@ -189,7 +191,7 @@ export default function AdminAuditPage() {
                 )}
               </div>
             ) : (
-              <p className="mt-3 text-sm text-slate-500">No entry selected.</p>
+              <p className="mt-3 text-sm text-slate-500">{tr ? "Kayıt seçilmedi." : "No entry selected."}</p>
             )}
           </section>
         </aside>

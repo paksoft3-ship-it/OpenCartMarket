@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { useMockData } from "@/lib/hooks/useMockData";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 type RiskLevel = "low" | "medium" | "high";
 
@@ -19,6 +20,8 @@ type OrderView = {
 };
 
 export default function AdminOrdersPage() {
+  const language = useAdminLanguage();
+  const tr = language === "tr";
   const { orders, isLoaded } = useMockData();
   const [statusFilter, setStatusFilter] = useState<"all" | "completed" | "pending" | "failed">("all");
   const [riskFilter, setRiskFilter] = useState<"all" | RiskLevel>("all");
@@ -36,7 +39,7 @@ export default function AdminOrdersPage() {
       const slaHours = order.status === "pending" ? (bucket % 10) + 1 : 0;
       return {
         id: order.id,
-        date: new Date(order.date).toLocaleDateString("tr-TR"),
+        date: new Date(order.date).toLocaleDateString(tr ? "tr-TR" : "en-US"),
         customerEmail,
         status: order.status,
         total: order.total,
@@ -74,46 +77,46 @@ export default function AdminOrdersPage() {
     <div className="flex-1 overflow-y-auto p-4 sm:p-8">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Orders Control Tower</h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Siparis akisi, risk seviyesi ve operasyon SLA takibi.</p>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">{tr ? "Sipariş Kontrol Merkezi" : "Orders Control Tower"}</h1>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{tr ? "Sipariş akışı, risk seviyesi ve operasyon SLA takibi." : "Track order flow, risk levels and operational SLAs."}</p>
         </div>
       </div>
 
       <div className="mb-6 grid gap-4 md:grid-cols-4">
-        <Metric label="Toplam Siparis" value={stats.total.toString()} />
-        <Metric label="Bekleyen Islem" value={stats.pending.toString()} />
-        <Metric label="Yuksek Risk" value={stats.highRisk.toString()} />
-        <Metric label="Toplam Ciro" value={`$${stats.revenue.toFixed(0)}`} />
+        <Metric label={tr ? "Toplam Sipariş" : "Total Orders"} value={stats.total.toString()} />
+        <Metric label={tr ? "Bekleyen İşlem" : "Pending"} value={stats.pending.toString()} />
+        <Metric label={tr ? "Yüksek Risk" : "High Risk"} value={stats.highRisk.toString()} />
+        <Metric label={tr ? "Toplam Ciro" : "Revenue"} value={`$${stats.revenue.toFixed(0)}`} />
       </div>
 
       <div className="mb-4 flex flex-wrap items-center gap-2">
-        <Pill active={statusFilter === "all"} label="Tum Durumlar" onClick={() => setStatusFilter("all")} />
-        <Pill active={statusFilter === "completed"} label="Completed" onClick={() => setStatusFilter("completed")} />
-        <Pill active={statusFilter === "pending"} label="Pending" onClick={() => setStatusFilter("pending")} />
-        <Pill active={statusFilter === "failed"} label="Failed" onClick={() => setStatusFilter("failed")} />
+        <Pill active={statusFilter === "all"} label={tr ? "Tüm Durumlar" : "All Statuses"} onClick={() => setStatusFilter("all")} />
+        <Pill active={statusFilter === "completed"} label={tr ? "Tamamlandı" : "Completed"} onClick={() => setStatusFilter("completed")} />
+        <Pill active={statusFilter === "pending"} label={tr ? "Beklemede" : "Pending"} onClick={() => setStatusFilter("pending")} />
+        <Pill active={statusFilter === "failed"} label={tr ? "Başarısız" : "Failed"} onClick={() => setStatusFilter("failed")} />
         <span className="mx-2 h-5 w-px bg-slate-300 dark:bg-slate-700" />
-        <Pill active={riskFilter === "all"} label="Tum Riskler" onClick={() => setRiskFilter("all")} />
-        <Pill active={riskFilter === "low"} label="Low Risk" onClick={() => setRiskFilter("low")} />
-        <Pill active={riskFilter === "medium"} label="Medium Risk" onClick={() => setRiskFilter("medium")} />
-        <Pill active={riskFilter === "high"} label="High Risk" onClick={() => setRiskFilter("high")} />
+        <Pill active={riskFilter === "all"} label={tr ? "Tüm Riskler" : "All Risks"} onClick={() => setRiskFilter("all")} />
+        <Pill active={riskFilter === "low"} label={tr ? "Düşük Risk" : "Low Risk"} onClick={() => setRiskFilter("low")} />
+        <Pill active={riskFilter === "medium"} label={tr ? "Orta Risk" : "Medium Risk"} onClick={() => setRiskFilter("medium")} />
+        <Pill active={riskFilter === "high"} label={tr ? "Yüksek Risk" : "High Risk"} onClick={() => setRiskFilter("high")} />
       </div>
 
       <div className="grid gap-4 lg:grid-cols-3">
-        <Lane title="Pending Queue" count={filtered.filter((order) => order.status === "pending").length} />
-        <Lane title="Risk Review" count={filtered.filter((order) => order.risk === "high").length} />
-        <Lane title="Completed Today" count={filtered.filter((order) => order.status === "completed").length} />
+        <Lane title={tr ? "Bekleyen Kuyruk" : "Pending Queue"} count={filtered.filter((order) => order.status === "pending").length} />
+        <Lane title={tr ? "Risk İncelemesi" : "Risk Review"} count={filtered.filter((order) => order.risk === "high").length} />
+        <Lane title={tr ? "Bugün Tamamlanan" : "Completed Today"} count={filtered.filter((order) => order.status === "completed").length} />
       </div>
 
       <div className="mt-6 overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
         <table className="w-full text-left">
           <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500 dark:bg-slate-800/50">
             <tr>
-              <th className="px-4 py-3">Order</th>
-              <th className="px-4 py-3">Customer</th>
-              <th className="px-4 py-3">Status</th>
+              <th className="px-4 py-3">{tr ? "Sipariş" : "Order"}</th>
+              <th className="px-4 py-3">{tr ? "Müşteri" : "Customer"}</th>
+              <th className="px-4 py-3">{tr ? "Durum" : "Status"}</th>
               <th className="px-4 py-3">Risk</th>
               <th className="px-4 py-3">SLA</th>
-              <th className="px-4 py-3 text-right">Total</th>
+              <th className="px-4 py-3 text-right">{tr ? "Toplam" : "Total"}</th>
             </tr>
           </thead>
           <tbody>
@@ -121,13 +124,13 @@ export default function AdminOrdersPage() {
               <tr key={order.id} className="cursor-pointer border-t border-slate-100 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-800/50" onClick={() => setSelectedId(order.id)}>
                 <td className="px-4 py-3">
                   <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{order.id}</p>
-                  <p className="text-xs text-slate-500">{order.date} • {order.items} item</p>
+                  <p className="text-xs text-slate-500">{order.date} • {order.items} {tr ? "ürün" : "item"}</p>
                 </td>
                 <td className="px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{order.customerEmail}</td>
-                <td className="px-4 py-3"><Badge className="capitalize" variant={order.status === "completed" ? "default" : "secondary"}>{order.status}</Badge></td>
+                <td className="px-4 py-3"><Badge className="capitalize" variant={order.status === "completed" ? "default" : "secondary"}>{tr ? (order.status === "completed" ? "tamamlandı" : order.status === "pending" ? "beklemede" : "başarısız") : order.status}</Badge></td>
                 <td className="px-4 py-3">
                   <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${order.risk === "high" ? "bg-red-100 text-red-700" : order.risk === "medium" ? "bg-amber-100 text-amber-700" : "bg-emerald-100 text-emerald-700"}`}>
-                    {order.risk}
+                    {tr ? (order.risk === "high" ? "yüksek" : order.risk === "medium" ? "orta" : "düşük") : order.risk}
                   </span>
                 </td>
                 <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">{order.slaHours ? `${order.slaHours}h` : "-"}</td>
@@ -136,7 +139,7 @@ export default function AdminOrdersPage() {
             ))}
             {filtered.length === 0 && (
               <tr>
-                <td className="h-24 px-4 text-center text-sm text-slate-500" colSpan={6}>Filtreye uygun siparis yok.</td>
+                <td className="h-24 px-4 text-center text-sm text-slate-500" colSpan={6}>{tr ? "Filtreye uygun sipariş yok." : "No orders match the filters."}</td>
               </tr>
             )}
           </tbody>
@@ -146,29 +149,29 @@ export default function AdminOrdersPage() {
       <Sheet onOpenChange={(open) => !open && setSelectedId(null)} open={Boolean(selected)}>
         <SheetContent className="sm:max-w-lg">
           <SheetHeader>
-            <SheetTitle>{selected?.id ?? "Order Detail"}</SheetTitle>
-            <SheetDescription>Order timeline, risk notes and next-best action.</SheetDescription>
+            <SheetTitle>{selected?.id ?? (tr ? "Sipariş Detayı" : "Order Detail")}</SheetTitle>
+            <SheetDescription>{tr ? "Sipariş zaman çizelgesi, risk notları ve önerilen aksiyon." : "Order timeline, risk notes and next-best action."}</SheetDescription>
           </SheetHeader>
           {selected && (
             <div className="space-y-4 p-4">
               <div className="rounded-lg border border-slate-200 p-4 dark:border-slate-700">
-                <p className="text-xs text-slate-500">Customer</p>
+                <p className="text-xs text-slate-500">{tr ? "Müşteri" : "Customer"}</p>
                 <p className="mt-1 text-sm font-semibold text-slate-900 dark:text-slate-100">{selected.customerEmail}</p>
               </div>
               <div className="grid grid-cols-2 gap-3">
-                <Detail label="Status" value={selected.status} />
-                <Detail label="Risk" value={selected.risk} />
+                <Detail label={tr ? "Durum" : "Status"} value={tr ? (selected.status === "completed" ? "tamamlandı" : selected.status === "pending" ? "beklemede" : "başarısız") : selected.status} />
+                <Detail label="Risk" value={tr ? (selected.risk === "high" ? "yüksek" : selected.risk === "medium" ? "orta" : "düşük") : selected.risk} />
                 <Detail label="SLA" value={selected.slaHours ? `${selected.slaHours}h` : "-"} />
-                <Detail label="Total" value={`$${selected.total.toFixed(2)}`} />
+                <Detail label={tr ? "Toplam" : "Total"} value={`$${selected.total.toFixed(2)}`} />
               </div>
               <div className="rounded-lg border border-slate-200 p-4 dark:border-slate-700">
-                <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Recommended Action</p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">{tr ? "Önerilen Aksiyon" : "Recommended Action"}</p>
                 <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
                   {selected.risk === "high"
-                    ? "Risk incelemesi baslatin, odeme dogrulama adimlarini tamamlayin."
+                    ? tr ? "Risk incelemesini başlatın, ödeme doğrulama adımlarını tamamlayın." : "Start risk review and complete payment verification."
                     : selected.status === "pending"
-                    ? "SLA asimi olmadan fulfillment ekibine yonlendirin."
-                    : "Siparis tamamlandi, upsell e-posta akisini tetikleyin."}
+                    ? tr ? "SLA aşımı olmadan fulfillment ekibine yönlendirin." : "Route to fulfillment before SLA breach."
+                    : tr ? "Sipariş tamamlandı, upsell e-posta akışını tetikleyin." : "Order completed, trigger upsell email flow."}
                 </p>
               </div>
             </div>

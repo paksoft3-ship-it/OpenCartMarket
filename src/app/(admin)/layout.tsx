@@ -5,50 +5,92 @@ import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import { AdminAccessProvider, AdminView } from "@/components/admin/AdminAccessContext";
-type NavItem = { href: string; icon: string; label: string; views: AdminView[] };
+import { AdminLanguage, AdminLanguageProvider } from "@/components/admin/AdminLanguageContext";
+type LocalizedLabel = { tr: string; en: string };
+type NavItem = { href: string; icon: string; label: LocalizedLabel; views: AdminView[] };
 
 const adminLinks: NavItem[] = [
-    { href: "/admin", icon: "dashboard", label: "Dashboard", views: ["super", "ops", "finance", "content", "growth"] },
-    { href: "/admin/products", icon: "inventory_2", label: "Products", views: ["super", "ops", "content", "growth"] },
-    { href: "/admin/orders", icon: "shopping_cart", label: "Orders", views: ["super", "ops", "finance"] },
-    { href: "/admin/customers", icon: "group", label: "Customers", views: ["super", "ops", "growth"] },
+    { href: "/admin", icon: "dashboard", label: { tr: "Kontrol Paneli", en: "Dashboard" }, views: ["super", "ops", "finance", "content", "growth"] },
+    { href: "/admin/products", icon: "inventory_2", label: { tr: "Ürünler", en: "Products" }, views: ["super", "ops", "content", "growth"] },
+    { href: "/admin/orders", icon: "shopping_cart", label: { tr: "Siparişler", en: "Orders" }, views: ["super", "ops", "finance"] },
+    { href: "/admin/customers", icon: "group", label: { tr: "Müşteriler", en: "Customers" }, views: ["super", "ops", "growth"] },
 ];
 
 const ecosystemLinks: NavItem[] = [
-    { href: "/admin/developers", icon: "code", label: "Developers", views: ["super", "ops"] },
-    { href: "/admin/modules", icon: "deployed_code", label: "Modules Lab", views: ["super", "ops", "content"] },
-    { href: "/admin/xml", icon: "sync_alt", label: "XML Hub", views: ["super", "ops", "finance"] },
-    { href: "/admin/licenses", icon: "vpn_key", label: "Licenses", views: ["super", "ops", "finance"] },
-    { href: "/admin/blog", icon: "article", label: "Blog", views: ["super", "content", "growth"] },
-    { href: "/admin/reviews", icon: "rule", label: "Moderation", views: ["super", "ops", "content"] },
+    { href: "/admin/developers", icon: "code", label: { tr: "Geliştiriciler", en: "Developers" }, views: ["super", "ops"] },
+    { href: "/admin/modules", icon: "deployed_code", label: { tr: "Modül Laboratuvarı", en: "Modules Lab" }, views: ["super", "ops", "content"] },
+    { href: "/admin/xml", icon: "sync_alt", label: { tr: "XML Merkezi", en: "XML Hub" }, views: ["super", "ops", "finance"] },
+    { href: "/admin/licenses", icon: "vpn_key", label: { tr: "Lisanslar", en: "Licenses" }, views: ["super", "ops", "finance"] },
+    { href: "/admin/blog", icon: "article", label: { tr: "Blog", en: "Blog" }, views: ["super", "content", "growth"] },
+    { href: "/admin/reviews", icon: "rule", label: { tr: "Moderasyon", en: "Moderation" }, views: ["super", "ops", "content"] },
 ];
 
 const managementLinks: NavItem[] = [
-    { href: "/admin/analytics", icon: "bar_chart", label: "Analytics", views: ["super", "finance", "growth", "ops"] },
-    { href: "/admin/risk", icon: "gpp_maybe", label: "Risk Center", views: ["super", "ops", "finance"] },
-    { href: "/admin/marketing", icon: "campaign", label: "Marketing", views: ["super", "growth", "content"] },
-    { href: "/admin/seo", icon: "travel_explore", label: "SEO", views: ["super", "content", "growth"] },
-    { href: "/admin/payouts", icon: "account_balance_wallet", label: "Payouts", views: ["super", "finance"] },
-    { href: "/admin/automations", icon: "automation", label: "Automations", views: ["super", "ops", "finance", "content", "growth"] },
-    { href: "/admin/audit", icon: "history", label: "Audit Logs", views: ["super", "ops", "finance", "content", "growth"] },
-    { href: "/admin/roles", icon: "admin_panel_settings", label: "Roles", views: ["super"] },
-    { href: "/admin/support", icon: "support_agent", label: "Support", views: ["super", "ops"] },
-    { href: "/admin/refunds", icon: "request_quote", label: "Refunds", views: ["super", "ops", "finance"] },
-    { href: "/admin/settings", icon: "settings", label: "Settings", views: ["super", "finance", "ops"] },
+    { href: "/admin/analytics", icon: "bar_chart", label: { tr: "Analitik", en: "Analytics" }, views: ["super", "finance", "growth", "ops"] },
+    { href: "/admin/risk", icon: "gpp_maybe", label: { tr: "Risk Merkezi", en: "Risk Center" }, views: ["super", "ops", "finance"] },
+    { href: "/admin/marketing", icon: "campaign", label: { tr: "Pazarlama", en: "Marketing" }, views: ["super", "growth", "content"] },
+    { href: "/admin/seo", icon: "travel_explore", label: { tr: "SEO", en: "SEO" }, views: ["super", "content", "growth"] },
+    { href: "/admin/payouts", icon: "account_balance_wallet", label: { tr: "Ödemeler", en: "Payouts" }, views: ["super", "finance"] },
+    { href: "/admin/automations", icon: "automation", label: { tr: "Otomasyonlar", en: "Automations" }, views: ["super", "ops", "finance", "content", "growth"] },
+    { href: "/admin/audit", icon: "history", label: { tr: "Denetim Kayıtları", en: "Audit Logs" }, views: ["super", "ops", "finance", "content", "growth"] },
+    { href: "/admin/roles", icon: "admin_panel_settings", label: { tr: "Roller", en: "Roles" }, views: ["super"] },
+    { href: "/admin/support", icon: "support_agent", label: { tr: "Destek", en: "Support" }, views: ["super", "ops"] },
+    { href: "/admin/refunds", icon: "request_quote", label: { tr: "İadeler", en: "Refunds" }, views: ["super", "ops", "finance"] },
+    { href: "/admin/settings", icon: "settings", label: { tr: "Ayarlar", en: "Settings" }, views: ["super", "finance", "ops"] },
 ];
 
-const viewOptions: { value: AdminView; label: string }[] = [
-    { value: "super", label: "Super Admin" },
-    { value: "ops", label: "Ops View" },
-    { value: "finance", label: "Finance View" },
-    { value: "content", label: "Content View" },
-    { value: "growth", label: "Growth View" },
+const viewOptions: { value: AdminView; label: LocalizedLabel }[] = [
+    { value: "super", label: { tr: "Süper Admin", en: "Super Admin" } },
+    { value: "ops", label: { tr: "Operasyon Görünümü", en: "Ops View" } },
+    { value: "finance", label: { tr: "Finans Görünümü", en: "Finance View" } },
+    { value: "content", label: { tr: "İçerik Görünümü", en: "Content View" } },
+    { value: "growth", label: { tr: "Büyüme Görünümü", en: "Growth View" } },
 ];
+
+const shellText: Record<AdminLanguage, Record<string, string>> = {
+    tr: {
+        ecosystem: "Ekosistem",
+        management: "Yönetim",
+        admin: "Yönetim",
+        dashboardOverview: "Kontrol Paneli Özeti",
+        searchPlaceholder: "Modül, kullanıcı veya sipariş ara...",
+        commandHint: "Komut Menüsü",
+        verified: "Doğrulandı",
+        accessRestricted: "Bu görünüm için erişim kısıtlı",
+        accessRestrictedDesc: "Bu modül şu görünümde kullanılamıyor:",
+        goDashboard: "Panele Dön",
+        commandSearchPlaceholder: "Yönetim sayfaları ve işlemleri ara...",
+        noMatch: "Eşleşen yönetim sayfası yok.",
+        language: "Dil",
+        ordersBadge: "12",
+    },
+    en: {
+        ecosystem: "Ecosystem",
+        management: "Management",
+        admin: "Admin",
+        dashboardOverview: "Dashboard Overview",
+        searchPlaceholder: "Search modules, users, or orders...",
+        commandHint: "Cmd K",
+        verified: "Verified",
+        accessRestricted: "Access Restricted for Current View",
+        accessRestrictedDesc: "This module is not available for",
+        goDashboard: "Go to Dashboard",
+        commandSearchPlaceholder: "Search admin pages and actions...",
+        noMatch: "No matching admin page.",
+        language: "Language",
+        ordersBadge: "12",
+    },
+};
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const [commandOpen, setCommandOpen] = useState(false);
     const [commandQuery, setCommandQuery] = useState("");
+    const [language, setLanguage] = useState<AdminLanguage>(() => {
+        if (typeof window === "undefined") return "tr";
+        const stored = localStorage.getItem("admin_language");
+        return stored === "en" ? "en" : "tr";
+    });
     const [activeView, setActiveView] = useState<AdminView>(() => {
         if (typeof window === "undefined") return "super";
         return (localStorage.getItem("admin_active_view") as AdminView | null) ?? "super";
@@ -66,6 +108,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         return () => window.removeEventListener("keydown", onKeydown);
     }, []);
 
+    const t = shellText[language];
+
     const filteredAdminLinks = useMemo(() => adminLinks.filter((item) => item.views.includes(activeView)), [activeView]);
     const filteredEcosystemLinks = useMemo(() => ecosystemLinks.filter((item) => item.views.includes(activeView)), [activeView]);
     const filteredManagementLinks = useMemo(() => managementLinks.filter((item) => item.views.includes(activeView)), [activeView]);
@@ -78,8 +122,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         ];
         const query = commandQuery.trim().toLowerCase();
         if (!query) return base;
-        return base.filter((item) => item.label.toLowerCase().includes(query) || item.href.toLowerCase().includes(query));
-    }, [commandQuery, filteredAdminLinks, filteredEcosystemLinks, filteredManagementLinks]);
+        return base.filter((item) => item.label[language].toLowerCase().includes(query) || item.href.toLowerCase().includes(query));
+    }, [commandQuery, filteredAdminLinks, filteredEcosystemLinks, filteredManagementLinks, language]);
 
     const allAllowedItems = useMemo(() => {
         return [...filteredAdminLinks, ...filteredEcosystemLinks, ...filteredManagementLinks];
@@ -89,6 +133,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         if (pathname === "/admin") return true;
         return allAllowedItems.some((item) => pathname === item.href || pathname.startsWith(`${item.href}/`));
     }, [allAllowedItems, pathname]);
+
+    const currentPathLabel = useMemo(() => {
+        if (pathname === "/admin") return t.dashboardOverview;
+        const exact = [...adminLinks, ...ecosystemLinks, ...managementLinks].find((item) => item.href === pathname);
+        if (exact) return exact.label[language];
+        const parent = [...adminLinks, ...ecosystemLinks, ...managementLinks].find((item) => pathname.startsWith(`${item.href}/`));
+        return parent ? parent.label[language] : pathname.replace("/admin/", "").replace(/-/g, " ");
+    }, [language, pathname, t.dashboardOverview]);
 
     return (
         <div className="flex bg-[#F8FAFC] dark:bg-[#0f1123] text-slate-900 dark:text-slate-100 min-h-screen font-display overflow-hidden">
@@ -120,14 +172,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                                 )}
                             >
                                 <span className={cn("material-symbols-outlined text-xl transition-colors", !isActive && "group-hover:text-white")}>{link.icon}</span>
-                                <span className="text-sm flex-1">{link.label}</span>
-                                {link.label === "Orders" && <span className="bg-primary/20 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full">12</span>}
+                                <span className="text-sm flex-1">{link.label[language]}</span>
+                                {link.href === "/admin/orders" && <span className="bg-primary/20 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full">{t.ordersBadge}</span>}
                             </Link>
                         );
                     })}
 
                     <div className="pt-4 pb-2 px-3">
-                        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Ecosystem</p>
+                        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">{t.ecosystem}</p>
                     </div>
 
                     {filteredEcosystemLinks.map((link) => {
@@ -144,13 +196,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                                 )}
                             >
                                 <span className={cn("material-symbols-outlined text-xl transition-colors", !isActive && "group-hover:text-white")}>{link.icon}</span>
-                                <span className="text-sm">{link.label}</span>
+                                <span className="text-sm">{link.label[language]}</span>
                             </Link>
                         );
                     })}
 
                     <div className="pt-4 pb-2 px-3">
-                        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Management</p>
+                        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">{t.management}</p>
                     </div>
 
                     {filteredManagementLinks.map((link) => {
@@ -167,7 +219,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                                 )}
                             >
                                 <span className={cn("material-symbols-outlined text-xl transition-colors", !isActive && "group-hover:text-white")}>{link.icon}</span>
-                                <span className="text-sm">{link.label}</span>
+                                <span className="text-sm">{link.label[language]}</span>
                             </Link>
                         );
                     })}
@@ -198,10 +250,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                         </button>
                         {/* Breadcrumb */}
                         <div className="hidden md:flex items-center text-sm font-medium text-slate-500 dark:text-slate-400">
-                            <Link href="/admin" className="hover:text-primary transition-colors">Admin</Link>
+                            <Link href="/admin" className="hover:text-primary transition-colors">{t.admin}</Link>
                             <span className="material-symbols-outlined text-lg mx-1">chevron_right</span>
                             <span className="text-slate-900 dark:text-slate-200 capitalize">
-                                {pathname === '/admin' ? 'Dashboard Overview' : pathname.replace('/admin/', '').replace('-', ' ')}
+                                {currentPathLabel}
                             </span>
                         </div>
                     </div>
@@ -212,7 +264,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <span className="material-symbols-outlined text-slate-500 dark:text-slate-400 text-lg">search</span>
                             </div>
-                            <input className="block w-full pl-10 pr-16 py-2 border border-slate-200 dark:border-slate-700 rounded-lg leading-5 bg-[#F8FAFC] dark:bg-slate-800 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm transition-shadow text-slate-900 dark:text-slate-200" placeholder="Search modules, users, or orders..." type="text" />
+                            <input className="block w-full pl-10 pr-16 py-2 border border-slate-200 dark:border-slate-700 rounded-lg leading-5 bg-[#F8FAFC] dark:bg-slate-800 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm transition-shadow text-slate-900 dark:text-slate-200" placeholder={t.searchPlaceholder} type="text" />
                             <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none">
                                 <span className="text-xs font-semibold text-slate-500 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded px-1.5 py-0.5">⌘K</span>
                             </div>
@@ -226,7 +278,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                                 type="button"
                             >
                                 <span className="material-symbols-outlined text-[16px]">search</span>
-                                Cmd K
+                                {t.commandHint}
                             </button>
                             <button className="relative p-2 text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors rounded-full hover:bg-primary/5">
                                 <span className="material-symbols-outlined text-xl">notifications</span>
@@ -236,9 +288,24 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                             <button className="hidden sm:flex items-center gap-2 text-sm font-medium text-slate-900 dark:text-slate-200 hover:text-primary transition-colors">
                                 <div className="flex items-center gap-1 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2.5 py-1 rounded-full text-xs">
                                     <span className="material-symbols-outlined text-[14px]">verified</span>
-                                    Verified
+                                    {t.verified}
                                 </div>
                             </button>
+                            <div className="hidden lg:flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-xs font-semibold text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                                <span>{t.language}</span>
+                                <select
+                                    className="rounded-md border border-slate-200 bg-white px-2 py-1 text-xs font-semibold text-slate-700 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-200"
+                                    onChange={(event) => {
+                                        const lang = event.target.value as AdminLanguage;
+                                        setLanguage(lang);
+                                        localStorage.setItem("admin_language", lang);
+                                    }}
+                                    value={language}
+                                >
+                                    <option value="tr">TR</option>
+                                    <option value="en">EN</option>
+                                </select>
+                            </div>
                             <select
                                 className="hidden md:block rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-xs font-semibold text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300"
                                 onChange={(event) => {
@@ -249,45 +316,47 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                                 value={activeView}
                             >
                                 {viewOptions.map((option) => (
-                                    <option key={option.value} value={option.value}>{option.label}</option>
+                                    <option key={option.value} value={option.value}>{option.label[language]}</option>
                                 ))}
                             </select>
                         </div>
                     </div>
                 </header>
 
-                <AdminAccessProvider activeView={activeView}>
-                    {hasAccess ? (
-                        children
-                    ) : (
-                        <div className="flex-1 overflow-y-auto p-8">
-                            <div className="mx-auto max-w-2xl rounded-2xl border border-slate-200 bg-white p-8 text-center dark:border-slate-800 dark:bg-slate-900">
-                                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Access Restricted for Current View</h2>
-                                <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-                                    This module is not available for <span className="font-semibold">{viewOptions.find((option) => option.value === activeView)?.label}</span>.
-                                </p>
-                                <div className="mt-5 flex items-center justify-center gap-2">
-                                    {viewOptions.map((option) => (
-                                        <button
-                                            key={option.value}
-                                            className={`rounded-full px-3 py-1.5 text-xs font-semibold ${activeView === option.value ? "bg-primary text-white" : "border border-slate-200 bg-white text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"}`}
-                                            onClick={() => {
-                                                setActiveView(option.value);
-                                                localStorage.setItem("admin_active_view", option.value);
-                                            }}
-                                            type="button"
-                                        >
-                                            {option.label}
-                                        </button>
-                                    ))}
+                <AdminLanguageProvider language={language}>
+                    <AdminAccessProvider activeView={activeView}>
+                        {hasAccess ? (
+                            children
+                        ) : (
+                            <div className="flex-1 overflow-y-auto p-8">
+                                <div className="mx-auto max-w-2xl rounded-2xl border border-slate-200 bg-white p-8 text-center dark:border-slate-800 dark:bg-slate-900">
+                                    <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">{t.accessRestricted}</h2>
+                                    <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+                                        {t.accessRestrictedDesc} <span className="font-semibold">{viewOptions.find((option) => option.value === activeView)?.label[language]}</span>.
+                                    </p>
+                                    <div className="mt-5 flex items-center justify-center gap-2">
+                                        {viewOptions.map((option) => (
+                                            <button
+                                                key={option.value}
+                                                className={`rounded-full px-3 py-1.5 text-xs font-semibold ${activeView === option.value ? "bg-primary text-white" : "border border-slate-200 bg-white text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"}`}
+                                                onClick={() => {
+                                                    setActiveView(option.value);
+                                                    localStorage.setItem("admin_active_view", option.value);
+                                                }}
+                                                type="button"
+                                            >
+                                                {option.label[language]}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <Link className="mt-5 inline-flex rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90" href="/admin">
+                                        {t.goDashboard}
+                                    </Link>
                                 </div>
-                                <Link className="mt-5 inline-flex rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90" href="/admin">
-                                    Go to Dashboard
-                                </Link>
                             </div>
-                        </div>
-                    )}
-                </AdminAccessProvider>
+                        )}
+                    </AdminAccessProvider>
+                </AdminLanguageProvider>
             </main>
 
             {commandOpen && (
@@ -301,7 +370,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                                 autoFocus
                                 className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 dark:border-slate-700 dark:bg-slate-800"
                                 onChange={(event) => setCommandQuery(event.target.value)}
-                                placeholder="Search admin pages and actions..."
+                                placeholder={t.commandSearchPlaceholder}
                                 value={commandQuery}
                             />
                         </div>
@@ -317,12 +386,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                                     }}
                                 >
                                     <span className="material-symbols-outlined text-[18px] text-slate-500">{item.icon}</span>
-                                    <span className="text-slate-800 dark:text-slate-200">{item.label}</span>
+                                    <span className="text-slate-800 dark:text-slate-200">{item.label[language]}</span>
                                     <span className="ml-auto text-xs text-slate-400">{item.href}</span>
                                 </Link>
                             ))}
                             {commandItems.length === 0 && (
-                                <p className="px-3 py-5 text-sm text-slate-500">No matching admin page.</p>
+                                <p className="px-3 py-5 text-sm text-slate-500">{t.noMatch}</p>
                             )}
                         </div>
                     </div>

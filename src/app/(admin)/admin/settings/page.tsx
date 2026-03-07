@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { useAdminOpsStore } from "@/lib/store/adminOpsStore";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 type PolicyDraft = {
   coreCommission: string;
@@ -20,6 +21,8 @@ type PolicyDraft = {
 };
 
 export default function AdminSettingsPage() {
+  const language = useAdminLanguage();
+  const tr = language === "tr";
   const policySettings = useAdminOpsStore((state) => state.policySettings);
   const auditTrail = useAdminOpsStore((state) => state.auditTrail);
   const restoreFromPoint = useAdminOpsStore((state) => state.restoreFromPoint);
@@ -114,23 +117,23 @@ export default function AdminSettingsPage() {
 
   const saveAll = () => {
     savePolicySettings(draft, "Admin");
-    toast.success("Settings saved and queued for policy deployment.");
+    toast.success(tr ? "Ayarlar kaydedildi ve politika dağıtım kuyruğuna alındı." : "Settings saved and queued for policy deployment.");
   };
 
   const applyRestorePoint = (restorePointId: string | undefined) => {
     if (!restorePointId) return;
-    if (!window.confirm(`Apply restore point ${restorePointId}?`)) return;
+    if (!window.confirm(tr ? `${restorePointId} geri yükleme noktası uygulansın mı?` : `Apply restore point ${restorePointId}?`)) return;
     restoreFromPoint(restorePointId, "Admin");
-    toast.success("Policy restore point applied.");
+    toast.success(tr ? "Politika geri yükleme noktası uygulandı." : "Policy restore point applied.");
   };
 
   return (
     <div className="flex-1 overflow-y-auto p-4 sm:p-8">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Control Plane Settings</h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Configure governance, finance, catalog quality, XML integrations, SEO and communication policies.</p>
-          <p className="mt-2 text-xs text-slate-500">Last updated: {new Date(policySettings.updatedAt).toLocaleString("tr-TR")}</p>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">{tr ? "Kontrol Düzlemi Ayarları" : "Control Plane Settings"}</h1>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{tr ? "Yönetişim, finans, katalog kalitesi, XML entegrasyonları, SEO ve iletişim politikalarını yönetin." : "Configure governance, finance, catalog quality, XML integrations, SEO and communication policies."}</p>
+          <p className="mt-2 text-xs text-slate-500">{tr ? "Son güncelleme" : "Last updated"}: {new Date(policySettings.updatedAt).toLocaleString(tr ? "tr-TR" : "en-US")}</p>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -139,76 +142,78 @@ export default function AdminSettingsPage() {
             onClick={resetDraft}
             type="button"
           >
-            Reset Draft
+            {tr ? "Taslağı Sıfırla" : "Reset Draft"}
           </button>
           <button className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90 disabled:opacity-50" disabled={!isDirty} onClick={saveAll}>
-            Save All Policies
+            {tr ? "Tüm Politikaları Kaydet" : "Save All Policies"}
           </button>
         </div>
       </div>
 
       <div className="mb-6 grid gap-4 md:grid-cols-3">
-        <QuickLink href="/admin/roles" label="Roles and Permissions" icon="admin_panel_settings" desc="View policies and role presets" />
-        <QuickLink href="/admin/modules" label="Modules Release Lab" icon="deployed_code" desc="Review and release workflow" />
-        <QuickLink href="/admin/xml" label="XML Integration Hub" icon="sync_alt" desc="Mapping templates and feed health" />
+        <QuickLink href="/admin/roles" label={tr ? "Roller ve Yetkiler" : "Roles and Permissions"} icon="admin_panel_settings" desc={tr ? "Politikaları ve rol şablonlarını görüntüle" : "View policies and role presets"} />
+        <QuickLink href="/admin/modules" label={tr ? "Modül Yayın Laboratuvarı" : "Modules Release Lab"} icon="deployed_code" desc={tr ? "İnceleme ve yayın akışı" : "Review and release workflow"} />
+        <QuickLink href="/admin/xml" label={tr ? "XML Entegrasyon Merkezi" : "XML Integration Hub"} icon="sync_alt" desc={tr ? "Eşleme şablonları ve besleme sağlığı" : "Mapping templates and feed health"} />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.2fr_1fr]">
         <section className="space-y-6">
-          <Panel title="Commission Matrix">
-            <FieldRow label="Core Extensions (%)" value={draft.coreCommission} onChange={(value) => setDraft((prev) => ({ ...prev, coreCommission: value }))} />
-            <FieldRow label="Premium Themes (%)" value={draft.premiumCommission} onChange={(value) => setDraft((prev) => ({ ...prev, premiumCommission: value }))} />
-            <FieldRow label="XML Integrations (%)" value={draft.xmlCommission} onChange={(value) => setDraft((prev) => ({ ...prev, xmlCommission: value }))} />
+          <Panel title={tr ? "Komisyon Matrisi" : "Commission Matrix"}>
+            <FieldRow label={tr ? "Temel Eklentiler (%)" : "Core Extensions (%)"} value={draft.coreCommission} onChange={(value) => setDraft((prev) => ({ ...prev, coreCommission: value }))} />
+            <FieldRow label={tr ? "Premium Temalar (%)" : "Premium Themes (%)"} value={draft.premiumCommission} onChange={(value) => setDraft((prev) => ({ ...prev, premiumCommission: value }))} />
+            <FieldRow label={tr ? "XML Entegrasyonları (%)" : "XML Integrations (%)"} value={draft.xmlCommission} onChange={(value) => setDraft((prev) => ({ ...prev, xmlCommission: value }))} />
           </Panel>
 
-          <Panel title="Payout and Refund Guardrails">
-            <FieldRow label="Minimum payout ($)" value={draft.minPayout} onChange={(value) => setDraft((prev) => ({ ...prev, minPayout: value }))} />
-            <FieldRow label="Transaction fee ($)" value={draft.txFee} onChange={(value) => setDraft((prev) => ({ ...prev, txFee: value }))} />
-            <FieldRow label="Payout retry limit" value={draft.payoutRetry} onChange={(value) => setDraft((prev) => ({ ...prev, payoutRetry: value }))} />
-            <FieldRow label="Auto-refund cap ($)" value={draft.refundAutoCap} onChange={(value) => setDraft((prev) => ({ ...prev, refundAutoCap: value }))} />
+          <Panel title={tr ? "Ödeme ve İade Sınırları" : "Payout and Refund Guardrails"}>
+            <FieldRow label={tr ? "Minimum ödeme ($)" : "Minimum payout ($)"} value={draft.minPayout} onChange={(value) => setDraft((prev) => ({ ...prev, minPayout: value }))} />
+            <FieldRow label={tr ? "İşlem ücreti ($)" : "Transaction fee ($)"} value={draft.txFee} onChange={(value) => setDraft((prev) => ({ ...prev, txFee: value }))} />
+            <FieldRow label={tr ? "Ödeme yeniden deneme limiti" : "Payout retry limit"} value={draft.payoutRetry} onChange={(value) => setDraft((prev) => ({ ...prev, payoutRetry: value }))} />
+            <FieldRow label={tr ? "Otomatik iade üst limiti ($)" : "Auto-refund cap ($)"} value={draft.refundAutoCap} onChange={(value) => setDraft((prev) => ({ ...prev, refundAutoCap: value }))} />
           </Panel>
 
-          <Panel title="Catalog and Moderation Policy">
-            <FieldRow label="Risk score threshold for manual review" value={draft.reviewScoreThreshold} onChange={(value) => setDraft((prev) => ({ ...prev, reviewScoreThreshold: value }))} />
+          <Panel title={tr ? "Katalog ve Moderasyon Politikası" : "Catalog and Moderation Policy"}>
+            <FieldRow label={tr ? "Manuel inceleme için risk skoru eşiği" : "Risk score threshold for manual review"} value={draft.reviewScoreThreshold} onChange={(value) => setDraft((prev) => ({ ...prev, reviewScoreThreshold: value }))} />
             <ToggleRow
               checked={draft.require2fa}
-              description="All admin roles must pass 2FA for sensitive actions."
-              label="Mandatory 2FA for admin actions"
+              description={tr ? "Tüm admin rolleri kritik işlemler için 2FA kullanmalıdır." : "All admin roles must pass 2FA for sensitive actions."}
+              label={tr ? "Admin işlemleri için zorunlu 2FA" : "Mandatory 2FA for admin actions"}
               onChange={(value) => setDraft((prev) => ({ ...prev, require2fa: value }))}
+              tr={tr}
             />
             <div className="mt-3 grid gap-2 text-sm text-slate-600 dark:text-slate-300">
-              <p className="rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800">First release requires QA + security checks.</p>
-              <p className="rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800">Rejected submissions auto-notify developer with diff notes.</p>
+              <p className="rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800">{tr ? "İlk yayın için QA + güvenlik kontrolleri zorunludur." : "First release requires QA + security checks."}</p>
+              <p className="rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800">{tr ? "Reddedilen gönderimler geliştiriciye fark notlarıyla otomatik bildirilir." : "Rejected submissions auto-notify developer with diff notes."}</p>
             </div>
           </Panel>
 
-          <Panel title="XML Integration Controls">
+          <Panel title={tr ? "XML Entegrasyon Kontrolleri" : "XML Integration Controls"}>
             <ToggleRow
               checked={draft.xmlStrictMode}
-              description="Reject malformed feeds and force schema validation."
-              label="Strict schema mode"
+              description={tr ? "Bozuk beslemeleri reddet ve şema doğrulamayı zorunlu tut." : "Reject malformed feeds and force schema validation."}
+              label={tr ? "Katı şema modu" : "Strict schema mode"}
               onChange={(value) => setDraft((prev) => ({ ...prev, xmlStrictMode: value }))}
+              tr={tr}
             />
             <div className="mt-3 grid gap-2 md:grid-cols-2">
-              <ActionButton label="Rebuild mappings" onClick={() => toast.success("Mapping rebuild job queued.")} />
-              <ActionButton label="Re-run failed syncs" onClick={() => {
+              <ActionButton label={tr ? "Eşlemeleri yeniden oluştur" : "Rebuild mappings"} onClick={() => toast.success(tr ? "Eşleme yeniden oluşturma işi kuyruğa alındı." : "Mapping rebuild job queued.")} />
+              <ActionButton label={tr ? "Başarısız senkronları tekrar çalıştır" : "Re-run failed syncs"} onClick={() => {
                 runFullXmlSync("Admin");
-                toast.success("Failed sync re-run queued.");
+                toast.success(tr ? "Başarısız senkron tekrar çalıştırma kuyruğa alındı." : "Failed sync re-run queued.");
               }} />
-              <ActionButton label="Open retry queue" onClick={() => toast.info("Use XML Hub to inspect retry queue.")}
+              <ActionButton label={tr ? "Yeniden deneme kuyruğunu aç" : "Open retry queue"} onClick={() => toast.info(tr ? "Yeniden deneme kuyruğunu XML Merkezi üzerinden inceleyin." : "Use XML Hub to inspect retry queue.")}
               />
-              <ActionButton label="Export feed diagnostics" onClick={() => toast.success("Diagnostics export started.")} />
+              <ActionButton label={tr ? "Besleme tanılama raporunu dışa aktar" : "Export feed diagnostics"} onClick={() => toast.success(tr ? "Tanılama dışa aktarma başlatıldı." : "Diagnostics export started.")} />
             </div>
           </Panel>
         </section>
 
         <aside className="space-y-6">
-          <Panel title="Policy History">
+          <Panel title={tr ? "Politika Geçmişi" : "Policy History"}>
             <div className="mb-3 grid gap-2 md:grid-cols-2">
               <input
                 className="rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800"
                 onChange={(event) => setHistoryQuery(event.target.value)}
-                placeholder="Search actor, field, or value..."
+                placeholder={tr ? "Aktör, alan veya değer ara..." : "Search actor, field, or value..."}
                 value={historyQuery}
               />
               <div className="grid grid-cols-3 gap-2">
@@ -217,7 +222,7 @@ export default function AdminSettingsPage() {
                   onChange={(event) => setHistoryActor(event.target.value)}
                   value={historyActor}
                 >
-                  <option value="all">All Actors</option>
+                  <option value="all">{tr ? "Tüm Aktörler" : "All Actors"}</option>
                   {historyActors.map((actor) => (
                     <option key={actor} value={actor}>{actor}</option>
                   ))}
@@ -227,7 +232,7 @@ export default function AdminSettingsPage() {
                   onChange={(event) => setHistoryField(event.target.value)}
                   value={historyField}
                 >
-                  <option value="all">All Fields</option>
+                  <option value="all">{tr ? "Tüm Alanlar" : "All Fields"}</option>
                   {historyFields.map((field) => (
                     <option key={field} value={field}>{field}</option>
                   ))}
@@ -237,7 +242,7 @@ export default function AdminSettingsPage() {
                   onChange={(event) => setHistoryWindow(event.target.value as "all" | "7d" | "30d")}
                   value={historyWindow}
                 >
-                  <option value="all">All Time</option>
+                  <option value="all">{tr ? "Tüm Zamanlar" : "All Time"}</option>
                   <option value="30d">30d</option>
                   <option value="7d">7d</option>
                 </select>
@@ -249,7 +254,7 @@ export default function AdminSettingsPage() {
                   <div className="flex items-start justify-between gap-2">
                     <div>
                       <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{entry.details}</p>
-                      <p className="text-xs text-slate-500">{new Date(entry.at).toLocaleString("tr-TR")} • {entry.actor}</p>
+                      <p className="text-xs text-slate-500">{new Date(entry.at).toLocaleString(tr ? "tr-TR" : "en-US")} • {entry.actor}</p>
                     </div>
                     {entry.restorePointId && (
                       <button
@@ -257,7 +262,7 @@ export default function AdminSettingsPage() {
                         onClick={() => applyRestorePoint(entry.restorePointId)}
                         type="button"
                       >
-                        Restore
+                        {tr ? "Geri Yükle" : "Restore"}
                       </button>
                     )}
                   </div>
@@ -267,42 +272,43 @@ export default function AdminSettingsPage() {
                         {change.field}: {change.before} → {change.after}
                       </span>
                     ))}
-                    {entry.changes.length > 4 && <span className="text-[11px] text-slate-500">+{entry.changes.length - 4} more</span>}
+                    {entry.changes.length > 4 && <span className="text-[11px] text-slate-500">+{entry.changes.length - 4} {tr ? "daha" : "more"}</span>}
                   </div>
                 </div>
               ))}
-              {policyHistory.length === 0 && <p className="text-sm text-slate-500">No saved policy revisions yet.</p>}
+              {policyHistory.length === 0 && <p className="text-sm text-slate-500">{tr ? "Henüz kayıtlı politika revizyonu yok." : "No saved policy revisions yet."}</p>}
             </div>
           </Panel>
 
-          <Panel title="Growth and SEO Defaults">
+          <Panel title={tr ? "Büyüme ve SEO Varsayılanları" : "Growth and SEO Defaults"}>
             <ToggleRow
               checked={draft.autoNoindexDrafts}
-              description="Apply noindex to draft or scheduled blog content."
-              label="Auto noindex for drafts"
+              description={tr ? "Taslak veya planlı blog içeriklerine noindex uygula." : "Apply noindex to draft or scheduled blog content."}
+              label={tr ? "Taslaklar için otomatik noindex" : "Auto noindex for drafts"}
               onChange={(value) => setDraft((prev) => ({ ...prev, autoNoindexDrafts: value }))}
+              tr={tr}
             />
             <div className="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-300">
-              <p className="rounded-lg border border-slate-100 px-3 py-2 dark:border-slate-800">UTM naming convention: `channel_source_campaign`</p>
-              <p className="rounded-lg border border-slate-100 px-3 py-2 dark:border-slate-800">Canonical enforcement: marketplace pages only</p>
-              <p className="rounded-lg border border-slate-100 px-3 py-2 dark:border-slate-800">Blog internal link minimum: 3 links/post</p>
+              <p className="rounded-lg border border-slate-100 px-3 py-2 dark:border-slate-800">{tr ? "UTM adlandırma kuralı: `channel_source_campaign`" : "UTM naming convention: `channel_source_campaign`"}</p>
+              <p className="rounded-lg border border-slate-100 px-3 py-2 dark:border-slate-800">{tr ? "Canonical zorlaması: yalnızca pazaryeri sayfaları" : "Canonical enforcement: marketplace pages only"}</p>
+              <p className="rounded-lg border border-slate-100 px-3 py-2 dark:border-slate-800">{tr ? "Blog iç link minimumu: gönderi başına 3 link" : "Blog internal link minimum: 3 links/post"}</p>
             </div>
           </Panel>
 
-          <Panel title="Notification Matrix">
-            <NotificationRow event="High-risk refund" teams="Ops, Finance" channel="In-app + Email" />
-            <NotificationRow event="Failed payout retries" teams="Finance" channel="In-app + Slack" />
-            <NotificationRow event="XML feed blocked" teams="Ops" channel="Pager + In-app" />
-            <NotificationRow event="SEO critical issue" teams="Growth, Content" channel="In-app" />
+          <Panel title={tr ? "Bildirim Matrisi" : "Notification Matrix"}>
+            <NotificationRow event={tr ? "Yüksek riskli iade" : "High-risk refund"} teams={tr ? "Operasyon, Finans" : "Ops, Finance"} channel={tr ? "Uygulama içi + E-posta" : "In-app + Email"} tr={tr} />
+            <NotificationRow event={tr ? "Başarısız ödeme yeniden denemeleri" : "Failed payout retries"} teams={tr ? "Finans" : "Finance"} channel={tr ? "Uygulama içi + Slack" : "In-app + Slack"} tr={tr} />
+            <NotificationRow event={tr ? "XML beslemesi engellendi" : "XML feed blocked"} teams={tr ? "Operasyon" : "Ops"} channel={tr ? "Pager + Uygulama içi" : "Pager + In-app"} tr={tr} />
+            <NotificationRow event={tr ? "SEO kritik sorunu" : "SEO critical issue"} teams={tr ? "Büyüme, İçerik" : "Growth, Content"} channel={tr ? "Uygulama içi" : "In-app"} tr={tr} />
           </Panel>
 
-          <Panel title="Policy Shortcuts">
+          <Panel title={tr ? "Politika Kısayolları" : "Policy Shortcuts"}>
             <div className="space-y-2">
-              <Shortcut href="/admin/audit" icon="history" label="Review policy changes in audit trail" />
-              <Shortcut href="/admin/automations" icon="automation" label="Tune automation guardrails" />
-              <Shortcut href="/admin/risk" icon="gpp_maybe" label="Adjust risk scans and severity models" />
-              <Shortcut href="/admin/marketing" icon="campaign" label="Open campaign governance panel" />
-              <Shortcut href="/admin/seo" icon="travel_explore" label="Open SEO sprint board" />
+              <Shortcut href="/admin/audit" icon="history" label={tr ? "Denetim kayıtlarında politika değişimlerini incele" : "Review policy changes in audit trail"} />
+              <Shortcut href="/admin/automations" icon="automation" label={tr ? "Otomasyon güvenlik sınırlarını düzenle" : "Tune automation guardrails"} />
+              <Shortcut href="/admin/risk" icon="gpp_maybe" label={tr ? "Risk taraması ve şiddet modellerini ayarla" : "Adjust risk scans and severity models"} />
+              <Shortcut href="/admin/marketing" icon="campaign" label={tr ? "Kampanya yönetişim panelini aç" : "Open campaign governance panel"} />
+              <Shortcut href="/admin/seo" icon="travel_explore" label={tr ? "SEO sprint panosunu aç" : "Open SEO sprint board"} />
             </div>
           </Panel>
         </aside>
@@ -338,11 +344,13 @@ function ToggleRow({
   description,
   checked,
   onChange,
+  tr,
 }: {
   label: string;
   description: string;
   checked: boolean;
   onChange: (value: boolean) => void;
+  tr: boolean;
 }) {
   return (
     <div className="mb-3 rounded-lg border border-slate-100 p-3 dark:border-slate-800">
@@ -356,7 +364,7 @@ function ToggleRow({
           onClick={() => onChange(!checked)}
           type="button"
         >
-          {checked ? "Enabled" : "Disabled"}
+          {checked ? (tr ? "Açık" : "Enabled") : tr ? "Kapalı" : "Disabled"}
         </button>
       </div>
     </div>
@@ -371,12 +379,12 @@ function ActionButton({ label, onClick }: { label: string; onClick: () => void }
   );
 }
 
-function NotificationRow({ event, teams, channel }: { event: string; teams: string; channel: string }) {
+function NotificationRow({ event, teams, channel, tr }: { event: string; teams: string; channel: string; tr: boolean }) {
   return (
     <div className="mb-2 rounded-lg border border-slate-100 p-3 text-sm last:mb-0 dark:border-slate-800">
       <p className="font-semibold text-slate-900 dark:text-slate-100">{event}</p>
-      <p className="text-xs text-slate-500">Teams: {teams}</p>
-      <p className="text-xs text-slate-500">Channel: {channel}</p>
+      <p className="text-xs text-slate-500">{tr ? "Ekipler" : "Teams"}: {teams}</p>
+      <p className="text-xs text-slate-500">{tr ? "Kanal" : "Channel"}: {channel}</p>
     </div>
   );
 }

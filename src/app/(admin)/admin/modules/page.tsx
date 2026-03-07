@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { useCan } from "@/components/admin/AdminAccessContext";
 import { ModuleRisk, ModuleStage, useAdminOpsStore } from "@/lib/store/adminOpsStore";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 const compatibility = [
   { version: "4.0.2.3", pass: 93, blocked: 2 },
@@ -12,6 +13,7 @@ const compatibility = [
 ];
 
 export default function AdminModulesPage() {
+  const tr = useAdminLanguage() === "tr";
   const canManage = useCan("manage_modules");
   const modules = useAdminOpsStore((state) => state.moduleSubmissions);
   const setModuleStage = useAdminOpsStore((state) => state.setModuleStage);
@@ -30,62 +32,62 @@ export default function AdminModulesPage() {
 
   const updateStage = (stage: ModuleStage) => {
     if (!selected || !canManage) {
-      toast.error("Current view cannot manage modules.");
+      toast.error(tr ? "Mevcut görünüm modülleri yönetemez." : "Current view cannot manage modules.");
       return;
     }
     setModuleStage(selected.id, stage, "Admin");
-    toast.success(`${selected.id} moved to ${stage}.`);
+    toast.success(tr ? `${selected.id} ${stage} aşamasına taşındı.` : `${selected.id} moved to ${stage}.`);
   };
 
   const updateRisk = (risk: ModuleRisk) => {
     if (!selected || !canManage) {
-      toast.error("Current view cannot manage modules.");
+      toast.error(tr ? "Mevcut görünüm modülleri yönetemez." : "Current view cannot manage modules.");
       return;
     }
     setModuleRisk(selected.id, risk, "Admin");
-    toast.success(`${selected.id} risk set to ${risk}.`);
+    toast.success(tr ? `${selected.id} risk seviyesi ${risk} olarak ayarlandı.` : `${selected.id} risk set to ${risk}.`);
   };
 
   return (
     <div className="flex-1 overflow-y-auto p-4 sm:p-8">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Modules Release Lab</h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Submission triage, QA gates, compatibility tracking and release train control.</p>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">{tr ? "Modül Yayın Laboratuvarı" : "Modules Release Lab"}</h1>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{tr ? "Başvuru triage, QA kapıları, uyumluluk takibi ve yayın hattı kontrolü." : "Submission triage, QA gates, compatibility tracking and release train control."}</p>
         </div>
         <button
           className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90 disabled:opacity-50"
           disabled={!canManage}
           onClick={() => {
-            if (!window.confirm("Create release batch from ready modules?")) return;
+            if (!window.confirm(tr ? "Yayına hazır modüllerden release batch oluşturulsun mu?" : "Create release batch from ready modules?")) return;
             createReleaseBatch("Admin");
-            toast.success("Release batch created.");
+            toast.success(tr ? "Release batch oluşturuldu." : "Release batch created.");
           }}
         >
-          Create Release Batch
+          {tr ? "Release Batch Oluştur" : "Create Release Batch"}
         </button>
       </div>
 
       <div className="mb-6 grid gap-4 md:grid-cols-4">
-        <Kpi label="In Review" value={String(metrics.inReview)} />
-        <Kpi label="QA Blocked" value={String(metrics.blocked)} />
-        <Kpi label="Ready to Release" value={String(metrics.ready)} />
-        <Kpi label="Avg Cycle Time" value={metrics.avgCycle} />
+        <Kpi label={tr ? "İncelemede" : "In Review"} value={String(metrics.inReview)} />
+        <Kpi label={tr ? "QA Engelli" : "QA Blocked"} value={String(metrics.blocked)} />
+        <Kpi label={tr ? "Yayına Hazır" : "Ready to Release"} value={String(metrics.ready)} />
+        <Kpi label={tr ? "Ort. Döngü Süresi" : "Avg Cycle Time"} value={metrics.avgCycle} />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.4fr_1fr]">
         <section className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
           <div className="border-b border-slate-200 p-4 dark:border-slate-800">
-            <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">Submission Queue</h2>
+            <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">{tr ? "Başvuru Kuyruğu" : "Submission Queue"}</h2>
           </div>
           <table className="w-full text-left">
             <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500 dark:bg-slate-800/50">
               <tr>
-                <th className="px-4 py-3">Module</th>
-                <th className="px-4 py-3">Type</th>
-                <th className="px-4 py-3">Owner</th>
-                <th className="px-4 py-3">Stage</th>
-                <th className="px-4 py-3">Risk</th>
+                <th className="px-4 py-3">{tr ? "Modül" : "Module"}</th>
+                <th className="px-4 py-3">{tr ? "Tür" : "Type"}</th>
+                <th className="px-4 py-3">{tr ? "Sorumlu" : "Owner"}</th>
+                <th className="px-4 py-3">{tr ? "Aşama" : "Stage"}</th>
+                <th className="px-4 py-3">{tr ? "Risk" : "Risk"}</th>
               </tr>
             </thead>
             <tbody>
@@ -99,14 +101,14 @@ export default function AdminModulesPage() {
                     <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{item.name}</p>
                     <p className="text-xs text-slate-500">{item.id}</p>
                   </td>
-                  <td className="px-4 py-3 text-sm capitalize text-slate-700 dark:text-slate-300">{item.type}</td>
+                  <td className="px-4 py-3 text-sm capitalize text-slate-700 dark:text-slate-300">{tr ? typeText(item.type) : item.type}</td>
                   <td className="px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{item.owner}</td>
                   <td className="px-4 py-3">
-                    <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">{item.stage}</span>
+                    <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">{tr ? stageText(item.stage) : item.stage}</span>
                   </td>
                   <td className="px-4 py-3">
                     <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${item.risk === "high" ? "bg-red-100 text-red-700" : item.risk === "medium" ? "bg-amber-100 text-amber-700" : "bg-emerald-100 text-emerald-700"}`}>
-                      {item.risk}
+                      {tr ? riskText(item.risk) : item.risk}
                     </span>
                   </td>
                 </tr>
@@ -121,32 +123,32 @@ export default function AdminModulesPage() {
               <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">{selected.name}</h3>
               <p className="mt-1 text-xs text-slate-500">{selected.id} • {selected.owner}</p>
               <div className="mt-4 grid grid-cols-2 gap-2">
-                <ActionButton disabled={!canManage} label="Move to QA" onClick={() => updateStage("qa")} />
-                <ActionButton disabled={!canManage} label="Move to Release" onClick={() => updateStage("release")} />
-                <ActionButton disabled={!canManage} label="Mark Released" onClick={() => updateStage("released")} />
-                <ActionButton disabled={!canManage} label="Mark Blocked" onClick={() => updateStage("blocked")} />
+                <ActionButton disabled={!canManage} label={tr ? "QA Aşamasına Taşı" : "Move to QA"} onClick={() => updateStage("qa")} />
+                <ActionButton disabled={!canManage} label={tr ? "Yayın Aşamasına Taşı" : "Move to Release"} onClick={() => updateStage("release")} />
+                <ActionButton disabled={!canManage} label={tr ? "Yayınlandı Olarak İşaretle" : "Mark Released"} onClick={() => updateStage("released")} />
+                <ActionButton disabled={!canManage} label={tr ? "Engellendi Olarak İşaretle" : "Mark Blocked"} onClick={() => updateStage("blocked")} />
               </div>
               <div className="mt-3 grid grid-cols-3 gap-2">
-                <RiskButton active={selected.risk === "low"} disabled={!canManage} label="Low" onClick={() => updateRisk("low")} />
-                <RiskButton active={selected.risk === "medium"} disabled={!canManage} label="Medium" onClick={() => updateRisk("medium")} />
-                <RiskButton active={selected.risk === "high"} disabled={!canManage} label="High" onClick={() => updateRisk("high")} />
+                <RiskButton active={selected.risk === "low"} disabled={!canManage} label={tr ? "Düşük" : "Low"} onClick={() => updateRisk("low")} />
+                <RiskButton active={selected.risk === "medium"} disabled={!canManage} label={tr ? "Orta" : "Medium"} onClick={() => updateRisk("medium")} />
+                <RiskButton active={selected.risk === "high"} disabled={!canManage} label={tr ? "Yüksek" : "High"} onClick={() => updateRisk("high")} />
               </div>
             </div>
           )}
 
           <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">Compatibility Heatmap</h3>
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">{tr ? "Uyumluluk Isı Haritası" : "Compatibility Heatmap"}</h3>
             <div className="mt-4 space-y-2">
               {compatibility.map((row) => (
                 <div key={row.version} className="rounded-lg border border-slate-100 p-3 dark:border-slate-800">
                   <div className="flex items-center justify-between">
                     <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{row.version}</p>
-                    <p className="text-xs text-slate-500">Blocked {row.blocked}</p>
+                    <p className="text-xs text-slate-500">{tr ? "Engelli" : "Blocked"} {row.blocked}</p>
                   </div>
                   <div className="mt-2 h-2 rounded-full bg-slate-100 dark:bg-slate-800">
                     <div className="h-2 rounded-full bg-emerald-500" style={{ width: `${row.pass}%` }} />
                   </div>
-                  <p className="mt-1 text-xs text-slate-500">Pass {row.pass}%</p>
+                  <p className="mt-1 text-xs text-slate-500">{tr ? "Geçiş" : "Pass"} {row.pass}%</p>
                 </div>
               ))}
             </div>
@@ -155,6 +157,30 @@ export default function AdminModulesPage() {
       </div>
     </div>
   );
+}
+
+function stageText(stage: ModuleStage) {
+  const map: Record<ModuleStage, string> = {
+    review: "inceleme",
+    qa: "qa",
+    release: "yayın",
+    released: "yayınlandı",
+    blocked: "engellendi",
+  };
+  return map[stage];
+}
+
+function riskText(risk: ModuleRisk) {
+  return risk === "high" ? "yüksek" : risk === "medium" ? "orta" : "düşük";
+}
+
+function typeText(type: string) {
+  const map: Record<string, string> = {
+    checkout: "checkout",
+    theme: "tema",
+    integration: "entegrasyon",
+  };
+  return map[type] ?? type;
 }
 
 function Kpi({ label, value }: { label: string; value: string }) {

@@ -4,8 +4,10 @@ import { useMemo, useState } from "react";
 import { RefundRisk, RefundStatus } from "@/lib/data/adminOps";
 import { useCan } from "@/components/admin/AdminAccessContext";
 import { useAdminOpsStore } from "@/lib/store/adminOpsStore";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 export default function AdminRefundsPage() {
+  const tr = useAdminLanguage() === "tr";
   const canApprove = useCan("approve_refund");
   const refunds = useAdminOpsStore((state) => state.refunds);
   const updateRefundStatus = useAdminOpsStore((state) => state.updateRefundStatus);
@@ -39,32 +41,32 @@ export default function AdminRefundsPage() {
     <div className="flex-1 overflow-y-auto p-4 sm:p-8">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Refund Intelligence Hub</h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Policy-driven kararlar, risk sinyalleri ve exception queue.</p>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">{tr ? "İade Zekası Merkezi" : "Refund Intelligence Hub"}</h1>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{tr ? "Politika odaklı kararlar, risk sinyalleri ve istisna kuyruğu." : "Policy-driven decisions, risk signals and exception queue."}</p>
         </div>
         <button className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200">
-          Export Casebook
+          {tr ? "Vaka Raporu Dışa Aktar" : "Export Casebook"}
         </button>
       </div>
 
       <div className="mb-6 grid gap-4 md:grid-cols-4">
-        <Metric label="Pending Cases" value={stats.pending.toString()} />
-        <Metric label="Under Review" value={stats.review.toString()} />
-        <Metric label="High Risk" value={stats.riskHigh.toString()} />
-        <Metric label="Total Exposure" value={`$${stats.amount.toFixed(0)}`} />
+        <Metric label={tr ? "Bekleyen Vaka" : "Pending Cases"} value={stats.pending.toString()} />
+        <Metric label={tr ? "İnceleme Altında" : "Under Review"} value={stats.review.toString()} />
+        <Metric label={tr ? "Yüksek Risk" : "High Risk"} value={stats.riskHigh.toString()} />
+        <Metric label={tr ? "Toplam Maruziyet" : "Total Exposure"} value={`$${stats.amount.toFixed(0)}`} />
       </div>
 
       <div className="mb-4 flex flex-wrap gap-2">
-        <Filter active={statusFilter === "all"} label="All Status" onClick={() => setStatusFilter("all")} />
-        <Filter active={statusFilter === "pending"} label="Pending" onClick={() => setStatusFilter("pending")} />
-        <Filter active={statusFilter === "review"} label="Review" onClick={() => setStatusFilter("review")} />
-        <Filter active={statusFilter === "approved"} label="Approved" onClick={() => setStatusFilter("approved")} />
-        <Filter active={statusFilter === "rejected"} label="Rejected" onClick={() => setStatusFilter("rejected")} />
+        <Filter active={statusFilter === "all"} label={tr ? "Tüm Durumlar" : "All Status"} onClick={() => setStatusFilter("all")} />
+        <Filter active={statusFilter === "pending"} label={tr ? "Beklemede" : "Pending"} onClick={() => setStatusFilter("pending")} />
+        <Filter active={statusFilter === "review"} label={tr ? "İncelemede" : "Review"} onClick={() => setStatusFilter("review")} />
+        <Filter active={statusFilter === "approved"} label={tr ? "Onaylandı" : "Approved"} onClick={() => setStatusFilter("approved")} />
+        <Filter active={statusFilter === "rejected"} label={tr ? "Reddedildi" : "Rejected"} onClick={() => setStatusFilter("rejected")} />
         <span className="mx-2 h-5 w-px bg-slate-300 dark:bg-slate-700" />
-        <Filter active={riskFilter === "all"} label="All Risk" onClick={() => setRiskFilter("all")} />
-        <Filter active={riskFilter === "high"} label="High Risk" onClick={() => setRiskFilter("high")} />
-        <Filter active={riskFilter === "medium"} label="Medium Risk" onClick={() => setRiskFilter("medium")} />
-        <Filter active={riskFilter === "low"} label="Low Risk" onClick={() => setRiskFilter("low")} />
+        <Filter active={riskFilter === "all"} label={tr ? "Tüm Riskler" : "All Risk"} onClick={() => setRiskFilter("all")} />
+        <Filter active={riskFilter === "high"} label={tr ? "Yüksek Risk" : "High Risk"} onClick={() => setRiskFilter("high")} />
+        <Filter active={riskFilter === "medium"} label={tr ? "Orta Risk" : "Medium Risk"} onClick={() => setRiskFilter("medium")} />
+        <Filter active={riskFilter === "low"} label={tr ? "Düşük Risk" : "Low Risk"} onClick={() => setRiskFilter("low")} />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.4fr_1fr]">
@@ -72,12 +74,12 @@ export default function AdminRefundsPage() {
           <table className="w-full text-left">
             <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500 dark:bg-slate-800/60">
               <tr>
-                <th className="px-4 py-3">Case</th>
-                <th className="px-4 py-3">Order</th>
-                <th className="px-4 py-3">Amount</th>
-                <th className="px-4 py-3">Status</th>
+                <th className="px-4 py-3">{tr ? "Vaka" : "Case"}</th>
+                <th className="px-4 py-3">{tr ? "Sipariş" : "Order"}</th>
+                <th className="px-4 py-3">{tr ? "Tutar" : "Amount"}</th>
+                <th className="px-4 py-3">{tr ? "Durum" : "Status"}</th>
                 <th className="px-4 py-3">Risk</th>
-                <th className="px-4 py-3">Open</th>
+                <th className="px-4 py-3">{tr ? "Açık Süre" : "Open"}</th>
               </tr>
             </thead>
             <tbody>
@@ -89,8 +91,8 @@ export default function AdminRefundsPage() {
                   </td>
                   <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">{item.order}</td>
                   <td className="px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-100">${item.amount.toFixed(2)}</td>
-                  <td className="px-4 py-3"><Pill label={item.status} tone="neutral" /></td>
-                  <td className="px-4 py-3"><Pill label={item.risk} tone={item.risk} /></td>
+                  <td className="px-4 py-3"><Pill label={tr ? statusText(item.status) : item.status} tone="neutral" /></td>
+                  <td className="px-4 py-3"><Pill label={tr ? riskText(item.risk) : item.risk} tone={item.risk} /></td>
                   <td className="px-4 py-3 text-sm text-slate-500">{item.hoursOpen ? `${item.hoursOpen}h` : "-"}</td>
                 </tr>
               ))}
@@ -103,45 +105,64 @@ export default function AdminRefundsPage() {
             <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">{selected.id}</h2>
             <p className="mt-1 text-sm text-slate-500">{selected.order} • {selected.customerEmail}</p>
             <div className="mt-4 rounded-lg border border-slate-100 p-4 text-sm leading-6 text-slate-600 dark:border-slate-800 dark:text-slate-300">
-              Talep nedeni: {selected.reason}. Bu musterinin onceki iade sayisi: {selected.previousRefunds}.
+              {tr ? "Talep nedeni" : "Reason"}: {selected.reason}. {tr ? "Bu müşterinin önceki iade sayısı" : "Previous refunds by this customer"}: {selected.previousRefunds}.
             </div>
-            <textarea className="mt-4 w-full rounded-lg border border-slate-200 p-3 text-sm dark:border-slate-700 dark:bg-slate-800" placeholder="Internal notes and policy reference..." rows={3} />
+            <textarea className="mt-4 w-full rounded-lg border border-slate-200 p-3 text-sm dark:border-slate-700 dark:bg-slate-800" placeholder={tr ? "İç notlar ve politika referansı..." : "Internal notes and policy reference..."} rows={3} />
             <div className="mt-3 grid grid-cols-2 gap-2">
               <button
                 className="rounded-lg border border-red-200 px-4 py-2 text-sm font-semibold text-red-600 hover:bg-red-50 disabled:opacity-50"
                 disabled={!canApprove}
                 onClick={() => {
-                  if (!window.confirm(`Reject ${selected.id}?`)) return;
+                  if (!window.confirm(tr ? `${selected.id} reddedilsin mi?` : `Reject ${selected.id}?`)) return;
                   updateRefundStatus(selected.id, "rejected", "Admin");
                 }}
               >
-                Reject
+                {tr ? "Reddet" : "Reject"}
               </button>
               <button
                 className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90 disabled:opacity-50"
                 disabled={!canApprove}
                 onClick={() => {
-                  if (!window.confirm(`Approve ${selected.id}?`)) return;
+                  if (!window.confirm(tr ? `${selected.id} onaylansın mı?` : `Approve ${selected.id}?`)) return;
                   updateRefundStatus(selected.id, "approved", "Admin");
                 }}
               >
-                Approve
+                {tr ? "Onayla" : "Approve"}
               </button>
             </div>
           </div>
 
           <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-            <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Decision Assistant</h3>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">{tr ? "Karar Asistanı" : "Decision Assistant"}</h3>
             <ul className="mt-3 space-y-2 text-sm text-slate-600 dark:text-slate-300">
-              <li className="rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800">Check license activation before refund.</li>
-              <li className="rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800">If duplicate purchase within 24h: auto approve.</li>
-              <li className="rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800">If repeated claims + high amount: escalate.</li>
+              <li className="rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800">{tr ? "İadeden önce lisans aktivasyonunu kontrol edin." : "Check license activation before refund."}</li>
+              <li className="rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800">{tr ? "24 saat içinde mükerrer satın alma varsa: otomatik onay." : "If duplicate purchase within 24h: auto approve."}</li>
+              <li className="rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800">{tr ? "Tekrarlayan talep + yüksek tutar varsa: eskale edin." : "If repeated claims + high amount: escalate."}</li>
             </ul>
           </div>
         </aside>
       </div>
     </div>
   );
+}
+
+function statusText(status: RefundStatus) {
+  const map: Record<RefundStatus, string> = {
+    pending: "beklemede",
+    review: "incelemede",
+    approved: "onaylandı",
+    rejected: "reddedildi",
+  };
+  return map[status];
+}
+
+function riskText(risk: RefundRisk) {
+  const map: Record<RefundRisk, string> = {
+    high: "yüksek",
+    medium: "orta",
+    low: "düşük",
+  };
+  return map[risk];
 }
 
 function Metric({ label, value }: { label: string; value: string }) {

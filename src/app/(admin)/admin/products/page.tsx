@@ -7,6 +7,7 @@ import categories from "@/data/categories.json";
 import { Product } from "@/lib/types";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { toast } from "sonner";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 const productSlots = [
   { type: "themes", label: "Themes", icon: "palette", color: "from-indigo-500 to-violet-500" },
@@ -24,6 +25,8 @@ const pipeline = [
 ];
 
 export default function AdminProductsPage() {
+  const language = useAdminLanguage();
+  const tr = language === "tr";
   const [products, setProducts] = useState<Product[]>(productsFallback as Product[]);
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
@@ -43,6 +46,29 @@ export default function AdminProductsPage() {
     }));
   }, [products]);
 
+  const slotLabel = (label: string) => {
+    if (!tr) return label;
+    const map: Record<string, string> = {
+      Themes: "Temalar",
+      Modules: "Modüller",
+      "XML Integrations": "XML Entegrasyonları",
+      Payment: "Ödeme",
+      "Marketing & SEO": "Pazarlama ve SEO",
+    };
+    return map[label] ?? label;
+  };
+
+  const pipelineLabel = (label: string) => {
+    if (!tr) return label;
+    const map: Record<string, string> = {
+      Concept: "Konsept",
+      "In Build": "Geliştirme",
+      "QA Review": "QA İnceleme",
+      "Launch Ready": "Yayına Hazır",
+    };
+    return map[label] ?? label;
+  };
+
   const handleAddProduct = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -51,7 +77,7 @@ export default function AdminProductsPage() {
     const price = Number(formData.get("price"));
 
     if (!name || !categoryId || Number.isNaN(price)) {
-      toast.error("Lutfen zorunlu alanlari doldurun.");
+      toast.error(tr ? "Lütfen zorunlu alanları doldurun." : "Please fill in required fields.");
       return;
     }
 
@@ -75,12 +101,12 @@ export default function AdminProductsPage() {
     };
 
     setProducts((prev) => [newProduct, ...prev]);
-    toast.success("Urun eklendi.");
+    toast.success(tr ? "Ürün eklendi." : "Product added.");
   };
 
   const deleteProduct = (id: string) => {
     setProducts((prev) => prev.filter((product) => product.id !== id));
-    toast.success("Urun kaldirildi.");
+    toast.success(tr ? "Ürün kaldırıldı." : "Product removed.");
   };
 
   return (
@@ -89,36 +115,38 @@ export default function AdminProductsPage() {
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Product Command Center</h1>
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-            Themes, modules, XML integrations, payment, marketing ve SEO urunlerini tek panelden yonetin.
+            {tr
+              ? "Tema, modül, XML entegrasyonu, ödeme, pazarlama ve SEO ürünlerini tek panelden yönetin."
+              : "Manage themes, modules, XML integrations, payment, marketing and SEO products from one panel."}
           </p>
         </div>
         <Dialog>
           <DialogTrigger asChild>
-            <button className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90">Yeni Urun Ekle</button>
+            <button className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90">{tr ? "Yeni Ürün Ekle" : "Add New Product"}</button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Yeni Urun</DialogTitle>
+              <DialogTitle>{tr ? "Yeni Ürün" : "New Product"}</DialogTitle>
             </DialogHeader>
             <form className="space-y-3" onSubmit={handleAddProduct}>
-              <input className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800" name="name" placeholder="Urun adi" required />
+              <input className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800" name="name" placeholder={tr ? "Ürün adı" : "Product name"} required />
               <select className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800" defaultValue="themes" name="categoryId">
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>{category.name}</option>
                 ))}
               </select>
-              <input className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800" min="0" name="price" placeholder="Fiyat" required step="0.01" type="number" />
-              <input className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800" name="shortDescription" placeholder="Kisa aciklama" required />
-              <button className="w-full rounded-lg bg-primary py-2 text-sm font-semibold text-white hover:bg-primary/90" type="submit">Kaydet</button>
+              <input className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800" min="0" name="price" placeholder={tr ? "Fiyat" : "Price"} required step="0.01" type="number" />
+              <input className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800" name="shortDescription" placeholder={tr ? "Kısa açıklama" : "Short description"} required />
+              <button className="w-full rounded-lg bg-primary py-2 text-sm font-semibold text-white hover:bg-primary/90" type="submit">{tr ? "Kaydet" : "Save"}</button>
             </form>
           </DialogContent>
         </Dialog>
       </div>
 
       <div className="mb-6 grid gap-3 md:grid-cols-3">
-        <JumpCard href="/admin/modules" icon="deployed_code" label="Open Modules Release Lab" desc="QA gates, release train and compatibility." />
-        <JumpCard href="/admin/xml" icon="sync_alt" label="Open XML Integration Hub" desc="Feed status, mappings and retries." />
-        <JumpCard href="/admin/marketing" icon="campaign" label="Open Marketing Console" desc="Campaign bundles and growth placement." />
+        <JumpCard href="/admin/modules" icon="deployed_code" label={tr ? "Modül Yayın Laboratuvarı" : "Open Modules Release Lab"} desc={tr ? "QA aşamaları, yayın hattı ve uyumluluk." : "QA gates, release train and compatibility."} />
+        <JumpCard href="/admin/xml" icon="sync_alt" label={tr ? "XML Entegrasyon Merkezi" : "Open XML Integration Hub"} desc={tr ? "Besleme durumu, eşlemeler ve yeniden denemeler." : "Feed status, mappings and retries."} />
+        <JumpCard href="/admin/marketing" icon="campaign" label={tr ? "Pazarlama Konsolu" : "Open Marketing Console"} desc={tr ? "Kampanya paketleri ve büyüme yerleşimleri." : "Campaign bundles and growth placement."} />
       </div>
 
       <div className="mb-6 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
@@ -126,13 +154,13 @@ export default function AdminProductsPage() {
           <article key={slot.type} className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
             <div className={`bg-gradient-to-r ${slot.color} px-4 py-3 text-white`}>
               <div className="flex items-center justify-between">
-                <p className="text-sm font-semibold">{slot.label}</p>
+                <p className="text-sm font-semibold">{slotLabel(slot.label)}</p>
                 <span className="material-symbols-outlined text-lg">{slot.icon}</span>
               </div>
             </div>
             <div className="p-4">
               <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">{slot.count}</p>
-              <p className="text-xs text-slate-500">Aktif urun</p>
+              <p className="text-xs text-slate-500">{tr ? "Aktif ürün" : "Active products"}</p>
             </div>
           </article>
         ))}
@@ -141,7 +169,7 @@ export default function AdminProductsPage() {
       <div className="mb-6 grid gap-4 xl:grid-cols-4">
         {pipeline.map((item) => (
           <section key={item.label} className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">{item.label}</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">{pipelineLabel(item.label)}</p>
             <p className="mt-2 text-3xl font-bold text-slate-900 dark:text-slate-100">{item.count}</p>
             <p className="mt-1 text-xs text-slate-500">{item.note}</p>
           </section>
@@ -152,10 +180,10 @@ export default function AdminProductsPage() {
         <input
           className="w-full max-w-sm rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-900"
           onChange={(event) => setSearch(event.target.value)}
-          placeholder="Urun ara..."
+          placeholder={tr ? "Ürün ara..." : "Search product..."}
           value={search}
         />
-        <FilterButton active={categoryFilter === "all"} label="Tum Urunler" onClick={() => setCategoryFilter("all")} />
+        <FilterButton active={categoryFilter === "all"} label={tr ? "Tüm Ürünler" : "All Products"} onClick={() => setCategoryFilter("all")} />
         {categories.map((category) => (
           <FilterButton
             key={category.id}
@@ -182,23 +210,23 @@ export default function AdminProductsPage() {
             <div className="mt-4 grid grid-cols-3 gap-2 text-center text-xs">
               <div className="rounded-lg bg-slate-50 p-2 dark:bg-slate-800">
                 <p className="font-semibold text-slate-900 dark:text-slate-100">${product.price.toFixed(0)}</p>
-                <p className="text-slate-500">Fiyat</p>
+                <p className="text-slate-500">{tr ? "Fiyat" : "Price"}</p>
               </div>
               <div className="rounded-lg bg-slate-50 p-2 dark:bg-slate-800">
                 <p className="font-semibold text-slate-900 dark:text-slate-100">{product.rating}</p>
-                <p className="text-slate-500">Puan</p>
+                <p className="text-slate-500">{tr ? "Puan" : "Rating"}</p>
               </div>
               <div className="rounded-lg bg-slate-50 p-2 dark:bg-slate-800">
                 <p className="font-semibold text-slate-900 dark:text-slate-100">{product.installs.toLocaleString()}</p>
-                <p className="text-slate-500">Kurulum</p>
+                <p className="text-slate-500">{tr ? "Kurulum" : "Installs"}</p>
               </div>
             </div>
             <div className="mt-4 flex gap-2">
               <button className="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">
-                Duzenle
+                {tr ? "Düzenle" : "Edit"}
               </button>
               <button className="rounded-lg border border-red-200 px-3 py-2 text-sm font-semibold text-red-600 hover:bg-red-50" onClick={() => deleteProduct(product.id)}>
-                Sil
+                {tr ? "Sil" : "Delete"}
               </button>
             </div>
           </article>

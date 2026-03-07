@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
 type Segment = "new" | "vip" | "churn-risk" | "active";
 
@@ -12,6 +13,8 @@ const customers = [
 ];
 
 export default function AdminCustomersPage() {
+  const language = useAdminLanguage();
+  const tr = language === "tr";
   const [segmentFilter, setSegmentFilter] = useState<Segment | "all">("all");
   const [selectedId, setSelectedId] = useState(customers[0].id);
   const selected = customers.find((item) => item.id === selectedId) ?? customers[0];
@@ -32,24 +35,24 @@ export default function AdminCustomersPage() {
     <div className="flex-1 overflow-y-auto p-4 sm:p-8">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Customer 360</h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Segment, LTV, ticket durumu ve sonraki aksiyon onerileri.</p>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">{tr ? "Müşteri 360" : "Customer 360"}</h1>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{tr ? "Segment, LTV, destek durumu ve sonraki aksiyon önerileri." : "Segment, LTV, ticket health and recommended next actions."}</p>
         </div>
       </div>
 
       <div className="mb-6 grid gap-4 md:grid-cols-4">
-        <Card label="Toplam Musteri" value={totals.total.toString()} />
-        <Card label="VIP Segment" value={totals.vip.toString()} />
-        <Card label="Churn Risk" value={totals.churnRisk.toString()} />
-        <Card label="Toplam LTV" value={`$${totals.ltv.toLocaleString()}`} />
+        <Card label={tr ? "Toplam Müşteri" : "Total Customers"} value={totals.total.toString()} />
+        <Card label={tr ? "VIP Segment" : "VIP Segment"} value={totals.vip.toString()} />
+        <Card label={tr ? "Churn Riski" : "Churn Risk"} value={totals.churnRisk.toString()} />
+        <Card label={tr ? "Toplam LTV" : "Total LTV"} value={`$${totals.ltv.toLocaleString()}`} />
       </div>
 
       <div className="mb-4 flex flex-wrap gap-2">
-        <SegmentPill active={segmentFilter === "all"} label="All" onClick={() => setSegmentFilter("all")} />
+        <SegmentPill active={segmentFilter === "all"} label={tr ? "Tümü" : "All"} onClick={() => setSegmentFilter("all")} />
         <SegmentPill active={segmentFilter === "vip"} label="VIP" onClick={() => setSegmentFilter("vip")} />
-        <SegmentPill active={segmentFilter === "active"} label="Active" onClick={() => setSegmentFilter("active")} />
-        <SegmentPill active={segmentFilter === "new"} label="New" onClick={() => setSegmentFilter("new")} />
-        <SegmentPill active={segmentFilter === "churn-risk"} label="Churn Risk" onClick={() => setSegmentFilter("churn-risk")} />
+        <SegmentPill active={segmentFilter === "active"} label={tr ? "Aktif" : "Active"} onClick={() => setSegmentFilter("active")} />
+        <SegmentPill active={segmentFilter === "new"} label={tr ? "Yeni" : "New"} onClick={() => setSegmentFilter("new")} />
+        <SegmentPill active={segmentFilter === "churn-risk"} label={tr ? "Churn Riski" : "Churn Risk"} onClick={() => setSegmentFilter("churn-risk")} />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.3fr_1fr]">
@@ -57,11 +60,11 @@ export default function AdminCustomersPage() {
           <table className="w-full text-left">
             <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500 dark:bg-slate-800/60">
               <tr>
-                <th className="px-4 py-3">Customer</th>
-                <th className="px-4 py-3">Segment</th>
-                <th className="px-4 py-3">Orders</th>
+                <th className="px-4 py-3">{tr ? "Müşteri" : "Customer"}</th>
+                <th className="px-4 py-3">{tr ? "Segment" : "Segment"}</th>
+                <th className="px-4 py-3">{tr ? "Sipariş" : "Orders"}</th>
                 <th className="px-4 py-3">LTV</th>
-                <th className="px-4 py-3">Open Tickets</th>
+                <th className="px-4 py-3">{tr ? "Açık Destek Talebi" : "Open Tickets"}</th>
               </tr>
             </thead>
             <tbody>
@@ -71,7 +74,7 @@ export default function AdminCustomersPage() {
                     <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{customer.name}</p>
                     <p className="text-xs text-slate-500">{customer.email}</p>
                   </td>
-                  <td className="px-4 py-3"><SegmentTag value={customer.segment} /></td>
+                  <td className="px-4 py-3"><SegmentTag value={customer.segment} tr={tr} /></td>
                   <td className="px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{customer.orders}</td>
                   <td className="px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-100">${customer.ltv}</td>
                   <td className="px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{customer.openTickets}</td>
@@ -86,26 +89,26 @@ export default function AdminCustomersPage() {
             <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">{selected.name}</h2>
             <p className="mt-1 text-sm text-slate-500">{selected.email}</p>
             <div className="mt-4 grid grid-cols-2 gap-2">
-              <Mini label="Segment" value={selected.segment} />
-              <Mini label="Orders" value={selected.orders.toString()} />
+              <Mini label={tr ? "Segment" : "Segment"} value={segmentText(selected.segment, tr)} />
+              <Mini label={tr ? "Sipariş" : "Orders"} value={selected.orders.toString()} />
               <Mini label="LTV" value={`$${selected.ltv}`} />
-              <Mini label="Last Purchase" value={selected.lastPurchase} />
+              <Mini label={tr ? "Son Satın Alma" : "Last Purchase"} value={selected.lastPurchase} />
             </div>
           </div>
           <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-            <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Recommended Next Action</h3>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">{tr ? "Önerilen Sonraki Aksiyon" : "Recommended Next Action"}</h3>
             <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
               {selected.segment === "churn-risk"
-                ? "Send retention offer + check unresolved ticket quality."
+                ? tr ? "Elde tutma teklifi gönderin ve çözümlenmemiş destek taleplerini kontrol edin." : "Send retention offer + check unresolved ticket quality."
                 : selected.segment === "vip"
-                ? "Invite to beta modules and premium bundle campaign."
+                ? tr ? "Beta modüllere ve premium paket kampanyasına davet edin." : "Invite to beta modules and premium bundle campaign."
                 : selected.segment === "new"
-                ? "Trigger onboarding email and setup guide."
-                : "Upsell relevant add-ons based on latest purchase."}
+                ? tr ? "Onboarding e-postası ve kurulum rehberini tetikleyin." : "Trigger onboarding email and setup guide."
+                : tr ? "Son satın almaya göre ilgili eklentiler için upsell önerin." : "Upsell relevant add-ons based on latest purchase."}
             </p>
             <div className="mt-4 grid grid-cols-2 gap-2">
-              <button className="rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800">Send Email</button>
-              <button className="rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-white hover:bg-primary/90">Create Task</button>
+              <button className="rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800">{tr ? "E-posta Gönder" : "Send Email"}</button>
+              <button className="rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-white hover:bg-primary/90">{tr ? "Görev Oluştur" : "Create Task"}</button>
             </div>
           </div>
         </aside>
@@ -135,7 +138,15 @@ function SegmentPill({ active, label, onClick }: { active: boolean; label: strin
   );
 }
 
-function SegmentTag({ value }: { value: Segment }) {
+function segmentText(value: Segment, tr: boolean) {
+  if (!tr) return value;
+  if (value === "churn-risk") return "churn-riski";
+  if (value === "active") return "aktif";
+  if (value === "new") return "yeni";
+  return "vip";
+}
+
+function SegmentTag({ value, tr }: { value: Segment; tr: boolean }) {
   const style =
     value === "vip"
       ? "bg-purple-100 text-purple-700"
@@ -144,7 +155,7 @@ function SegmentTag({ value }: { value: Segment }) {
       : value === "new"
       ? "bg-amber-100 text-amber-700"
       : "bg-emerald-100 text-emerald-700";
-  return <span className={`rounded-full px-2.5 py-1 text-xs font-semibold capitalize ${style}`}>{value}</span>;
+  return <span className={`rounded-full px-2.5 py-1 text-xs font-semibold capitalize ${style}`}>{segmentText(value, tr)}</span>;
 }
 
 function Mini({ label, value }: { label: string; value: string }) {
