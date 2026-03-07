@@ -1,3 +1,4 @@
+
 const fs = require('fs');
 const path = require('path');
 
@@ -31,9 +32,9 @@ for (let i = 1; i <= 35; i++) {
   } else {
     name = `${adjectives[i % adjectives.length]} OpenCart ${nouns[i % nouns.length]}`;
   }
-  
+
   const slug = name.toLowerCase().replace(/\s+/g, '-') + '-' + i;
-  
+
   products.push({
     id: `prod-${i}`,
     slug,

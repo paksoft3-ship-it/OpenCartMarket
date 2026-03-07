@@ -33,9 +33,21 @@ export function ProductCard({ product }: ProductCardProps) {
                     )}
                 </div>
                 {/* Hover Overlay Actions */}
-                <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 p-4">
-                    <button className="flex-1 bg-white text-slate-900 hover:bg-slate-50 font-medium py-2 px-4 rounded-lg text-sm shadow-sm transition-colors border border-transparent">Canlı Demo</button>
-                    <button className="flex-1 bg-primary text-white hover:bg-primary/90 font-medium py-2 px-4 rounded-lg text-sm shadow-sm transition-colors">Detayları Gör</button>
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 via-slate-900/55 to-transparent p-3 md:p-4 opacity-100 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100 transition-opacity duration-300">
+                    <div className="grid grid-cols-2 gap-2">
+                        <Link
+                            href={`/product/${product.slug}`}
+                            className="inline-flex h-10 items-center justify-center rounded-xl border border-white/30 bg-white/95 px-2 text-[11px] font-semibold text-slate-900 shadow-md transition-colors hover:bg-white whitespace-nowrap leading-none sm:px-3 sm:text-xs"
+                        >
+                            Canlı Demo
+                        </Link>
+                        <Link
+                            href={`/product/${product.slug}`}
+                            className="inline-flex h-10 items-center justify-center rounded-xl bg-primary px-2 text-[11px] font-semibold text-white shadow-md shadow-primary/30 transition-colors hover:bg-primary/90 whitespace-nowrap leading-none sm:px-3 sm:text-xs"
+                        >
+                            Detayları Gör
+                        </Link>
+                    </div>
                 </div>
             </Link>
 
