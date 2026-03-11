@@ -113,7 +113,7 @@ export default function AdminPayoutsPage() {
         <Kpi label={tr ? "Bekleyen Tutar" : "Pending Amount"} value={`₺${metrics.pendingAmount.toLocaleString()}`} />
         <Kpi label={tr ? "İstisna Kuyruğu" : "Exception Queue"} value={metrics.exceptionCount.toString()} />
         <Kpi label={tr ? "Toplam İşlem Ücreti" : "Total Processing Fee"} value={`₺${metrics.fees.toLocaleString()}`} />
-        <Kpi label={tr ? "Otomatik Mutabakat Oranı" : "Auto Settlement Ratio"} value="71%" />
+        <Kpi label={tr ? "Otomatik Mutabakat Oranı" : "Auto Settlement Ratio"} value="—" />
       </div>
 
       <div className="mb-4 flex flex-wrap gap-2">

@@ -14,6 +14,7 @@ export const createProductSchema = z.object({
   tags: z.array(z.string()).default([]),
   version: z.string().default("1.0.0"),
   status: z.enum(["draft", "review", "published", "archived"]).default("draft"),
+  demoUrl: z.string().default(""),
 });
 
 export const updateProductSchema = createProductSchema.partial();

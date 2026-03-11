@@ -1,16 +1,40 @@
 "use client";
 
-import developers from "@/data/developers.json";
+import { useEffect, useState } from "react";
 import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
+import { toast } from "sonner";
+
+interface Developer {
+  id: string;
+  name: string;
+  rating: number;
+  reviews: number;
+  products: number;
+  joined: string;
+}
 
 export default function AdminDevelopersPage() {
   const tr = useAdminLanguage() === "tr";
+  const [developers, setDevelopers] = useState<Developer[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/admin/developers")
+      .then((r) => r.json())
+      .then((data) => setDevelopers(data.items ?? []))
+      .catch(() => toast.error(tr ? "Geliştiriciler yüklenemedi." : "Failed to load developers."))
+      .finally(() => setLoading(false));
+  }, [tr]);
+
+  const total = developers.length;
+  const active = developers.filter((d) => d.rating >= 4.5).length;
+
   return (
     <div className="flex-1 overflow-y-auto p-4 sm:p-8">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Geliştirici Yönetimi</h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Satıcı hesaplarını, ürün sayılarını ve performanslarını yönetin.</p>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">{tr ? "Geliştirici Yönetimi" : "Developer Management"}</h1>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{tr ? "Satıcı hesaplarını, ürün sayılarını ve performanslarını yönetin." : "Manage seller accounts, product counts and performance."}</p>
         </div>
         <div className="flex items-center gap-2">
           <input
@@ -23,41 +47,47 @@ export default function AdminDevelopersPage() {
       </div>
 
       <div className="mb-6 grid gap-4 md:grid-cols-3">
-        <MetricCard label={tr ? "Toplam Geliştirici" : "Total Developers"} value="842" />
-        <MetricCard label={tr ? "Aktif Satıcı" : "Active Sellers"} value="796" />
-        <MetricCard label={tr ? "Yeni Başvuru (7 gün)" : "New Applications (7d)"} value="34" />
+        <MetricCard label={tr ? "Toplam Geliştirici" : "Total Developers"} value={loading ? "—" : total.toString()} />
+        <MetricCard label={tr ? "Aktif Satıcı" : "Active Sellers"} value={loading ? "—" : active.toString()} />
+        <MetricCard label={tr ? "Toplam Ürün" : "Total Products"} value={loading ? "—" : developers.reduce((sum, d) => sum + d.products, 0).toString()} />
       </div>
 
       <div className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
-        <table className="w-full text-left">
-          <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500 dark:bg-slate-800/50">
-            <tr>
-              <th className="px-4 py-3">{tr ? "Geliştirici" : "Developer"}</th>
-              <th className="px-4 py-3">{tr ? "Puan" : "Rating"}</th>
-              <th className="px-4 py-3">{tr ? "Ürün" : "Products"}</th>
-              <th className="px-4 py-3">{tr ? "İnceleme" : "Reviews"}</th>
-              <th className="px-4 py-3">{tr ? "Katılım" : "Joined"}</th>
-              <th className="px-4 py-3 text-right">{tr ? "İşlem" : "Action"}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {developers.map((developer) => (
-              <tr key={developer.id} className="border-t border-slate-100 dark:border-slate-800">
-                <td className="px-4 py-3">
-                  <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{developer.name}</p>
-                  <p className="text-xs text-slate-500">{developer.id}</p>
-                </td>
-                <td className="px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{developer.rating.toFixed(1)}</td>
-                <td className="px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{developer.products}</td>
-                <td className="px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{developer.reviews}</td>
-                <td className="px-4 py-3 text-sm text-slate-500">{new Date(developer.joined).toLocaleDateString(tr ? "tr-TR" : "en-US")}</td>
-                <td className="px-4 py-3 text-right">
-                  <button className="text-sm font-semibold text-primary hover:underline">{tr ? "Profili Gör" : "View Profile"}</button>
-                </td>
+        {loading ? (
+          <div className="p-8 text-center text-sm text-slate-500">{tr ? "Yükleniyor..." : "Loading..."}</div>
+        ) : developers.length === 0 ? (
+          <div className="p-8 text-center text-sm text-slate-500">{tr ? "Geliştirici bulunamadı." : "No developers found."}</div>
+        ) : (
+          <table className="w-full text-left">
+            <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500 dark:bg-slate-800/50">
+              <tr>
+                <th className="px-4 py-3">{tr ? "Geliştirici" : "Developer"}</th>
+                <th className="px-4 py-3">{tr ? "Puan" : "Rating"}</th>
+                <th className="px-4 py-3">{tr ? "Ürün" : "Products"}</th>
+                <th className="px-4 py-3">{tr ? "İnceleme" : "Reviews"}</th>
+                <th className="px-4 py-3">{tr ? "Katılım" : "Joined"}</th>
+                <th className="px-4 py-3 text-right">{tr ? "İşlem" : "Action"}</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {developers.map((developer) => (
+                <tr key={developer.id} className="border-t border-slate-100 dark:border-slate-800">
+                  <td className="px-4 py-3">
+                    <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{developer.name}</p>
+                    <p className="text-xs text-slate-500">{developer.id}</p>
+                  </td>
+                  <td className="px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{developer.rating.toFixed(1)}</td>
+                  <td className="px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{developer.products}</td>
+                  <td className="px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{developer.reviews}</td>
+                  <td className="px-4 py-3 text-sm text-slate-500">{new Date(developer.joined).toLocaleDateString(tr ? "tr-TR" : "en-US")}</td>
+                  <td className="px-4 py-3 text-right">
+                    <button className="text-sm font-semibold text-primary hover:underline">{tr ? "Profili Gör" : "View Profile"}</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

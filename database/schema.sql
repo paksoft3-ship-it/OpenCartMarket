@@ -81,9 +81,13 @@ CREATE TABLE IF NOT EXISTS admin_products (
   tags              JSONB NOT NULL DEFAULT '[]'::JSONB,
   version           TEXT NOT NULL DEFAULT '1.0.0',
   status            product_status NOT NULL DEFAULT 'draft',
+  demo_url          TEXT NOT NULL DEFAULT '',
   created_at        TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at        TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
+-- Migration: add demo_url to existing installs
+ALTER TABLE admin_products ADD COLUMN IF NOT EXISTS demo_url TEXT NOT NULL DEFAULT '';
 
 CREATE TABLE IF NOT EXISTS product_files (
   id               UUID PRIMARY KEY DEFAULT gen_random_uuid(),

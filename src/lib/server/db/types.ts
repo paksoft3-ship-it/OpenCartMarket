@@ -28,6 +28,7 @@ export interface AdminProduct {
   tags: string[];
   version: string;
   status: ProductStatus;
+  demoUrl: string;
   createdAt: string;
   updatedAt: string;
 }

@@ -18,12 +18,6 @@ interface ModuleSubmission {
   createdAt: string;
 }
 
-const compatibility = [
-  { version: "4.0.2.3", pass: 93, blocked: 2 },
-  { version: "4.0.2.2", pass: 88, blocked: 5 },
-  { version: "3.0.3.9", pass: 81, blocked: 9 },
-];
-
 export default function AdminModulesPage() {
   const tr = useAdminLanguage() === "tr";
   const canManage = useCan("manage_modules");
@@ -54,7 +48,7 @@ export default function AdminModulesPage() {
     const inReview = modules.filter((item) => item.stage === "review").length;
     const blocked = modules.filter((item) => item.stage === "blocked").length;
     const ready = modules.filter((item) => item.stage === "release").length;
-    return { inReview, blocked, ready, avgCycle: "3.4d" };
+    return { inReview, blocked, ready };
   }, [modules]);
 
   const updateStage = async (stage: ModuleStage) => {
@@ -122,7 +116,7 @@ export default function AdminModulesPage() {
         <Kpi label={tr ? "İncelemede" : "In Review"} value={String(metrics.inReview)} />
         <Kpi label={tr ? "QA Engelli" : "QA Blocked"} value={String(metrics.blocked)} />
         <Kpi label={tr ? "Yayına Hazır" : "Ready to Release"} value={String(metrics.ready)} />
-        <Kpi label={tr ? "Ort. Döngü Süresi" : "Avg Cycle Time"} value={metrics.avgCycle} />
+        <Kpi label={tr ? "Ort. Döngü Süresi" : "Avg Cycle Time"} value="—" />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.4fr_1fr]">
@@ -188,20 +182,7 @@ export default function AdminModulesPage() {
 
           <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
             <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">{tr ? "Uyumluluk Isı Haritası" : "Compatibility Heatmap"}</h3>
-            <div className="mt-4 space-y-2">
-              {compatibility.map((row) => (
-                <div key={row.version} className="rounded-lg border border-slate-100 p-3 dark:border-slate-800">
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{row.version}</p>
-                    <p className="text-xs text-slate-500">{tr ? "Engelli" : "Blocked"} {row.blocked}</p>
-                  </div>
-                  <div className="mt-2 h-2 rounded-full bg-slate-100 dark:bg-slate-800">
-                    <div className="h-2 rounded-full bg-emerald-500" style={{ width: `${row.pass}%` }} />
-                  </div>
-                  <p className="mt-1 text-xs text-slate-500">{tr ? "Geçiş" : "Pass"} {row.pass}%</p>
-                </div>
-              ))}
-            </div>
+            <p className="mt-3 text-sm text-slate-500">{tr ? "Uyumluluk verisi henüz mevcut değil." : "No compatibility data available yet."}</p>
           </div>
         </aside>
       </div>

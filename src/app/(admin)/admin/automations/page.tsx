@@ -31,8 +31,8 @@ export default function AdminAutomationsPage() {
   const [logs, setLogs] = useState<AutomationLog[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedId, setSelectedId] = useState("");
-  const [conditions, setConditions] = useState(["refund.amount > 100"]);
-  const [actions, setActions] = useState(["require manager approval"]);
+  const [conditions, setConditions] = useState<string[]>([]);
+  const [actions, setActions] = useState<string[]>([]);
 
   const selected = useMemo(() => rules.find((rule) => rule.id === selectedId) ?? rules[0], [rules, selectedId]);
 

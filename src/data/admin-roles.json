@@ -1,0 +1,6 @@
+[
+  { "id": "role-ops", "name": "Operations Manager", "users": 0, "scope": "Orders, Refunds, Support", "perms": ["approve_refund", "assign_ticket", "review_risk"] },
+  { "id": "role-fin", "name": "Finance Analyst", "users": 0, "scope": "Payouts, Revenue, Reconciliation", "perms": ["approve_payout", "view_revenue", "run_settlement"] },
+  { "id": "role-content", "name": "Content Lead", "users": 0, "scope": "Blog, SEO, Docs", "perms": ["publish_blog", "manage_seo", "edit_docs"] },
+  { "id": "role-growth", "name": "Growth Manager", "users": 0, "scope": "Marketing, Analytics", "perms": ["launch_campaign", "manage_coupon", "view_cohorts"] }
+]

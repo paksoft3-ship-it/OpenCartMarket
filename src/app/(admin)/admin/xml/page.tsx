@@ -61,7 +61,9 @@ export default function AdminXmlPage() {
     const active = feeds.filter((feed) => feed.status === "healthy").length;
     const degraded = feeds.filter((feed) => feed.status === "degraded").length;
     const failedMappings = feeds.reduce((sum, feed) => sum + feed.errors, 0);
-    return { active, degraded, failedMappings, avgSyncDelay: "54s" };
+    const totalLatencyEntries = feeds.filter((f) => f.latency && f.latency !== "-").length;
+    const avgSyncDelay = totalLatencyEntries > 0 ? feeds.filter((f) => f.latency && f.latency !== "-")[0]?.latency ?? "—" : "—";
+    return { active, degraded, failedMappings, avgSyncDelay };
   }, [feeds]);
 
   const retryFeed = async (id: string) => {

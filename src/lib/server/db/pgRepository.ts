@@ -55,6 +55,7 @@ function rowToProduct(row: Record<string, unknown>): AdminProduct {
     tags: Array.isArray(row.tags) ? row.tags.map(String) : [],
     version: String(row.version),
     status: row.status as AdminProduct["status"],
+    demoUrl: String(row.demo_url ?? ""),
     createdAt: String(row.created_at),
     updatedAt: String(row.updated_at),
   };
@@ -71,14 +72,14 @@ async function createProduct(
 ): Promise<AdminProduct> {
   const pool = getPool();
   const { rows } = await pool.query(
-    `INSERT INTO admin_products (slug,name,short_description,description,price,category_id,developer_id,compatibility,images,features,tags,version,status)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING *`,
+    `INSERT INTO admin_products (slug,name,short_description,description,price,category_id,developer_id,compatibility,images,features,tags,version,status,demo_url)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING *`,
     [
       payload.slug, payload.name, payload.shortDescription, payload.description,
       payload.price, payload.categoryId, payload.developerId,
       JSON.stringify(payload.compatibility), JSON.stringify(payload.images),
       JSON.stringify(payload.features), JSON.stringify(payload.tags),
-      payload.version, payload.status,
+      payload.version, payload.status, payload.demoUrl ?? "",
     ]
   );
   const created = rowToProduct(rows[0]);
@@ -106,6 +107,7 @@ async function updateProduct(
     slug: "slug", name: "name", shortDescription: "short_description",
     description: "description", price: "price", categoryId: "category_id",
     developerId: "developer_id", version: "version", status: "status",
+    demoUrl: "demo_url",
   };
   const jsonCols = new Set(["compatibility", "images", "features", "tags"]);
   const fields: string[] = [];

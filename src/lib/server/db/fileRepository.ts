@@ -46,6 +46,7 @@ function initialProducts(): AdminProduct[] {
     tags: Array.isArray(item.tags) ? item.tags.map(String) : [],
     version: "1.0.0",
     status: "published",
+    demoUrl: String(item.demoUrl ?? ""),
     createdAt: String(item.createdAt ?? nowIso()),
     updatedAt: String(item.updatedAt ?? nowIso()),
   }));
