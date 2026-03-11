@@ -1,15 +1,30 @@
 import Link from "next/link";
 import Image from "next/image";
-import { blogPosts } from "@/lib/data/blogPosts";
+import { getBlogPosts } from "@/lib/data/blogPosts";
 
 export const metadata = {
   title: "Blog | OpenCart Marketplace",
   description: "Marketplace growth, SEO, and OpenCart product strategy articles.",
 };
 
-export default function BlogPage() {
-  const featured = blogPosts[0];
-  const rest = blogPosts.slice(1);
+export default async function BlogPage() {
+  const posts = await getBlogPosts();
+  if (posts.length === 0) {
+    return (
+      <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h1 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white">Marketplace Blog</h1>
+            <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">SEO, marketing, and product growth playbooks for OpenCart sellers.</p>
+          </div>
+        </div>
+        <p className="text-slate-600 dark:text-slate-300">Henüz blog yazısı bulunmamaktadır.</p>
+      </div>
+    );
+  }
+
+  const featured = posts[0];
+  const rest = posts.slice(1);
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8">

@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import MDEditor from "@uiw/react-md-editor";
+import "@uiw/react-md-editor/markdown-editor.css";
 import { toast } from "sonner";
 import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
@@ -16,9 +18,20 @@ interface BlogPost {
 
 export default function AdminBlogPage() {
   const tr = useAdminLanguage() === "tr";
-  const locale = tr ? "tr-TR" : "en-US";
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [form, setForm] = useState({
+    title: "",
+    author: "",
+    excerpt: "",
+    content: "",
+    cover: "",
+    category: "SEO" as "SEO" | "Marketing" | "Growth" | "Product",
+    readTime: "",
+    status: "draft" as "draft" | "published",
+  });
 
   const load = async () => {
     try {
@@ -36,6 +49,54 @@ export default function AdminBlogPage() {
 
   useEffect(() => { load(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const handleCreate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.title.trim() || !form.author.trim()) {
+      toast.error(tr ? "Başlık ve yazar zorunludur." : "Title and author are required.");
+      return;
+    }
+    setSaving(true);
+    try {
+      const slug = form.title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+      const res = await fetch("/api/admin/blog", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-admin-actor": "Admin" },
+        body: JSON.stringify({ ...form, slug }),
+      });
+      if (!res.ok) throw new Error();
+      const created: BlogPost = await res.json();
+      setPosts((prev) => [created, ...prev]);
+      setShowModal(false);
+      setForm({
+        title: "",
+        author: "",
+        excerpt: "",
+        content: "",
+        cover: "",
+        category: "SEO",
+        readTime: "",
+        status: "draft",
+      });
+      toast.success(tr ? "Blog yazısı oluşturuldu." : "Blog post created.");
+    } catch {
+      toast.error(tr ? "Yazı oluşturulamadı." : "Failed to create post.");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!window.confirm(tr ? "Bu yazı silinsin mi?" : "Delete this post?")) return;
+    try {
+      const res = await fetch(`/api/admin/blog/${id}`, { method: "DELETE", headers: { "x-admin-actor": "Admin" } });
+      if (!res.ok) throw new Error();
+      setPosts((prev) => prev.filter((p) => p.id !== id));
+      toast.success(tr ? "Yazı silindi." : "Post deleted.");
+    } catch {
+      toast.error(tr ? "Silinemedi." : "Delete failed.");
+    }
+  };
+
   const published = posts.filter((p) => p.status === "published").length;
   const drafts = posts.filter((p) => p.status === "draft").length;
 
@@ -46,105 +107,142 @@ export default function AdminBlogPage() {
           <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">{tr ? "Blog Yönetimi" : "Blog Management"}</h1>
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{tr ? "İçerik üretimi, yayın takvimi ve blog performansını yönetin." : "Manage content creation, publishing calendar and blog performance."}</p>
         </div>
-        <div className="flex items-center gap-2">
-          <button className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200">
-            {tr ? "İçerik Takvimi" : "Content Calendar"}
-          </button>
-          <button className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90">{tr ? "Yeni Yazı" : "New Post"}</button>
-        </div>
+        <button className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90" onClick={() => setShowModal(true)}>
+          {tr ? "Yeni Yazı" : "New Post"}
+        </button>
       </div>
 
-      <div className="mb-6 grid gap-4 md:grid-cols-4">
+      <div className="mb-6 grid gap-4 md:grid-cols-3">
         <Card label={tr ? "Toplam Yazı" : "Total Posts"} value={posts.length.toString()} />
         <Card label={tr ? "Yayında" : "Published"} value={published.toString()} />
         <Card label={tr ? "Taslak" : "Draft"} value={drafts.toString()} />
-        <Card label={tr ? "Aylık Okunma" : "Monthly Views"} value="—" />
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-[1.4fr_1fr]">
-        <section className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
-          {loading ? (
-            <div className="flex items-center justify-center p-8 text-slate-500">{tr ? "Yükleniyor..." : "Loading..."}</div>
-          ) : (
-            <table className="w-full text-left">
-              <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500 dark:bg-slate-800/50">
-                <tr>
-                  <th className="px-4 py-3">{tr ? "Yazı" : "Post"}</th>
-                  <th className="px-4 py-3">{tr ? "Yazar" : "Author"}</th>
-                  <th className="px-4 py-3">{tr ? "Durum" : "Status"}</th>
-                  <th className="px-4 py-3">{tr ? "Yayın" : "Publish"}</th>
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+        {loading ? (
+          <div className="flex items-center justify-center p-10 text-slate-500">{tr ? "Yükleniyor..." : "Loading..."}</div>
+        ) : posts.length === 0 ? (
+          <div className="flex flex-col items-center justify-center p-10 text-slate-500 gap-2">
+            <p>{tr ? "Henüz blog yazısı yok." : "No blog posts yet."}</p>
+            <button className="mt-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90" onClick={() => setShowModal(true)}>
+              {tr ? "İlk Yazıyı Oluştur" : "Create First Post"}
+            </button>
+          </div>
+        ) : (
+          <table className="w-full text-left">
+            <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500 dark:bg-slate-800/50">
+              <tr>
+                <th className="px-4 py-3">{tr ? "Yazı" : "Post"}</th>
+                <th className="px-4 py-3">{tr ? "Yazar" : "Author"}</th>
+                <th className="px-4 py-3">{tr ? "Durum" : "Status"}</th>
+                <th className="px-4 py-3">{tr ? "Tarih" : "Date"}</th>
+                <th className="px-4 py-3"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {posts.map((post) => (
+                <tr key={post.id} className="border-t border-slate-100 dark:border-slate-800">
+                  <td className="px-4 py-3">
+                    <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{post.title}</p>
+                    <p className="text-xs text-slate-500">{post.slug}</p>
+                  </td>
+                  <td className="px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{post.author}</td>
+                  <td className="px-4 py-3">
+                    <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${post.status === "published" ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300"}`}>
+                      {tr ? (post.status === "published" ? "yayında" : "taslak") : post.status}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3 text-sm text-slate-500">{post.publishedAt ? new Date(post.publishedAt).toLocaleDateString(tr ? "tr-TR" : "en-US") : "—"}</td>
+                  <td className="px-4 py-3">
+                    <button className="rounded-lg border border-red-200 px-3 py-1 text-xs font-semibold text-red-600 hover:bg-red-50" onClick={() => handleDelete(post.id)}>
+                      {tr ? "Sil" : "Delete"}
+                    </button>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {posts.map((post) => (
-                  <tr key={post.id} className="border-t border-slate-100 dark:border-slate-800">
-                    <td className="px-4 py-3">
-                      <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{post.title}</p>
-                      <p className="text-xs text-slate-500">{post.slug}</p>
-                    </td>
-                    <td className="px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{post.author}</td>
-                    <td className="px-4 py-3">
-                      <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
-                        {tr ? (post.status === "published" ? "yayında" : post.status === "scheduled" ? "planlandı" : "taslak") : post.status}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 text-sm text-slate-500">{post.publishedAt ?? "-"}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </section>
-
-        <aside className="space-y-6">
-          <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-            <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">{tr ? "Kategori Dağılımı" : "Category Split"}</h2>
-            <div className="mt-4 space-y-3 text-sm">
-              <Row label="SEO" value="—" />
-              <Row label={tr ? "Pazarlama" : "Marketing"} value="—" />
-              <Row label={tr ? "Büyüme" : "Growth"} value="—" />
-              <Row label={tr ? "Ürün" : "Product"} value="—" />
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-            <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">{tr ? "Editoryal Hızlı Aksiyonlar" : "Editorial Quick Actions"}</h2>
-            <div className="mt-4 space-y-2">
-              <button className="w-full rounded-lg border border-slate-200 px-3 py-2 text-left text-sm hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800">
-                {tr ? "En çok trafik alan 10 yazıyı güncelle" : "Refresh top-traffic 10 posts"}
-              </button>
-              <button className="w-full rounded-lg border border-slate-200 px-3 py-2 text-left text-sm hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800">
-                {tr ? "Düşük CTR başlıkları yeniden yaz" : "Rewrite low-CTR headlines"}
-              </button>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-            <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">{tr ? "Dağıtım Kanalları" : "Distribution Channels"}</h2>
-            <div className="mt-3 space-y-2 text-sm">
-              <ChannelRow name="Website Blog" cadence={tr ? "Günlük" : "Daily"} health="healthy" tr={tr} />
-              <ChannelRow name="Email Digest" cadence={tr ? "Haftalık" : "Weekly"} health="healthy" tr={tr} />
-              <ChannelRow name="X / Twitter" cadence={tr ? "Günlük" : "Daily"} health="needs-update" tr={tr} />
-              <ChannelRow name="LinkedIn" cadence={tr ? "İki haftada bir" : "Bi-weekly"} health="healthy" tr={tr} />
-            </div>
-          </div>
-        </aside>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
 
-      <section className="mt-6 rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-        <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">{tr ? "Editoryal İş Akışı Panosu" : "Editorial Workflow Board"}</h2>
-          <button className="rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-semibold hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800">
-            {tr ? "Hikaye Ekle" : "Add Story"}
-          </button>
+      {/* New Post Modal */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="w-full max-w-3xl rounded-xl bg-white p-6 shadow-xl dark:bg-slate-900">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">{tr ? "Yeni Blog Yazısı" : "New Blog Post"}</h2>
+              <button className="text-slate-400 hover:text-slate-600" onClick={() => setShowModal(false)}>✕</button>
+            </div>
+            <form onSubmit={handleCreate} className="space-y-3">
+              <input
+                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800"
+                placeholder={tr ? "Başlık *" : "Title *"}
+                value={form.title}
+                onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
+                required
+              />
+              <input
+                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800"
+                placeholder={tr ? "Yazar *" : "Author *"}
+                value={form.author}
+                onChange={(e) => setForm((f) => ({ ...f, author: e.target.value }))}
+                required
+              />
+              <input
+                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800"
+                placeholder={tr ? "Özet" : "Excerpt"}
+                value={form.excerpt}
+                onChange={(e) => setForm((f) => ({ ...f, excerpt: e.target.value }))}
+              />
+              <input
+                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800"
+                placeholder="Cover image URL"
+                value={form.cover}
+                onChange={(e) => setForm((f) => ({ ...f, cover: e.target.value }))}
+              />
+              <select
+                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800"
+                value={form.category}
+                onChange={(e) => setForm((f) => ({ ...f, category: e.target.value as "SEO" | "Marketing" | "Growth" | "Product" }))}
+              >
+                <option value="SEO">SEO</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Growth">Growth</option>
+                <option value="Product">Product</option>
+              </select>
+              <input
+                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800"
+                placeholder="e.g. 5 min"
+                value={form.readTime}
+                onChange={(e) => setForm((f) => ({ ...f, readTime: e.target.value }))}
+              />
+              <div data-color-mode="light">
+                <MDEditor
+                  value={form.content}
+                  onChange={(val) => setForm((f) => ({ ...f, content: val ?? "" }))}
+                  height={300}
+                />
+              </div>
+              <select
+                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800"
+                value={form.status}
+                onChange={(e) => setForm((f) => ({ ...f, status: e.target.value as "draft" | "published" }))}
+              >
+                <option value="draft">{tr ? "Taslak" : "Draft"}</option>
+                <option value="published">{tr ? "Yayınla" : "Published"}</option>
+              </select>
+              <div className="flex gap-2 pt-2">
+                <button type="button" className="flex-1 rounded-lg border border-slate-200 py-2 text-sm font-semibold hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800" onClick={() => setShowModal(false)}>
+                  {tr ? "İptal" : "Cancel"}
+                </button>
+                <button type="submit" disabled={saving} className="flex-1 rounded-lg bg-primary py-2 text-sm font-semibold text-white hover:bg-primary/90 disabled:opacity-50">
+                  {saving ? (tr ? "Kaydediliyor..." : "Saving...") : (tr ? "Kaydet" : "Save")}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div className="grid gap-3 lg:grid-cols-4">
-          <WorkflowColumn title={tr ? "Fikirler" : "Ideas"} items={tr ? ["OpenCart checkout UX analizi", "En sık 10 XML feed hatası"] : ["OpenCart checkout UX teardown", "Top 10 XML feed mistakes"]} />
-          <WorkflowColumn title={tr ? "Taslak" : "Drafting"} items={tr ? ["Eklenti fiyatlandırma strateji rehberi", "Satıcı elde tutma playbook'u"] : ["Plugin pricing strategy guide", "Merchant retention playbook"]} />
-          <WorkflowColumn title={tr ? "İnceleme" : "Review"} items={tr ? ["SEO Checklist 2026 güncellemesi"] : ["SEO Checklist 2026 update"]} />
-          <WorkflowColumn title={tr ? "Planlandı" : "Scheduled"} items={tr ? ["Module Bundles dönüşüm yazısı"] : ["Module Bundles conversion post"]} />
-        </div>
-      </section>
+      )}
     </div>
   );
 }
@@ -154,41 +252,6 @@ function Card({ label, value }: { label: string; value: string }) {
     <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
       <p className="text-sm text-slate-500 dark:text-slate-400">{label}</p>
       <p className="mt-2 text-2xl font-bold text-slate-900 dark:text-slate-100">{value}</p>
-    </div>
-  );
-}
-
-function Row({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex items-center justify-between border-b border-slate-100 pb-2 dark:border-slate-800">
-      <span className="text-slate-600 dark:text-slate-300">{label}</span>
-      <span className="font-semibold text-slate-900 dark:text-slate-100">{value}</span>
-    </div>
-  );
-}
-
-function ChannelRow({ name, cadence, health, tr }: { name: string; cadence: string; health: "healthy" | "needs-update"; tr: boolean }) {
-  const tone = health === "healthy" ? "text-emerald-600" : "text-amber-600";
-  return (
-    <div className="flex items-center justify-between rounded-lg border border-slate-100 px-3 py-2 dark:border-slate-800">
-      <div>
-        <p className="text-sm font-medium text-slate-900 dark:text-slate-100">{name}</p>
-        <p className="text-xs text-slate-500">{cadence}</p>
-      </div>
-      <span className={`text-xs font-semibold ${tone}`}>{tr ? (health === "healthy" ? "sağlıklı" : "güncelleme gerekli") : health}</span>
-    </div>
-  );
-}
-
-function WorkflowColumn({ title, items }: { title: string; items: string[] }) {
-  return (
-    <div className="rounded-lg border border-slate-100 p-3 dark:border-slate-800">
-      <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">{title}</p>
-      <div className="mt-2 space-y-2">
-        {items.map((item) => (
-          <p key={item} className="rounded-md bg-slate-50 px-2.5 py-2 text-sm text-slate-700 dark:bg-slate-800 dark:text-slate-300">{item}</p>
-        ))}
-      </div>
     </div>
   );
 }

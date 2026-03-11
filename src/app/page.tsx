@@ -48,7 +48,7 @@ export default async function Home() {
                 <div className="w-8 h-8 rounded-full bg-slate-300 border-2 border-background"></div>
                 <div className="w-8 h-8 rounded-full bg-slate-400 border-2 border-background"></div>
               </div>
-              <p><span className="font-semibold text-slate-900 dark:text-white">5,000+</span> geliştirici tarafından güveniliyor</p>
+              <p><span className="font-semibold text-slate-900 dark:text-white">Çok sayıda</span> geliştirici tarafından güveniliyor</p>
             </div>
           </div>
           <div className="flex-1 w-full max-w-xl lg:max-w-none relative">
@@ -136,7 +136,7 @@ export default async function Home() {
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-indigo-400">En Büyük</span> OpenCart Pazaryerinde Satın
               </h2>
               <p className="text-lg lg:text-xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
-                Aylık 10.000+ aktif mağaza sahibine ulaşın, ürünlerinizi güvenle satın ve düzenli gelir elde edin.
+                Binlerce aktif mağaza sahibine ulaşın, ürünlerinizi güvenle satın ve düzenli gelir elde edin.
               </p>
               <ul className="flex flex-col gap-4 mt-2">
                 {[
@@ -188,7 +188,7 @@ export default async function Home() {
                     <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-border">
                       <p className="text-xs text-slate-500 font-medium mb-1">Aylık Kazanç</p>
                       <p className="text-2xl font-bold flex items-baseline gap-2 text-slate-900 dark:text-white">
-                        ₺12,450
+                        ₺---
                         <span className="text-xs font-semibold text-emerald-500 flex items-center">
                           <span className="material-symbols-outlined text-[14px]">trending_up</span>
                           14%
@@ -198,7 +198,7 @@ export default async function Home() {
                     <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-border">
                       <p className="text-xs text-slate-500 font-medium mb-1">Aktif Üyeler</p>
                       <p className="text-2xl font-bold flex items-baseline gap-2 text-slate-900 dark:text-white">
-                        342
+                        ---
                         <span className="text-xs font-semibold text-emerald-500 flex items-center">
                           <span className="material-symbols-outlined text-[14px]">trending_up</span>
                           8%

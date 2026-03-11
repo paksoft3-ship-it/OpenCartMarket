@@ -67,28 +67,10 @@ export default async function BrowsePage({
                         </div>
                     )}
 
-                    {/* Pagination */}
                     {products.length > 0 && (
-                        <div className="mt-12 flex items-center justify-between border-t border-slate-200 dark:border-slate-700 pt-6">
-                            <div className="hidden sm:block text-sm text-slate-500 dark:text-slate-400">
-                                Toplam <span className="font-medium text-slate-900 dark:text-white">{Math.max(products.length, 1240)}</span> sonuçtan <span className="font-medium text-slate-900 dark:text-white">1</span>-<span className="font-medium text-slate-900 dark:text-white">{Math.min(12, products.length)}</span> arası gösteriliyor
-                            </div>
-                            <div className="flex flex-1 sm:flex-none justify-between sm:justify-end gap-2">
-                                <button className="relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg text-slate-400 bg-slate-50 border border-slate-200 cursor-not-allowed dark:bg-slate-800 dark:border-slate-700" disabled>
-                                    Önceki
-                                </button>
-                                <div className="hidden sm:flex items-center gap-1">
-                                    <button className="relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg bg-primary text-white border border-primary shadow-sm">1</button>
-                                    <button className="relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg text-slate-600 bg-white border border-slate-200 hover:bg-slate-50 hover:text-primary dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700">2</button>
-                                    <button className="relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg text-slate-600 bg-white border border-slate-200 hover:bg-slate-50 hover:text-primary dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700">3</button>
-                                    <span className="px-2 text-slate-500">...</span>
-                                    <button className="relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg text-slate-600 bg-white border border-slate-200 hover:bg-slate-50 hover:text-primary dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700">104</button>
-                                </div>
-                                <button className="relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg text-slate-600 bg-white border border-slate-200 hover:bg-slate-50 hover:text-primary transition-colors dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700">
-                                    Sonraki
-                                </button>
-                            </div>
-                        </div>
+                        <p className="mt-8 text-center text-sm text-slate-500">
+                            {products.length} ürün bulundu
+                        </p>
                     )}
                 </div>
             </main>

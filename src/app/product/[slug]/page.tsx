@@ -40,13 +40,19 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
                 {/* Hero Image Preview */}
                 <div className="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm bg-white dark:bg-slate-900 aspect-[16/10] relative group">
-                    <Image
-                        src={product.images[0] || "https://picsum.photos/seed/placeholder/800/600"}
-                        alt={product.name}
-                        fill
-                        className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                        priority
-                    />
+                    {product.images && product.images.length > 0 ? (
+                        <Image
+                            src={product.images[0]}
+                            alt={product.name}
+                            fill
+                            className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                            priority
+                        />
+                    ) : (
+                        <div className="w-full h-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                            <span className="material-symbols-outlined text-4xl text-slate-400">image</span>
+                        </div>
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-8">
                         <button className="bg-white/90 backdrop-blur-sm text-slate-900 hover:bg-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg transition-all transform translate-y-4 group-hover:translate-y-0">
                             <span className="material-symbols-outlined">visibility</span>
@@ -165,7 +171,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                                 </li>
                                 <li className="flex justify-between items-center">
                                     <span className="text-slate-500 dark:text-slate-400">Lisans:</span>
-                                    <span className="font-medium text-slate-900 dark:text-slate-100">Tek Site (Standard)</span>
+                                    <span className="font-medium text-slate-900 dark:text-slate-100">{product.license || "Tek Site (Standard)"}</span>
                                 </li>
                                 <li className="flex justify-between items-center">
                                     <span className="text-slate-500 dark:text-slate-400">Yazar:</span>

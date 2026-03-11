@@ -16,13 +16,6 @@ const productSlots = [
   { type: "marketing", label: "Marketing & SEO", icon: "trending_up", color: "from-pink-500 to-rose-500" },
 ];
 
-const pipeline = [
-  { label: "Concept", count: 24, note: "Yeni fikirler ve brief'ler" },
-  { label: "In Build", count: 13, note: "Geliştirme aşamasında" },
-  { label: "QA Review", count: 9, note: "Test ve kalite kontrol" },
-  { label: "Launch Ready", count: 7, note: "Yayın bekliyor" },
-];
-
 export default function AdminProductsPage() {
   const language = useAdminLanguage();
   const tr = language === "tr";
@@ -30,6 +23,8 @@ export default function AdminProductsPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
+  const [editProduct, setEditProduct] = useState<Product | null>(null);
+  const [editSaving, setEditSaving] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -97,17 +92,6 @@ export default function AdminProductsPage() {
     return map[label] ?? label;
   };
 
-  const pipelineLabel = (label: string) => {
-    if (!tr) return label;
-    const map: Record<string, string> = {
-      Concept: "Konsept",
-      "In Build": "Geliştirme",
-      "QA Review": "QA İnceleme",
-      "Launch Ready": "Yayına Hazır",
-    };
-    return map[label] ?? label;
-  };
-
   const handleAddProduct = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -170,6 +154,35 @@ export default function AdminProductsPage() {
       .catch(() => {
         toast.error(tr ? "Ürün eklenemedi." : "Failed to add product.");
       });
+  };
+
+  const handleEditProduct = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!editProduct) return;
+    setEditSaving(true);
+    const formData = new FormData(event.currentTarget);
+    const patch = {
+      name: (formData.get("name") as string).trim(),
+      price: Number(formData.get("price")),
+      shortDescription: (formData.get("shortDescription") as string).trim(),
+      categoryId: formData.get("categoryId") as string,
+    };
+    try {
+      const res = await fetch(`/api/admin/products/${editProduct.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", "x-admin-actor": "Admin UI" },
+        body: JSON.stringify(patch),
+      });
+      if (!res.ok) throw new Error();
+      const updated = await res.json() as Record<string, unknown>;
+      setProducts((prev) => prev.map((p) => p.id === editProduct.id ? { ...p, ...patch, updatedAt: String(updated.updatedAt ?? new Date().toISOString()) } : p));
+      setEditProduct(null);
+      toast.success(tr ? "Ürün güncellendi." : "Product updated.");
+    } catch {
+      toast.error(tr ? "Güncelleme başarısız." : "Update failed.");
+    } finally {
+      setEditSaving(false);
+    }
   };
 
   const deleteProduct = (id: string) => {
@@ -244,16 +257,6 @@ export default function AdminProductsPage() {
         ))}
       </div>
 
-      <div className="mb-6 grid gap-4 xl:grid-cols-4">
-        {pipeline.map((item) => (
-          <section key={item.label} className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">{pipelineLabel(item.label)}</p>
-            <p className="mt-2 text-3xl font-bold text-slate-900 dark:text-slate-100">{item.count}</p>
-            <p className="mt-1 text-xs text-slate-500">{item.note}</p>
-          </section>
-        ))}
-      </div>
-
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <input
           className="w-full max-w-sm rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-900"
@@ -305,7 +308,7 @@ export default function AdminProductsPage() {
               </div>
             </div>
             <div className="mt-4 flex gap-2">
-              <button className="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">
+              <button className="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800" onClick={() => setEditProduct(product)}>
                 {tr ? "Düzenle" : "Edit"}
               </button>
               <button className="rounded-lg border border-red-200 px-3 py-2 text-sm font-semibold text-red-600 hover:bg-red-50" onClick={() => deleteProduct(product.id)}>
@@ -315,6 +318,36 @@ export default function AdminProductsPage() {
           </article>
         ))}
       </div>
+
+      {/* Edit Product Modal */}
+      {editProduct && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="w-full max-w-lg rounded-xl bg-white p-6 shadow-xl dark:bg-slate-900">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">{tr ? "Ürünü Düzenle" : "Edit Product"}</h2>
+              <button className="text-slate-400 hover:text-slate-600" onClick={() => setEditProduct(null)}>✕</button>
+            </div>
+            <form className="space-y-3" onSubmit={handleEditProduct}>
+              <input className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800" name="name" defaultValue={editProduct.name} placeholder={tr ? "Ürün adı" : "Product name"} required />
+              <select className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800" name="categoryId" defaultValue={editProduct.categoryId}>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>{category.name}</option>
+                ))}
+              </select>
+              <input className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800" min="0" name="price" defaultValue={editProduct.price} placeholder={tr ? "Fiyat" : "Price"} required step="0.01" type="number" />
+              <input className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800" name="shortDescription" defaultValue={editProduct.shortDescription} placeholder={tr ? "Kısa açıklama" : "Short description"} required />
+              <div className="flex gap-2 pt-2">
+                <button type="button" className="flex-1 rounded-lg border border-slate-200 py-2 text-sm font-semibold hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800" onClick={() => setEditProduct(null)}>
+                  {tr ? "İptal" : "Cancel"}
+                </button>
+                <button type="submit" disabled={editSaving} className="flex-1 rounded-lg bg-primary py-2 text-sm font-semibold text-white hover:bg-primary/90 disabled:opacity-50">
+                  {editSaving ? (tr ? "Kaydediliyor..." : "Saving...") : (tr ? "Güncelle" : "Update")}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

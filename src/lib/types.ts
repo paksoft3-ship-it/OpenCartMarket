@@ -31,6 +31,7 @@ export interface Product {
     images: string[];
     features: string[];
     tags: string[];
+    license?: string;
     createdAt: string;
     updatedAt: string;
 }
