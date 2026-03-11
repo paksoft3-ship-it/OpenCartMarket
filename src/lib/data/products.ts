@@ -1,8 +1,43 @@
-import { Product } from '../types';
-import { readJsonFile } from './utils';
+import productsFallback from "@/data/products.json";
+import { fileRepository } from "@/lib/server/db/fileRepository";
+import { Product } from "../types";
+import { AdminProduct } from "@/lib/server/db/types";
+import { readJsonFile } from "./utils";
+
+function mapAdminProductToCatalog(admin: AdminProduct): Product {
+    const fallback = (productsFallback as Product[]).find((item) => item.slug === admin.slug || item.id === admin.id);
+    return {
+        id: admin.id,
+        slug: admin.slug,
+        name: admin.name,
+        shortDescription: admin.shortDescription,
+        description: admin.description,
+        price: admin.price,
+        rating: fallback?.rating ?? "4.8",
+        installs: fallback?.installs ?? 0,
+        categoryId: admin.categoryId,
+        developerId: admin.developerId,
+        compatibility: admin.compatibility,
+        images: admin.images.length > 0 ? admin.images : (fallback?.images ?? []),
+        features: admin.features,
+        tags: admin.tags,
+        createdAt: admin.createdAt,
+        updatedAt: admin.updatedAt,
+    };
+}
 
 export async function getProducts(): Promise<Product[]> {
-    return readJsonFile<Product[]>('products.json');
+    try {
+        const adminProducts = await fileRepository.listProducts();
+        if (adminProducts.length === 0) {
+            return readJsonFile<Product[]>("products.json");
+        }
+        return adminProducts
+            .filter((product) => product.status === "published")
+            .map(mapAdminProductToCatalog);
+    } catch {
+        return readJsonFile<Product[]>("products.json");
+    }
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {

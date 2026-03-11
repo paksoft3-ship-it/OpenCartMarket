@@ -1,24 +1,55 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { PayoutQueue, PayoutStatus } from "@/lib/data/adminOps";
+import { useEffect, useMemo, useState } from "react";
+import { toast } from "sonner";
+import { PayoutQueue, PayoutStatus } from "@/lib/server/db/opsTypes";
 import { useCan } from "@/components/admin/AdminAccessContext";
-import { useAdminOpsStore } from "@/lib/store/adminOpsStore";
 import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
+
+interface PayoutRequest {
+  id: string;
+  developer: string;
+  amount: number;
+  requestedAt: string;
+  method: string;
+  status: PayoutStatus;
+  queue: PayoutQueue;
+  reason: string;
+  fee: number;
+  retries: number;
+}
 
 export default function AdminPayoutsPage() {
   const language = useAdminLanguage();
   const tr = language === "tr";
   const canApprove = useCan("approve_payout");
   const canRunSettlement = useCan("run_settlement");
-  const payouts = useAdminOpsStore((state) => state.payouts);
-  const updatePayoutStatus = useAdminOpsStore((state) => state.updatePayoutStatus);
-  const retryPayout = useAdminOpsStore((state) => state.retryPayout);
+
+  const [payouts, setPayouts] = useState<PayoutRequest[]>([]);
+  const [loading, setLoading] = useState(true);
   const [queueFilter, setQueueFilter] = useState<PayoutQueue>("all");
   const [selectedId, setSelectedId] = useState(() => {
-    if (typeof window === "undefined") return payouts[0]?.id ?? "";
-    return new URLSearchParams(window.location.search).get("payoutId") ?? payouts[0]?.id ?? "";
+    if (typeof window === "undefined") return "";
+    return new URLSearchParams(window.location.search).get("payoutId") ?? "";
   });
+
+  const load = async () => {
+    try {
+      const res = await fetch("/api/admin/payouts");
+      if (res.ok) {
+        const { items } = await res.json();
+        setPayouts(items ?? []);
+        if (!selectedId && items?.length > 0) setSelectedId(items[0].id);
+      }
+    } catch {
+      toast.error(tr ? "Ödemeler yüklenemedi." : "Failed to load payouts.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { load(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const selected = payouts.find((item) => item.id === selectedId) ?? payouts[0];
 
   const filtered = useMemo(() => {
@@ -32,6 +63,38 @@ export default function AdminPayoutsPage() {
     return { pendingAmount, exceptionCount, fees };
   }, [payouts]);
 
+  const updateStatus = async (id: string, status: PayoutStatus) => {
+    try {
+      const res = await fetch(`/api/admin/payouts/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", "x-admin-actor": "Admin" },
+        body: JSON.stringify({ status }),
+      });
+      if (!res.ok) throw new Error();
+      const updated: PayoutRequest = await res.json();
+      setPayouts((prev) => prev.map((p) => p.id === id ? updated : p));
+      toast.success(tr ? "Ödeme durumu güncellendi." : "Payout status updated.");
+    } catch {
+      toast.error(tr ? "Güncelleme başarısız." : "Update failed.");
+    }
+  };
+
+  const retryPayout = async (id: string) => {
+    try {
+      const res = await fetch(`/api/admin/payouts/${id}/retry`, {
+        method: "POST",
+        headers: { "x-admin-actor": "Admin" },
+      });
+      if (!res.ok) throw new Error();
+      const updated: PayoutRequest = await res.json();
+      setPayouts((prev) => prev.map((p) => p.id === id ? updated : p));
+      toast.success(tr ? "Yeniden deneme başlatıldı." : "Retry initiated.");
+    } catch {
+      toast.error(tr ? "Yeniden deneme başarısız." : "Retry failed.");
+    }
+  };
+
+  if (loading) return <div className="flex-1 flex items-center justify-center text-slate-500">{tr ? "Yükleniyor..." : "Loading..."}</div>;
   if (!selected) return null;
 
   return (
@@ -47,7 +110,7 @@ export default function AdminPayoutsPage() {
       </div>
 
       <div className="mb-6 grid gap-4 md:grid-cols-4">
-        <Kpi label="Bekleyen Tutar" value={`₺${metrics.pendingAmount.toLocaleString()}`} />
+        <Kpi label={tr ? "Bekleyen Tutar" : "Pending Amount"} value={`₺${metrics.pendingAmount.toLocaleString()}`} />
         <Kpi label={tr ? "İstisna Kuyruğu" : "Exception Queue"} value={metrics.exceptionCount.toString()} />
         <Kpi label={tr ? "Toplam İşlem Ücreti" : "Total Processing Fee"} value={`₺${metrics.fees.toLocaleString()}`} />
         <Kpi label={tr ? "Otomatik Mutabakat Oranı" : "Auto Settlement Ratio"} value="71%" />
@@ -65,11 +128,11 @@ export default function AdminPayoutsPage() {
           <table className="w-full text-left">
             <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500 dark:bg-slate-800/50">
               <tr>
-                <th className="px-4 py-3">Talep</th>
-                <th className="px-4 py-3">Geliştirici</th>
-                <th className="px-4 py-3">Tutar</th>
+                <th className="px-4 py-3">{tr ? "Talep" : "Request"}</th>
+                <th className="px-4 py-3">{tr ? "Geliştirici" : "Developer"}</th>
+                <th className="px-4 py-3">{tr ? "Tutar" : "Amount"}</th>
                 <th className="px-4 py-3">{tr ? "Kuyruk" : "Queue"}</th>
-                <th className="px-4 py-3">Durum</th>
+                <th className="px-4 py-3">{tr ? "Durum" : "Status"}</th>
                 <th className="px-4 py-3">{tr ? "Yeniden Deneme" : "Retry"}</th>
               </tr>
             </thead>
@@ -110,7 +173,7 @@ export default function AdminPayoutsPage() {
                 disabled={!canApprove}
                 onClick={() => {
                   if (!window.confirm(tr ? `${selected.id} ödemesi yeniden denensin mi?` : `Retry payout ${selected.id}?`)) return;
-                  retryPayout(selected.id, "Admin");
+                  retryPayout(selected.id);
                 }}
               >
                 {tr ? "Yeniden Dene" : "Retry"}
@@ -120,7 +183,7 @@ export default function AdminPayoutsPage() {
                 disabled={!canApprove}
                 onClick={() => {
                   if (!window.confirm(tr ? `${selected.id} ödemesi onaylansın mı?` : `Approve payout ${selected.id}?`)) return;
-                  updatePayoutStatus(selected.id, "Onaylandı", "Admin");
+                  updateStatus(selected.id, "Onaylandı");
                 }}
               >
                 {tr ? "Onayla" : "Approve"}

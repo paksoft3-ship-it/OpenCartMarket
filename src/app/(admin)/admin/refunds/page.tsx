@@ -1,40 +1,87 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { RefundRisk, RefundStatus } from "@/lib/data/adminOps";
+import { useEffect, useMemo, useState } from "react";
+import { toast } from "sonner";
 import { useCan } from "@/components/admin/AdminAccessContext";
-import { useAdminOpsStore } from "@/lib/store/adminOpsStore";
 import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
+
+type RefundStatus = "pending" | "review" | "approved" | "rejected";
+type RefundRisk = "low" | "medium" | "high";
+
+interface RefundCase {
+  id: string;
+  order: string;
+  customer: string;
+  customerEmail: string;
+  amount: number;
+  reason: string;
+  status: RefundStatus;
+  risk: RefundRisk;
+  previousRefunds: number;
+  hoursOpen: number;
+}
 
 export default function AdminRefundsPage() {
   const tr = useAdminLanguage() === "tr";
   const canApprove = useCan("approve_refund");
-  const refunds = useAdminOpsStore((state) => state.refunds);
-  const updateRefundStatus = useAdminOpsStore((state) => state.updateRefundStatus);
-  const [selectedId, setSelectedId] = useState(() => {
-    if (typeof window === "undefined") return refunds[0]?.id ?? "";
-    return new URLSearchParams(window.location.search).get("refundId") ?? refunds[0]?.id ?? "";
-  });
+
+  const [refunds, setRefunds] = useState<RefundCase[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedId, setSelectedId] = useState("");
   const [statusFilter, setStatusFilter] = useState<RefundStatus | "all">("all");
   const [riskFilter, setRiskFilter] = useState<RefundRisk | "all">("all");
-  const selected = refunds.find((item) => item.id === selectedId) ?? refunds[0];
+
+  const load = async () => {
+    try {
+      const res = await fetch("/api/admin/refunds");
+      if (res.ok) {
+        const { items } = await res.json();
+        setRefunds(items ?? []);
+        if (!selectedId && items?.length > 0) setSelectedId(items[0].id);
+      }
+    } catch {
+      toast.error("Failed to load refunds");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { load(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const selected = refunds.find((r) => r.id === selectedId) ?? refunds[0];
 
   const filtered = useMemo(() => {
-    return refunds.filter((item) => {
-      const matchStatus = statusFilter === "all" || item.status === statusFilter;
-      const matchRisk = riskFilter === "all" || item.risk === riskFilter;
+    return refunds.filter((r) => {
+      const matchStatus = statusFilter === "all" || r.status === statusFilter;
+      const matchRisk = riskFilter === "all" || r.risk === riskFilter;
       return matchStatus && matchRisk;
     });
-  }, [refunds, riskFilter, statusFilter]);
+  }, [refunds, statusFilter, riskFilter]);
 
-  const stats = useMemo(() => {
-    const pending = refunds.filter((item) => item.status === "pending").length;
-    const review = refunds.filter((item) => item.status === "review").length;
-    const riskHigh = refunds.filter((item) => item.risk === "high").length;
-    const amount = refunds.reduce((sum, item) => sum + item.amount, 0);
-    return { pending, review, riskHigh, amount };
-  }, [refunds]);
+  const stats = useMemo(() => ({
+    pending: refunds.filter((r) => r.status === "pending").length,
+    review: refunds.filter((r) => r.status === "review").length,
+    riskHigh: refunds.filter((r) => r.risk === "high").length,
+    amount: refunds.reduce((s, r) => s + r.amount, 0),
+  }), [refunds]);
 
+  const updateStatus = async (id: string, status: RefundStatus) => {
+    try {
+      const res = await fetch(`/api/admin/refunds/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", "x-admin-actor": "Admin" },
+        body: JSON.stringify({ status }),
+      });
+      if (!res.ok) throw new Error();
+      const updated: RefundCase = await res.json();
+      setRefunds((prev) => prev.map((r) => r.id === id ? updated : r));
+      toast.success(tr ? "İade durumu güncellendi." : "Refund status updated.");
+    } catch {
+      toast.error(tr ? "Güncelleme başarısız." : "Update failed.");
+    }
+  };
+
+  if (loading) return <div className="flex-1 flex items-center justify-center text-slate-500">{tr ? "Yükleniyor..." : "Loading..."}</div>;
   if (!selected) return null;
 
   return (
@@ -85,10 +132,7 @@ export default function AdminRefundsPage() {
             <tbody>
               {filtered.map((item) => (
                 <tr key={item.id} className="cursor-pointer border-t border-slate-100 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-800/50" onClick={() => setSelectedId(item.id)}>
-                  <td className="px-4 py-3">
-                    <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{item.id}</p>
-                    <p className="text-xs text-slate-500">{item.customer}</p>
-                  </td>
+                  <td className="px-4 py-3"><p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{item.id}</p><p className="text-xs text-slate-500">{item.customer}</p></td>
                   <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">{item.order}</td>
                   <td className="px-4 py-3 text-sm font-semibold text-slate-900 dark:text-slate-100">${item.amount.toFixed(2)}</td>
                   <td className="px-4 py-3"><Pill label={tr ? statusText(item.status) : item.status} tone="neutral" /></td>
@@ -112,26 +156,19 @@ export default function AdminRefundsPage() {
               <button
                 className="rounded-lg border border-red-200 px-4 py-2 text-sm font-semibold text-red-600 hover:bg-red-50 disabled:opacity-50"
                 disabled={!canApprove}
-                onClick={() => {
-                  if (!window.confirm(tr ? `${selected.id} reddedilsin mi?` : `Reject ${selected.id}?`)) return;
-                  updateRefundStatus(selected.id, "rejected", "Admin");
-                }}
+                onClick={() => { if (!window.confirm(tr ? `${selected.id} reddedilsin mi?` : `Reject ${selected.id}?`)) return; updateStatus(selected.id, "rejected"); }}
               >
                 {tr ? "Reddet" : "Reject"}
               </button>
               <button
                 className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90 disabled:opacity-50"
                 disabled={!canApprove}
-                onClick={() => {
-                  if (!window.confirm(tr ? `${selected.id} onaylansın mı?` : `Approve ${selected.id}?`)) return;
-                  updateRefundStatus(selected.id, "approved", "Admin");
-                }}
+                onClick={() => { if (!window.confirm(tr ? `${selected.id} onaylansın mı?` : `Approve ${selected.id}?`)) return; updateStatus(selected.id, "approved"); }}
               >
                 {tr ? "Onayla" : "Approve"}
               </button>
             </div>
           </div>
-
           <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
             <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">{tr ? "Karar Asistanı" : "Decision Assistant"}</h3>
             <ul className="mt-3 space-y-2 text-sm text-slate-600 dark:text-slate-300">
@@ -147,21 +184,12 @@ export default function AdminRefundsPage() {
 }
 
 function statusText(status: RefundStatus) {
-  const map: Record<RefundStatus, string> = {
-    pending: "beklemede",
-    review: "incelemede",
-    approved: "onaylandı",
-    rejected: "reddedildi",
-  };
+  const map: Record<RefundStatus, string> = { pending: "beklemede", review: "incelemede", approved: "onaylandı", rejected: "reddedildi" };
   return map[status];
 }
 
 function riskText(risk: RefundRisk) {
-  const map: Record<RefundRisk, string> = {
-    high: "yüksek",
-    medium: "orta",
-    low: "düşük",
-  };
+  const map: Record<RefundRisk, string> = { high: "yüksek", medium: "orta", low: "düşük" };
   return map[risk];
 }
 
@@ -178,22 +206,12 @@ function Filter({ active, label, onClick }: { active: boolean; label: string; on
   return (
     <button
       className={`rounded-full px-3 py-1.5 text-xs font-semibold ${active ? "bg-primary text-white" : "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"}`}
-      onClick={onClick}
-      type="button"
-    >
-      {label}
-    </button>
+      onClick={onClick} type="button"
+    >{label}</button>
   );
 }
 
 function Pill({ label, tone }: { label: string; tone: "low" | "medium" | "high" | "neutral" }) {
-  const styles =
-    tone === "high"
-      ? "bg-red-100 text-red-700"
-      : tone === "medium"
-      ? "bg-amber-100 text-amber-700"
-      : tone === "low"
-      ? "bg-emerald-100 text-emerald-700"
-      : "bg-primary/10 text-primary";
+  const styles = tone === "high" ? "bg-red-100 text-red-700" : tone === "medium" ? "bg-amber-100 text-amber-700" : tone === "low" ? "bg-emerald-100 text-emerald-700" : "bg-primary/10 text-primary";
   return <span className={`rounded-full px-2.5 py-1 text-xs font-semibold capitalize ${styles}`}>{label}</span>;
 }

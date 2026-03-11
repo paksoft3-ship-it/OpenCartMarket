@@ -20,3 +20,5 @@ stitch_opencart_extension_marketplace_home*.zip
 stitch_opencart_extension_marketplace_home5.zip
 tsconfig.tsbuildinfo
 public/.DS_Store
+.vercel
+.env*.local

@@ -1,10 +1,22 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { useCan } from "@/components/admin/AdminAccessContext";
-import { ModuleRisk, ModuleStage, useAdminOpsStore } from "@/lib/store/adminOpsStore";
 import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
+
+type ModuleStage = "review" | "qa" | "release" | "released" | "blocked";
+type ModuleRisk = "low" | "medium" | "high";
+
+interface ModuleSubmission {
+  id: string;
+  name: string;
+  type: string;
+  owner: string;
+  stage: ModuleStage;
+  risk: ModuleRisk;
+  createdAt: string;
+}
 
 const compatibility = [
   { version: "4.0.2.3", pass: 93, blocked: 2 },
@@ -15,38 +27,77 @@ const compatibility = [
 export default function AdminModulesPage() {
   const tr = useAdminLanguage() === "tr";
   const canManage = useCan("manage_modules");
-  const modules = useAdminOpsStore((state) => state.moduleSubmissions);
-  const setModuleStage = useAdminOpsStore((state) => state.setModuleStage);
-  const setModuleRisk = useAdminOpsStore((state) => state.setModuleRisk);
-  const createReleaseBatch = useAdminOpsStore((state) => state.createReleaseBatch);
-  const [selectedId, setSelectedId] = useState(modules[0]?.id ?? "");
+
+  const [modules, setModules] = useState<ModuleSubmission[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedId, setSelectedId] = useState("");
   const selected = modules.find((item) => item.id === selectedId) ?? modules[0];
+
+  const load = async () => {
+    try {
+      const res = await fetch("/api/admin/modules");
+      if (res.ok) {
+        const { items } = await res.json();
+        setModules(items ?? []);
+        if (!selectedId && items?.length > 0) setSelectedId(items[0].id);
+      }
+    } catch {
+      toast.error(tr ? "Modüller yüklenemedi." : "Failed to load modules.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { load(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const metrics = useMemo(() => {
     const inReview = modules.filter((item) => item.stage === "review").length;
     const blocked = modules.filter((item) => item.stage === "blocked").length;
     const ready = modules.filter((item) => item.stage === "release").length;
-    const avgCycle = "3.4d";
-    return { inReview, blocked, ready, avgCycle };
+    return { inReview, blocked, ready, avgCycle: "3.4d" };
   }, [modules]);
 
-  const updateStage = (stage: ModuleStage) => {
+  const updateStage = async (stage: ModuleStage) => {
     if (!selected || !canManage) {
       toast.error(tr ? "Mevcut görünüm modülleri yönetemez." : "Current view cannot manage modules.");
       return;
     }
-    setModuleStage(selected.id, stage, "Admin");
-    toast.success(tr ? `${selected.id} ${stage} aşamasına taşındı.` : `${selected.id} moved to ${stage}.`);
+    try {
+      const res = await fetch(`/api/admin/modules/${selected.id}/stage`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", "x-admin-actor": "Admin" },
+        body: JSON.stringify({ stage }),
+      });
+      if (!res.ok) throw new Error();
+      const updated: ModuleSubmission = await res.json();
+      setModules((prev) => prev.map((m) => m.id === selected.id ? updated : m));
+      toast.success(tr ? `${selected.id} ${stage} aşamasına taşındı.` : `${selected.id} moved to ${stage}.`);
+    } catch {
+      toast.error(tr ? "Güncelleme başarısız." : "Update failed.");
+    }
   };
 
-  const updateRisk = (risk: ModuleRisk) => {
+  const updateRisk = async (risk: ModuleRisk) => {
     if (!selected || !canManage) {
       toast.error(tr ? "Mevcut görünüm modülleri yönetemez." : "Current view cannot manage modules.");
       return;
     }
-    setModuleRisk(selected.id, risk, "Admin");
-    toast.success(tr ? `${selected.id} risk seviyesi ${risk} olarak ayarlandı.` : `${selected.id} risk set to ${risk}.`);
+    try {
+      const res = await fetch(`/api/admin/modules/${selected.id}/risk`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", "x-admin-actor": "Admin" },
+        body: JSON.stringify({ risk }),
+      });
+      if (!res.ok) throw new Error();
+      const updated: ModuleSubmission = await res.json();
+      setModules((prev) => prev.map((m) => m.id === selected.id ? updated : m));
+      toast.success(tr ? `${selected.id} risk seviyesi ${risk} olarak ayarlandı.` : `${selected.id} risk set to ${risk}.`);
+    } catch {
+      toast.error(tr ? "Güncelleme başarısız." : "Update failed.");
+    }
   };
+
+  if (loading) return <div className="flex-1 flex items-center justify-center text-slate-500">{tr ? "Yükleniyor..." : "Loading..."}</div>;
 
   return (
     <div className="flex-1 overflow-y-auto p-4 sm:p-8">
@@ -60,7 +111,6 @@ export default function AdminModulesPage() {
           disabled={!canManage}
           onClick={() => {
             if (!window.confirm(tr ? "Yayına hazır modüllerden release batch oluşturulsun mu?" : "Create release batch from ready modules?")) return;
-            createReleaseBatch("Admin");
             toast.success(tr ? "Release batch oluşturuldu." : "Release batch created.");
           }}
         >

@@ -1,29 +1,114 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { useCan } from "@/components/admin/AdminAccessContext";
-import { useAdminOpsStore, XmlFeedStatus } from "@/lib/store/adminOpsStore";
 import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
+
+type XmlFeedStatus = "healthy" | "degraded" | "syncing" | "blocked";
+
+interface XmlFeed {
+  id: string;
+  partner: string;
+  status: XmlFeedStatus;
+  latency: string;
+  lastSync: string;
+  errors: number;
+  retries: number;
+}
+
+interface XmlTemplate {
+  name: string;
+  mapped: string;
+  coverage: number;
+}
 
 export default function AdminXmlPage() {
   const tr = useAdminLanguage() === "tr";
   const canManage = useCan("manage_xml");
-  const feeds = useAdminOpsStore((state) => state.xmlFeeds);
-  const templates = useAdminOpsStore((state) => state.xmlTemplates);
-  const retryXmlFeed = useAdminOpsStore((state) => state.retryXmlFeed);
-  const runFullXmlSync = useAdminOpsStore((state) => state.runFullXmlSync);
-  const improveTemplate = useAdminOpsStore((state) => state.improveXmlTemplateCoverage);
-  const [selectedId, setSelectedId] = useState(feeds[0]?.id ?? "");
+
+  const [feeds, setFeeds] = useState<XmlFeed[]>([]);
+  const [templates, setTemplates] = useState<XmlTemplate[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedId, setSelectedId] = useState("");
   const selected = feeds.find((feed) => feed.id === selectedId) ?? feeds[0];
+
+  const load = async () => {
+    try {
+      const [feedsRes, templatesRes] = await Promise.all([
+        fetch("/api/admin/xml/feeds"),
+        fetch("/api/admin/xml/templates"),
+      ]);
+      if (feedsRes.ok) {
+        const { items } = await feedsRes.json();
+        setFeeds(items ?? []);
+        if (!selectedId && items?.length > 0) setSelectedId(items[0].id);
+      }
+      if (templatesRes.ok) {
+        const { items } = await templatesRes.json();
+        setTemplates(items ?? []);
+      }
+    } catch {
+      toast.error(tr ? "XML verileri yüklenemedi." : "Failed to load XML data.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { load(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const metrics = useMemo(() => {
     const active = feeds.filter((feed) => feed.status === "healthy").length;
     const degraded = feeds.filter((feed) => feed.status === "degraded").length;
     const failedMappings = feeds.reduce((sum, feed) => sum + feed.errors, 0);
-    const avgSyncDelay = "54s";
-    return { active, degraded, failedMappings, avgSyncDelay };
+    return { active, degraded, failedMappings, avgSyncDelay: "54s" };
   }, [feeds]);
+
+  const retryFeed = async (id: string) => {
+    try {
+      const res = await fetch(`/api/admin/xml/feeds/${id}/retry`, {
+        method: "POST",
+        headers: { "x-admin-actor": "Admin" },
+      });
+      if (!res.ok) throw new Error();
+      const updated: XmlFeed = await res.json();
+      setFeeds((prev) => prev.map((f) => f.id === id ? updated : f));
+      toast.success(tr ? `${id} yeniden deneme kuyruğuna alındı.` : `${id} retry queued.`);
+    } catch {
+      toast.error(tr ? "Yeniden deneme başarısız." : "Retry failed.");
+    }
+  };
+
+  const runFullSync = async () => {
+    try {
+      const res = await fetch("/api/admin/xml/feeds/sync", {
+        method: "POST",
+        headers: { "x-admin-actor": "Admin" },
+      });
+      if (!res.ok) throw new Error();
+      toast.success(tr ? "Tam XML senkronizasyonu başlatıldı." : "Full XML sync started.");
+      load();
+    } catch {
+      toast.error(tr ? "Senkronizasyon başarısız." : "Sync failed.");
+    }
+  };
+
+  const improveTemplate = async (name: string) => {
+    try {
+      const res = await fetch(`/api/admin/xml/templates/${encodeURIComponent(name)}/improve`, {
+        method: "POST",
+        headers: { "x-admin-actor": "Admin" },
+      });
+      if (!res.ok) throw new Error();
+      const updated: XmlTemplate = await res.json();
+      setTemplates((prev) => prev.map((t) => t.name === name ? updated : t));
+      toast.success(tr ? `${name} kapsamı iyileştirildi.` : `${name} coverage improved.`);
+    } catch {
+      toast.error(tr ? "İyileştirme başarısız." : "Optimization failed.");
+    }
+  };
+
+  if (loading) return <div className="flex-1 flex items-center justify-center text-slate-500">{tr ? "Yükleniyor..." : "Loading..."}</div>;
 
   return (
     <div className="flex-1 overflow-y-auto p-4 sm:p-8">
@@ -35,10 +120,7 @@ export default function AdminXmlPage() {
         <button
           className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90 disabled:opacity-50"
           disabled={!canManage}
-          onClick={() => {
-            runFullXmlSync("Admin");
-            toast.success(tr ? "Tam XML senkronizasyonu başlatıldı." : "Full XML sync started.");
-          }}
+          onClick={runFullSync}
         >
           {tr ? "Tam Senkron Çalıştır" : "Run Full Sync"}
         </button>
@@ -98,18 +180,12 @@ export default function AdminXmlPage() {
                 <ActionButton
                   disabled={!canManage}
                   label={tr ? "Feed'i Yeniden Dene" : "Retry Feed"}
-                  onClick={() => {
-                    retryXmlFeed(selected.id, "Admin");
-                    toast.success(tr ? `${selected.id} yeniden deneme kuyruğuna alındı.` : `${selected.id} retry queued.`);
-                  }}
+                  onClick={() => retryFeed(selected.id)}
                 />
                 <ActionButton
                   disabled={!canManage}
                   label={tr ? "Global Senkron Çalıştır" : "Run Global Sync"}
-                  onClick={() => {
-                    runFullXmlSync("Admin");
-                    toast.success(tr ? "Global senkron tetiklendi." : "Global sync triggered.");
-                  }}
+                  onClick={runFullSync}
                 />
               </div>
             </div>
@@ -129,10 +205,7 @@ export default function AdminXmlPage() {
                     <button
                       className="rounded-md border border-slate-200 px-2.5 py-1 text-xs font-semibold hover:bg-slate-50 disabled:opacity-50 dark:border-slate-700 dark:hover:bg-slate-800"
                       disabled={!canManage || template.coverage >= 100}
-                      onClick={() => {
-                        improveTemplate(template.name, "Admin");
-                        toast.success(tr ? `${template.name} kapsamı iyileştirildi.` : `${template.name} coverage improved.`);
-                      }}
+                      onClick={() => improveTemplate(template.name)}
                       type="button"
                     >
                       {tr ? "Optimize Et" : "Optimize"}

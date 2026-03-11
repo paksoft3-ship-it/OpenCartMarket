@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import productsFallback from "@/data/products.json";
+import { useEffect, useMemo, useState } from "react";
 import categories from "@/data/categories.json";
 import { Product } from "@/lib/types";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -27,9 +26,49 @@ const pipeline = [
 export default function AdminProductsPage() {
   const language = useAdminLanguage();
   const tr = language === "tr";
-  const [products, setProducts] = useState<Product[]>(productsFallback as Product[]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
+
+  useEffect(() => {
+    let active = true;
+    const loadProducts = async () => {
+      try {
+        const response = await fetch("/api/admin/products", { cache: "no-store" });
+        if (!response.ok) throw new Error("Failed to load products");
+        const payload = await response.json() as { items: Array<Record<string, unknown>> };
+        if (!active) return;
+        const mapped = (payload.items ?? []).map((item) => ({
+          id: String(item.id),
+          slug: String(item.slug),
+          name: String(item.name),
+          shortDescription: String(item.shortDescription ?? ""),
+          description: String(item.description ?? ""),
+          price: Number(item.price ?? 0),
+          rating: "0.0",
+          installs: 0,
+          categoryId: String(item.categoryId),
+          developerId: String(item.developerId ?? "dev-1"),
+          compatibility: Array.isArray(item.compatibility) ? item.compatibility.map(String) : [],
+          images: Array.isArray(item.images) ? item.images.map(String) : [],
+          features: Array.isArray(item.features) ? item.features.map(String) : [],
+          tags: Array.isArray(item.tags) ? item.tags.map(String) : [],
+          createdAt: String(item.createdAt ?? new Date().toISOString()),
+          updatedAt: String(item.updatedAt ?? new Date().toISOString()),
+        })) as Product[];
+        setProducts(mapped);
+      } catch {
+        toast.error(tr ? "Ürünler yüklenemedi." : "Failed to load products.");
+      } finally {
+        if (active) setLoading(false);
+      }
+    };
+    loadProducts();
+    return () => {
+      active = false;
+    };
+  }, [tr]);
 
   const filtered = useMemo(() => {
     return products.filter((product) => {
@@ -81,32 +120,71 @@ export default function AdminProductsPage() {
       return;
     }
 
-    const newProduct: Product = {
-      id: `prod-${crypto.randomUUID().slice(0, 8)}`,
+    const payload = {
       slug: name.toLowerCase().replace(/\s+/g, "-"),
       name,
       shortDescription: (formData.get("shortDescription") as string) || "Yeni urun aciklamasi",
       description: "Yonetim panelinden detaylandirilacak urun icerigi.",
       price,
-      rating: "0.0",
-      installs: 0,
       categoryId,
       developerId: "dev-1",
       compatibility: ["4.0.2.3"],
       images: ["https://picsum.photos/seed/new-admin-product/800/600"],
       features: [],
       tags: [],
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+      version: "1.0.0",
+      status: "published",
     };
-
-    setProducts((prev) => [newProduct, ...prev]);
-    toast.success(tr ? "Ürün eklendi." : "Product added.");
+    fetch("/api/admin/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-admin-actor": "Admin UI",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(async (response) => {
+        if (!response.ok) throw new Error("Create failed");
+        const created = await response.json() as Record<string, unknown>;
+        const mapped: Product = {
+          id: String(created.id),
+          slug: String(created.slug),
+          name: String(created.name),
+          shortDescription: String(created.shortDescription ?? ""),
+          description: String(created.description ?? ""),
+          price: Number(created.price ?? 0),
+          rating: "0.0",
+          installs: 0,
+          categoryId: String(created.categoryId),
+          developerId: String(created.developerId ?? "dev-1"),
+          compatibility: Array.isArray(created.compatibility) ? created.compatibility.map(String) : [],
+          images: Array.isArray(created.images) ? created.images.map(String) : [],
+          features: Array.isArray(created.features) ? created.features.map(String) : [],
+          tags: Array.isArray(created.tags) ? created.tags.map(String) : [],
+          createdAt: String(created.createdAt ?? new Date().toISOString()),
+          updatedAt: String(created.updatedAt ?? new Date().toISOString()),
+        };
+        setProducts((prev) => [mapped, ...prev]);
+        toast.success(tr ? "Ürün eklendi." : "Product added.");
+      })
+      .catch(() => {
+        toast.error(tr ? "Ürün eklenemedi." : "Failed to add product.");
+      });
   };
 
   const deleteProduct = (id: string) => {
-    setProducts((prev) => prev.filter((product) => product.id !== id));
-    toast.success(tr ? "Ürün kaldırıldı." : "Product removed.");
+    fetch(`/api/admin/products/${id}`, {
+      method: "DELETE",
+      headers: { "x-admin-actor": "Admin UI" },
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Delete failed");
+        setProducts((prev) => prev.filter((product) => product.id !== id));
+        toast.success(tr ? "Ürün kaldırıldı." : "Product removed.");
+      })
+      .catch(() => {
+        toast.error(tr ? "Ürün silinemedi." : "Failed to delete product.");
+      });
   };
 
   return (
@@ -195,6 +273,11 @@ export default function AdminProductsPage() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {!loading && filtered.length === 0 && (
+          <article className="rounded-xl border border-dashed border-slate-300 bg-slate-50/60 p-8 text-sm text-slate-500 dark:border-slate-700 dark:bg-slate-900/40 dark:text-slate-400">
+            {tr ? "Filtreye uygun ürün bulunamadı." : "No products found for the selected filter."}
+          </article>
+        )}
         {filtered.slice(0, 12).map((product) => (
           <article key={product.id} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <div className="mb-3 flex items-start justify-between gap-3">

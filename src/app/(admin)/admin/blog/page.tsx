@@ -1,16 +1,43 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
 
-const posts = [
-  { id: "BLG-102", title: "OpenCart SEO Checklist 2026", author: "Marketplace Team", status: "published" as const, views: 4210, published: "28 Feb 2026" },
-  { id: "BLG-101", title: "Increase Conversion with Module Bundles", author: "Growth Desk", status: "scheduled" as const, views: 0, published: "10 Mar 2026" },
-  { id: "BLG-100", title: "Managing XML Integrations at Scale", author: "Tech Ops", status: "draft" as const, views: 0, published: "-" },
-];
+interface BlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  author: string;
+  status: "draft" | "published" | "scheduled";
+  publishedAt: string | null;
+  createdAt: string;
+}
 
 export default function AdminBlogPage() {
   const tr = useAdminLanguage() === "tr";
   const locale = tr ? "tr-TR" : "en-US";
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const load = async () => {
+    try {
+      const res = await fetch("/api/admin/blog");
+      if (res.ok) {
+        const { items } = await res.json();
+        setPosts(items ?? []);
+      }
+    } catch {
+      toast.error(tr ? "Blog yazıları yüklenemedi." : "Failed to load blog posts.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { load(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const published = posts.filter((p) => p.status === "published").length;
+  const drafts = posts.filter((p) => p.status === "draft").length;
 
   return (
     <div className="flex-1 overflow-y-auto p-4 sm:p-8">
@@ -28,53 +55,55 @@ export default function AdminBlogPage() {
       </div>
 
       <div className="mb-6 grid gap-4 md:grid-cols-4">
-        <Card label={tr ? "Toplam Yazı" : "Total Posts"} value="48" />
-        <Card label={tr ? "Yayında" : "Published"} value="37" />
-        <Card label={tr ? "Taslak" : "Draft"} value="8" />
-        <Card label={tr ? "Aylık Okunma" : "Monthly Views"} value="126K" />
+        <Card label={tr ? "Toplam Yazı" : "Total Posts"} value={posts.length.toString()} />
+        <Card label={tr ? "Yayında" : "Published"} value={published.toString()} />
+        <Card label={tr ? "Taslak" : "Draft"} value={drafts.toString()} />
+        <Card label={tr ? "Aylık Okunma" : "Monthly Views"} value="—" />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.4fr_1fr]">
         <section className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
-          <table className="w-full text-left">
-            <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500 dark:bg-slate-800/50">
-              <tr>
-                <th className="px-4 py-3">{tr ? "Yazı" : "Post"}</th>
-                <th className="px-4 py-3">{tr ? "Yazar" : "Author"}</th>
-                <th className="px-4 py-3">{tr ? "Durum" : "Status"}</th>
-                <th className="px-4 py-3">{tr ? "Görüntülenme" : "Views"}</th>
-                <th className="px-4 py-3">{tr ? "Yayın" : "Publish"}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {posts.map((post) => (
-                <tr key={post.id} className="border-t border-slate-100 dark:border-slate-800">
-                  <td className="px-4 py-3">
-                    <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{post.title}</p>
-                    <p className="text-xs text-slate-500">{post.id}</p>
-                  </td>
-                  <td className="px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{post.author}</td>
-                  <td className="px-4 py-3">
-                    <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
-                      {tr ? (post.status === "published" ? "yayında" : post.status === "scheduled" ? "planlandı" : "taslak") : post.status}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{post.views.toLocaleString(locale)}</td>
-                  <td className="px-4 py-3 text-sm text-slate-500">{post.published}</td>
+          {loading ? (
+            <div className="flex items-center justify-center p-8 text-slate-500">{tr ? "Yükleniyor..." : "Loading..."}</div>
+          ) : (
+            <table className="w-full text-left">
+              <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500 dark:bg-slate-800/50">
+                <tr>
+                  <th className="px-4 py-3">{tr ? "Yazı" : "Post"}</th>
+                  <th className="px-4 py-3">{tr ? "Yazar" : "Author"}</th>
+                  <th className="px-4 py-3">{tr ? "Durum" : "Status"}</th>
+                  <th className="px-4 py-3">{tr ? "Yayın" : "Publish"}</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {posts.map((post) => (
+                  <tr key={post.id} className="border-t border-slate-100 dark:border-slate-800">
+                    <td className="px-4 py-3">
+                      <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{post.title}</p>
+                      <p className="text-xs text-slate-500">{post.slug}</p>
+                    </td>
+                    <td className="px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{post.author}</td>
+                    <td className="px-4 py-3">
+                      <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
+                        {tr ? (post.status === "published" ? "yayında" : post.status === "scheduled" ? "planlandı" : "taslak") : post.status}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-sm text-slate-500">{post.publishedAt ?? "-"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </section>
 
         <aside className="space-y-6">
           <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
             <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">{tr ? "Kategori Dağılımı" : "Category Split"}</h2>
             <div className="mt-4 space-y-3 text-sm">
-              <Row label="SEO" value="14" />
-              <Row label={tr ? "Pazarlama" : "Marketing"} value="11" />
-              <Row label={tr ? "Büyüme" : "Growth"} value="9" />
-              <Row label={tr ? "Ürün" : "Product"} value="14" />
+              <Row label="SEO" value="—" />
+              <Row label={tr ? "Pazarlama" : "Marketing"} value="—" />
+              <Row label={tr ? "Büyüme" : "Growth"} value="—" />
+              <Row label={tr ? "Ürün" : "Product"} value="—" />
             </div>
           </div>
 

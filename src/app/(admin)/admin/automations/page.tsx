@@ -1,10 +1,25 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { useCan } from "@/components/admin/AdminAccessContext";
-import { useAdminOpsStore } from "@/lib/store/adminOpsStore";
 import { useAdminLanguage } from "@/components/admin/AdminLanguageContext";
+
+interface AutomationRule {
+  id: string;
+  name: string;
+  trigger: string;
+  action: string;
+  status: "active" | "paused";
+  runs: number;
+}
+
+interface AutomationLog {
+  id: string;
+  rule: string;
+  result: "success" | "skipped";
+  at: string;
+}
 
 export default function AdminAutomationsPage() {
   const tr = useAdminLanguage() === "tr";
@@ -12,59 +27,106 @@ export default function AdminAutomationsPage() {
   const canSimulate = useCan("simulate_automation");
   const canEdit = useCan("edit_automation");
 
-  const rules = useAdminOpsStore((state) => state.rules);
-  const logs = useAdminOpsStore((state) => state.automationLogs);
-  const createRule = useAdminOpsStore((state) => state.createRule);
-  const toggleRule = useAdminOpsStore((state) => state.toggleRule);
-  const deleteRule = useAdminOpsStore((state) => state.deleteRule);
-  const simulateRule = useAdminOpsStore((state) => state.simulateRule);
-  const [selectedId, setSelectedId] = useState("AUT-101");
+  const [rules, setRules] = useState<AutomationRule[]>([]);
+  const [logs, setLogs] = useState<AutomationLog[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedId, setSelectedId] = useState("");
   const [conditions, setConditions] = useState(["refund.amount > 100"]);
   const [actions, setActions] = useState(["require manager approval"]);
+
   const selected = useMemo(() => rules.find((rule) => rule.id === selectedId) ?? rules[0], [rules, selectedId]);
 
-  if (!selected) return null;
+  const load = async () => {
+    try {
+      const [rulesRes, logsRes] = await Promise.all([
+        fetch("/api/admin/automations"),
+        fetch("/api/admin/automations/logs"),
+      ]);
+      if (rulesRes.ok) {
+        const { items } = await rulesRes.json();
+        setRules(items ?? []);
+        if (!selectedId && items?.length > 0) setSelectedId(items[0].id);
+      }
+      if (logsRes.ok) {
+        const { items } = await logsRes.json();
+        setLogs(items ?? []);
+      }
+    } catch {
+      toast.error(tr ? "Otomasyon verileri yüklenemedi." : "Failed to load automations.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  const runSimulation = () => {
-    if (!canSimulate) {
+  useEffect(() => { load(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const runSimulation = async () => {
+    if (!canSimulate || !selected) {
       toast.error(tr ? "Mevcut görünüm kuralları simüle edemez." : "Current view cannot simulate rules.");
       return;
     }
-    if (!selected) return;
-    simulateRule(selected.id, selected.status === "active" ? "success" : "skipped", "Admin");
-    toast.success(tr ? `${selected.id} için simülasyon tamamlandı.` : `Simulation completed for ${selected.id}`);
+    try {
+      const res = await fetch(`/api/admin/automations/${selected.id}/simulate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-admin-actor": "Admin" },
+        body: JSON.stringify({ result: selected.status === "active" ? "success" : "skipped" }),
+      });
+      if (!res.ok) throw new Error();
+      toast.success(tr ? `${selected.id} için simülasyon tamamlandı.` : `Simulation completed for ${selected.id}`);
+      load();
+    } catch {
+      toast.error(tr ? "Simülasyon başarısız." : "Simulation failed.");
+    }
   };
 
-  const addRuleFromBuilder = () => {
+  const addRuleFromBuilder = async () => {
     if (!canCreate) {
       toast.error(tr ? "Mevcut görünüm otomasyon kuralı oluşturamaz." : "Current view cannot create automation rules.");
       return;
     }
     if (!window.confirm(tr ? "Mevcut kural oluşturucu bloklarından yeni bir kural oluşturulsun mu?" : "Create a new rule from current builder blocks?")) return;
-    const newRule = {
-      id: `AUT-${Math.floor(110 + Math.random() * 900)}`,
-      name: `Custom Rule ${rules.length + 1}`,
-      trigger: conditions.join(" AND "),
-      action: actions.join(" + "),
-      status: "active" as const,
-      runs: 0,
-    };
-    createRule(newRule, "Admin");
-    setSelectedId(newRule.id);
-    toast.success(tr ? "Kural oluşturucudan yeni kural eklendi." : "Rule created from builder.");
+    try {
+      const res = await fetch("/api/admin/automations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-admin-actor": "Admin" },
+        body: JSON.stringify({
+          name: `Custom Rule ${rules.length + 1}`,
+          trigger: conditions.join(" AND "),
+          action: actions.join(" + "),
+          status: "active",
+        }),
+      });
+      if (!res.ok) throw new Error();
+      const created: AutomationRule = await res.json();
+      setRules((prev) => [...prev, created]);
+      setSelectedId(created.id);
+      toast.success(tr ? "Kural oluşturucudan yeni kural eklendi." : "Rule created from builder.");
+    } catch {
+      toast.error(tr ? "Kural oluşturulamadı." : "Failed to create rule.");
+    }
   };
 
-  const toggleSelectedRule = () => {
+  const toggleSelectedRule = async () => {
     if (!canEdit || !selected) {
       toast.error(tr ? "Mevcut görünüm kuralları düzenleyemez." : "Current view cannot edit rules.");
       return;
     }
     if (!window.confirm(tr ? `${selected.id} kural durumu değiştirilsin mi?` : `Toggle status for ${selected.id}?`)) return;
-    toggleRule(selected.id, "Admin");
-    toast.success(tr ? "Kural durumu güncellendi." : "Rule status updated.");
+    try {
+      const res = await fetch(`/api/admin/automations/${selected.id}/toggle`, {
+        method: "POST",
+        headers: { "x-admin-actor": "Admin" },
+      });
+      if (!res.ok) throw new Error();
+      const updated: AutomationRule = await res.json();
+      setRules((prev) => prev.map((r) => r.id === selected.id ? updated : r));
+      toast.success(tr ? "Kural durumu güncellendi." : "Rule status updated.");
+    } catch {
+      toast.error(tr ? "Güncelleme başarısız." : "Update failed.");
+    }
   };
 
-  const deleteSelectedRule = () => {
+  const deleteSelectedRule = async () => {
     if (!canEdit || !selected) {
       toast.error(tr ? "Mevcut görünüm kural silemez." : "Current view cannot delete rules.");
       return;
@@ -74,11 +136,23 @@ export default function AdminAutomationsPage() {
       return;
     }
     if (!window.confirm(tr ? `${selected.id} silinsin mi? Bu işlem denetimden geri alınabilir.` : `Delete ${selected.id}? This can be undone from Audit.`)) return;
-    const next = rules.filter((rule) => rule.id !== selected.id);
-    deleteRule(selected.id, "Admin");
-    setSelectedId(next[0]?.id ?? "AUT-101");
-    toast.success(tr ? "Kural silindi." : "Rule deleted.");
+    try {
+      const res = await fetch(`/api/admin/automations/${selected.id}`, {
+        method: "DELETE",
+        headers: { "x-admin-actor": "Admin" },
+      });
+      if (!res.ok) throw new Error();
+      const remaining = rules.filter((r) => r.id !== selected.id);
+      setRules(remaining);
+      setSelectedId(remaining[0]?.id ?? "");
+      toast.success(tr ? "Kural silindi." : "Rule deleted.");
+    } catch {
+      toast.error(tr ? "Silme başarısız." : "Delete failed.");
+    }
   };
+
+  if (loading) return <div className="flex-1 flex items-center justify-center text-slate-500">{tr ? "Yükleniyor..." : "Loading..."}</div>;
+  if (!selected) return null;
 
   return (
     <div className="flex-1 overflow-y-auto p-4 sm:p-8">
@@ -93,10 +167,10 @@ export default function AdminAutomationsPage() {
       </div>
 
       <div className="mb-6 grid gap-4 md:grid-cols-4">
-        <Metric label={tr ? "Aktif Kurallar" : "Active Rules"} value="18" />
-        <Metric label={tr ? "Durdurulan Kurallar" : "Paused Rules"} value="5" />
-        <Metric label={tr ? "Çalıştırma (30g)" : "Executions (30d)"} value="1,284" />
-        <Metric label={tr ? "Tahmini Kazanılan Saat" : "Estimated Hours Saved"} value="94h" />
+        <Metric label={tr ? "Aktif Kurallar" : "Active Rules"} value={rules.filter((r) => r.status === "active").length.toString()} />
+        <Metric label={tr ? "Durdurulan Kurallar" : "Paused Rules"} value={rules.filter((r) => r.status === "paused").length.toString()} />
+        <Metric label={tr ? "Çalıştırma (30g)" : "Executions (30d)"} value={rules.reduce((s, r) => s + r.runs, 0).toString()} />
+        <Metric label={tr ? "Tahmini Kazanılan Saat" : "Estimated Hours Saved"} value="—" />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.3fr_1fr]">
