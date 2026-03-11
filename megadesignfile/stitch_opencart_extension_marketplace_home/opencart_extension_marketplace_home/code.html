@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OpenCart Extension Marketplace Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B6CFF",
+                        "secondary": "#7F56D9",
+                        "accent": "#00C2A8",
+                        "background-light": "#F8FAFC",
+                        "background-dark": "#0f1123",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1e213a",
+                        "border-light": "#E2E8F0",
+                        "border-dark": "#2d3150"
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6, .font-display {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased font-body">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- Top Nav -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-border-light dark:border-border-dark bg-surface-light/90 dark:bg-surface-dark/90 px-8 py-4 backdrop-blur-md">
+<div class="flex items-center gap-4 text-primary">
+<span class="material-symbols-outlined text-3xl">shopping_cart</span>
+<h2 class="text-slate-900 dark:text-white text-xl font-display font-bold leading-tight tracking-tight">OpenCart Marketplace</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Themes</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Modules</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">XML Integrations</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Marketing Tools</a>
+</nav>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-lg h-10 px-5 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-sm font-semibold">
+<span>Log In</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 px-5 bg-primary text-white hover:bg-primary/90 transition-colors text-sm font-semibold shadow-sm shadow-primary/20">
+<span>Get Started</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-1">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-6 py-20 lg:py-24">
+<div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+<div class="flex-1 flex flex-col gap-8 text-center lg:text-left">
+<div class="flex flex-col gap-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider w-max mx-auto lg:mx-0">
+<span class="material-symbols-outlined text-sm">new_releases</span>
+<span>New Modules Available</span>
+</div>
+<h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight text-slate-900 dark:text-white">
+                            Modern OpenCart <br class="hidden lg:block"/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Themes &amp; Modules</span>
+</h1>
+<p class="text-slate-600 dark:text-slate-400 text-lg sm:text-xl font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                            A premium curated ecosystem of themes and modules for Turkish developers and store owners. Elevate your e-commerce experience today.
+                        </p>
+</div>
+<div class="flex flex-wrap items-center justify-center lg:justify-start gap-4">
+<button class="flex items-center justify-center rounded-xl h-12 px-6 bg-primary text-white hover:bg-primary/90 transition-colors text-base font-bold shadow-lg shadow-primary/20">
+                            Browse Themes
+                        </button>
+<button class="flex items-center justify-center rounded-xl h-12 px-6 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-base font-bold">
+                            Browse Modules
+                        </button>
+</div>
+<div class="flex items-center justify-center lg:justify-start gap-4 text-sm text-slate-500 dark:text-slate-400 mt-4">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-slate-200 border-2 border-surface-light dark:border-surface-dark"></div>
+<div class="w-8 h-8 rounded-full bg-slate-300 border-2 border-surface-light dark:border-surface-dark"></div>
+<div class="w-8 h-8 rounded-full bg-slate-400 border-2 border-surface-light dark:border-surface-dark"></div>
+</div>
+<p>Trusted by <span class="font-semibold text-slate-900 dark:text-white">5,000+</span> developers</p>
+</div>
+</div>
+<div class="flex-1 w-full max-w-xl lg:max-w-none relative">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-2xl blur-3xl -z-10"></div>
+<div class="rounded-2xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-2 shadow-2xl">
+<div class="w-full aspect-[4/3] bg-slate-100 dark:bg-slate-800 rounded-xl overflow-hidden relative">
+<img alt="E-commerce dashboard preview" class="w-full h-full object-cover" data-alt="High fidelity UI dashboard preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7MISBmIXhZYfPiPPscyQq_nxbXYwS9EYjoRM3I2jnWYwch4M7xvTKk04Up-D5bWzidFfVPlcqyS9ZM4XW7sCxPLski7O-9Pi6fYOLgQHXT7rdl2CdrJr0IJp4Lnn3sL967he6cQAXIHn5DQX9g30TTQXI9WGqrywq-8ijEyziDf3LRWUBvk2YBM3Rn20KcAqswJCEwf8wAAM0ZaXQc95M-zUfGBB3gXhb3qOAI4T95y0JnJHeKaWeIeQctd-z7TpEbwNZFUU-zCo"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Categories Section -->
+<section class="max-w-7xl mx-auto px-6 py-12">
+<h2 class="font-display text-2xl font-bold text-slate-900 dark:text-white mb-8">Browse by Category</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+<a class="group flex flex-col items-center gap-4 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-6 transition-all hover:border-primary/50 hover:shadow-md hover:shadow-primary/5 text-center" href="#">
+<div class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">palette</span>
+</div>
+<h3 class="font-display text-base font-semibold text-slate-900 dark:text-white">Themes</h3>
+</a>
+<a class="group flex flex-col items-center gap-4 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-6 transition-all hover:border-secondary/50 hover:shadow-md hover:shadow-secondary/5 text-center" href="#">
+<div class="w-12 h-12 rounded-full bg-secondary/10 text-secondary flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">extension</span>
+</div>
+<h3 class="font-display text-base font-semibold text-slate-900 dark:text-white">Modules</h3>
+</a>
+<a class="group flex flex-col items-center gap-4 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-6 transition-all hover:border-primary/50 hover:shadow-md hover:shadow-primary/5 text-center" href="#">
+<div class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">integration_instructions</span>
+</div>
+<h3 class="font-display text-base font-semibold text-slate-900 dark:text-white">XML Integrations</h3>
+</a>
+<a class="group flex flex-col items-center gap-4 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-6 transition-all hover:border-accent/50 hover:shadow-md hover:shadow-accent/5 text-center" href="#">
+<div class="w-12 h-12 rounded-full bg-accent/10 text-accent flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">campaign</span>
+</div>
+<h3 class="font-display text-base font-semibold text-slate-900 dark:text-white">Marketing Tools</h3>
+</a>
+<a class="group flex flex-col items-center gap-4 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-6 transition-all hover:border-primary/50 hover:shadow-md hover:shadow-primary/5 text-center" href="#">
+<div class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">payments</span>
+</div>
+<h3 class="font-display text-base font-semibold text-slate-900 dark:text-white">Payment Modules</h3>
+</a>
+</div>
+</section>
+<!-- Featured Products -->
+<section class="max-w-7xl mx-auto px-6 py-16">
+<div class="flex items-center justify-between mb-8">
+<h2 class="font-display text-2xl font-bold text-slate-900 dark:text-white">Featured Products</h2>
+<a class="text-primary hover:text-primary/80 font-medium text-sm flex items-center gap-1 transition-colors" href="#">
+                    View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Product Card 1 -->
+<div class="group flex flex-col rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark overflow-hidden hover:shadow-lg transition-shadow">
+<div class="aspect-[4/3] bg-slate-100 dark:bg-slate-800 relative overflow-hidden">
+<img alt="Minimalist Shop Theme" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Minimalist Shop Theme Preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChyZgTpYN_zo_3UMmYIRf_i_UlwrYSCFYpd5i8LZmT6_ZebaRgTbDuDJdwDiVOQU5jbuNVslW-e6fnmTdZBYClL7RyuxFEyX5r1gwWowSwU1Hwa1U_nywU_UxfmQsL90kjx1T-3Nznygtp6MCOkOgKHPoYJw1tiBXwimC9zD7BW83noy6e_fT83WbLJEJp6za6Zm2-4gc9eLVCcajQjKCAkK8uZ1kTpk6qlXUnE-IVtrr5rWNmsbuyEWIJYyVgXUvJ3svhz_dEHUo"/>
+<div class="absolute top-3 left-3 bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur text-xs font-semibold px-2 py-1 rounded-md text-slate-800 dark:text-slate-200">
+                            Theme
+                        </div>
+</div>
+<div class="p-5 flex flex-col gap-3">
+<div class="flex justify-between items-start gap-2">
+<h3 class="font-display font-semibold text-slate-900 dark:text-white text-lg leading-tight line-clamp-1">Aura Minimalist Theme</h3>
+<span class="text-accent font-bold text-lg whitespace-nowrap">$49.00</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm line-clamp-2">Clean, modern design suitable for fashion and electronics stores.</p>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-border-light dark:border-border-dark">
+<div class="flex items-center gap-1 text-amber-400">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-slate-700 dark:text-slate-300 text-sm font-medium">4.8</span>
+<span class="text-slate-400 text-xs">(120)</span>
+</div>
+<div class="flex items-center gap-1 text-slate-500 text-xs font-medium">
+<span class="material-symbols-outlined text-sm">download</span>
+                                1.2k
+                            </div>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group flex flex-col rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark overflow-hidden hover:shadow-lg transition-shadow">
+<div class="aspect-[4/3] bg-slate-100 dark:bg-slate-800 relative overflow-hidden">
+<div class="w-full h-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-6xl opacity-50">speed</span>
+</div>
+<div class="absolute top-3 left-3 bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur text-xs font-semibold px-2 py-1 rounded-md text-slate-800 dark:text-slate-200">
+                            Module
+                        </div>
+</div>
+<div class="p-5 flex flex-col gap-3">
+<div class="flex justify-between items-start gap-2">
+<h3 class="font-display font-semibold text-slate-900 dark:text-white text-lg leading-tight line-clamp-1">Ultra Speed Optimizer</h3>
+<span class="text-accent font-bold text-lg whitespace-nowrap">$29.00</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm line-clamp-2">Boost your OpenCart performance with advanced caching mechanisms.</p>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-border-light dark:border-border-dark">
+<div class="flex items-center gap-1 text-amber-400">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-slate-700 dark:text-slate-300 text-sm font-medium">5.0</span>
+<span class="text-slate-400 text-xs">(85)</span>
+</div>
+<div class="flex items-center gap-1 text-slate-500 text-xs font-medium">
+<span class="material-symbols-outlined text-sm">download</span>
+                                3.4k
+                            </div>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group flex flex-col rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark overflow-hidden hover:shadow-lg transition-shadow">
+<div class="aspect-[4/3] bg-slate-100 dark:bg-slate-800 relative overflow-hidden">
+<div class="w-full h-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-6xl opacity-50">shopping_cart_checkout</span>
+</div>
+<div class="absolute top-3 left-3 bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur text-xs font-semibold px-2 py-1 rounded-md text-slate-800 dark:text-slate-200">
+                            Module
+                        </div>
+</div>
+<div class="p-5 flex flex-col gap-3">
+<div class="flex justify-between items-start gap-2">
+<h3 class="font-display font-semibold text-slate-900 dark:text-white text-lg leading-tight line-clamp-1">One Page Checkout Pro</h3>
+<span class="text-accent font-bold text-lg whitespace-nowrap">$35.00</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm line-clamp-2">Simplify the buying process and increase conversion rates instantly.</p>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-border-light dark:border-border-dark">
+<div class="flex items-center gap-1 text-amber-400">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-slate-700 dark:text-slate-300 text-sm font-medium">4.9</span>
+<span class="text-slate-400 text-xs">(210)</span>
+</div>
+<div class="flex items-center gap-1 text-slate-500 text-xs font-medium">
+<span class="material-symbols-outlined text-sm">download</span>
+                                5.1k
+                            </div>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group flex flex-col rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark overflow-hidden hover:shadow-lg transition-shadow">
+<div class="aspect-[4/3] bg-slate-100 dark:bg-slate-800 relative overflow-hidden">
+<img alt="Tech Store Theme" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Tech Store Theme Preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGSauqZ_UEiXqTOpWI_gzwFeKMPL4oTrT00nf6gQ7Jnc-ZwWR3ATr3iiFM8s1HTjViVUtLqPVuPKb2zMTVUIxGXTVG7XxPDrFqI3C-OpsRSyUzV4dQsh7uc-z9vmcq3IOoDnojeoKXXaRjDXhcmwky-Gd9XzKUW6evKgC6r_xDhOUkv12b-f_wanEejmS2jUwM3Rni05sQGf_vZbD3hhtzBLf2vakeX1wuQDgizB-Oso9N7qUkSDDK2H8bhbOJ0a0nQfTv8M6vtPo"/>
+<div class="absolute top-3 left-3 bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur text-xs font-semibold px-2 py-1 rounded-md text-slate-800 dark:text-slate-200">
+                            Theme
+                        </div>
+</div>
+<div class="p-5 flex flex-col gap-3">
+<div class="flex justify-between items-start gap-2">
+<h3 class="font-display font-semibold text-slate-900 dark:text-white text-lg leading-tight line-clamp-1">Electro Gadget Theme</h3>
+<span class="text-accent font-bold text-lg whitespace-nowrap">$59.00</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm line-clamp-2">Feature-rich theme designed specifically for electronics megastores.</p>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-border-light dark:border-border-dark">
+<div class="flex items-center gap-1 text-amber-400">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-slate-700 dark:text-slate-300 text-sm font-medium">4.7</span>
+<span class="text-slate-400 text-xs">(64)</span>
+</div>
+<div class="flex items-center gap-1 text-slate-500 text-xs font-medium">
+<span class="material-symbols-outlined text-sm">download</span>
+                                850
+                            </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Section -->
+<section class="border-y border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark py-12">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-border-light dark:divide-border-dark">
+<div class="flex flex-col items-center justify-center p-4">
+<span class="font-display text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white">5K+</span>
+<span class="text-sm text-slate-500 dark:text-slate-400 font-medium mt-1">Developers</span>
+</div>
+<div class="flex flex-col items-center justify-center p-4">
+<span class="font-display text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white">120+</span>
+<span class="text-sm text-slate-500 dark:text-slate-400 font-medium mt-1">Premium Themes</span>
+</div>
+<div class="flex flex-col items-center justify-center p-4">
+<span class="font-display text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white">450+</span>
+<span class="text-sm text-slate-500 dark:text-slate-400 font-medium mt-1">Modules</span>
+</div>
+<div class="flex flex-col items-center justify-center p-4">
+<span class="font-display text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white">50K+</span>
+<span class="text-sm text-slate-500 dark:text-slate-400 font-medium mt-1">Downloads</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

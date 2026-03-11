@@ -66,16 +66,24 @@ export function ProductSlider({ title, badge, products, viewAllLink }: ProductSl
                     <span className="material-symbols-outlined">chevron_right</span>
                 </button>
 
-                <div
-                    ref={scrollRef}
-                    className="flex overflow-x-auto hide-scrollbar gap-6 pb-4 pt-2 -mx-2 px-2 snap-x scroll-smooth"
-                >
-                    {products.map((product) => (
-                        <div key={product.id} className="flex-none w-[280px] snap-start">
-                            <ProductCard product={product} />
-                        </div>
-                    ))}
-                </div>
+                {products.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center py-16 px-6 rounded-2xl border border-dashed border-border bg-slate-50 dark:bg-slate-800/30 text-center gap-3">
+                        <span className="material-symbols-outlined text-4xl text-slate-300 dark:text-slate-600">inventory_2</span>
+                        <p className="text-base font-semibold text-slate-500 dark:text-slate-400">Henüz ürün bulunmuyor</p>
+                        <p className="text-sm text-slate-400 dark:text-slate-500">Yakında yeni ürünler eklenecek.</p>
+                    </div>
+                ) : (
+                    <div
+                        ref={scrollRef}
+                        className="flex overflow-x-auto hide-scrollbar gap-6 pb-4 pt-2 -mx-2 px-2 snap-x scroll-smooth"
+                    >
+                        {products.map((product) => (
+                            <div key={product.id} className="flex-none w-[280px] snap-start">
+                                <ProductCard product={product} />
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
         </section>
     );

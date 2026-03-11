@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Support Management Panel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#5B6CFF",
+              "background-light": "#f5f6f8",
+              "background-dark": "#0f1123",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex flex-col min-h-screen">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-10 py-3 sticky top-0 z-10">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-primary">support_agent</span>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Admin Support</h2>
+</div>
+<label class="flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-slate-500 flex border-none bg-slate-100 dark:bg-slate-800 items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-slate-100 focus:outline-0 focus:ring-0 border-none bg-slate-100 dark:bg-slate-800 focus:border-none h-full placeholder:text-slate-500 px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Search tickets..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9">
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 text-sm font-medium leading-normal" href="#">Dashboard</a>
+<a class="text-primary text-sm font-medium leading-normal" href="#">Tickets</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 text-sm font-medium leading-normal" href="#">Customers</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 text-sm font-medium leading-normal" href="#">Settings</a>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary hover:bg-primary/90 text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors">
+<span class="material-symbols-outlined mr-2 text-sm">add</span>
+<span class="truncate">New Ticket</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-slate-200 dark:border-slate-700" data-alt="Admin User Avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAWtPVo9eHIvpuArNrqNTXYuchaUO7SglxILBvQ09mkVnNxA2_slei_BHVk0lBV5hzPCI1SJu1xfZNiix_HNNTRQ5wpP_64_II75D2uf0GO-O5VotBQx4gFog_xE-ElOVaCj9ECiuqV-uEu9rl0181C7HcQJ_f08feqb1W0rjyTDU5anprq-N_QcW0XW_e18WRijre5F7zvnFU3t9LXixV7yC0cs3diyfyE-qBMS_tPlrBKvVz2SDTDwAk1CArU1lWnRcWbddAGrl0");'></div>
+</div>
+</header>
+<main class="flex-1 max-w-[1440px] mx-auto w-full p-6 grid grid-cols-12 gap-6">
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-6">
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col">
+<div class="p-4 border-b border-slate-200 dark:border-slate-800">
+<div class="flex gap-3 flex-wrap">
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-4 text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal transition-colors">
+                                Unassigned
+                            </button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary/10 text-primary px-4 text-sm font-medium leading-normal transition-colors border border-primary/20">
+                                Open
+                            </button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-4 text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal transition-colors">
+                                On Hold
+                            </button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800/50 px-4 text-sm font-medium leading-normal transition-colors">
+                                SLA Breached
+                            </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Ticket</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Customer</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Priority</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Category</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Agent</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-colors bg-primary/5 dark:bg-primary/10">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="text-sm font-medium text-slate-900 dark:text-slate-100">#1042</div>
+<div class="text-xs text-slate-500">2 mins ago</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-xs font-bold mr-3 text-slate-600 dark:text-slate-300">AY</div>
+<div class="text-sm font-medium text-slate-900 dark:text-slate-100">Ahmet Yılmaz</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">
+                                            2h remaining
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-400">
+                                        Theme Issue
+                                    </td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-400">
+                                        John Doe
+                                    </td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="text-sm font-medium text-slate-900 dark:text-slate-100">#1041</div>
+<div class="text-xs text-slate-500">1 hour ago</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-xs font-bold mr-3 text-slate-600 dark:text-slate-300">MD</div>
+<div class="text-sm font-medium text-slate-900 dark:text-slate-100">Mehmet Demir</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300">
+                                            High Priority
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-400">
+                                        Module Install
+                                    </td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-400">
+                                        Unassigned
+                                    </td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="text-sm font-medium text-slate-900 dark:text-slate-100">#1040</div>
+<div class="text-xs text-slate-500">3 hours ago</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-xs font-bold mr-3 text-slate-600 dark:text-slate-300">AK</div>
+<div class="text-sm font-medium text-slate-900 dark:text-slate-100">Ayşe Kaya</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300">
+                                            Normal
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-400">
+                                        General Question
+                                    </td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-400">
+                                        Jane Smith
+                                    </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 flex flex-col flex-1 min-h-[500px]">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+<div>
+<h2 class="text-xl font-bold leading-tight tracking-tight flex items-center gap-3">
+<span>#1042: MegaMenu module not saving settings</span>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">2h remaining</span>
+</h2>
+<p class="text-sm text-slate-500 mt-1">Ahmet Yılmaz • OpenCart 4 Theme Pro</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<div class="flex border-b border-slate-200 dark:border-slate-800 px-6 gap-8 bg-slate-50/50 dark:bg-slate-900/50">
+<button class="flex flex-col items-center justify-center border-b-2 border-primary text-primary pb-3 pt-4 font-medium text-sm">
+                            Customer Chat
+                        </button>
+<button class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 pb-3 pt-4 font-medium text-sm transition-colors">
+                            Internal Notes
+                        </button>
+</div>
+<div class="flex-1 p-6 flex flex-col gap-6 overflow-y-auto bg-slate-50/30 dark:bg-slate-900/30">
+<div class="flex gap-4">
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 flex-shrink-0 flex items-center justify-center text-sm font-bold text-slate-600 dark:text-slate-300">AY</div>
+<div class="flex flex-col gap-1 max-w-[80%]">
+<div class="flex items-center gap-2">
+<span class="font-semibold text-sm">Ahmet Yılmaz</span>
+<span class="text-xs text-slate-500">Today, 10:23 AM</span>
+</div>
+<div class="bg-white dark:bg-slate-800 p-4 rounded-2xl rounded-tl-none shadow-sm border border-slate-100 dark:border-slate-700 text-sm">
+<p>Hello, I recently purchased the OpenCart 4 Theme Pro. When I try to save the MegaMenu settings in the admin panel, it shows a success message but the changes don't apply to the frontend. Can you help?</p>
+</div>
+</div>
+</div>
+<div class="flex gap-4 flex-row-reverse">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-10 w-10 border border-slate-200 dark:border-slate-700 flex-shrink-0" data-alt="Admin User Avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0wGsH5YGQZd2eNMi0nTh_JkCq1Z6FH_I1z8rg2vKbbTrjPoA2QMCQfA3AOYfSH3tDARrQA9zvp7VC52XFmLxlQBR9xnQLRTG0xh45WBv9Vzkn5CNnTAR5eMhQ7iz3zNFa6ciKehbkcx4PXFp5gJo4mbRkBJ6V1siP5U7DJYDsXU2rEeA8pOZ2Gym80ZJLQWIYILnq6NsVkd3lsztfl18SCqS9_sljGww6r37Ql38uvSxD4d9cTvxwNtNTbErhcR7pZtw-EKCdJHo");'></div>
+<div class="flex flex-col gap-1 max-w-[80%] items-end">
+<div class="flex items-center gap-2 flex-row-reverse">
+<span class="font-semibold text-sm">John Doe (You)</span>
+<span class="text-xs text-slate-500">Today, 10:45 AM</span>
+</div>
+<div class="bg-primary text-white p-4 rounded-2xl rounded-tr-none shadow-sm text-sm">
+<p>Hi Ahmet, thank you for reaching out. This sounds like it might be a cache issue or a permission problem with the module folders.</p>
+<p class="mt-2">Could you please provide your admin credentials and FTP access so I can take a closer look? (Please share them using the secure form below)</p>
+</div>
+</div>
+</div>
+<div class="flex gap-4 w-full">
+<div class="w-10 flex-shrink-0"></div>
+<div class="w-full bg-[#FFFBEB] dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800/30 rounded-lg p-4 text-sm">
+<div class="flex items-center gap-2 mb-2 text-amber-800 dark:text-amber-500 font-medium">
+<span class="material-symbols-outlined text-sm">lock</span>
+                                    Internal Note
+                                </div>
+<p class="text-amber-900 dark:text-amber-200/80">Likely the known OCMOD cache issue with version 4.0.2.1. Waiting for credentials to apply the patch.</p>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+<div class="flex flex-col gap-3">
+<div class="flex items-center gap-2 px-2">
+<button class="text-slate-400 hover:text-primary transition-colors" title="Attach file">
+<span class="material-symbols-outlined">attach_file</span>
+</button>
+<button class="text-slate-400 hover:text-primary transition-colors" title="Insert Canned Response">
+<span class="material-symbols-outlined">forum</span>
+</button>
+<span class="text-xs text-slate-500 ml-auto flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+                                    Customer is online
+                                </span>
+</div>
+<div class="flex gap-3">
+<textarea class="form-textarea w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-primary text-sm resize-none" placeholder="Type your reply..." rows="3"></textarea>
+</div>
+<div class="flex justify-between items-center">
+<label class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 cursor-pointer">
+<input class="rounded text-primary focus:ring-primary border-slate-300 bg-white dark:bg-slate-800" type="checkbox"/>
+                                    Mark as Internal Note
+                                </label>
+<div class="flex gap-2">
+<button class="px-4 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                                        Close Ticket
+                                    </button>
+<button class="px-4 py-2 rounded-lg text-sm font-medium text-white bg-primary hover:bg-primary/90 transition-colors flex items-center gap-2 shadow-sm">
+                                        Send Reply
+                                        <span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-5 flex flex-col gap-5">
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Ticket Properties</h3>
+<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-slate-600 dark:text-slate-400">Assigned Agent</label>
+<div class="relative">
+<select class="form-select w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm focus:border-primary focus:ring-primary appearance-none py-2.5 pl-3 pr-10">
+<option>John Doe</option>
+<option>Jane Smith</option>
+<option>Unassigned</option>
+</select>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-slate-600 dark:text-slate-400">Status</label>
+<select class="form-select w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm focus:border-primary focus:ring-primary py-2.5">
+<option selected="">Open</option>
+<option>Pending</option>
+<option>Resolved</option>
+<option>Closed</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-slate-600 dark:text-slate-400">Category</label>
+<select class="form-select w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm focus:border-primary focus:ring-primary py-2.5">
+<option>Theme Issue</option>
+<option>Module Installation</option>
+<option>Billing</option>
+<option>General Inquiry</option>
+</select>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-5 flex flex-col gap-4">
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex justify-between items-center">
+                        Canned Responses
+                        <span class="material-symbols-outlined text-sm cursor-pointer hover:text-primary transition-colors">settings</span>
+</h3>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-sm">search</span>
+<input class="form-input w-full rounded-lg border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm pl-9 py-2 focus:border-primary focus:ring-primary" placeholder="Search templates..." type="text"/>
+</div>
+<div class="flex flex-col gap-2 mt-1">
+<button class="text-left px-3 py-2 rounded-md text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-between group">
+<span class="truncate">Request FTP Credentials</span>
+<span class="material-symbols-outlined text-sm text-slate-400 opacity-0 group-hover:opacity-100">add</span>
+</button>
+<button class="text-left px-3 py-2 rounded-md text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-between group">
+<span class="truncate">OpenCart 4 Guide</span>
+<span class="material-symbols-outlined text-sm text-slate-400 opacity-0 group-hover:opacity-100">add</span>
+</button>
+<button class="text-left px-3 py-2 rounded-md text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-between group">
+<span class="truncate">Installation Help</span>
+<span class="material-symbols-outlined text-sm text-slate-400 opacity-0 group-hover:opacity-100">add</span>
+</button>
+<button class="text-left px-3 py-2 rounded-md text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-between group">
+<span class="truncate">Refund Policy Info</span>
+<span class="material-symbols-outlined text-sm text-slate-400 opacity-0 group-hover:opacity-100">add</span>
+</button>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-5 flex flex-col gap-4">
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Customer Details</h3>
+<div class="flex items-center gap-3">
+<div class="h-12 w-12 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-lg font-bold text-slate-600 dark:text-slate-300">AY</div>
+<div>
+<div class="font-medium text-slate-900 dark:text-slate-100">Ahmet Yılmaz</div>
+<div class="text-sm text-slate-500">ahmet@example.com</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mt-2 border-t border-slate-100 dark:border-slate-800 pt-4">
+<div>
+<div class="text-xs text-slate-500 mb-1">Total Tickets</div>
+<div class="font-medium">12</div>
+</div>
+<div>
+<div class="text-xs text-slate-500 mb-1">Active Licenses</div>
+<div class="font-medium">3</div>
+</div>
+</div>
+<button class="mt-2 w-full py-2 rounded-lg text-sm font-medium text-primary bg-primary/10 hover:bg-primary/20 transition-colors">
+                        View Full Profile
+                    </button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

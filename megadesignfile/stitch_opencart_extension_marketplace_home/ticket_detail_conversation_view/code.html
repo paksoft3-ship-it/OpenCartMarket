@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ticket Detay - OpenCart SaaS Marketplace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5c6cff",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#0f1123",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 lg:px-40 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z" fill="currentColor" fill-rule="evenodd"></path>
+<path clip-rule="evenodd" d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">OpenCart SaaS</h2>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="#">Temalar</a>
+<a class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="#">Modüller</a>
+<a class="text-primary text-sm font-bold leading-normal" href="#">Destek</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden sm:flex items-center justify-center rounded-xl h-10 px-4 bg-primary text-white text-sm font-bold">
+                    Profilim
+                </button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-slate-200" data-alt="User profile avatar circle" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDCk45Ck36kUCdHRfyMSQzDVbyj4va8cY76618MfJKwIUBs0_mHN_upQEUTn3jK4YpEBtZ1G3ArpQSkD1lZesWrOcqK0caoJxAayRMmWUACE4SVvVXGTjmhpKitgSoS5lPRynA278pqoX3gKHbvUa0Ok8XOUCo4QFWtN8tlZks0UMsZtG5v5q7smc5wotHN7mRUHFNfmW3qGoVpONgW7kgsNiAkVy1UmQVLGRFuKUEJbdyDTP2tMDyphlZEmr0S7BvvVfSHspUWpKs");'></div>
+</div>
+</header>
+<main class="flex-1 flex flex-col items-center px-4 lg:px-40 py-8">
+<div class="w-full max-w-4xl space-y-6">
+<!-- Ticket Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2 mb-1">
+<a class="flex items-center text-slate-500 hover:text-primary transition-colors text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-lg mr-1">arrow_back</span>
+                                Taleplerim
+                            </a>
+</div>
+<h1 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Ultima Theme Kurulum Sorunu</h1>
+<div class="flex items-center gap-3 text-sm text-slate-500 mt-1">
+<span class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded text-xs font-semibold">#12345</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+                                2 saat önce oluşturuldu
+                            </span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg border border-slate-100 dark:border-slate-800">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Durum: Açık</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+<span class="text-xs font-bold text-slate-400">ÇÖZÜLDÜ</span>
+</div>
+</div>
+</div>
+<!-- Conversation Thread -->
+<div class="space-y-6">
+<!-- Customer Message -->
+<div class="flex flex-col items-start max-w-[85%]">
+<div class="flex items-center gap-2 mb-2 ml-1">
+<span class="text-sm font-bold text-slate-800 dark:text-slate-200">Ahmet Yılmaz</span>
+<span class="text-xs text-slate-400">14:20</span>
+</div>
+<div class="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-4 rounded-2xl rounded-tl-none border border-slate-200 dark:border-slate-700">
+<p class="leading-relaxed">Merhaba, Ultima temasını satın aldım ancak kurulum sırasında "PHP Version Mismatch" hatası alıyorum. OpenCart 4.0.2.3 kullanıyorum ve PHP sürümüm 8.1. Yardımcı olabilir misiniz?</p>
+<div class="mt-4 flex flex-wrap gap-2">
+<div class="flex items-center gap-2 bg-white dark:bg-slate-900 p-2 pr-4 rounded-lg border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-primary">description</span>
+<span class="text-xs font-medium">error_log.txt</span>
+<button class="ml-2 text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-sm">download</span></button>
+</div>
+<div class="flex items-center gap-2 bg-white dark:bg-slate-900 p-2 pr-4 rounded-lg border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-primary">image</span>
+<span class="text-xs font-medium">screenshot.png</span>
+<button class="ml-2 text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-sm">download</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Developer Response -->
+<div class="flex flex-col items-end w-full">
+<div class="max-w-[85%] flex flex-col items-end">
+<div class="flex items-center gap-2 mb-2 mr-1">
+<span class="text-xs text-slate-400">14:45</span>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Destek Ekibi</span>
+<span class="text-sm font-bold text-slate-800 dark:text-slate-200">Caner (OpenCart Uzmanı)</span>
+</div>
+<div class="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 p-4 rounded-2xl rounded-tr-none border-l-4 border-l-primary shadow-sm border border-slate-200 dark:border-slate-800">
+<p class="leading-relaxed">Merhaba Ahmet Bey, geri bildiriminiz için teşekkürler. Ultima teması şu an için PHP 8.2 ve üzeri sürümlerde en stabil şekilde çalışmaktadır. Ancak PHP 8.1 için de küçük bir patch hazırladık.</p>
+<p class="mt-3 leading-relaxed">Ekli dosyadaki `system/library` klasörünü sunucunuza yükleyip tekrar dener misiniz? Sorun devam ederse FTP bilgilerinizi iletebilirseniz bizzat kontrol edebilirim.</p>
+<div class="mt-4">
+<div class="flex items-center gap-2 bg-primary/5 p-2 pr-4 rounded-lg border border-primary/10 w-fit">
+<span class="material-symbols-outlined text-primary">folder_zip</span>
+<span class="text-xs font-medium">php81_compatibility_fix.zip</span>
+<button class="ml-2 text-primary hover:text-primary/70"><span class="material-symbols-outlined text-sm">download</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Customer Follow up -->
+<div class="flex flex-col items-start max-w-[85%]">
+<div class="flex items-center gap-2 mb-2 ml-1">
+<span class="text-sm font-bold text-slate-800 dark:text-slate-200">Ahmet Yılmaz</span>
+<span class="text-xs text-slate-400">15:10</span>
+</div>
+<div class="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-4 rounded-2xl rounded-tl-none border border-slate-200 dark:border-slate-700">
+<p class="leading-relaxed">Verdiğiniz fix dosyasını yükledim, kurulum ekranı şimdi açılıyor ancak veritabanı ayarlarını yaptıktan sonra boş bir beyaz sayfa ile karşılaşıyorum. FTP bilgilerini özelden paylaşıyorum.</p>
+</div>
+</div>
+</div>
+<!-- Rich Text Input Area -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden mt-8">
+<div class="flex items-center gap-1 p-2 border-b border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/30">
+<button class="p-2 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-colors text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-[20px]">format_bold</span>
+</button>
+<button class="p-2 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-colors text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-[20px]">format_italic</span>
+</button>
+<button class="p-2 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-colors text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-[20px]">link</span>
+</button>
+<button class="p-2 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-colors text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-[20px]">format_list_bulleted</span>
+</button>
+<button class="p-2 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-colors text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-[20px]">code</span>
+</button>
+</div>
+<textarea class="w-full p-4 min-h-[150px] border-none focus:ring-0 text-slate-800 dark:text-slate-200 bg-transparent placeholder:text-slate-400 resize-none" placeholder="Yanıtınızı buraya yazın..."></textarea>
+<div class="flex items-center justify-between p-4 bg-slate-50/50 dark:bg-slate-800/20 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-lg">attach_file</span>
+                                Dosya Ekle
+                            </button>
+<span class="text-xs text-slate-400 hidden sm:inline">(Maks. 20MB)</span>
+</div>
+<button class="flex items-center gap-2 px-8 py-2.5 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl transition-all shadow-md active:scale-95">
+                            Yanıtla
+                            <span class="material-symbols-outlined text-lg">send</span>
+</button>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="flex justify-center py-6">
+<p class="text-xs text-slate-400 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">lock</span>
+                        Bu konuşma uçtan uca şifrelenmiştir ve sadece siz ve destek ekibi tarafından görülebilir.
+                    </p>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

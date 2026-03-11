@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Developer Profile Page View</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B6CFF",
+                        "background-light": "#F8FAFC",
+                        "background-dark": "#0f1123",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-10 py-4 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4">
+<div class="text-primary size-6 flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">shopping_cart</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">OpenCart Market</h2>
+</div>
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-96">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full ring-1 ring-slate-200 dark:ring-slate-700 bg-slate-50 dark:bg-slate-800 focus-within:ring-2 focus-within:ring-primary">
+<div class="text-slate-400 flex border-none items-center justify-center pl-4 rounded-l-lg">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg bg-transparent text-slate-900 dark:text-slate-100 focus:outline-0 focus:ring-0 border-none h-full placeholder:text-slate-400 px-4 rounded-l-none pl-2 text-sm font-medium leading-normal" placeholder="Search themes and modules..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<div class="hidden lg:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Themes</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Modules</a>
+<a class="text-slate-900 dark:text-slate-100 font-semibold text-sm leading-normal" href="#">Developers</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Community</a>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-white dark:ring-slate-900 shadow-sm" data-alt="User profile avatar placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCJyZjWKNLxWd48UbgpejDw18waxqD625u7mwZBav1-Pv1KiLRI_32WTtAGytUfBCw9NoQ8RiMmi6KOwa1j0pXR8-NIKuJ-TVStJ_-Cbnezb8OWoOM949Z_M4wCMoVl-BJBmAvupU_6c8lrsvDAiHKQCJL0I1ixu9NZFrXA41h7yRj-Cnn_ZCzrkU5E7CI_2HLNQBQhTgHdOzhdzrqskx10OVQ0SQTedwqA_-gzeiaNfA6l77G8jU8ZdjDyn8pyYMfqYZFWWxjq4A0");'></div>
+</div>
+</header>
+<main class="flex flex-1 flex-col items-center py-10 px-4 md:px-10 lg:px-20 max-w-7xl mx-auto w-full gap-8">
+<!-- Header Section -->
+<section class="w-full flex flex-col items-center gap-6">
+<div class="flex flex-col items-center gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-32 w-32 shadow-xl ring-4 ring-white dark:ring-slate-800" data-alt="Developer portrait photo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA4gCi2Tox_VlEKA-60ZBosb-86Af0UX9f2rD0c5IFcG4n1Yt9YT9NTCcQ_o1g_AVliUIg-15bfXPox90paqHi2whakueymuRpGjoCsxq8cgLGdf-M4pDxqP3-OKmZXPOYWow1q9XDuy1jiEVip-iYbZy4xApeL3Lyh1XO1Rq9u134v-Zi7HeHfD0PrdKvThPghKzlOxH3hidlQ6UsLV5RWy4vREOlZOguyh_rG00fS47I1WPn7dg6WLBPh9d0Fps5bIqKmN1hcOIs");'></div>
+<div class="flex flex-col items-center justify-center gap-1">
+<h1 class="text-3xl font-bold leading-tight tracking-tight">Arda Yılmaz</h1>
+<div class="flex items-center gap-1.5 text-[#00C2A8] bg-[#00C2A8]/10 px-3 py-1 rounded-full text-sm font-semibold">
+<span class="material-symbols-outlined text-base">verified</span>
+                                Verified Developer
+                            </div>
+</div>
+</div>
+<div class="flex w-full max-w-xs gap-3 mt-2">
+<button class="flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold shadow-sm hover:bg-primary/90 transition-colors flex-1">
+                            Contact
+                        </button>
+<button class="flex items-center justify-center rounded-lg h-10 px-4 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700 text-sm font-bold shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex-1">
+                            Follow
+                        </button>
+</div>
+<div class="flex flex-wrap justify-center gap-4 mt-6 w-full max-w-2xl">
+<div class="flex flex-1 min-w-[120px] flex-col gap-1 rounded-xl bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700 p-4 items-center text-center transition-transform hover:-translate-y-1">
+<p class="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">4.9<span class="text-lg text-slate-400 font-medium">/5</span></p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Rating</p>
+</div>
+<div class="flex flex-1 min-w-[120px] flex-col gap-1 rounded-xl bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700 p-4 items-center text-center transition-transform hover:-translate-y-1">
+<p class="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">24</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Products</p>
+</div>
+<div class="flex flex-1 min-w-[120px] flex-col gap-1 rounded-xl bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700 p-4 items-center text-center transition-transform hover:-translate-y-1">
+<p class="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">12k+</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Downloads</p>
+</div>
+</div>
+</section>
+<!-- Developer Bio Section -->
+<section class="w-full flex flex-col md:flex-row gap-8 bg-white dark:bg-slate-800 p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 mt-4">
+<div class="w-full md:w-1/3 flex flex-col gap-4 border-b md:border-b-0 md:border-r border-slate-100 dark:border-slate-700 pb-6 md:pb-0 md:pr-8">
+<h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-2">Trust Indicators</h3>
+<div class="flex justify-between items-center py-2">
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<p class="text-sm font-medium">Response Time</p>
+</div>
+<p class="text-slate-900 dark:text-slate-100 text-sm font-semibold">&lt; 2 hours</p>
+</div>
+<div class="flex justify-between items-center py-2">
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">support_agent</span>
+<p class="text-sm font-medium">Support Quality</p>
+</div>
+<p class="text-slate-900 dark:text-slate-100 text-sm font-semibold">High</p>
+</div>
+<div class="flex justify-between items-center py-2">
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">event</span>
+<p class="text-sm font-medium">Member since</p>
+</div>
+<p class="text-slate-900 dark:text-slate-100 text-sm font-semibold">2021</p>
+</div>
+</div>
+<div class="w-full md:w-2/3 flex flex-col justify-center">
+<h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-3">About the Developer</h3>
+<p class="text-slate-600 dark:text-slate-300 text-base font-normal leading-relaxed">
+                            Expert OpenCart developer specializing in high-performance themes and modules. Focused on delivering fast, modern, and SEO-optimized solutions for Turkish store owners. My products are built with modern tech stacks, ensuring clean code, exceptional speed, and easy customization for e-commerce growth.
+                        </p>
+</div>
+</section>
+<!-- Tabs & Product Grid -->
+<section class="w-full mt-8">
+<div class="flex border-b border-slate-200 dark:border-slate-700 mb-8 overflow-x-auto no-scrollbar">
+<button class="text-primary border-b-2 border-primary pb-3 px-4 font-semibold text-sm whitespace-nowrap">Themes</button>
+<button class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 border-b-2 border-transparent pb-3 px-4 font-medium text-sm whitespace-nowrap transition-colors">Modules</button>
+<button class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 border-b-2 border-transparent pb-3 px-4 font-medium text-sm whitespace-nowrap transition-colors">Reviews (142)</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Product Card 1 -->
+<div class="group flex flex-col bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-md transition-all cursor-pointer">
+<div class="h-48 w-full bg-slate-100 dark:bg-slate-900 relative overflow-hidden">
+<img alt="Dashboard theme preview" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="OpenCart admin dashboard theme preview showing charts and metrics" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfqvULaxsuhTn9c9BHdRAcj-o2GknDc5MdlUCL89LcP221mbeCYOPDFxJlzHulXXb_dzVXw1qtG6GWIsMUUzVqUAb5f0Jz0yebYw8_GUo44n03RD9wWnBwc8OTPtKjUcaTpSmFW2VEu9y5x3zogzH0C_IihgYbx2j6iFOJwLtxhouSuprsx3rZxTBXXy8jEdgYw39YlwfRS-_oPxo8Pid_0SS7BXS-RCkMil6izKqvG9dM7ajIL5ea9hRLsXt_isagrjdivp6QvUw"/>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-slate-900 px-2.5 py-1 rounded-md text-xs font-bold shadow-sm">
+                                    $49.00
+                                </div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h4 class="text-lg font-semibold text-slate-900 dark:text-slate-100 leading-tight">Nexus - Modern Admin Theme</h4>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">A clean, responsive admin dashboard theme for OpenCart 3.x with dark mode support.</p>
+<div class="mt-auto flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-1 text-amber-500 text-sm font-medium">
+<span class="material-symbols-outlined text-base">star</span>
+                                        4.9 (42)
+                                    </div>
+<div class="flex items-center gap-1 text-slate-400 text-sm">
+<span class="material-symbols-outlined text-base">download</span>
+                                        2.4k
+                                    </div>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group flex flex-col bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-md transition-all cursor-pointer">
+<div class="h-48 w-full bg-slate-100 dark:bg-slate-900 relative overflow-hidden">
+<img alt="Storefront theme preview" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="E-commerce storefront minimal layout preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtHCNFDuObUIWCQUFJ7Jn80i11R6j0jJceX8-OlCFlPvmGZqWpX989ygJeXCk25yIyMXzi4JnzJsZZo7tpZ9mbBXvD9G5LUW2TiHsPXVN6dAFpHW1X762Mxv7_jRThr8roCDiFCtjrpzsQc1M4ULt3XY8dzGedh8qbhB33u7yl7y8zRZ7Adqg4m1nc7Tge-DSBnua-ko7OP8mk8BNUuZ3XH3qpw-mMinGoMX7wAm7_pixbsYKpWYqp0ywfe6hrYirACcqdcQsJGKg"/>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-slate-900 px-2.5 py-1 rounded-md text-xs font-bold shadow-sm">
+                                    $89.00
+                                </div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h4 class="text-lg font-semibold text-slate-900 dark:text-slate-100 leading-tight">Lumina - Minimal Storefront</h4>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">High-conversion, minimalist theme focused on speed and mobile experience.</p>
+<div class="mt-auto flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-1 text-amber-500 text-sm font-medium">
+<span class="material-symbols-outlined text-base">star</span>
+                                        5.0 (28)
+                                    </div>
+<div class="flex items-center gap-1 text-slate-400 text-sm">
+<span class="material-symbols-outlined text-base">download</span>
+                                        1.1k
+                                    </div>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group flex flex-col bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-md transition-all cursor-pointer">
+<div class="h-48 w-full bg-slate-100 dark:bg-slate-900 relative overflow-hidden">
+<div class="w-full h-full bg-gradient-to-br from-primary/20 to-purple-500/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+<span class="material-symbols-outlined text-6xl text-primary/50">speed</span>
+</div>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-slate-900 px-2.5 py-1 rounded-md text-xs font-bold shadow-sm">
+                                    $29.00
+                                </div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h4 class="text-lg font-semibold text-slate-900 dark:text-slate-100 leading-tight">Speed Optimizer Pro</h4>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Advanced caching and asset minification module for 90+ Google PageSpeed score.</p>
+<div class="mt-auto flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-1 text-amber-500 text-sm font-medium">
+<span class="material-symbols-outlined text-base">star</span>
+                                        4.8 (156)
+                                    </div>
+<div class="flex items-center gap-1 text-slate-400 text-sm">
+<span class="material-symbols-outlined text-base">download</span>
+                                        5.8k
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</div>
+</body></html>

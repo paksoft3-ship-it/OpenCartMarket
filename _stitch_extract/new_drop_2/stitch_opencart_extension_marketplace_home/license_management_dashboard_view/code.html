@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lisans Yönetimi - SaaS Marketplace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B6CFF",
+                        "background-light": "#F8FAFC",
+                        "background-dark": "#0f1123",
+                        "success": "#00C2A8",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-10 py-4 sticky top-0 z-10">
+<div class="flex items-center gap-4 text-slate-900 dark:text-white">
+<div class="size-6 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">storefront</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight">SaaS Marketplace</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-8 hidden md:flex">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Ana Sayfa</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Pazaryeri</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Destek</a>
+<a class="text-primary text-sm font-semibold leading-normal" href="#">Hesabım</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 p-2">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-slate-200 dark:border-slate-700" data-alt="User avatar profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBRLM0nM7nwzXxhKQdldm58eNWyhYJhz6WFzrmacDJBFTZ5S3mYUrDtgpLEZAYyGtBnQkvipYcIpSvf9POJAY7BeQlTstidUDNRo0KVUZarhHJ1debjtO6zyKBYbkWF6vWihQU4LHx3BFtSB4nxwEeaL0EdvQHvFBEqDNi01hPNEKIW5__8HEfBK3qrbkUF3qvR4U5UYKtmbibAqZ2jju6My44owhgzHscLQcMPdbqAA9OUH7egVKeBWObL4IAK_2Ij67fc-wEigws");'></div>
+</div>
+</div>
+</header>
+<div class="layout-container flex h-full grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 gap-8">
+<aside class="w-64 shrink-0 hidden lg:block">
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-6 sticky top-24">
+<div class="flex gap-4 items-center border-b border-slate-100 dark:border-slate-800 pb-6">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12" data-alt="User profile thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB1cWmlVUSDWKpTCh9tgGO3kQmfnPzkAH6IQkZsSTEe576sHQyxFMFfnOEdI9nb3qicqRSQQoV2zJ7Pdb7buNYbh4N77mhJnkdxUEwyG4ukzwk3oRKBKeGS88izjydW18RAzz818_BkTqTuXxgXvvF5MU-92enwRq-cFro22VsiB7c2Kv2vbncbYZ4YWNZ2_lJNkESBHscjgV-U6XR4XjyJxXkyjZ-xyj3Bve7RqMj8b-XJiL5qzDzyKvd6ixgbY6mOnly2BiSNn1M");'></div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-base font-semibold leading-normal">Ahmet Yılmaz</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Premium Üye</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-400">person</span>
+<p class="text-sm font-medium leading-normal">Profilim</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:bg-primary/20" href="#">
+<span class="material-symbols-outlined">key</span>
+<p class="text-sm font-semibold leading-normal">Lisanslarım</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-400">receipt_long</span>
+<p class="text-sm font-medium leading-normal">Faturalarım</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-400">download</span>
+<p class="text-sm font-medium leading-normal">İndirmeler</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-400">settings</span>
+<p class="text-sm font-medium leading-normal">Ayarlar</p>
+</a>
+</nav>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 gap-6">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+<div class="flex flex-col gap-2">
+<h1 class="text-slate-900 dark:text-white text-3xl font-bold leading-tight">Lisans Yönetimi</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal">Tüm aktif, süresi dolan ve iptal edilen lisanslarınızı buradan yönetin.</p>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 flex flex-col md:flex-row gap-4 items-center">
+<div class="relative flex-1 w-full">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 border border-slate-200 dark:border-slate-700 rounded-lg leading-5 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-primary/50 focus:border-primary sm:text-sm transition-all" placeholder="Lisans ara (ürün adı, alan adı)..." type="text"/>
+</div>
+<div class="flex gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
+<button class="flex whitespace-nowrap items-center justify-center gap-x-2 rounded-lg bg-slate-100 dark:bg-slate-800 px-4 py-2 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700">
+<p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Tümü</p>
+</button>
+<button class="flex whitespace-nowrap items-center justify-center gap-x-2 rounded-lg bg-primary/10 px-4 py-2 border border-primary/20 text-primary">
+<span class="w-2 h-2 rounded-full bg-success"></span>
+<p class="text-sm font-semibold">Aktif (2)</p>
+</button>
+<button class="flex whitespace-nowrap items-center justify-center gap-x-2 rounded-lg bg-slate-100 dark:bg-slate-800 px-4 py-2 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700">
+<p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Süresi Dolan</p>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
+<div class="flex gap-4 items-center">
+<div class="w-16 h-16 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shrink-0 shadow-inner" data-alt="Ultima Theme abstract product thumbnail">
+<span class="material-symbols-outlined text-3xl">view_quilt</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Ultima Theme</h3>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300">Pro</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400">OpenCart 3.0.3.8 Uyumlu</p>
+</div>
+</div>
+<div class="flex items-center gap-3 w-full md:w-auto">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-success/10 text-success border border-success/20">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                                    Aktif
+                                </span>
+<div class="text-right ml-auto md:ml-0">
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-0.5">Yenileme Tarihi</p>
+<p class="text-sm font-semibold text-slate-900 dark:text-white">15 Kas 2024</p>
+</div>
+</div>
+</div>
+<div class="p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 bg-slate-50/50 dark:bg-slate-800/20">
+<div class="flex flex-col gap-4">
+<h4 class="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-sm">key</span>
+                                    Lisans Anahtarı
+                                </h4>
+<div class="flex items-center gap-2 bg-white dark:bg-slate-900 p-1 pl-3 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
+<code class="font-mono text-sm text-slate-700 dark:text-slate-300 flex-1 truncate">ULT-PRO-8F92-K3M9-L1N5</code>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors rounded-md hover:bg-slate-50 dark:hover:bg-slate-800" title="Görüntüle">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-md text-sm font-medium transition-colors border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+                                        Kopyala
+                                    </button>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h4 class="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-sm">language</span>
+                                        Tanımlı Alan Adları <span class="text-slate-400 font-normal">(1/3)</span>
+</h4>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between bg-white dark:bg-slate-900 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-success text-[20px]">check_circle</span>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">magazam.com.tr</span>
+</div>
+<button class="text-slate-400 hover:text-red-500 transition-colors p-1" title="Deaktive Et">
+<span class="material-symbols-outlined text-[20px]">cancel</span>
+</button>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<div class="relative flex-1">
+<input class="w-full text-sm px-3 py-2 border border-dashed border-slate-300 dark:border-slate-600 rounded-lg bg-transparent text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="yeni-alan-adi.com" type="text"/>
+</div>
+<button class="px-3 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg text-sm font-medium transition-colors border border-slate-200 dark:border-slate-700 shrink-0 flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">add</span> Ekle
+                                        </button>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 flex justify-end gap-3">
+<button class="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-2">
+                                İndir <span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+<button class="px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg shadow-sm hover:bg-primary/90 transition-colors">
+                                Yenile
+                            </button>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
+<div class="flex gap-4 items-center">
+<div class="w-16 h-16 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white shrink-0 shadow-inner" data-alt="SEO Module abstract product thumbnail">
+<span class="material-symbols-outlined text-3xl">search_check</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Gelişmiş SEO Modülü</h3>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">Standart</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400">OpenCart 3.x</p>
+</div>
+</div>
+<div class="flex items-center gap-3 w-full md:w-auto">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-success/10 text-success border border-success/20">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                                    Aktif
+                                </span>
+<div class="text-right ml-auto md:ml-0">
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-0.5">Yenileme Tarihi</p>
+<p class="text-sm font-semibold text-slate-900 dark:text-white">02 Ara 2024</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<aside class="w-72 shrink-0 hidden xl:block">
+<div class="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-slate-800 dark:to-slate-900 rounded-xl shadow-sm border border-amber-100 dark:border-slate-700 p-5 flex flex-col gap-4 sticky top-24">
+<div class="flex items-center gap-3 text-amber-700 dark:text-amber-400">
+<span class="material-symbols-outlined text-2xl">lightbulb</span>
+<h3 class="font-bold text-base">Lisanslar Nasıl Çalışır?</h3>
+</div>
+<div class="text-sm text-slate-600 dark:text-slate-300 space-y-3">
+<p>Satın aldığınız her ürün size özel bir <strong>Lisans Anahtarı</strong> ile gelir.</p>
+<ul class="list-disc pl-4 space-y-1.5 text-slate-500 dark:text-slate-400">
+<li>Bu anahtarı mağazanızın yönetim panelindeki modül ayarlarına girerek aktifleştirebilirsiniz.</li>
+<li>Alan adı değişikliği yapmak isterseniz, önce mevcut alan adını buradan deaktive etmelisiniz.</li>
+<li>Lisans süreniz boyunca ücretsiz güncelleme ve destek alırsınız.</li>
+</ul>
+</div>
+<a class="text-sm font-medium text-primary hover:underline mt-2 flex items-center gap-1" href="#">
+                        Detaylı dokümantasyon <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</aside>
+</div>
+</div>
+</body></html>

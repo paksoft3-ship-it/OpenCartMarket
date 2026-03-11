@@ -56,8 +56,8 @@ export default async function BrowsePage({
                     {products.length === 0 ? (
                         <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 py-24 text-center bg-white/50 dark:bg-slate-800/50">
                             <span className="material-symbols-outlined text-4xl text-slate-400 mb-4">search_off</span>
-                            <h2 className="text-xl font-semibold text-slate-900 dark:text-white">No products found</h2>
-                            <p className="mt-2 text-slate-500 dark:text-slate-400">Try adjusting your filters or search query.</p>
+                            <h2 className="text-xl font-semibold text-slate-900 dark:text-white">Ürün bulunamadı</h2>
+                            <p className="mt-2 text-slate-500 dark:text-slate-400">Filtrelerinizi veya arama sorgunuzu değiştirmeyi deneyin.</p>
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

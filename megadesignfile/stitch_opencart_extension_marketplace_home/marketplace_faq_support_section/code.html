@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sıkça Sorulan Sorular - OpenCart Marketplace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5B6CFF",
+                        "background-light": "#F8FAFC",
+                        "background-dark": "#0f1123",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display text-slate-900 dark:text-slate-100">
+<!-- Top Navigation -->
+<header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-16">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">shopping_cart</span>
+</div>
+<span class="font-bold text-xl tracking-tight">OpenCart Marketplace</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors" href="#">Temalar</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors" href="#">Modüller</a>
+<a class="text-sm font-medium text-primary" href="#">SSS</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors" href="#">Destek</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="hidden md:flex items-center justify-center px-4 py-2 rounded-lg text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 transition-colors">
+                        Giriş Yap
+                    </button>
+<button class="flex items-center justify-center px-4 py-2 rounded-lg text-sm font-semibold text-white bg-primary hover:bg-primary/90 transition-colors shadow-sm">
+                        Kayıt Ol
+                    </button>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow py-12 px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto">
+<!-- Page Header & Search -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 items-end">
+<div class="lg:col-span-8">
+<h1 class="text-4xl font-bold tracking-tight mb-4">Sıkça Sorulan Sorular</h1>
+<p class="text-lg text-slate-600 dark:text-slate-400">Pazaryerimiz, temalar ve modüller hakkında en çok merak edilen soruların cevaplarını burada bulabilirsiniz.</p>
+</div>
+<div class="lg:col-span-4">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="block w-full pl-10 pr-16 py-3 border border-slate-200 dark:border-slate-700 rounded-xl leading-5 bg-white dark:bg-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-shadow" placeholder="Sorunuzu arayın..." type="text"/>
+<div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+<span class="text-xs font-medium text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md border border-slate-200 dark:border-slate-700">⌘K</span>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- FAQ Accordion -->
+<div class="lg:col-span-8 space-y-4">
+<details class="group bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden [&amp;_summary::-webkit-details-marker]:hidden" open="">
+<summary class="flex items-center justify-between p-6 cursor-pointer list-none hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors border-l-4 border-transparent group-open:border-primary group-open:bg-slate-50 dark:group-open:bg-slate-800/50">
+<h3 class="text-base font-semibold text-slate-900 dark:text-white pr-6">Kurulum ne kadar sürer?</h3>
+<span class="material-symbols-outlined text-slate-400 group-open:text-primary transition-transform duration-200 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-2 text-slate-600 dark:text-slate-400 border-l-4 border-primary bg-slate-50 dark:bg-slate-800/50">
+<p>Satın aldığınız ürünlerin kurulumu genellikle oldukça basittir. Modüller için Extension Installer (Eklenti Yükleyici) kullanılarak 2-3 dakika içinde kurulum tamamlanabilir. Temalar için ise sağlanan dökümantasyondaki adımları takip ederek 10-15 dakika içinde sitenizi hazır hale getirebilirsiniz.</p>
+</div>
+</details>
+<details class="group bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden [&amp;_summary::-webkit-details-marker]:hidden">
+<summary class="flex items-center justify-between p-6 cursor-pointer list-none hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors border-l-4 border-transparent group-open:border-primary group-open:bg-slate-50 dark:group-open:bg-slate-800/50">
+<h3 class="text-base font-semibold text-slate-900 dark:text-white pr-6">OpenCart 3 ve 4 uyumluluğu?</h3>
+<span class="material-symbols-outlined text-slate-400 group-open:text-primary transition-transform duration-200 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-2 text-slate-600 dark:text-slate-400 border-l-4 border-primary bg-slate-50 dark:bg-slate-800/50">
+<p>Pazaryerimizdeki tüm ürünlerin desteklediği OpenCart sürümleri ürün detay sayfasında açıkça belirtilmiştir. Yeni eklenen ürünlerin çoğu OpenCart 4.x ile tam uyumludur. Ancak satın almadan önce mutlaka sürüm uyumluluk listesini kontrol etmenizi öneririz.</p>
+</div>
+</details>
+<details class="group bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden [&amp;_summary::-webkit-details-marker]:hidden">
+<summary class="flex items-center justify-between p-6 cursor-pointer list-none hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors border-l-4 border-transparent group-open:border-primary group-open:bg-slate-50 dark:group-open:bg-slate-800/50">
+<h3 class="text-base font-semibold text-slate-900 dark:text-white pr-6">İade politikası nedir?</h3>
+<span class="material-symbols-outlined text-slate-400 group-open:text-primary transition-transform duration-200 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-2 text-slate-600 dark:text-slate-400 border-l-4 border-primary bg-slate-50 dark:bg-slate-800/50">
+<p>Dijital ürünlerin doğası gereği, indirilen ürünlerde standart bir iade politikamız bulunmamaktadır. Ancak, ürün belirtilen özellikleri taşımıyorsa, çalışmıyorsa ve geliştirici destek talebinize rağmen sorunu çözemezse, 14 gün içerisinde iade talebinde bulunabilirsiniz.</p>
+</div>
+</details>
+<details class="group bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden [&amp;_summary::-webkit-details-marker]:hidden">
+<summary class="flex items-center justify-between p-6 cursor-pointer list-none hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors border-l-4 border-transparent group-open:border-primary group-open:bg-slate-50 dark:group-open:bg-slate-800/50">
+<h3 class="text-base font-semibold text-slate-900 dark:text-white pr-6">Lisans kullanımı nasıl çalışır?</h3>
+<span class="material-symbols-outlined text-slate-400 group-open:text-primary transition-transform duration-200 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-2 text-slate-600 dark:text-slate-400 border-l-4 border-primary bg-slate-50 dark:bg-slate-800/50">
+<p>Satın aldığınız her ürün tek bir alan adı (domain) için geçerlidir. Geliştirme (development/staging) ortamları için ek lisans gerekmez. Birden fazla canlı mağazada kullanım için her mağaza adına ayrı lisans satın almanız gerekmektedir.</p>
+</div>
+</details>
+<details class="group bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden [&amp;_summary::-webkit-details-marker]:hidden">
+<summary class="flex items-center justify-between p-6 cursor-pointer list-none hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors border-l-4 border-transparent group-open:border-primary group-open:bg-slate-50 dark:group-open:bg-slate-800/50">
+<h3 class="text-base font-semibold text-slate-900 dark:text-white pr-6">Destek dahil mi?</h3>
+<span class="material-symbols-outlined text-slate-400 group-open:text-primary transition-transform duration-200 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-6 pb-6 pt-2 text-slate-600 dark:text-slate-400 border-l-4 border-primary bg-slate-50 dark:bg-slate-800/50">
+<p>Evet, tüm satın alımlar 6 aylık ücretsiz geliştirici desteği içerir. Bu destek, ürün hatalarının giderilmesini ve temel kurulum sorularını kapsar. Özel geliştirmeler veya temanın/modülün yapısını değiştiren istekler standart destek kapsamına girmez.</p>
+</div>
+</details>
+</div>
+<!-- Sidebar / Action Card -->
+<div class="lg:col-span-4">
+<div class="sticky top-24 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 p-8 text-center">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+<span class="material-symbols-outlined text-3xl text-primary">support_agent</span>
+</div>
+<h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white">Aradığınızı bulamadınız mı?</h3>
+<p class="text-slate-600 dark:text-slate-400 mb-8 text-sm leading-relaxed">Destek ekibimiz sorularınızı yanıtlamak ve size yardımcı olmak için her zaman hazır.</p>
+<div class="space-y-3">
+<a class="flex items-center justify-center w-full py-3 px-4 rounded-xl text-white bg-primary hover:bg-primary/90 font-semibold transition-colors shadow-sm gap-2" href="#">
+<span class="material-symbols-outlined text-sm">mail</span>
+                                Destek ile İletişime Geç
+                            </a>
+<a class="flex items-center justify-center w-full py-3 px-4 rounded-xl text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 font-medium transition-colors gap-2 border border-slate-200 dark:border-slate-700" href="#">
+<span class="material-symbols-outlined text-sm">menu_book</span>
+                                Dokümantasyona Göz At
+                            </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

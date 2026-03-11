@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6c5cff",
+                        "accent": "#00C2A8",
+                        "background-light": "#F8FAFC",
+                        "background-dark": "#110f23",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1.5rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<div class="min-h-screen flex flex-col">
+<!-- Navigation Bar -->
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-2 rounded-lg text-white">
+<span class="material-symbols-outlined block">support_agent</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">OpenCart Destek</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors" href="#">Temalar</a>
+<a class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors" href="#">Modüller</a>
+<a class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors" href="#">Geliştiriciler</a>
+<a class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors" href="#">Topluluk</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="px-6 py-2.5 rounded-full bg-primary text-white text-sm font-bold hover:opacity-90 transition-opacity">
+                        Giriş Yap
+                    </button>
+<div class="size-10 rounded-full border-2 border-slate-100 dark:border-slate-800 bg-cover bg-center" data-alt="User profile avatar placeholder" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDQhJEvNdQsk2kXFU3pXKO3AdBP5igj4CSq55IOkm3fbpl4N5EOLww4nV8CG5hMuwhllj0CaxLo8S9C8bAN4eHIifDN7qmqmxbOXfrq4KmihzaqLNhH4CxGdkt8sq4izdtGEjiPgP7ksakqQl2l5Q2abRMTl1Ohq65KYrnvCICiLq65J7Weldol68UbAKlQKHJ1vWCsAJWrsI3XSc0yuY-sPZxzXaNQcnbnTB-DoY_DvRYhy2geBiJFFXnn10_ZUXtzBbDFkNR7YK8')">
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow max-w-7xl mx-auto px-6 py-12 w-full">
+<!-- Hero Section -->
+<div class="text-center max-w-3xl mx-auto mb-16">
+<h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-8 tracking-tight">
+                    Size nasıl yardımcı olabiliriz?
+                </h1>
+<div class="relative group">
+<div class="absolute inset-y-0 left-5 flex items-center pointer-events-none text-slate-400 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full h-16 pl-14 pr-24 rounded-2xl bg-white dark:bg-slate-800 border-none shadow-xl shadow-primary/5 focus:ring-2 focus:ring-primary/20 text-lg" placeholder="Arama yapın veya bir komut girin..." type="text"/>
+<div class="absolute inset-y-4 right-4 flex items-center px-3 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-500 text-xs font-bold border border-slate-200 dark:border-slate-600 pointer-events-none">
+                        ⌘ K
+                    </div>
+</div>
+</div>
+<!-- Primary Actions -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+<div class="group relative overflow-hidden bg-primary p-8 rounded-xl text-white shadow-2xl shadow-primary/20 cursor-pointer hover:-translate-y-1 transition-all">
+<div class="flex flex-col h-full justify-between">
+<span class="material-symbols-outlined text-4xl mb-4 opacity-80">add_task</span>
+<div>
+<h3 class="text-xl font-bold mb-2">Yeni Destek Talebi</h3>
+<p class="text-primary-foreground/70 text-sm">Hızlı çözüm için yeni bir bilet oluşturun.</p>
+</div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-9xl">send</span>
+</div>
+</div>
+<div class="group bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-pointer hover:shadow-md transition-all">
+<div class="flex flex-col h-full justify-between">
+<div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined">confirmation_number</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Aktif Taleplerim</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Mevcut destek taleplerinizin durumunu takip edin.</p>
+</div>
+</div>
+</div>
+<div class="group bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 cursor-pointer hover:shadow-md transition-all">
+<div class="flex flex-col h-full justify-between">
+<div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined">library_books</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Dokümantasyon</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Kılavuzlar ve teknik belgeler ile kendiniz çözün.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Category Grid -->
+<div class="mb-12">
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-8 flex items-center gap-3">
+<span class="w-8 h-1 bg-primary rounded-full"></span>
+                    Destek Kategorileri
+                </h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Category Item 1 -->
+<div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm hover:shadow-md transition-all border border-slate-100 dark:border-slate-700 flex items-start gap-5 group cursor-pointer">
+<div class="size-14 shrink-0 rounded-2xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">payments</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-1">Ödeme Sorunları</h4>
+<p class="text-slate-500 text-sm leading-relaxed">Ödeme yöntemleri, faturalandırma ve POS hataları.</p>
+</div>
+</div>
+<!-- Category Item 2 -->
+<div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm hover:shadow-md transition-all border border-slate-100 dark:border-slate-700 flex items-start gap-5 group cursor-pointer">
+<div class="size-14 shrink-0 rounded-2xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">terminal</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-1">Kurulum Yardımı</h4>
+<p class="text-slate-500 text-sm leading-relaxed">Modül ve tema kurulumu aşamasındaki zorluklar.</p>
+</div>
+</div>
+<!-- Category Item 3 -->
+<div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm hover:shadow-md transition-all border border-slate-100 dark:border-slate-700 flex items-start gap-5 group cursor-pointer">
+<div class="size-14 shrink-0 rounded-2xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">bug_report</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-1">Teknik Hata</h4>
+<p class="text-slate-500 text-sm leading-relaxed">Sistem hataları ve çakışan eklenti problemleri.</p>
+</div>
+</div>
+<!-- Category Item 4 -->
+<div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm hover:shadow-md transition-all border border-slate-100 dark:border-slate-700 flex items-start gap-5 group cursor-pointer">
+<div class="size-14 shrink-0 rounded-2xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">key</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-1">Lisans İşlemleri</h4>
+<p class="text-slate-500 text-sm leading-relaxed">Domain değişikliği ve lisans aktivasyon işlemleri.</p>
+</div>
+</div>
+<!-- Category Item 5 -->
+<div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm hover:shadow-md transition-all border border-slate-100 dark:border-slate-700 flex items-start gap-5 group cursor-pointer">
+<div class="size-14 shrink-0 rounded-2xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">assignment_return</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-1">İade Talebi</h4>
+<p class="text-slate-500 text-sm leading-relaxed">İptal prosedürleri ve iade süreci takibi.</p>
+</div>
+</div>
+<!-- Category Item 6 -->
+<div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm hover:shadow-md transition-all border border-slate-100 dark:border-slate-700 flex items-start gap-5 group cursor-pointer">
+<div class="size-14 shrink-0 rounded-2xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">code</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-1">Geliştirici Soruları</h4>
+<p class="text-slate-500 text-sm leading-relaxed">API entegrasyonu ve kod yapısı hakkında sorular.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer / Live Support Badge -->
+<footer class="bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 py-12">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-accent"></span>
+</span>
+<span class="text-accent font-bold text-sm tracking-wide uppercase">7/24 Canlı Destek</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Müşteri temsilcilerimiz şu an çevrimiçi ve yardıma hazır.</p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-6 py-3 bg-slate-900 dark:bg-white dark:text-slate-900 text-white rounded-full font-bold hover:opacity-90 transition-all">
+<span class="material-symbols-outlined">chat_bubble</span>
+                        Sohbeti Başlat
+                    </button>
+<button class="flex items-center gap-2 px-6 py-3 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-full font-bold hover:bg-slate-200 transition-all">
+                        Bizi Arayın
+                    </button>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-slate-50 dark:border-slate-800 text-center">
+<p class="text-slate-400 text-xs">© 2024 OpenCart Destek Merkezi. Tüm hakları saklıdır.</p>
+</div>
+</footer>
+</div>
+</body></html>

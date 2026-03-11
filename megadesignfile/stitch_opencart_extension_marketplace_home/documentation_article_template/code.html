@@ -1,0 +1,253 @@
+<html class="dark"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0d0df2",
+            "accent-teal": "#00C2A8",
+            "accent-blue": "#5B6CFF",
+            "background-light": "#f5f5f8",
+            "background-dark": "#101022",
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #282839;
+      border-radius: 10px;
+    }
+    .code-block {
+      background: #1a1a2e;
+      border: 1px solid #282839;
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-300">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 lg:px-12 py-3">
+<div class="mx-auto flex max-w-7xl items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="flex h-8 w-8 items-center justify-center rounded bg-primary text-white">
+<span class="material-symbols-outlined text-xl">package_2</span>
+</div>
+<h1 class="text-lg font-bold tracking-tight">OpenCart <span class="text-primary">SaaS</span></h1>
+</div>
+<nav class="hidden items-center gap-6 md:flex">
+<a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-white transition-colors" href="#">Marketplace</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-white transition-colors" href="#">Modüller</a>
+<a class="text-sm font-medium text-primary underline underline-offset-8" href="#">Dokümantasyon</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="h-9 w-64 rounded-lg border-none bg-slate-200/50 pl-10 text-sm focus:ring-2 focus:ring-primary dark:bg-slate-800/50 dark:text-white" placeholder="Dokümanlarda ara..." type="text"/>
+</div>
+<button class="flex h-9 items-center justify-center rounded-lg bg-primary px-4 text-sm font-semibold text-white hover:bg-primary/90 transition-all">
+            Giriş Yap
+          </button>
+</div>
+</div>
+</header>
+<div class="mx-auto flex w-full max-w-7xl grow">
+<!-- Left Sidebar: Navigation -->
+<aside class="sticky top-16 hidden h-[calc(100vh-64px)] w-64 flex-col border-r border-slate-200 dark:border-slate-800 px-6 py-8 lg:flex">
+<div class="custom-scrollbar overflow-y-auto pr-2">
+<div class="mb-8">
+<h3 class="mb-4 text-xs font-bold uppercase tracking-widest text-slate-400">Başlangıç</h3>
+<ul class="space-y-2">
+<li><a class="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-white" href="#">Tanıtım</a></li>
+<li><a class="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-white" href="#">Hızlı Kurulum</a></li>
+<li><a class="flex items-center gap-2 text-sm font-bold text-primary" href="#">Sistem Gereksinimleri</a></li>
+</ul>
+</div>
+<div class="mb-8">
+<h3 class="mb-4 text-xs font-bold uppercase tracking-widest text-slate-400">Modül Geliştirme</h3>
+<ul class="space-y-2">
+<li><a class="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-white" href="#">Mimari Yapı</a></li>
+<li><a class="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-white" href="#">Hooks &amp; Events</a></li>
+<li><a class="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-white" href="#">Veritabanı Şeması</a></li>
+<li><a class="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-white" href="#">Admin Paneli Entegrasyonu</a></li>
+</ul>
+</div>
+<div class="mb-8">
+<h3 class="mb-4 text-xs font-bold uppercase tracking-widest text-slate-400">API Referansı</h3>
+<ul class="space-y-2">
+<li><a class="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-white" href="#">Kimlik Doğrulama</a></li>
+<li><a class="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-white" href="#">Endpoint Listesi</a></li>
+</ul>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 px-6 py-10 lg:px-12">
+<div class="mx-auto max-w-3xl">
+<!-- Breadcrumbs -->
+<nav class="mb-6 flex items-center gap-2 text-xs font-medium text-slate-500">
+<a class="hover:text-primary" href="#">Dokümantasyon</a>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<a class="hover:text-primary" href="#">Başlangıç</a>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<span class="text-slate-900 dark:text-slate-100">Sistem Gereksinimleri</span>
+</nav>
+<article class="prose prose-slate dark:prose-invert max-w-none">
+<h1 class="mb-4 text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white lg:text-5xl">Sistem Gereksinimleri</h1>
+<p class="mb-8 text-xl text-slate-600 dark:text-slate-400">OpenCart SaaS altyapısının sorunsuz çalışması için sunucunuzun karşılaması gereken minimum ve önerilen teknik detaylar.</p>
+<h2 class="group relative mb-4 mt-12 text-2xl font-bold tracking-tight" id="sunucu-altyapisi">
+              Sunucu Altyapısı
+              <a class="absolute -left-6 top-0 hidden text-primary group-hover:inline opacity-50" href="#sunucu-altyapisi">#</a>
+</h2>
+<p class="mb-4">SaaS platformumuz, en son PHP teknolojileri ve modern veritabanı motorları ile optimize edilmiştir. Performans kaybı yaşamamak için aşağıdaki sürümleri kullanmanızı öneririz.</p>
+<!-- Tip Callout -->
+<div class="my-8 flex items-start gap-4 rounded-xl border-l-4 border-accent-teal bg-accent-teal/10 p-5 dark:bg-accent-teal/5">
+<span class="material-symbols-outlined text-accent-teal">lightbulb</span>
+<div>
+<strong class="block mb-1 text-accent-teal">İpucu</strong>
+<p class="text-sm leading-relaxed">Daha yüksek trafikli mağazalar için Redis cache kullanımını şiddetle tavsiye ediyoruz.</p>
+</div>
+</div>
+<h3 class="mb-3 mt-8 text-xl font-semibold" id="php-versiyonlari">PHP Versiyonları</h3>
+<p class="mb-4">Modüllerimizin çoğu PHP 8.1 ve üzeri özellikleri (Type hinting, Enums) kullanmaktadır.</p>
+<ul class="mb-6 list-inside list-disc space-y-2 text-slate-600 dark:text-slate-400">
+<li>Minimum: <code class="rounded bg-slate-200 px-1 dark:bg-slate-800">PHP 7.4</code></li>
+<li>Önerilen: <code class="rounded bg-slate-200 px-1 dark:bg-slate-800">PHP 8.2</code></li>
+<li>Gerekli Eklentiler: <code class="text-xs">curl, gd, mbstring, zip, xml</code></li>
+</ul>
+<h2 class="mb-4 mt-12 text-2xl font-bold tracking-tight" id="kurulum-komutlari">Kurulum Komutları</h2>
+<p class="mb-4">Bağımlılıkları yüklemek için aşağıdaki Composer komutunu terminalinizde çalıştırabilirsiniz.</p>
+<!-- Code Block Component -->
+<div class="code-block relative my-6 overflow-hidden rounded-xl">
+<div class="flex items-center justify-between bg-slate-800/50 px-4 py-2">
+<span class="text-xs font-mono text-slate-400">bash</span>
+<button class="flex items-center gap-1 text-xs font-medium text-slate-400 hover:text-white">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+                  Kopyala
+                </button>
+</div>
+<div class="p-4 font-mono text-sm text-slate-300">
+<p><span class="text-accent-teal">composer</span> require opencart-saas/core-module</p>
+<p><span class="text-accent-teal">php</span> artisan migrate --seed</p>
+</div>
+</div>
+<!-- Warning Callout -->
+<div class="my-8 flex items-start gap-4 rounded-xl border-l-4 border-accent-blue bg-accent-blue/10 p-5 dark:bg-accent-blue/5">
+<span class="material-symbols-outlined text-accent-blue">warning</span>
+<div>
+<strong class="block mb-1 text-accent-blue">Dikkat</strong>
+<p class="text-sm leading-relaxed">Migration işlemi mevcut veritabanı tablolarınızda değişiklik yapabilir. Lütfen yedek almayı unutmayın.</p>
+</div>
+</div>
+<h2 class="mb-4 mt-12 text-2xl font-bold tracking-tight" id="veritabani-yapilandirmasi">Veritabanı Yapılandırması</h2>
+<p class="mb-4">MySQL 8.0 veya PostgreSQL 14+ sürümleri tam uyumluluk sağlamaktadır. Karakter seti olarak <code class="rounded bg-slate-200 px-1 dark:bg-slate-800">utf8mb4</code> kullanılması zorunludur.</p>
+</article>
+<!-- Feedback Section -->
+<div class="mt-16 border-t border-slate-200 pt-10 dark:border-slate-800">
+<div class="flex flex-col items-center justify-between gap-6 md:flex-row">
+<div>
+<h4 class="text-lg font-bold">Bu içerik yardımcı oldu mu?</h4>
+<p class="text-sm text-slate-500">Geri bildiriminiz bizim için değerlidir.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex h-10 items-center gap-2 rounded-lg border border-slate-200 px-6 font-medium hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900 transition-all">
+<span class="material-symbols-outlined text-lg">thumb_up</span> Evet
+                </button>
+<button class="flex h-10 items-center gap-2 rounded-lg border border-slate-200 px-6 font-medium hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900 transition-all">
+<span class="material-symbols-outlined text-lg">thumb_down</span> Hayır
+                </button>
+</div>
+</div>
+<div class="mt-12 flex flex-col items-center justify-between gap-6 rounded-2xl bg-primary/5 p-8 md:flex-row">
+<div class="flex items-center gap-4 text-center md:text-left">
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<div>
+<h5 class="text-lg font-bold">Daha fazla yardıma mı ihtiyacınız var?</h5>
+<p class="text-sm text-slate-500">Teknik ekibimiz 7/24 yanınızda.</p>
+</div>
+</div>
+<button class="whitespace-nowrap rounded-lg bg-primary px-6 py-3 font-bold text-white shadow-lg shadow-primary/20 transition-transform active:scale-95">
+                Destek Ekibiyle İletişime Geç
+              </button>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex items-center justify-between py-6">
+<a class="group flex items-center gap-3 text-left" href="#">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 group-hover:border-primary dark:border-slate-800 transition-colors">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">arrow_back</span>
+</div>
+<div>
+<span class="block text-xs font-medium text-slate-500">Önceki</span>
+<span class="text-sm font-bold group-hover:text-primary">Hızlı Kurulum</span>
+</div>
+</a>
+<a class="group flex items-center gap-3 text-right" href="#">
+<div>
+<span class="block text-xs font-medium text-slate-500">Sonraki</span>
+<span class="text-sm font-bold group-hover:text-primary">Mimari Yapı</span>
+</div>
+<div class="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 group-hover:border-primary dark:border-slate-800 transition-colors">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">arrow_forward</span>
+</div>
+</a>
+</div>
+</div>
+</main>
+<!-- Right Sidebar: TOC -->
+<aside class="sticky top-16 hidden h-[calc(100vh-64px)] w-64 flex-col px-6 py-10 xl:flex">
+<h3 class="mb-4 text-xs font-bold uppercase tracking-widest text-slate-400">Bu Sayfada</h3>
+<nav class="space-y-3">
+<a class="block border-l-2 border-primary pl-4 text-sm font-bold text-primary" href="#sunucu-altyapisi">Sunucu Altyapısı</a>
+<a class="block border-l-2 border-transparent pl-4 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white" href="#php-versiyonlari">PHP Versiyonları</a>
+<a class="block border-l-2 border-transparent pl-4 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white" href="#kurulum-komutlari">Kurulum Komutları</a>
+<a class="block border-l-2 border-transparent pl-4 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white" href="#veritabani-yapilandirmasi">Veritabanı Yapılandırması</a>
+</nav>
+<div class="mt-auto border-t border-slate-200 pt-8 dark:border-slate-800">
+<div class="rounded-xl bg-slate-100 p-4 dark:bg-slate-900">
+<h4 class="mb-2 text-sm font-bold">Bültene Katılın</h4>
+<p class="mb-4 text-xs text-slate-500 leading-relaxed">Yeni özellikler ve güncellemelerden haberdar olun.</p>
+<div class="flex flex-col gap-2">
+<input class="h-8 w-full rounded-md border-none bg-white text-xs dark:bg-slate-800" placeholder="E-posta" type="email"/>
+<button class="h-8 w-full rounded-md bg-slate-900 text-xs font-bold text-white dark:bg-primary">Abone Ol</button>
+</div>
+</div>
+</div>
+</aside>
+</div>
+<!-- Mobile Search Fab -->
+<button class="fixed bottom-6 right-6 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-xl shadow-primary/40 lg:hidden">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</body></html>

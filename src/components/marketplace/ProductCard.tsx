@@ -11,8 +11,19 @@ function getStableReviewCount(product: Product): number {
     return 10 + ((numericId * 37 + product.installs + Math.round(Number(product.rating) * 10)) % 200);
 }
 
+function isPublicUrl(url?: string): boolean {
+    if (!url) return false;
+    try {
+        const { hostname } = new URL(url);
+        return hostname !== "localhost" && hostname !== "127.0.0.1" && !hostname.startsWith("192.168.");
+    } catch {
+        return false;
+    }
+}
+
 export function ProductCard({ product }: ProductCardProps) {
     const reviewCount = getStableReviewCount(product);
+    const hasDemoUrl = isPublicUrl(product.demoUrl);
 
     return (
         <div className="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-soft hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 dark:border-slate-700 flex flex-col h-full relative">
@@ -35,12 +46,20 @@ export function ProductCard({ product }: ProductCardProps) {
                 {/* Hover Overlay Actions */}
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 via-slate-900/55 to-transparent p-3 md:p-4 opacity-100 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100 transition-opacity duration-300">
                     <div className="grid grid-cols-2 gap-2">
-                        <Link
-                            href={`/product/${product.slug}`}
-                            className="inline-flex h-10 items-center justify-center rounded-xl border border-white/30 bg-white/95 px-2 text-[11px] font-semibold text-slate-900 shadow-md transition-colors hover:bg-white whitespace-nowrap leading-none sm:px-3 sm:text-xs"
-                        >
-                            Canlı Demo
-                        </Link>
+                        {hasDemoUrl ? (
+                            <a
+                                href={product.demoUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex h-10 items-center justify-center rounded-xl border border-white/30 bg-white/95 px-2 text-[11px] font-semibold text-slate-900 shadow-md transition-colors hover:bg-white whitespace-nowrap leading-none sm:px-3 sm:text-xs"
+                            >
+                                Canlı Demo
+                            </a>
+                        ) : (
+                            <span className="inline-flex h-10 items-center justify-center rounded-xl border border-white/20 bg-white/30 px-2 text-[11px] font-semibold text-white/60 whitespace-nowrap leading-none sm:px-3 sm:text-xs cursor-not-allowed" title="Demo yakında eklenecek">
+                                Demo Yakında
+                            </span>
+                        )}
                         <Link
                             href={`/product/${product.slug}`}
                             className="inline-flex h-10 items-center justify-center rounded-xl bg-primary px-2 text-[11px] font-semibold text-white shadow-md shadow-primary/30 transition-colors hover:bg-primary/90 whitespace-nowrap leading-none sm:px-3 sm:text-xs"

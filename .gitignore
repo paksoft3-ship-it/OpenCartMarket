@@ -1,24 +1,28 @@
-node_modules/
+# Next.js
 .next/
-dist/
 out/
+build/
 
-megadesignfile/
-megadesignfile.zip
-stitch_opencart_extension_marketplace_home5/
-AI_CONTEXT.md
-public/logo_backup.png
-public/logo444.png
-public/logo1.png
-public/logo1_v2.png
-public/favicon_backup.png
-public/favicon1.png
-public/fa.png
-_stitch_extract/
-stitch.zip
-stitch_opencart_extension_marketplace_home*.zip
-stitch_opencart_extension_marketplace_home5.zip
-tsconfig.tsbuildinfo
-public/.DS_Store
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables — NEVER commit these
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel
 .vercel
-.env*.local
+
+# macOS
+.DS_Store
+*.DS_Store
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts

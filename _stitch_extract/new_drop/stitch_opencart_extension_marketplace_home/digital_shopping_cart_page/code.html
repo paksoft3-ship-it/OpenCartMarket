@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alışveriş Sepeti - OpenCart SaaS Marketplace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5c6cff",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f1123",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex h-16 items-center justify-between gap-8">
+<!-- Logo -->
+<div class="flex items-center gap-3">
+<div class="text-primary size-8">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z" fill="currentColor" fill-rule="evenodd"></path>
+<path clip-rule="evenodd" d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<span class="text-xl font-bold tracking-tight">OpenCart SaaS</span>
+</div>
+<!-- Search -->
+<div class="hidden md:flex flex-1 max-w-md">
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+<span class="material-symbols-outlined text-lg">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 border-none bg-slate-100 dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-primary/50 text-sm" placeholder="Tema veya modül ara..." type="text"/>
+</div>
+</div>
+<!-- Nav Links -->
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Temalar</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Modüller</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Hizmetler</a>
+<button class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-opacity-90 transition-all">Giriş Yap</button>
+</nav>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<!-- Page Title -->
+<h1 class="text-4xl font-black mb-10 tracking-tight">Alışveriş Sepeti</h1>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Cart Items -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Item 1 -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row gap-6">
+<div class="w-full sm:w-48 aspect-[4/3] bg-slate-200 dark:bg-slate-800 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Ultima Admin" class="w-full h-full object-cover" data-alt="Modern dashboard UI template for OpenCart admin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeALgscxlFOvS8R3lHQ5RxTPJ29WHxdBTf_b_XkucQ95h2qX3xrIRHeBZQ8Yp1JkgItNnqtSHqNRgL6fzkxx-0E_fH3Hv4GCfs2UAgGVAeoNTY4cYuFhTzMEWjiLiE3Hf7dl1zIHAxgZWxEYMZe_2MvkzrB1JnWK9dXinAuc-ZzQqpPgUfbwD71yehsGuC_5VXz7lAzMAq3ciiq0EFogRRDjYkAISR_vbh3Osrp_Pdt1wc8nXE3KqnLgDc8VRQ3hqBYf3H4X_O_54"/>
+</div>
+<div class="flex-1 flex flex-col justify-between py-1">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="text-xl font-bold">Ultima Admin Theme</h3>
+<span class="text-xl font-bold text-slate-900 dark:text-slate-100">$59</span>
+</div>
+<div class="flex items-center gap-3 mt-2">
+<span class="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider">Tema</span>
+<span class="text-sm text-slate-500 dark:text-slate-400">Versiyon: v4.0.2</span>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<button class="flex items-center gap-1.5 text-sm font-medium text-rose-500 hover:text-rose-600 transition-colors">
+<span class="material-symbols-outlined text-lg">delete</span>
+                                Kaldır
+                            </button>
+<span class="text-xs text-slate-400">Ömür boyu lisans dahil</span>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row gap-6">
+<div class="w-full sm:w-48 aspect-[4/3] bg-slate-200 dark:bg-slate-800 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="SEO Pack Pro" class="w-full h-full object-cover" data-alt="Data analytics and SEO visualization icons" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn_ruvtN5TyyFytUI1fOXiwD-mqrAhKpHTnm1z4aI4r3mOsScP2QMlABDd-8ypqjKtk_Z224xqfzhEAQgwg47ceUGLdI937Z-bj--kZM2nFHjn1V83oc4ZYYQJLSHAsOOLWACaUcsNus7NQxYHN2CvSLPxO-eiItQAesOt7J7ooOS-VqwdL5xmjQEEMjQsNwv0pxAg8aKjLYIiMZJaBFPoORcqW9Klghix8pUFyf6a5ttUyP4PvL0Mo1b3QJjOZW1PXJra4Dxq200"/>
+</div>
+<div class="flex-1 flex flex-col justify-between py-1">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="text-xl font-bold">SEO Pack Pro</h3>
+<span class="text-xl font-bold text-slate-900 dark:text-slate-100">$35</span>
+</div>
+<div class="flex items-center gap-3 mt-2">
+<span class="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider">Modül</span>
+<span class="text-sm text-slate-500 dark:text-slate-400">Versiyon: v2.1.0</span>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<button class="flex items-center gap-1.5 text-sm font-medium text-rose-500 hover:text-rose-600 transition-colors">
+<span class="material-symbols-outlined text-lg">delete</span>
+                                Kaldır
+                            </button>
+<span class="text-xs text-slate-400">Ücretsiz kurulum desteği</span>
+</div>
+</div>
+</div>
+<!-- Promotional Banner -->
+<div class="bg-primary/5 border border-primary/10 p-6 rounded-xl flex items-center gap-4">
+<div class="bg-primary/20 p-3 rounded-full text-primary">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<div>
+<p class="font-bold text-slate-900 dark:text-slate-100">Kuponunuz mu var?</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">Ödeme adımında kupon kodunuzu kullanarak indirimden faydalanabilirsiniz.</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Summary -->
+<div class="lg:col-span-4">
+<div class="sticky top-24 bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none">
+<h2 class="text-xl font-bold mb-6">Sipariş Özeti</h2>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between text-slate-600 dark:text-slate-400">
+<span>Ara Toplam</span>
+<span class="font-medium">$94.00</span>
+</div>
+<div class="flex justify-between text-slate-600 dark:text-slate-400">
+<span>KDV (%0)</span>
+<span class="font-medium">$0.00</span>
+</div>
+<div class="flex justify-between text-rose-500">
+<span>İndirim</span>
+<span class="font-medium">-$0.00</span>
+</div>
+<div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-end">
+<span class="text-lg font-bold">Toplam</span>
+<span class="text-3xl font-black text-primary">$94.00</span>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-4 rounded-xl text-lg font-bold hover:bg-opacity-95 shadow-lg shadow-primary/30 transition-all flex items-center justify-center gap-2">
+                        Ödemeye Geç
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<div class="mt-6 flex flex-col gap-3">
+<div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+                            Güvenli 256-bit SSL ödeme altyapısı
+                        </div>
+<div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">cloud_download</span>
+                            Ödeme sonrası anında indirme
+                        </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recommended Section -->
+<section class="mt-24">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-2xl font-bold tracking-tight">Sizin İçin Seçtiklerimiz</h2>
+<a class="text-primary font-semibold text-sm hover:underline" href="#">Tümünü Gör</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Rec Card 1 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 overflow-hidden hover:shadow-lg transition-all">
+<div class="aspect-video bg-slate-200 dark:bg-slate-800 overflow-hidden relative">
+<img alt="Quick Checkout" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="App interface design with checkout buttons" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVvnI-Q1RmqTjk1vIFTkMyCVW-pKboGbNXM5tWtDBTwKMoQ_Jfu6N-4QCpjyJGKAyBCvM_TRwPYFv18jMR88yYy6Wh6NTd0CXEYTAuApJMeuP-lJsFbmYVjUnWLJBxFBuBGw_vSwcOpkoK4NUB5cbNuHIN8Nfsfw9uNrL1IUkt77ZcQ5-PLjTb78a7DuAZLc1OYA_xEfGok98rIEVkj30tGkw3uESUGZYRsGSrHPm2VQDPyUiyUGSAFZBi4kTZErrBjKTgv6wTnfs"/>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-2 py-1 rounded-md text-xs font-bold text-slate-900 shadow-sm">
+                            $24
+                        </div>
+</div>
+<div class="p-5">
+<h4 class="font-bold mb-1 group-hover:text-primary transition-colors">Fast Checkout Pro</h4>
+<p class="text-xs text-slate-500 mb-4 line-clamp-1">Tek adımda ödeme modülü ile dönüşüm oranlarını artırın.</p>
+<button class="w-full py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-sm font-bold hover:bg-primary hover:text-white transition-all">Sepete Ekle</button>
+</div>
+</div>
+<!-- Rec Card 2 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 overflow-hidden hover:shadow-lg transition-all">
+<div class="aspect-video bg-slate-200 dark:bg-slate-800 overflow-hidden relative">
+<img alt="Multi-Vendor" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Abstract futuristic technology network pattern" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXaaBadwUsBO9xjbLGFNITz-B7MzJEtz1QIg1vRRms8B8DMadimz_LyAwtq3liKeVYS5A21IPEI4j0_pnKnzrf-gwF6kyc9eyRqDZ5eCalgvhU1gKwauRXI92OrUWPBlP88PBmi0i2VlqOERS_0SXp-_R83cYMqBgMxp7WMQlEfoIHZ5DphUDA6jlohCOHv8X6v7YxxRkzhjx--u7MAVexLJdF-FhN-G2duynzZ4Zt39JuC7F8_gZN6NdcNiMBRhAo8UdvT71TQWM"/>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-2 py-1 rounded-md text-xs font-bold text-slate-900 shadow-sm">
+                            $129
+                        </div>
+</div>
+<div class="p-5">
+<h4 class="font-bold mb-1 group-hover:text-primary transition-colors">Marketplace Master</h4>
+<p class="text-xs text-slate-500 mb-4 line-clamp-1">OpenCart sitenizi tam kapsamlı bir pazaryerine dönüştürün.</p>
+<button class="w-full py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-sm font-bold hover:bg-primary hover:text-white transition-all">Sepete Ekle</button>
+</div>
+</div>
+<!-- Rec Card 3 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 overflow-hidden hover:shadow-lg transition-all">
+<div class="aspect-video bg-slate-200 dark:bg-slate-800 overflow-hidden relative">
+<img alt="Blog Module" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Person working on laptop with code and graphs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8uZOEq3GhPD0tSEro4KzFWd47vUZ3f_orMYf2BNOUCN2gAW5e9cRj8U35GGVBFza3vtrZJJsCfiDEy7w34niCPI_j71aodn8q3dWzi0LSz54CA9ajkkEcC5rHy5vZTK3VzHVTg4TaxPoCTGik-meatOmfz3PyNgDUzT8dO3AtpnUHG0toreoZ3qnCJ2PEaXNVARTjsBrBkb-KntV2MosKBrv_RZjLP34JrxCVCEAzxxmIvfH33Gbiy4Dg_ITHYt0VqsUgNGOKl98"/>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-2 py-1 rounded-md text-xs font-bold text-slate-900 shadow-sm">
+                            $19
+                        </div>
+</div>
+<div class="p-5">
+<h4 class="font-bold mb-1 group-hover:text-primary transition-colors">Smart Blog Engine</h4>
+<p class="text-xs text-slate-500 mb-4 line-clamp-1">SEO uyumlu blog yönetimi ve içerik pazarlama modülü.</p>
+<button class="w-full py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-sm font-bold hover:bg-primary hover:text-white transition-all">Sepete Ekle</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="mt-32 border-t border-slate-200 dark:border-slate-800 py-12 bg-white dark:bg-background-dark">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="text-slate-400 size-6">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z" fill="currentColor" fill-rule="evenodd"></path>
+<path clip-rule="evenodd" d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<span class="text-sm font-bold text-slate-400 uppercase tracking-widest">OpenCart SaaS Marketplace</span>
+</div>
+<div class="flex gap-8 text-sm text-slate-500 dark:text-slate-400">
+<a class="hover:text-primary transition-colors" href="#">Kullanım Koşulları</a>
+<a class="hover:text-primary transition-colors" href="#">Gizlilik Politikası</a>
+<a class="hover:text-primary transition-colors" href="#">Destek</a>
+</div>
+<p class="text-sm text-slate-400">© 2024 Tüm Hakları Saklıdır.</p>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OpenCart SaaS Marketplace - Kayıt Ol</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4d5eff",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f1123",
+                        "success": "#00C2A8",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-bg {
+            background: radial-gradient(circle at top right, rgba(77, 94, 255, 0.08), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(77, 94, 255, 0.05), transparent 30%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen font-display antialiased">
+<!-- Navbar Component -->
+<header class="w-full border-b border-slate-200/60 dark:border-slate-800 bg-white/70 dark:bg-background-dark/70 backdrop-blur-md sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="bg-primary p-1.5 rounded-lg">
+<svg class="size-6 text-white" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z" fill="currentColor" fill-rule="evenodd"></path>
+<path clip-rule="evenodd" d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h1 class="text-slate-900 dark:text-slate-100 text-lg font-bold tracking-tight">OpenCart SaaS</h1>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="#">Temalar</a>
+<a class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="#">Modüller</a>
+<a class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="#">Geliştiriciler</a>
+<button class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg text-sm font-semibold transition-all shadow-sm">
+                    Giriş Yap
+                </button>
+</div>
+</div>
+</header>
+<!-- Main Registration Section -->
+<main class="gradient-bg flex items-center justify-center py-16 px-4 min-h-[calc(100vh-64px)]">
+<div class="w-full max-w-[540px]">
+<!-- Auth Card -->
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none border border-slate-100 dark:border-slate-800 p-8 md:p-12">
+<!-- Card Header -->
+<div class="mb-10 text-center md:text-left">
+<h2 class="text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight mb-2">Yeni Hesap Oluştur</h2>
+<p class="text-slate-500 dark:text-slate-400 text-base leading-relaxed">Modern OpenCart ekosistemine katılın ve mağazanızı bir üst seviyeye taşıyın.</p>
+</div>
+<!-- Registration Form -->
+<form class="space-y-6" onsubmit="return false;">
+<!-- Name Input -->
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300 ml-1">Ad Soyad</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-[20px] group-focus-within:text-primary transition-colors">person</span>
+<input class="w-full pl-11 pr-4 py-3.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all placeholder:text-slate-400 text-slate-900 dark:text-slate-100" placeholder="Adınızı ve soyadınızı girin" type="text"/>
+</div>
+</div>
+<!-- Email Input -->
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300 ml-1">E-posta</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-[20px] group-focus-within:text-primary transition-colors">mail</span>
+<input class="w-full pl-11 pr-4 py-3.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all placeholder:text-slate-400 text-slate-900 dark:text-slate-100" placeholder="ornek@eposta.com" type="email"/>
+</div>
+</div>
+<!-- Password Group -->
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300 ml-1">Şifre</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-[20px] group-focus-within:text-primary transition-colors">lock</span>
+<input class="w-full pl-11 pr-12 py-3.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all placeholder:text-slate-400 text-slate-900 dark:text-slate-100" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Strength Meter -->
+<div class="space-y-1.5 px-1">
+<div class="flex gap-1.5 h-1.5">
+<div class="flex-1 rounded-full bg-success"></div>
+<div class="flex-1 rounded-full bg-success"></div>
+<div class="flex-1 rounded-full bg-success"></div>
+<div class="flex-1 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-[11px] font-medium text-success uppercase tracking-wider">Güçlü Şifre</span>
+<span class="text-[11px] font-medium text-slate-400">Minimum 8 karakter</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300 ml-1">Şifre Onayı</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-[20px] group-focus-within:text-primary transition-colors">lock_reset</span>
+<input class="w-full pl-11 pr-4 py-3.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all placeholder:text-slate-400 text-slate-900 dark:text-slate-100" placeholder="••••••••" type="password"/>
+</div>
+</div>
+</div>
+<!-- Terms Checkbox -->
+<div class="flex items-start gap-3 px-1 py-2">
+<div class="flex items-center h-5">
+<input class="w-5 h-5 rounded border-slate-300 dark:border-slate-700 text-primary focus:ring-primary/20 transition-all cursor-pointer" id="terms" type="checkbox"/>
+</div>
+<label class="text-sm text-slate-600 dark:text-slate-400 cursor-pointer select-none leading-tight" for="terms">
+<a class="text-primary font-medium hover:underline" href="#">Kullanım Koşullarını</a> ve <a class="text-primary font-medium hover:underline" href="#">Gizlilik Politikasını</a> kabul ediyorum.
+                        </label>
+</div>
+<!-- CTA Button -->
+<button class="w-full bg-primary hover:bg-primary/90 text-white py-4 rounded-xl font-bold text-base transition-all shadow-lg shadow-primary/20 active:scale-[0.98] flex items-center justify-center gap-2 mt-4">
+                        Hesap Oluştur
+                        <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</form>
+<!-- Footer Links -->
+<div class="mt-10 pt-8 border-t border-slate-100 dark:border-slate-800 text-center">
+<p class="text-slate-600 dark:text-slate-400 text-sm">
+                        Zaten hesabınız var mı? 
+                        <a class="text-primary font-bold hover:underline ml-1" href="#">Giriş Yap</a>
+</p>
+</div>
+</div>
+<!-- Bottom Support Text -->
+<div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 px-2 opacity-60">
+<div class="flex items-center gap-4 text-xs font-medium text-slate-500">
+<a class="hover:text-primary transition-colors" href="#">Destek</a>
+<a class="hover:text-primary transition-colors" href="#">SSS</a>
+<a class="hover:text-primary transition-colors" href="#">Güvenlik</a>
+</div>
+<div class="flex items-center gap-1.5 text-xs text-slate-500">
+<span class="size-2 rounded-full bg-success"></span>
+                    Tüm sistemler çalışıyor
+                </div>
+</div>
+</div>
+</main>
+<!-- Simple Footer -->
+<footer class="py-8 text-center border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900">
+<p class="text-slate-400 text-xs font-medium">© 2024 OpenCart SaaS Marketplace. Tüm hakları saklıdır.</p>
+</footer>
+</body></html>
