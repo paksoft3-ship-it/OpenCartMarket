@@ -106,7 +106,7 @@ export default function BrowseFilters({ categories, currentParams }: BrowseFilte
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-4">OpenCart Sürümü</h3>
                 <div className="space-y-3">
                     <label className="flex items-center gap-3 cursor-pointer group">
-                        <input checked defaultChecked className="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary" type="checkbox" readOnly />
+                        <input checked className="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary" type="checkbox" readOnly />
                         <span className="text-sm text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">4.x (En Yeni)</span>
                     </label>
                     <label className="flex items-center gap-3 cursor-pointer group">

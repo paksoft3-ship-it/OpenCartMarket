@@ -19,7 +19,7 @@ export default async function Home() {
   return (
     <div className="relative flex flex-col w-full group/design-root overflow-x-hidden bg-background-light dark:bg-background-dark">
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-6 py-20 lg:py-24">
+      <section className="w-full px-6 lg:px-16 xl:px-24 py-20 lg:py-24">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           <div className="flex-1 flex flex-col gap-8 text-center lg:text-left">
             <div className="flex flex-col gap-4">
