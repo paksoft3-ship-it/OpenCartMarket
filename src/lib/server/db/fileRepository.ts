@@ -47,6 +47,7 @@ function initialProducts(): AdminProduct[] {
     version: "1.0.0",
     status: "published",
     demoUrl: String(item.demoUrl ?? ""),
+    sortOrder: Number(item.sortOrder ?? 999),
     createdAt: String(item.createdAt ?? nowIso()),
     updatedAt: String(item.updatedAt ?? nowIso()),
   }));

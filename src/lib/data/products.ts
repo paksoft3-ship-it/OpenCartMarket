@@ -18,7 +18,7 @@ function mapAdminProductToCatalog(admin: AdminProduct): Product {
         images: admin.images,
         features: admin.features,
         tags: admin.tags,
-        demoUrl: admin.demoUrl ?? "",
+        demoUrl: admin.demoUrl || undefined,
         createdAt: admin.createdAt,
         updatedAt: admin.updatedAt,
     };

@@ -89,6 +89,9 @@ CREATE TABLE IF NOT EXISTS admin_products (
 -- Migration: add demo_url to existing installs
 ALTER TABLE admin_products ADD COLUMN IF NOT EXISTS demo_url TEXT NOT NULL DEFAULT '';
 
+-- Migration: add sort_order for product listing priority
+ALTER TABLE admin_products ADD COLUMN IF NOT EXISTS sort_order INTEGER NOT NULL DEFAULT 999;
+
 CREATE TABLE IF NOT EXISTS product_files (
   id               UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   product_id       UUID NOT NULL REFERENCES admin_products(id) ON DELETE CASCADE,

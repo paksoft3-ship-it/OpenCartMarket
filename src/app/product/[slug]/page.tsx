@@ -53,12 +53,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                             <span className="material-symbols-outlined text-4xl text-slate-400">image</span>
                         </div>
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-8">
-                        <button className="bg-white/90 backdrop-blur-sm text-slate-900 hover:bg-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg transition-all transform translate-y-4 group-hover:translate-y-0">
-                            <span className="material-symbols-outlined">visibility</span>
-                            Tam Ekran Önizleme
-                        </button>
-                    </div>
+                    {product.demoUrl && (
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-8">
+                            <a href={product.demoUrl} target="_blank" rel="noopener noreferrer" className="bg-white/90 backdrop-blur-sm text-slate-900 hover:bg-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg transition-all transform translate-y-4 group-hover:translate-y-0">
+                                <span className="material-symbols-outlined">visibility</span>
+                                Tam Ekran Önizleme
+                            </a>
+                        </div>
+                    )}
                 </div>
 
                 {/* Tab Navigation */}
@@ -139,10 +141,17 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                                 <span className="material-symbols-outlined">shopping_cart</span>
                                 Satın Al
                             </AddToCartButton>
-                            <button className="w-full bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100 font-bold py-4 px-6 rounded-xl flex items-center justify-center gap-2 transition-colors border border-slate-200 dark:border-slate-700">
-                                <span className="material-symbols-outlined">preview</span>
-                                Canlı Demo
-                            </button>
+                            {product.demoUrl ? (
+                                <a href={product.demoUrl} target="_blank" rel="noopener noreferrer" className="w-full bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100 font-bold py-4 px-6 rounded-xl flex items-center justify-center gap-2 transition-colors border border-slate-200 dark:border-slate-700">
+                                    <span className="material-symbols-outlined">preview</span>
+                                    Canlı Demo
+                                </a>
+                            ) : (
+                                <button disabled className="w-full bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-600 font-bold py-4 px-6 rounded-xl flex items-center justify-center gap-2 border border-slate-200 dark:border-slate-700 cursor-not-allowed opacity-50">
+                                    <span className="material-symbols-outlined">preview</span>
+                                    Canlı Demo
+                                </button>
+                            )}
                         </div>
 
                         <div className="flex items-center justify-between text-sm text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-6">
@@ -203,9 +212,15 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                         <span className="text-xl font-bold text-slate-900 dark:text-slate-100">${product.price.toFixed(2)}</span>
                     </div>
                     <div className="flex gap-3 shrink-0 w-full sm:w-auto">
-                        <button className="flex-1 sm:flex-none bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 font-bold py-3 px-4 rounded-xl flex items-center justify-center border border-slate-200 dark:border-slate-700">
-                            <span className="material-symbols-outlined">preview</span>
-                        </button>
+                        {product.demoUrl ? (
+                            <a href={product.demoUrl} target="_blank" rel="noopener noreferrer" className="flex-1 sm:flex-none bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 font-bold py-3 px-4 rounded-xl flex items-center justify-center border border-slate-200 dark:border-slate-700">
+                                <span className="material-symbols-outlined">preview</span>
+                            </a>
+                        ) : (
+                            <button disabled className="flex-1 sm:flex-none bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-600 font-bold py-3 px-4 rounded-xl flex items-center justify-center border border-slate-200 dark:border-slate-700 opacity-50 cursor-not-allowed">
+                                <span className="material-symbols-outlined">preview</span>
+                            </button>
+                        )}
                         <AddToCartButton product={product} className="flex-[2] sm:flex-none bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-xl flex items-center justify-center gap-2 shadow-sm">
                             Sepete Ekle
                         </AddToCartButton>

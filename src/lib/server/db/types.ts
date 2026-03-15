@@ -29,6 +29,7 @@ export interface AdminProduct {
   version: string;
   status: ProductStatus;
   demoUrl: string;
+  sortOrder?: number;
   createdAt: string;
   updatedAt: string;
 }
