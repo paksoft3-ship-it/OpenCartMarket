@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="heroBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="heroGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="heroGradDark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
+    </linearGradient>
+    <linearGradient id="heroGradFashion" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#2d2d2d"/>
+    </linearGradient>
+    <linearGradient id="heroGradMinimal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.15"/>
+    </filter>
+    <clipPath id="screenClip"><rect x="60" y="80" width="680" height="420" rx="8"/></clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#heroBg)"/>
+
+  <!-- Browser chrome -->
+  <rect x="60" y="55" width="680" height="445" rx="10" fill="#1e293b" filter="url(#shadow)"/>
+  <!-- Browser bar -->
+  <rect x="60" y="55" width="680" height="28" rx="10" fill="#0f0f1a"/>
+  <rect x="60" y="72" width="680" height="11" fill="#0f0f1a"/>
+  <circle cx="83" cy="69" r="5" fill="#ff5f56"/>
+  <circle cx="100" cy="69" r="5" fill="#ffbd2e"/>
+  <circle cx="117" cy="69" r="5" fill="#27c93f"/>
+  <rect x="150" y="61" width="420" height="16" rx="8" fill="#1a1a2e"/>
+  <text x="360" y="73" fill="#6366f1" font-size="8" text-anchor="middle" font-family="monospace">localhost/opencart/</text>
+
+  <!-- Store content clipped to screen -->
+  <g clip-path="url(#screenClip)">
+    <!-- Header -->
+    <rect x="60" y="83" width="680" height="36" fill="#1a1a2e"/>
+    <rect x="72" y="93" width="60" height="16" rx="3" fill="#7c3aed"/>
+    <text x="102" y="105" fill="white" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif">NOVA</text>
+    <text x="200" y="105" fill="#aaa" font-size="8" font-family="sans-serif">Shop</text><text x="235" y="105" fill="#aaa" font-size="8" font-family="sans-serif">Sale</text><text x="265" y="105" fill="#aaa" font-size="8" font-family="sans-serif">Blog</text>
+    <text x="680" y="105" fill="white" font-size="8" text-anchor="end" font-family="sans-serif">Cart (0)</text>
+
+    <!-- Hero -->
+    <rect x="60" y="119" width="680" height="130" fill="url(#heroGradDark)"/>
+    <text x="380" y="165" fill="white" font-size="22" font-weight="bold" text-anchor="middle" font-family="sans-serif">Summer Collection</text>
+         <text x="380" y="188" fill="rgba(255,255,255,0.7)" font-size="11" text-anchor="middle" font-family="sans-serif">Discover trending products</text>
+         <rect x="330" y="200" width="100" height="20" rx="4" fill="white"/>
+         <text x="380" y="215" fill="#7c3aed" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif">Shop Now</text>
+
+    <!-- Product cards row -->
+    <rect x="60" y="249" width="680" height="100" fill="#0f0f1a"/>
+    
+        <rect x="90" y="258" width="148" height="80" rx="4" fill="#1e1e3a" stroke="#2d2d5e" stroke-width="0.5"/>
+        <rect x="90" y="258" width="148" height="45" rx="4" fill="#1e1e3a"/>
+        <rect x="90" y="311" width="90" height="6" rx="3" fill="#3b3b6e"/>
+        <rect x="90" y="323" width="55" height="5" rx="2.5" fill="#7c3aed" opacity="0.7"/>
+      
+        <rect x="258" y="258" width="148" height="80" rx="4" fill="#1e1e3a" stroke="#2d2d5e" stroke-width="0.5"/>
+        <rect x="258" y="258" width="148" height="45" rx="4" fill="#1e1e3a"/>
+        <rect x="258" y="311" width="90" height="6" rx="3" fill="#3b3b6e"/>
+        <rect x="258" y="323" width="55" height="5" rx="2.5" fill="#7c3aed" opacity="0.7"/>
+      
+        <rect x="426" y="258" width="148" height="80" rx="4" fill="#1e1e3a" stroke="#2d2d5e" stroke-width="0.5"/>
+        <rect x="426" y="258" width="148" height="45" rx="4" fill="#1e1e3a"/>
+        <rect x="426" y="311" width="90" height="6" rx="3" fill="#3b3b6e"/>
+        <rect x="426" y="323" width="55" height="5" rx="2.5" fill="#7c3aed" opacity="0.7"/>
+      
+        <rect x="594" y="258" width="148" height="80" rx="4" fill="#1e1e3a" stroke="#2d2d5e" stroke-width="0.5"/>
+        <rect x="594" y="258" width="148" height="45" rx="4" fill="#1e1e3a"/>
+        <rect x="594" y="311" width="90" height="6" rx="3" fill="#3b3b6e"/>
+        <rect x="594" y="323" width="55" height="5" rx="2.5" fill="#7c3aed" opacity="0.7"/>
+      
+
+    <!-- Footer strip -->
+    <rect x="60" y="349" width="680" height="152" fill="#08080f"/>
+    <rect x="72" y="362" width="50" height="12" rx="2" fill="#7c3aed" opacity="0.7"/>
+    <rect x="130" y="362" width="80" height="6" rx="3" fill="#2d2d5e"/><rect x="250" y="362" width="80" height="6" rx="3" fill="#2d2d5e"/><rect x="370" y="362" width="80" height="6" rx="3" fill="#2d2d5e"/><rect x="490" y="362" width="80" height="6" rx="3" fill="#2d2d5e"/>
+    <rect x="130" y="374" width="60" height="4" rx="2" fill="#1e1e3a"/><rect x="250" y="374" width="60" height="4" rx="2" fill="#1e1e3a"/><rect x="370" y="374" width="60" height="4" rx="2" fill="#1e1e3a"/><rect x="490" y="374" width="60" height="4" rx="2" fill="#1e1e3a"/>
+  </g>
+
+  <!-- Label banner at bottom -->
+  <rect x="0" y="525" width="800" height="75" fill="#1e293b"/>
+  <rect x="0" y="525" width="800" height="3" fill="#7c3aed"/>
+
+  <!-- Product name -->
+  <text x="30" y="552" fill="#f1f5f9" font-size="22" font-weight="bold" font-family="sans-serif">NovaKur Electronics Theme</text>
+
+  <!-- Price badge -->
+  <rect x="680" y="535" width="90" height="30" rx="6" fill="#7c3aed"/>
+  <text x="725" y="556" fill="white" font-size="14" font-weight="bold" text-anchor="middle" font-family="sans-serif">$44.99</text>
+
+  <!-- Category tag -->
+  <rect x="30" y="562" width="50" height="16" rx="4" fill="#7c3aed" opacity="0.15"/>
+  <text x="55" y="574" fill="#7c3aed" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif">THEME</text>
+</svg>

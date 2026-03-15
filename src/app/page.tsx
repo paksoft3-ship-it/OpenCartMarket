@@ -1,5 +1,6 @@
 import Link from "next/link";
 /* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 import { ProductSlider } from "@/components/marketplace/ProductSlider";
 import { getProducts } from "@/lib/data/products";
 
@@ -11,8 +12,8 @@ export default async function Home() {
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     .slice(0, 8);
 
-  const trending = [...allProducts]
-    .sort((a, b) => b.installs - a.installs)
+  const bestSellers = [...allProducts]
+    .sort((a, b) => b.price - a.price)
     .slice(0, 8);
 
   return (
@@ -55,7 +56,13 @@ export default async function Home() {
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-2xl blur-3xl -z-10"></div>
             <div className="rounded-2xl border border-border bg-surface dark:bg-card p-2 shadow-2xl">
               <div className="w-full aspect-[4/3] bg-slate-100 dark:bg-slate-800 rounded-xl overflow-hidden relative">
-                <img alt="E-commerce dashboard preview" className="w-full h-full object-cover" data-alt="High fidelity UI dashboard preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7MISBmIXhZYfPiPPscyQq_nxbXYwS9EYjoRM3I2jnWYwch4M7xvTKk04Up-D5bWzidFfVPlcqyS9ZM4XW7sCxPLski7O-9Pi6fYOLgQHXT7rdl2CdrJr0IJp4Lnn3sL967he6cQAXIHn5DQX9g30TTQXI9WGqrywq-8ijEyziDf3LRWUBvk2YBM3Rn20KcAqswJCEwf8wAAM0ZaXQc95M-zUfGBB3gXhb3qOAI4T95y0JnJHeKaWeIeQctd-z7TpEbwNZFUU-zCo" />
+                <Image
+                  src="https://fashion.demos.opencartkur.com/extension/novakur/catalog/view/assets/img/fashion/hero-editorial.jpg"
+                  alt="NovaKur Fashion Theme preview"
+                  fill
+                  className="object-cover object-top"
+                  priority
+                />
               </div>
             </div>
           </div>
@@ -66,53 +73,39 @@ export default async function Home() {
       <section className="max-w-7xl mx-auto px-6 py-12 w-full">
         <h2 className="font-display text-2xl font-bold text-slate-900 dark:text-white mb-8">Kategoriye Göre Göz At</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          <Link className="group flex flex-col items-center gap-4 rounded-xl border border-border bg-surface dark:bg-card p-6 transition-all hover:border-primary/50 hover:shadow-md hover:shadow-primary/5 text-center" href="/browse?category=themes">
-            <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
-              <span className="material-symbols-outlined text-2xl">palette</span>
-            </div>
-            <h3 className="font-display text-base font-semibold text-slate-900 dark:text-white">Temalar</h3>
-          </Link>
-          <Link className="group flex flex-col items-center gap-4 rounded-xl border border-border bg-surface dark:bg-card p-6 transition-all hover:border-secondary/50 hover:shadow-md hover:shadow-secondary/5 text-center" href="/browse?category=modules">
-            <div className="w-12 h-12 rounded-full bg-secondary/10 text-secondary flex items-center justify-center group-hover:scale-110 transition-transform">
-              <span className="material-symbols-outlined text-2xl">extension</span>
-            </div>
-            <h3 className="font-display text-base font-semibold text-slate-900 dark:text-white">Modüller</h3>
-          </Link>
-          <Link className="group flex flex-col items-center gap-4 rounded-xl border border-border bg-surface dark:bg-card p-6 transition-all hover:border-primary/50 hover:shadow-md hover:shadow-primary/5 text-center" href="/browse?category=xml-integrations">
-            <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
-              <span className="material-symbols-outlined text-2xl">integration_instructions</span>
-            </div>
-            <h3 className="font-display text-base font-semibold text-slate-900 dark:text-white">XML Entegrasyonları</h3>
-          </Link>
-          <Link className="group flex flex-col items-center gap-4 rounded-xl border border-border bg-surface dark:bg-card p-6 transition-all hover:border-accent/50 hover:shadow-md hover:shadow-accent/5 text-center" href="/browse?category=marketing">
-            <div className="w-12 h-12 rounded-full bg-accent/10 text-accent flex items-center justify-center group-hover:scale-110 transition-transform">
-              <span className="material-symbols-outlined text-2xl">campaign</span>
-            </div>
-            <h3 className="font-display text-base font-semibold text-slate-900 dark:text-white">Pazarlama Araçları</h3>
-          </Link>
-          <Link className="group flex flex-col items-center gap-4 rounded-xl border border-border bg-surface dark:bg-card p-6 transition-all hover:border-primary/50 hover:shadow-md hover:shadow-primary/5 text-center" href="/browse?category=payments">
-            <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
-              <span className="material-symbols-outlined text-2xl">payments</span>
-            </div>
-            <h3 className="font-display text-base font-semibold text-slate-900 dark:text-white">Ödeme Modülleri</h3>
-          </Link>
+          {[
+            { href: "/browse?category=themes", label: "Temalar", icon: "palette", img: "https://fashion.demos.opencartkur.com/extension/novakur/catalog/view/assets/img/fashion/hero-editorial.jpg" },
+            { href: "/browse?category=modules", label: "Modüller", icon: "extension", img: "https://fashion.demos.opencartkur.com/extension/novakur/catalog/view/assets/img/fashion/checkout-hero.jpg" },
+            { href: "/browse?category=xml-integrations", label: "XML Entegrasyonları", icon: "integration_instructions", img: "https://fashion.demos.opencartkur.com/extension/novakur/catalog/view/assets/img/fashion/category-menswear.jpg" },
+            { href: "/browse?category=modules", label: "Pazarlama Araçları", icon: "campaign", img: "https://fashion.demos.opencartkur.com/extension/novakur/catalog/view/assets/img/fashion/collection-banner.jpg" },
+            { href: "/browse?category=modules", label: "Ödeme Modülleri", icon: "payments", img: "https://fashion.demos.opencartkur.com/extension/novakur/catalog/view/assets/img/fashion/checkout-trust-bg.jpg" },
+          ].map((cat) => (
+            <Link key={cat.href + cat.label} className="group relative rounded-xl overflow-hidden border border-border aspect-[3/2] flex items-end transition-all hover:shadow-lg hover:-translate-y-0.5" href={cat.href}>
+              <Image src={cat.img} alt={cat.label} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
+              <div className="relative z-10 p-4 flex items-center gap-2">
+                <span className="material-symbols-outlined text-white text-lg">{cat.icon}</span>
+                <h3 className="font-display text-sm font-bold text-white leading-tight">{cat.label}</h3>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
       {/* Product Sliders */}
       <div className="max-w-7xl mx-auto px-6 py-16 flex flex-col gap-20 w-full">
         <ProductSlider
-          title="Yeni Çıkanlar"
-          badge={{ text: "New", type: "new" }}
-          products={newReleases}
-          viewAllLink="/browse?sort=newest"
+          title="Çok Satanlar"
+          badge={{ text: "Bestseller", type: "trending" }}
+          products={bestSellers}
+          viewAllLink="/browse?sort=popular"
         />
 
         <ProductSlider
-          title="Bu Haftanın Trendleri"
-          badge={{ text: "Trending", type: "trending" }}
-          products={trending}
-          viewAllLink="/browse?sort=popular"
+          title="Yeni Gelenler"
+          badge={{ text: "Yeni", type: "new" }}
+          products={newReleases}
+          viewAllLink="/browse?sort=newest"
         />
       </div>
 
