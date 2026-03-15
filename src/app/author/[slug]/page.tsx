@@ -27,28 +27,28 @@ export default function AuthorProfilePage() {
                         <h1 className="text-3xl font-bold leading-tight tracking-tight text-slate-900 dark:text-slate-100">Arda Yılmaz</h1>
                         <div className="flex items-center gap-1.5 text-emerald-500 bg-emerald-500/10 px-3 py-1 rounded-full text-sm font-semibold">
                             <BadgeCheck className="w-4 h-4" />
-                            Verified Developer
+                            Doğrulanmış Geliştirici
                         </div>
                     </div>
                 </div>
 
                 <div className="flex w-full max-w-xs gap-3 mt-2">
-                    <Button className="flex-1 font-bold shadow-sm h-10">Contact</Button>
-                    <Button variant="outline" className="flex-1 font-bold shadow-sm h-10">Follow</Button>
+                    <Button className="flex-1 font-bold shadow-sm h-10">İletişim</Button>
+                    <Button variant="outline" className="flex-1 font-bold shadow-sm h-10">Takip Et</Button>
                 </div>
 
                 <div className="flex flex-wrap justify-center gap-4 mt-6 w-full max-w-2xl">
                     <div className="flex flex-1 min-w-[120px] flex-col gap-1 rounded-xl bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700 p-4 items-center text-center transition-transform hover:-translate-y-1">
                         <p className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">4.9<span className="text-lg text-slate-400 font-medium">/5</span></p>
-                        <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Rating</p>
+                        <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Puan</p>
                     </div>
                     <div className="flex flex-1 min-w-[120px] flex-col gap-1 rounded-xl bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700 p-4 items-center text-center transition-transform hover:-translate-y-1">
                         <p className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">24</p>
-                        <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Products</p>
+                        <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Ürün</p>
                     </div>
                     <div className="flex flex-1 min-w-[120px] flex-col gap-1 rounded-xl bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700 p-4 items-center text-center transition-transform hover:-translate-y-1">
                         <p className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">12k+</p>
-                        <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Downloads</p>
+                        <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">İndirme</p>
                     </div>
                 </div>
             </section>
@@ -56,33 +56,33 @@ export default function AuthorProfilePage() {
             {/* Developer Bio Section */}
             <section className="w-full flex flex-col md:flex-row gap-8 bg-white dark:bg-slate-800 p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 mt-4 text-slate-900 dark:text-slate-100">
                 <div className="w-full md:w-1/3 flex flex-col gap-4 border-b md:border-b-0 md:border-r border-slate-100 dark:border-slate-700 pb-6 md:pb-0 md:pr-8">
-                    <h3 className="text-lg font-semibold mb-2">Trust Indicators</h3>
+                    <h3 className="text-lg font-semibold mb-2">Güven Göstergeleri</h3>
                     <div className="flex justify-between items-center py-2">
                         <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
                             <Clock className="w-4 h-4" />
-                            <p className="text-sm font-medium">Response Time</p>
+                            <p className="text-sm font-medium">Yanıt Süresi</p>
                         </div>
-                        <p className="text-sm font-semibold">&lt; 2 hours</p>
+                        <p className="text-sm font-semibold">&lt; 2 saat</p>
                     </div>
                     <div className="flex justify-between items-center py-2">
                         <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
                             <Headphones className="w-4 h-4" />
-                            <p className="text-sm font-medium">Support Quality</p>
+                            <p className="text-sm font-medium">Destek Kalitesi</p>
                         </div>
-                        <p className="text-sm font-semibold">High</p>
+                        <p className="text-sm font-semibold">Yüksek</p>
                     </div>
                     <div className="flex justify-between items-center py-2">
                         <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
                             <Calendar className="w-4 h-4" />
-                            <p className="text-sm font-medium">Member since</p>
+                            <p className="text-sm font-medium">Üyelik tarihi</p>
                         </div>
                         <p className="text-sm font-semibold">2021</p>
                     </div>
                 </div>
                 <div className="w-full md:w-2/3 flex flex-col justify-center">
-                    <h3 className="text-lg font-semibold mb-3">About the Developer</h3>
+                    <h3 className="text-lg font-semibold mb-3">Geliştirici Hakkında</h3>
                     <p className="text-slate-600 dark:text-slate-300 text-base font-normal leading-relaxed">
-                        Expert OpenCart developer specializing in high-performance themes and modules. Focused on delivering fast, modern, and SEO-optimized solutions for Turkish store owners. My products are built with modern tech stacks, ensuring clean code, exceptional speed, and easy customization for e-commerce growth.
+                        Yüksek performanslı temalar ve modüller konusunda uzmanlaşmış OpenCart geliştiricisi. Türk mağaza sahipleri için hızlı, modern ve SEO odaklı çözümler sunmaya odaklanmıştır. Ürünlerim modern teknoloji yığınları ile inşa edilmiştir; temiz kod, olağanüstü hız ve e-ticaret büyümesi için kolay özelleştirme sağlar.
                     </p>
                 </div>
             </section>
@@ -90,9 +90,9 @@ export default function AuthorProfilePage() {
             {/* Tabs & Product Grid */}
             <section className="w-full mt-8">
                 <div className="flex border-b border-slate-200 dark:border-slate-700 mb-8 overflow-x-auto no-scrollbar">
-                    <button className="text-primary border-b-2 border-primary pb-3 px-4 font-semibold text-sm whitespace-nowrap">Themes</button>
-                    <button className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 border-b-2 border-transparent pb-3 px-4 font-medium text-sm whitespace-nowrap transition-colors">Modules</button>
-                    <button className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 border-b-2 border-transparent pb-3 px-4 font-medium text-sm whitespace-nowrap transition-colors">Reviews (142)</button>
+                    <button className="text-primary border-b-2 border-primary pb-3 px-4 font-semibold text-sm whitespace-nowrap">Temalar</button>
+                    <button className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 border-b-2 border-transparent pb-3 px-4 font-medium text-sm whitespace-nowrap transition-colors">Modüller</button>
+                    <button className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 border-b-2 border-transparent pb-3 px-4 font-medium text-sm whitespace-nowrap transition-colors">Yorumlar (142)</button>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -111,9 +111,9 @@ export default function AuthorProfilePage() {
                         </div>
                         <div className="p-5 flex flex-col flex-1">
                             <div className="flex justify-between items-start mb-2">
-                                <h4 className="text-lg font-semibold text-slate-900 dark:text-slate-100 leading-tight">Nexus - Modern Admin Theme</h4>
+                                <h4 className="text-lg font-semibold text-slate-900 dark:text-slate-100 leading-tight">Nexus - Modern Admin Teması</h4>
                             </div>
-                            <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">A clean, responsive admin dashboard theme for OpenCart 3.x with dark mode support.</p>
+                            <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">OpenCart 3.x için karanlık mod destekli, temiz ve duyarlı bir yönetici panosu teması.</p>
                             <div className="mt-auto flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">
                                 <div className="flex items-center gap-1 text-amber-500 text-sm font-medium">
                                     <Star className="w-4 h-4 fill-current" />
@@ -142,9 +142,9 @@ export default function AuthorProfilePage() {
                         </div>
                         <div className="p-5 flex flex-col flex-1">
                             <div className="flex justify-between items-start mb-2">
-                                <h4 className="text-lg font-semibold text-slate-900 dark:text-slate-100 leading-tight">Lumina - Minimal Storefront</h4>
+                                <h4 className="text-lg font-semibold text-slate-900 dark:text-slate-100 leading-tight">Lumina - Minimal Mağaza Teması</h4>
                             </div>
-                            <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">High-conversion, minimalist theme focused on speed and mobile experience.</p>
+                            <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Hız ve mobil deneyime odaklanan, yüksek dönüşüm oranlı minimalist tema.</p>
                             <div className="mt-auto flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">
                                 <div className="flex items-center gap-1 text-amber-500 text-sm font-medium">
                                     <Star className="w-4 h-4 fill-current" />
@@ -170,9 +170,9 @@ export default function AuthorProfilePage() {
                         </div>
                         <div className="p-5 flex flex-col flex-1">
                             <div className="flex justify-between items-start mb-2">
-                                <h4 className="text-lg font-semibold text-slate-900 dark:text-slate-100 leading-tight">Speed Optimizer Pro</h4>
+                                <h4 className="text-lg font-semibold text-slate-900 dark:text-slate-100 leading-tight">Hız Optimizasyon Pro</h4>
                             </div>
-                            <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Advanced caching and asset minification module for 90+ Google PageSpeed score.</p>
+                            <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">90+ Google PageSpeed puanı için gelişmiş önbellekleme ve varlık küçültme modülü.</p>
                             <div className="mt-auto flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">
                                 <div className="flex items-center gap-1 text-amber-500 text-sm font-medium">
                                     <Star className="w-4 h-4 fill-current" />
