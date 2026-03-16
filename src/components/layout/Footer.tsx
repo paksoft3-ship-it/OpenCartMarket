@@ -71,39 +71,40 @@ export function Footer() {
                     </div>
                 </div>
 
-                <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-slate-200 dark:border-slate-800">
-                    <div className="flex items-center gap-4">
-                        {/* Social Icons (using placeholders for now) */}
-                        <a href="#" className="text-slate-400 hover:text-primary transition-colors">
-                            <span className="material-symbols-outlined text-xl">share</span>
-                        </a>
-                        <a href="#" className="text-slate-400 hover:text-primary transition-colors font-bold text-sm">X</a>
-                        <a href="#" className="text-slate-400 hover:text-primary transition-colors font-bold text-sm">LI</a>
-                        <a href="#" className="text-slate-400 hover:text-primary transition-colors font-bold text-sm">GH</a>
-                    </div>
-                    <div className="flex flex-col items-center gap-2">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-slate-200 dark:border-slate-800">
+                    {/* Left: copyright + links */}
+                    <div className="flex items-center gap-4 flex-wrap justify-center md:justify-start">
                         <p className="text-slate-500 text-sm">
                             &copy; {new Date().getFullYear()} Tüm hakları saklıdır.
                         </p>
-                        <a
-                            href="https://paksoft.com.tr"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 group"
-                        >
-                            <span className="text-slate-500 text-sm group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">Geliştiren</span>
-                            <span className="flex items-center gap-1.5 text-primary group-hover:text-primary/80 transition-colors">
-                                <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 -rotate-12">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c1.85 0 3.58-.5 5.08-1.38-.7.13-1.42.21-2.16.21-5.52 0-10-4.48-10-10S9.42 2.83 14.92 2.83c.74 0 1.46.08 2.16.21C15.58 2.5 13.85 2 12 2z" />
-                                </svg>
-                                <span className="font-bold text-base tracking-wide">PakSoft</span>
-                            </span>
-                        </a>
+                        <span className="text-slate-300 dark:text-slate-700 hidden md:inline">|</span>
+                        <Link href="/privacy" className="text-xs font-semibold text-slate-400 hover:text-primary transition-colors">Gizlilik</Link>
+                        <Link href="/terms" className="text-xs font-semibold text-slate-400 hover:text-primary transition-colors">Koşullar</Link>
                     </div>
-                    <div className="flex gap-4 text-xs font-semibold text-slate-400">
-                        <Link href="/privacy" className="hover:text-primary transition-colors">Gizlilik</Link>
-                        <Link href="/terms" className="hover:text-primary transition-colors">Koşullar</Link>
-                        <button className="flex items-center gap-1 hover:text-primary transition-colors">
+
+                    {/* Center: PakSoft */}
+                    <a
+                        href="https://paksoft.com.tr"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 group"
+                    >
+                        <span className="text-slate-500 text-sm group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">Geliştiren</span>
+                        <span className="flex items-center gap-1.5 text-primary group-hover:text-primary/80 transition-colors">
+                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 -rotate-12">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c1.85 0 3.58-.5 5.08-1.38-.7.13-1.42.21-2.16.21-5.52 0-10-4.48-10-10S9.42 2.83 14.92 2.83c.74 0 1.46.08 2.16.21C15.58 2.5 13.85 2 12 2z" />
+                            </svg>
+                            <span className="font-bold text-base tracking-wide">PakSoft</span>
+                        </span>
+                    </a>
+
+                    {/* Right: social + language */}
+                    <div className="flex items-center gap-4">
+                        <a href="#" className="text-slate-400 hover:text-primary transition-colors font-bold text-sm">X</a>
+                        <a href="#" className="text-slate-400 hover:text-primary transition-colors font-bold text-sm">LI</a>
+                        <a href="#" className="text-slate-400 hover:text-primary transition-colors font-bold text-sm">GH</a>
+                        <span className="text-slate-300 dark:text-slate-700">|</span>
+                        <button className="flex items-center gap-1 text-xs font-semibold text-slate-400 hover:text-primary transition-colors">
                             TR / EN
                             <span className="material-symbols-outlined text-xs">expand_more</span>
                         </button>
