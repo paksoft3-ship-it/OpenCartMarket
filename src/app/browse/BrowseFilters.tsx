@@ -52,7 +52,6 @@ export default function BrowseFilters({ categories, currentParams }: BrowseFilte
                             className="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary"
                         />
                         <span className="text-sm text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">Tümü</span>
-                        <span className="ml-auto text-xs text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">1240</span>
                     </label>
                     <label className="flex items-center gap-3 cursor-pointer group">
                         <input
@@ -63,41 +62,16 @@ export default function BrowseFilters({ categories, currentParams }: BrowseFilte
                             className="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary"
                         />
                         <span className="text-sm text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">Temalar</span>
-                        <span className="ml-auto text-xs text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">342</span>
                     </label>
-                    <label className="flex items-center gap-3 cursor-pointer group">
-                        <input
-                            type="checkbox"
-                            name="category"
-                            checked={currentParams.category === "modules"}
-                            onChange={() => setFilter("category", "modules")}
-                            className="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary"
-                        />
-                        <span className="text-sm text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">Ödeme Modülleri</span>
-                        <span className="ml-auto text-xs text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">156</span>
-                    </label>
-                    <label className="flex items-center gap-3 cursor-pointer group">
-                        <input
-                            type="checkbox"
-                            name="category"
-                            checked={currentParams.category === "shipping"}
-                            onChange={() => setFilter("category", "shipping")}
-                            className="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary"
-                        />
-                        <span className="text-sm text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">Kargo Modülleri</span>
-                        <span className="ml-auto text-xs text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">89</span>
-                    </label>
-                    <label className="flex items-center gap-3 cursor-pointer group">
-                        <input
-                            type="checkbox"
-                            name="category"
-                            checked={currentParams.category === "seo"}
-                            onChange={() => setFilter("category", "seo")}
-                            className="w-4 h-4 rounded border-slate-300 text-primary focus:ring-primary"
-                        />
-                        <span className="text-sm text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">SEO Araçları</span>
-                        <span className="ml-auto text-xs text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">64</span>
-                    </label>
+                    <div className="pt-2 border-t border-slate-100 dark:border-slate-700">
+                        <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-600 mb-2">Yakında</p>
+                        {["Modüller", "XML Entegrasyonları", "Ödeme Modülleri"].map((name) => (
+                            <div key={name} className="flex items-center gap-3 py-1.5">
+                                <span className="w-4 h-4 rounded border border-dashed border-slate-300 dark:border-slate-600 shrink-0" />
+                                <span className="text-sm text-slate-400 dark:text-slate-600">{name}</span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
 
