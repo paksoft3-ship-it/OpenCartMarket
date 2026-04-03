@@ -54,11 +54,23 @@ export default async function BrowsePage({
                     />
 
                     {products.length === 0 ? (
-                        <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 py-24 text-center bg-white/50 dark:bg-slate-800/50">
-                            <span className="material-symbols-outlined text-4xl text-slate-400 mb-4">search_off</span>
-                            <h2 className="text-xl font-semibold text-slate-900 dark:text-white">Ürün bulunamadı</h2>
-                            <p className="mt-2 text-slate-500 dark:text-slate-400">Filtrelerinizi veya arama sorgunuzu değiştirmeyi deneyin.</p>
-                        </div>
+                        category && !query ? (
+                            <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 py-24 text-center bg-white/50 dark:bg-slate-800/50">
+                                <span className="material-symbols-outlined text-5xl text-slate-300 dark:text-slate-600 mb-5">inventory_2</span>
+                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Ürünler Yakında</h2>
+                                <p className="mt-3 text-slate-500 dark:text-slate-400 max-w-sm">Bu kategorideki ürünler üzerinde çalışıyoruz. Yakında burada olacak.</p>
+                                <a href="/browse?category=themes" className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-medium hover:opacity-80 transition-opacity">
+                                    <span className="material-symbols-outlined text-base" style={{fontSize: '1rem'}}>arrow_back</span>
+                                    Temalara Göz At
+                                </a>
+                            </div>
+                        ) : (
+                            <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 py-24 text-center bg-white/50 dark:bg-slate-800/50">
+                                <span className="material-symbols-outlined text-4xl text-slate-400 mb-4">search_off</span>
+                                <h2 className="text-xl font-semibold text-slate-900 dark:text-white">Ürün bulunamadı</h2>
+                                <p className="mt-2 text-slate-500 dark:text-slate-400">Filtrelerinizi veya arama sorgunuzu değiştirmeyi deneyin.</p>
+                            </div>
+                        )
                     ) : (
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {products.map((product) => (

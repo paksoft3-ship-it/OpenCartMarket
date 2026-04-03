@@ -75,22 +75,28 @@ export default async function Home() {
       {/* Categories Section */}
       <section className="max-w-7xl mx-auto px-6 py-12 w-full">
         <h2 className="font-display text-2xl font-bold text-slate-900 dark:text-white mb-8">Kategoriye Göre Göz At</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {/* Active category */}
+          <Link className="group relative rounded-xl overflow-hidden border border-border aspect-[3/2] flex items-end transition-all hover:shadow-lg hover:-translate-y-0.5" href="/browse?category=themes">
+            <Image src="/images/products/nk-theme-fashion/screen-1.png" alt="Temalar" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
+            <div className="relative z-10 p-4 flex items-center gap-2">
+              <span className="material-symbols-outlined text-white text-lg">palette</span>
+              <h3 className="font-display text-sm font-bold text-white leading-tight">Temalar</h3>
+            </div>
+          </Link>
+
+          {/* Coming soon categories */}
           {[
-            { href: "/browse?category=themes", label: "Temalar", icon: "palette", img: "/images/products/nk-theme-fashion/screen-1.png" },
-            { href: "/browse?category=modules", label: "Modüller", icon: "extension", img: "/images/products/nk-theme-electronics/screen-2.png" },
-            { href: "/browse?category=xml-integrations", label: "XML Entegrasyonları", icon: "integration_instructions", img: "/images/products/nk-theme-grocery/screen-2.png" },
-            { href: "/browse?category=modules", label: "Pazarlama Araçları", icon: "campaign", img: "/images/products/nk-theme-cosmetics/screen-3.png" },
-            { href: "/browse?category=modules", label: "Ödeme Modülleri", icon: "payments", img: "/images/products/nk-theme-furniture/screen-4.png" },
+            { label: "Modüller", icon: "extension" },
+            { label: "XML Entegrasyonları", icon: "integration_instructions" },
+            { label: "Ödeme Modülleri", icon: "payments" },
           ].map((cat) => (
-            <Link key={cat.href + cat.label} className="group relative rounded-xl overflow-hidden border border-border aspect-[3/2] flex items-end transition-all hover:shadow-lg hover:-translate-y-0.5" href={cat.href}>
-              <Image src={cat.img} alt={cat.label} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
-              <div className="relative z-10 p-4 flex items-center gap-2">
-                <span className="material-symbols-outlined text-white text-lg">{cat.icon}</span>
-                <h3 className="font-display text-sm font-bold text-white leading-tight">{cat.label}</h3>
-              </div>
-            </Link>
+            <div key={cat.label} className="relative rounded-xl overflow-hidden border border-dashed border-slate-300 dark:border-slate-700 aspect-[3/2] flex flex-col items-center justify-center gap-2 bg-slate-50 dark:bg-slate-800/50">
+              <span className="material-symbols-outlined text-3xl text-slate-300 dark:text-slate-600">{cat.icon}</span>
+              <p className="text-xs font-semibold text-slate-400 dark:text-slate-500">{cat.label}</p>
+              <span className="text-[10px] font-medium tracking-widest uppercase text-slate-400 dark:text-slate-600 bg-slate-200 dark:bg-slate-700 px-2 py-0.5 rounded-full">Yakında</span>
+            </div>
           ))}
         </div>
       </section>
