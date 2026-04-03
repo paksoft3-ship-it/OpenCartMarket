@@ -42,8 +42,8 @@ export default async function Home() {
               <Link href="/browse?category=themes" className="flex items-center justify-center rounded-xl h-12 px-6 bg-primary text-white hover:bg-primary/90 transition-colors text-base font-bold shadow-lg shadow-primary/20">
                 Temaları İncele
               </Link>
-              <Link href="/browse?category=modules" className="flex items-center justify-center rounded-xl h-12 px-6 bg-surface dark:bg-card border border-border text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-base font-bold">
-                Modülleri İncele
+              <Link href="/browse" className="flex items-center justify-center rounded-xl h-12 px-6 bg-surface dark:bg-card border border-border text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-base font-bold">
+                Tümünü Gör
               </Link>
             </div>
             <div className="flex items-center justify-center lg:justify-start gap-4 text-sm text-slate-500 dark:text-slate-400 mt-4">
@@ -118,8 +118,8 @@ export default async function Home() {
         />
       </div>
 
-      {/* Sell on Marketplace Section */}
-      <section className="relative overflow-hidden py-24 bg-slate-50 dark:bg-slate-900/50 border-y border-border">
+      {/* Sell on Marketplace Section — removed: platform is NovaKur-only for now */}
+      {false && <section className="relative overflow-hidden py-24 bg-slate-50 dark:bg-slate-900/50 border-y border-border">
         {/* Subtle abstract background gradient */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 dark:bg-primary/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
 
@@ -229,7 +229,7 @@ export default async function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* Benefits Section */}
       <section className="max-w-7xl mx-auto px-6 py-24 w-full">
