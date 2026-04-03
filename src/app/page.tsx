@@ -8,9 +8,12 @@ export default async function Home() {
   const allProducts = await getProducts();
 
   // Create subsets for sliders
-  const newReleases = [...allProducts]
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-    .slice(0, 8);
+  // Pin Fashion (1st) and Electronics (2nd) at the front of Yeni Gelenler
+  const PINNED = ['nk-theme-fashion', 'nk-theme-electronics'];
+  const pinned = PINNED.map(slug => allProducts.find(p => p.slug === slug)).filter(Boolean) as typeof allProducts;
+  const rest = allProducts.filter(p => !PINNED.includes(p.slug))
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  const newReleases = [...pinned, ...rest].slice(0, 8);
 
   const bestSellers = [...allProducts]
     .sort((a, b) => b.price - a.price)
@@ -57,8 +60,8 @@ export default async function Home() {
             <div className="rounded-2xl border border-border bg-surface dark:bg-card p-2 shadow-2xl">
               <div className="w-full aspect-[4/3] bg-slate-100 dark:bg-slate-800 rounded-xl overflow-hidden relative">
                 <Image
-                  src="https://fashion.demos.opencartkur.com/extension/novakur/catalog/view/assets/img/fashion/hero-editorial.jpg"
-                  alt="NovaKur Fashion Theme preview"
+                  src="/images/products/nk-theme-fashion/screen-1.png"
+                  alt="NovaKur Fashion Theme — homepage preview"
                   fill
                   className="object-cover object-top"
                   priority
@@ -74,11 +77,11 @@ export default async function Home() {
         <h2 className="font-display text-2xl font-bold text-slate-900 dark:text-white mb-8">Kategoriye Göre Göz At</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {[
-            { href: "/browse?category=themes", label: "Temalar", icon: "palette", img: "https://fashion.demos.opencartkur.com/extension/novakur/catalog/view/assets/img/fashion/hero-editorial.jpg" },
-            { href: "/browse?category=modules", label: "Modüller", icon: "extension", img: "https://fashion.demos.opencartkur.com/extension/novakur/catalog/view/assets/img/fashion/checkout-hero.jpg" },
-            { href: "/browse?category=xml-integrations", label: "XML Entegrasyonları", icon: "integration_instructions", img: "https://fashion.demos.opencartkur.com/extension/novakur/catalog/view/assets/img/fashion/category-menswear.jpg" },
-            { href: "/browse?category=modules", label: "Pazarlama Araçları", icon: "campaign", img: "https://fashion.demos.opencartkur.com/extension/novakur/catalog/view/assets/img/fashion/collection-banner.jpg" },
-            { href: "/browse?category=modules", label: "Ödeme Modülleri", icon: "payments", img: "https://fashion.demos.opencartkur.com/extension/novakur/catalog/view/assets/img/fashion/checkout-trust-bg.jpg" },
+            { href: "/browse?category=themes", label: "Temalar", icon: "palette", img: "/images/products/nk-theme-fashion/screen-1.png" },
+            { href: "/browse?category=modules", label: "Modüller", icon: "extension", img: "/images/products/nk-theme-electronics/screen-2.png" },
+            { href: "/browse?category=xml-integrations", label: "XML Entegrasyonları", icon: "integration_instructions", img: "/images/products/nk-theme-grocery/screen-2.png" },
+            { href: "/browse?category=modules", label: "Pazarlama Araçları", icon: "campaign", img: "/images/products/nk-theme-cosmetics/screen-3.png" },
+            { href: "/browse?category=modules", label: "Ödeme Modülleri", icon: "payments", img: "/images/products/nk-theme-furniture/screen-4.png" },
           ].map((cat) => (
             <Link key={cat.href + cat.label} className="group relative rounded-xl overflow-hidden border border-border aspect-[3/2] flex items-end transition-all hover:shadow-lg hover:-translate-y-0.5" href={cat.href}>
               <Image src={cat.img} alt={cat.label} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />

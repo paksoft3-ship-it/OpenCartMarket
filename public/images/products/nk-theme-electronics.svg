@@ -1,104 +1,173 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
   <defs>
-    <linearGradient id="heroBg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#0f172a"/>
-      <stop offset="100%" stop-color="#1e293b"/>
+    <linearGradient id="elecBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1220"/>
+      <stop offset="100%" stop-color="#0f172a"/>
     </linearGradient>
-    <linearGradient id="heroGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#4f46e5"/>
-      <stop offset="100%" stop-color="#7c3aed"/>
+    <linearGradient id="elecHero" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1a2e"/>
+      <stop offset="100%" stop-color="#0f172a"/>
     </linearGradient>
-    <linearGradient id="heroGradDark" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#7c3aed"/>
-      <stop offset="100%" stop-color="#4f46e5"/>
-    </linearGradient>
-    <linearGradient id="heroGradFashion" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1a1a1a"/>
-      <stop offset="100%" stop-color="#2d2d2d"/>
-    </linearGradient>
-    <linearGradient id="heroGradMinimal" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#f8fafc"/>
-      <stop offset="100%" stop-color="#f1f5f9"/>
+    <linearGradient id="elecGlow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0da2e7" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#0da2e7" stop-opacity="0"/>
     </linearGradient>
     <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
-      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.15"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.3"/>
     </filter>
     <clipPath id="screenClip"><rect x="60" y="80" width="680" height="420" rx="8"/></clipPath>
   </defs>
 
   <!-- Background -->
-  <rect width="800" height="600" fill="url(#heroBg)"/>
+  <rect width="800" height="600" fill="url(#elecBg)"/>
 
   <!-- Browser chrome -->
-  <rect x="60" y="55" width="680" height="445" rx="10" fill="#1e293b" filter="url(#shadow)"/>
-  <!-- Browser bar -->
-  <rect x="60" y="55" width="680" height="28" rx="10" fill="#0f0f1a"/>
-  <rect x="60" y="72" width="680" height="11" fill="#0f0f1a"/>
+  <rect x="60" y="55" width="680" height="445" rx="10" fill="#101c28" filter="url(#shadow)"/>
+  <!-- Browser top bar -->
+  <rect x="60" y="55" width="680" height="28" rx="10" fill="#080e18"/>
+  <rect x="60" y="72" width="680" height="11" fill="#080e18"/>
   <circle cx="83" cy="69" r="5" fill="#ff5f56"/>
   <circle cx="100" cy="69" r="5" fill="#ffbd2e"/>
   <circle cx="117" cy="69" r="5" fill="#27c93f"/>
-  <rect x="150" y="61" width="420" height="16" rx="8" fill="#1a1a2e"/>
-  <text x="360" y="73" fill="#6366f1" font-size="8" text-anchor="middle" font-family="monospace">localhost/opencart/</text>
+  <!-- URL bar -->
+  <rect x="150" y="61" width="420" height="16" rx="8" fill="#0d1b2a"/>
+  <text x="360" y="73" fill="#0da2e7" font-size="8" text-anchor="middle" font-family="monospace">electronics.demos.opencartkur.com</text>
 
   <!-- Store content clipped to screen -->
   <g clip-path="url(#screenClip)">
-    <!-- Header -->
-    <rect x="60" y="83" width="680" height="36" fill="#1a1a2e"/>
-    <rect x="72" y="93" width="60" height="16" rx="3" fill="#7c3aed"/>
-    <text x="102" y="105" fill="white" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif">NOVA</text>
-    <text x="200" y="105" fill="#aaa" font-size="8" font-family="sans-serif">Shop</text><text x="235" y="105" fill="#aaa" font-size="8" font-family="sans-serif">Sale</text><text x="265" y="105" fill="#aaa" font-size="8" font-family="sans-serif">Blog</text>
-    <text x="680" y="105" fill="white" font-size="8" text-anchor="end" font-family="sans-serif">Cart (0)</text>
 
-    <!-- Hero -->
-    <rect x="60" y="119" width="680" height="130" fill="url(#heroGradDark)"/>
-    <text x="380" y="165" fill="white" font-size="22" font-weight="bold" text-anchor="middle" font-family="sans-serif">Summer Collection</text>
-         <text x="380" y="188" fill="rgba(255,255,255,0.7)" font-size="11" text-anchor="middle" font-family="sans-serif">Discover trending products</text>
-         <rect x="330" y="200" width="100" height="20" rx="4" fill="white"/>
-         <text x="380" y="215" fill="#7c3aed" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif">Shop Now</text>
+    <!-- Topbar -->
+    <rect x="60" y="80" width="680" height="16" fill="#080e18"/>
+    <text x="500" y="91" fill="#64748b" font-size="7" font-family="sans-serif">Free Shipping on orders $99+</text>
+    <text x="680" y="91" fill="#64748b" font-size="7" text-anchor="end" font-family="sans-serif">TR | EN</text>
+
+    <!-- Header / navbar -->
+    <rect x="60" y="96" width="680" height="38" fill="#0b1629"/>
+    <!-- Logo -->
+    <rect x="72" y="104" width="38" height="22" rx="2" fill="#0da2e7" opacity="0.15"/>
+    <text x="91" y="119" fill="#0da2e7" font-size="10" font-weight="bold" text-anchor="middle" font-family="monospace">NK</text>
+    <!-- Nav items -->
+    <text x="140" y="119" fill="#94a3b8" font-size="8" font-family="sans-serif">TVs</text>
+    <text x="175" y="119" fill="#94a3b8" font-size="8" font-family="sans-serif">Laptops</text>
+    <text x="220" y="119" fill="#94a3b8" font-size="8" font-family="sans-serif">Phones</text>
+    <text x="265" y="119" fill="#94a3b8" font-size="8" font-family="sans-serif">Audio</text>
+    <text x="300" y="119" fill="#0da2e7" font-size="8" font-family="sans-serif">Sale</text>
+    <!-- Search bar -->
+    <rect x="350" y="107" width="200" height="18" rx="9" fill="#0d1b2a" stroke="#1e3a4a" stroke-width="0.7"/>
+    <text x="450" y="119" fill="#334155" font-size="7" text-anchor="middle" font-family="sans-serif">Search products...</text>
+    <!-- Cart icon -->
+    <text x="680" y="119" fill="#e2e8f0" font-size="8" text-anchor="end" font-family="sans-serif">Cart (2)</text>
+
+    <!-- Hero banner -->
+    <rect x="60" y="134" width="680" height="110" fill="url(#elecHero)"/>
+    <!-- Glow accent -->
+    <rect x="60" y="134" width="340" height="110" fill="url(#elecGlow)"/>
+    <!-- Accent line -->
+    <rect x="60" y="134" width="680" height="2" fill="#0da2e7" opacity="0.5"/>
+    <!-- Hero text left -->
+    <text x="100" y="163" fill="#64748b" font-size="7" font-family="sans-serif" letter-spacing="3">NEW ARRIVALS 2025</text>
+    <text x="100" y="183" fill="#ffffff" font-size="18" font-weight="bold" font-family="sans-serif">ASUS ROG Zephyrus</text>
+    <text x="100" y="200" fill="#ffffff" font-size="18" font-weight="bold" font-family="sans-serif">G14 Gaming Laptop</text>
+    <text x="100" y="218" fill="#0da2e7" font-size="11" font-weight="bold" font-family="sans-serif">$1,499.00</text>
+    <rect x="100" y="225" width="72" height="14" rx="2" fill="#0da2e7"/>
+    <text x="136" y="235" fill="white" font-size="7" font-weight="bold" text-anchor="middle" font-family="sans-serif">ADD TO CART</text>
+    <!-- Hero image placeholder (laptop silhouette) -->
+    <rect x="530" y="140" width="170" height="98" rx="4" fill="#0d1b2a" opacity="0.5"/>
+    <rect x="555" y="148" width="120" height="75" rx="3" fill="#162130"/>
+    <rect x="558" y="151" width="114" height="66" rx="2" fill="#0b1629"/>
+    <rect x="540" y="224" width="148" height="4" rx="2" fill="#1e3a4a"/>
+    <rect x="570" y="228" width="88" height="2" rx="1" fill="#1e3a4a"/>
+    <!-- Screen glow on laptop -->
+    <rect x="558" y="151" width="114" height="66" rx="2" fill="#0da2e7" opacity="0.04"/>
+
+    <!-- Category pills row -->
+    <rect x="60" y="244" width="680" height="30" fill="#0b1629"/>
+    <rect x="76" y="251" width="52" height="16" rx="8" fill="#0da2e7"/>
+    <text x="102" y="263" fill="white" font-size="7" font-weight="bold" text-anchor="middle" font-family="sans-serif">All</text>
+    <rect x="138" y="251" width="52" height="16" rx="8" fill="#101c28" stroke="#1e3a4a" stroke-width="0.7"/>
+    <text x="164" y="263" fill="#94a3b8" font-size="7" text-anchor="middle" font-family="sans-serif">Laptops</text>
+    <rect x="200" y="251" width="52" height="16" rx="8" fill="#101c28" stroke="#1e3a4a" stroke-width="0.7"/>
+    <text x="226" y="263" fill="#94a3b8" font-size="7" text-anchor="middle" font-family="sans-serif">Phones</text>
+    <rect x="262" y="251" width="52" height="16" rx="8" fill="#101c28" stroke="#1e3a4a" stroke-width="0.7"/>
+    <text x="288" y="263" fill="#94a3b8" font-size="7" text-anchor="middle" font-family="sans-serif">Audio</text>
+    <rect x="324" y="251" width="52" height="16" rx="8" fill="#101c28" stroke="#1e3a4a" stroke-width="0.7"/>
+    <text x="350" y="263" fill="#94a3b8" font-size="7" text-anchor="middle" font-family="sans-serif">Cameras</text>
 
     <!-- Product cards row -->
-    <rect x="60" y="249" width="680" height="100" fill="#0f0f1a"/>
-    
-        <rect x="90" y="258" width="148" height="80" rx="4" fill="#1e1e3a" stroke="#2d2d5e" stroke-width="0.5"/>
-        <rect x="90" y="258" width="148" height="45" rx="4" fill="#1e1e3a"/>
-        <rect x="90" y="311" width="90" height="6" rx="3" fill="#3b3b6e"/>
-        <rect x="90" y="323" width="55" height="5" rx="2.5" fill="#7c3aed" opacity="0.7"/>
-      
-        <rect x="258" y="258" width="148" height="80" rx="4" fill="#1e1e3a" stroke="#2d2d5e" stroke-width="0.5"/>
-        <rect x="258" y="258" width="148" height="45" rx="4" fill="#1e1e3a"/>
-        <rect x="258" y="311" width="90" height="6" rx="3" fill="#3b3b6e"/>
-        <rect x="258" y="323" width="55" height="5" rx="2.5" fill="#7c3aed" opacity="0.7"/>
-      
-        <rect x="426" y="258" width="148" height="80" rx="4" fill="#1e1e3a" stroke="#2d2d5e" stroke-width="0.5"/>
-        <rect x="426" y="258" width="148" height="45" rx="4" fill="#1e1e3a"/>
-        <rect x="426" y="311" width="90" height="6" rx="3" fill="#3b3b6e"/>
-        <rect x="426" y="323" width="55" height="5" rx="2.5" fill="#7c3aed" opacity="0.7"/>
-      
-        <rect x="594" y="258" width="148" height="80" rx="4" fill="#1e1e3a" stroke="#2d2d5e" stroke-width="0.5"/>
-        <rect x="594" y="258" width="148" height="45" rx="4" fill="#1e1e3a"/>
-        <rect x="594" y="311" width="90" height="6" rx="3" fill="#3b3b6e"/>
-        <rect x="594" y="323" width="55" height="5" rx="2.5" fill="#7c3aed" opacity="0.7"/>
-      
+    <rect x="60" y="274" width="680" height="100" fill="#0b1629"/>
+
+    <!-- Card 1 -->
+    <rect x="76" y="280" width="144" height="84" rx="3" fill="#101c28" stroke="#1e3a4a" stroke-width="0.7"/>
+    <rect x="76" y="280" width="144" height="46" rx="3" fill="#162130"/>
+    <rect x="76" y="315" width="144" height="15" fill="#162130"/>
+    <rect x="85" y="336" width="80" height="5" rx="2.5" fill="#1e3a4a"/>
+    <rect x="85" y="348" width="45" height="5" rx="2.5" fill="#0da2e7" opacity="0.8"/>
+    <rect x="196" y="348" width="16" height="10" rx="1" fill="#0da2e7" opacity="0.2"/>
+    <text x="204" y="357" fill="#0da2e7" font-size="6" font-weight="bold" text-anchor="middle" font-family="sans-serif">+</text>
+    <!-- Screen on card 1 -->
+    <rect x="100" y="287" width="96" height="52" rx="2" fill="#0b1629" opacity="0.8"/>
+    <text x="148" y="320" fill="#0da2e7" font-size="14" text-anchor="middle" font-family="sans-serif">📺</text>
+
+    <!-- Card 2 -->
+    <rect x="230" y="280" width="144" height="84" rx="3" fill="#101c28" stroke="#1e3a4a" stroke-width="0.7"/>
+    <rect x="230" y="280" width="144" height="46" rx="3" fill="#162130"/>
+    <rect x="230" y="315" width="144" height="15" fill="#162130"/>
+    <rect x="239" y="336" width="80" height="5" rx="2.5" fill="#1e3a4a"/>
+    <rect x="239" y="348" width="50" height="5" rx="2.5" fill="#0da2e7" opacity="0.8"/>
+    <text x="254" y="320" fill="#94a3b8" font-size="14" text-anchor="middle" font-family="sans-serif">💻</text>
+    <rect x="341" y="281" width="28" height="9" rx="4" fill="#0da2e7"/>
+    <text x="355" y="288" fill="white" font-size="5" font-weight="bold" text-anchor="middle" font-family="sans-serif">NEW</text>
+
+    <!-- Card 3 -->
+    <rect x="384" y="280" width="144" height="84" rx="3" fill="#101c28" stroke="#1e3a4a" stroke-width="0.7"/>
+    <rect x="384" y="280" width="144" height="46" rx="3" fill="#162130"/>
+    <rect x="384" y="315" width="144" height="15" fill="#162130"/>
+    <rect x="393" y="336" width="80" height="5" rx="2.5" fill="#1e3a4a"/>
+    <rect x="393" y="348" width="40" height="5" rx="2.5" fill="#0da2e7" opacity="0.8"/>
+    <text x="408" y="320" fill="#94a3b8" font-size="14" text-anchor="middle" font-family="sans-serif">📱</text>
+
+    <!-- Card 4 -->
+    <rect x="538" y="280" width="144" height="84" rx="3" fill="#101c28" stroke="#1e3a4a" stroke-width="0.7"/>
+    <rect x="538" y="280" width="144" height="46" rx="3" fill="#162130"/>
+    <rect x="538" y="315" width="144" height="15" fill="#162130"/>
+    <rect x="547" y="336" width="80" height="5" rx="2.5" fill="#1e3a4a"/>
+    <rect x="547" y="348" width="55" height="5" rx="2.5" fill="#0da2e7" opacity="0.8"/>
+    <text x="562" y="320" fill="#94a3b8" font-size="14" text-anchor="middle" font-family="sans-serif">🎧</text>
 
     <!-- Footer strip -->
-    <rect x="60" y="349" width="680" height="152" fill="#08080f"/>
-    <rect x="72" y="362" width="50" height="12" rx="2" fill="#7c3aed" opacity="0.7"/>
-    <rect x="130" y="362" width="80" height="6" rx="3" fill="#2d2d5e"/><rect x="250" y="362" width="80" height="6" rx="3" fill="#2d2d5e"/><rect x="370" y="362" width="80" height="6" rx="3" fill="#2d2d5e"/><rect x="490" y="362" width="80" height="6" rx="3" fill="#2d2d5e"/>
-    <rect x="130" y="374" width="60" height="4" rx="2" fill="#1e1e3a"/><rect x="250" y="374" width="60" height="4" rx="2" fill="#1e1e3a"/><rect x="370" y="374" width="60" height="4" rx="2" fill="#1e1e3a"/><rect x="490" y="374" width="60" height="4" rx="2" fill="#1e1e3a"/>
+    <rect x="60" y="374" width="680" height="127" fill="#080e18"/>
+    <rect x="60" y="374" width="680" height="2" fill="#1e3a4a"/>
+    <!-- Footer columns -->
+    <rect x="76" y="384" width="35" height="8" rx="2" fill="#0da2e7" opacity="0.6"/>
+    <rect x="76" y="398" width="65" height="4" rx="2" fill="#1e3a4a"/>
+    <rect x="76" y="408" width="50" height="4" rx="2" fill="#1e3a4a"/>
+    <rect x="76" y="418" width="55" height="4" rx="2" fill="#1e3a4a"/>
+
+    <rect x="220" y="384" width="55" height="4" rx="2" fill="#334155"/>
+    <rect x="220" y="394" width="45" height="4" rx="2" fill="#1e3a4a"/>
+    <rect x="220" y="404" width="50" height="4" rx="2" fill="#1e3a4a"/>
+
+    <rect x="380" y="384" width="55" height="4" rx="2" fill="#334155"/>
+    <rect x="380" y="394" width="45" height="4" rx="2" fill="#1e3a4a"/>
+    <rect x="380" y="404" width="50" height="4" rx="2" fill="#1e3a4a"/>
+
+    <rect x="540" y="384" width="55" height="4" rx="2" fill="#334155"/>
+    <rect x="540" y="394" width="45" height="4" rx="2" fill="#1e3a4a"/>
+    <rect x="540" y="404" width="50" height="4" rx="2" fill="#1e3a4a"/>
   </g>
 
   <!-- Label banner at bottom -->
-  <rect x="0" y="525" width="800" height="75" fill="#1e293b"/>
-  <rect x="0" y="525" width="800" height="3" fill="#7c3aed"/>
+  <rect x="0" y="525" width="800" height="75" fill="#0b1629"/>
+  <rect x="0" y="525" width="800" height="3" fill="#0da2e7"/>
 
   <!-- Product name -->
-  <text x="30" y="552" fill="#f1f5f9" font-size="22" font-weight="bold" font-family="sans-serif">NovaKur Electronics Theme</text>
+  <text x="30" y="552" fill="#f1f5f9" font-size="22" font-weight="bold" font-family="sans-serif">Premium Electronics Theme</text>
 
   <!-- Price badge -->
-  <rect x="680" y="535" width="90" height="30" rx="6" fill="#7c3aed"/>
-  <text x="725" y="556" fill="white" font-size="14" font-weight="bold" text-anchor="middle" font-family="sans-serif">$44.99</text>
+  <rect x="672" y="535" width="98" height="30" rx="6" fill="#0da2e7"/>
+  <text x="721" y="556" fill="white" font-size="14" font-weight="bold" text-anchor="middle" font-family="sans-serif">$59.00</text>
 
   <!-- Category tag -->
-  <rect x="30" y="562" width="50" height="16" rx="4" fill="#7c3aed" opacity="0.15"/>
-  <text x="55" y="574" fill="#7c3aed" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif">THEME</text>
+  <rect x="30" y="562" width="50" height="16" rx="4" fill="#0da2e7" opacity="0.15"/>
+  <text x="55" y="574" fill="#0da2e7" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif">THEME</text>
 </svg>

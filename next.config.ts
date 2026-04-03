@@ -21,10 +21,7 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
       },
-      {
-        protocol: 'https',
-        hostname: 'fashion.demos.opencartkur.com',
-      },
+      // theme demo hosts — add back if using remote demo images in manifests
     ],
   },
 };
