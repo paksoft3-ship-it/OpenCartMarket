@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+
+  <!-- Grid lines -->
+  <line x1="0" y1="0" x2="0" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="67" y1="0" x2="67" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="134" y1="0" x2="134" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="201" y1="0" x2="201" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="268" y1="0" x2="268" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="335" y1="0" x2="335" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="402" y1="0" x2="402" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="469" y1="0" x2="469" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="536" y1="0" x2="536" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="603" y1="0" x2="603" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="670" y1="0" x2="670" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="737" y1="0" x2="737" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="0" x2="800" y2="0" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="67" x2="800" y2="67" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="134" x2="800" y2="134" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="201" x2="800" y2="201" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="268" x2="800" y2="268" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="335" x2="800" y2="335" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="402" x2="800" y2="402" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="469" x2="800" y2="469" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="536" x2="800" y2="536" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+
+  <!-- Glow orb -->
+  <circle cx="400" cy="250" r="200" fill="#10b981" opacity="0.06" filter="url(#glow)"/>
+
+  <!-- Accordion preview illustration -->
+  <rect x="185" y="70" width="430" height="410" rx="12" fill="#0d2d24" stroke="#10b981" stroke-width="1.5"/>
+
+  <!-- Step 1: done -->
+  <rect x="200" y="85" width="400" height="42" rx="6" fill="#0a1f17"/>
+  <circle cx="226" cy="106" r="12" fill="#10b981"/>
+  <path d="M220 106 l4 4 l8 -8" stroke="#0a1f17" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="248" y="100" width="110" height="10" rx="3" fill="#1a3a2a"/>
+
+  <!-- Step 2: done -->
+  <rect x="200" y="135" width="400" height="42" rx="6" fill="#0a1f17"/>
+  <circle cx="226" cy="156" r="12" fill="#10b981"/>
+  <path d="M220 156 l4 4 l8 -8" stroke="#0a1f17" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="248" y="150" width="140" height="10" rx="3" fill="#1a3a2a"/>
+
+  <!-- Step 3: open -->
+  <rect x="200" y="185" width="400" height="42" rx="6" fill="#123a2c"/>
+  <circle cx="226" cy="206" r="12" fill="#34d399"/>
+  <text x="226" y="211" fill="#0a1f17" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif">3</text>
+  <rect x="248" y="200" width="125" height="10" rx="3" fill="#2f6b52"/>
+  <path d="M568 202 l8 8 l8 -8" stroke="#34d399" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Open panel body -->
+  <rect x="200" y="227" width="400" height="120" rx="6" fill="#0a1f17"/>
+  <rect x="218" y="245" width="170" height="26" rx="4" fill="#123a2c"/>
+  <rect x="404" y="245" width="170" height="26" rx="4" fill="#123a2c"/>
+  <rect x="218" y="283" width="356" height="26" rx="4" fill="#123a2c"/>
+  <rect x="494" y="319" width="80" height="18" rx="4" fill="#10b981"/>
+
+  <!-- Step 4 -->
+  <rect x="200" y="357" width="400" height="42" rx="6" fill="#0a1f17"/>
+  <circle cx="226" cy="378" r="12" fill="#1a3a2a"/>
+  <text x="226" y="383" fill="#6ee7b7" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif">4</text>
+  <rect x="248" y="372" width="120" height="10" rx="3" fill="#1a3a2a"/>
+
+  <!-- Step 5 -->
+  <rect x="200" y="407" width="400" height="42" rx="6" fill="#0a1f17"/>
+  <circle cx="226" cy="428" r="12" fill="#1a3a2a"/>
+  <text x="226" y="433" fill="#6ee7b7" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif">5</text>
+  <rect x="248" y="422" width="95" height="10" rx="3" fill="#1a3a2a"/>
+
+  <!-- Label area -->
+  <rect x="0" y="525" width="800" height="75" fill="#161b22"/>
+  <rect x="0" y="525" width="800" height="3" fill="#10b981"/>
+
+  <text x="30" y="552" fill="#f0fdf4" font-size="22" font-weight="bold" font-family="sans-serif">NovaKur One-Page Checkout</text>
+
+  <rect x="680" y="535" width="90" height="30" rx="6" fill="#1a3a2a"/><text x="725" y="556" fill="#10b981" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif">$49</text>
+
+  <rect x="30" y="562" width="60" height="16" rx="4" fill="#10b981" opacity="0.15"/>
+  <text x="60" y="574" fill="#10b981" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif">MODULE</text>
+</svg>

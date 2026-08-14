@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+
+  <!-- Grid lines -->
+  <line x1="0" y1="0" x2="0" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="67" y1="0" x2="67" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="134" y1="0" x2="134" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="201" y1="0" x2="201" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="268" y1="0" x2="268" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="335" y1="0" x2="335" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="402" y1="0" x2="402" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="469" y1="0" x2="469" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="536" y1="0" x2="536" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="603" y1="0" x2="603" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="670" y1="0" x2="670" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="737" y1="0" x2="737" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="0" x2="800" y2="0" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="67" x2="800" y2="67" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="134" x2="800" y2="134" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="201" x2="800" y2="201" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="268" x2="800" y2="268" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="335" x2="800" y2="335" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="402" x2="800" y2="402" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="469" x2="800" y2="469" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="536" x2="800" y2="536" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+
+  <!-- Glow orb -->
+  <circle cx="400" cy="250" r="200" fill="#10b981" opacity="0.06" filter="url(#glow)"/>
+
+  <!-- Panel: CSV column mapping -->
+  <rect x="90" y="120" width="620" height="270" rx="12" fill="#0d2d24" stroke="#10b981" stroke-width="1.5"/>
+
+  <!-- Left: spreadsheet -->
+  <rect x="110" y="140" width="235" height="150" rx="6" fill="#0a1f17"/>
+  <rect x="110" y="140" width="235" height="22" rx="6" fill="#123a2c"/>
+  <text x="122" y="155" fill="#6ee7b7" font-size="10" font-weight="bold" font-family="monospace">products.csv</text>
+  <rect x="120" y="172" width="60" height="8" rx="2" fill="#1a3a2a"/>
+  <rect x="190" y="172" width="70" height="8" rx="2" fill="#1a3a2a"/>
+  <rect x="270" y="172" width="60" height="8" rx="2" fill="#1a3a2a"/>
+  <rect x="120" y="192" width="60" height="8" rx="2" fill="#153025"/>
+  <rect x="190" y="192" width="70" height="8" rx="2" fill="#153025"/>
+  <rect x="270" y="192" width="60" height="8" rx="2" fill="#153025"/>
+  <rect x="120" y="212" width="60" height="8" rx="2" fill="#153025"/>
+  <rect x="190" y="212" width="70" height="8" rx="2" fill="#153025"/>
+  <rect x="270" y="212" width="60" height="8" rx="2" fill="#153025"/>
+  <rect x="120" y="232" width="60" height="8" rx="2" fill="#153025"/>
+  <rect x="190" y="232" width="70" height="8" rx="2" fill="#153025"/>
+  <rect x="270" y="232" width="60" height="8" rx="2" fill="#153025"/>
+  <rect x="120" y="252" width="60" height="8" rx="2" fill="#153025"/>
+  <rect x="190" y="252" width="70" height="8" rx="2" fill="#153025"/>
+  <rect x="270" y="252" width="60" height="8" rx="2" fill="#153025"/>
+
+  <!-- Mapping arrows -->
+  <path d="M352 178 L392 178" stroke="#10b981" stroke-width="2"/>
+  <path d="M352 208 L392 208" stroke="#10b981" stroke-width="2"/>
+  <path d="M352 238 L392 238" stroke="#10b981" stroke-width="2"/>
+  <polygon points="392,174 400,178 392,182" fill="#10b981"/>
+  <polygon points="392,204 400,208 392,212" fill="#10b981"/>
+  <polygon points="392,234 400,238 392,242" fill="#10b981"/>
+
+  <!-- Right: OpenCart fields -->
+  <rect x="408" y="140" width="282" height="150" rx="6" fill="#0a1f17"/>
+  <rect x="408" y="140" width="282" height="22" rx="6" fill="#123a2c"/>
+  <text x="420" y="155" fill="#6ee7b7" font-size="10" font-weight="bold" font-family="monospace">oc_product</text>
+  <rect x="420" y="171" width="120" height="15" rx="3" fill="#153025"/>
+  <text x="428" y="182" fill="#6ee7b7" font-size="9" font-family="monospace">model</text>
+  <rect x="420" y="201" width="120" height="15" rx="3" fill="#153025"/>
+  <text x="428" y="212" fill="#6ee7b7" font-size="9" font-family="monospace">name</text>
+  <rect x="420" y="231" width="120" height="15" rx="3" fill="#153025"/>
+  <text x="428" y="242" fill="#6ee7b7" font-size="9" font-family="monospace">price</text>
+  <rect x="556" y="171" width="120" height="15" rx="3" fill="#0f2a20"/>
+  <text x="564" y="182" fill="#3f7f66" font-size="9" font-family="monospace">product_desc.</text>
+  <rect x="556" y="201" width="120" height="15" rx="3" fill="#0f2a20"/>
+  <text x="564" y="212" fill="#3f7f66" font-size="9" font-family="monospace">to_category</text>
+  <rect x="556" y="231" width="120" height="15" rx="3" fill="#0f2a20"/>
+  <text x="564" y="242" fill="#3f7f66" font-size="9" font-family="monospace">seo_url</text>
+
+  <!-- Progress bar -->
+  <rect x="110" y="312" width="580" height="16" rx="8" fill="#0a1f17"/>
+  <rect x="110" y="312" width="400" height="16" rx="8" fill="#10b981"/>
+  <text x="118" y="350" fill="#6ee7b7" font-size="11" font-family="sans-serif">Chunked import — 4,000 / 5,800 rows</text>
+  <rect x="560" y="340" width="130" height="18" rx="4" fill="#1a3a2a"/>
+  <text x="625" y="353" fill="#10b981" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif">DRY RUN PASSED</text>
+
+  <!-- Feature chips -->
+  <rect x="90" y="420" width="150" height="34" rx="8" fill="#0d2d24" stroke="#10b981" stroke-width="1"/>
+  <text x="165" y="442" fill="#6ee7b7" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif">Column mapping</text>
+  <rect x="256" y="420" width="130" height="34" rx="8" fill="#0d2d24" stroke="#10b981" stroke-width="1"/>
+  <text x="321" y="442" fill="#6ee7b7" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif">Dry run</text>
+  <rect x="402" y="420" width="150" height="34" rx="8" fill="#0d2d24" stroke="#10b981" stroke-width="1"/>
+  <text x="477" y="442" fill="#6ee7b7" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif">UTF-8 + BOM</text>
+  <rect x="568" y="420" width="142" height="34" rx="8" fill="#0d2d24" stroke="#10b981" stroke-width="1"/>
+  <text x="639" y="442" fill="#6ee7b7" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif">No timeouts</text>
+
+  <!-- Label area -->
+  <rect x="0" y="525" width="800" height="75" fill="#161b22"/>
+  <rect x="0" y="525" width="800" height="3" fill="#10b981"/>
+
+  <text x="30" y="552" fill="#f0fdf4" font-size="22" font-weight="bold" font-family="sans-serif">NovaKur Import / Export Pro</text>
+
+  <rect x="680" y="535" width="90" height="30" rx="6" fill="#1a3a2a"/>
+  <text x="725" y="556" fill="#10b981" font-size="14" font-weight="bold" text-anchor="middle" font-family="sans-serif">$39</text>
+
+  <rect x="30" y="562" width="60" height="16" rx="4" fill="#10b981" opacity="0.15"/>
+  <text x="60" y="574" fill="#10b981" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif">MODULE</text>
+</svg>
