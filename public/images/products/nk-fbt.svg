@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+
+  <!-- Grid lines -->
+  <line x1="0" y1="0" x2="0" y2="600" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="67" y1="0" x2="67" y2="600" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="134" y1="0" x2="134" y2="600" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="201" y1="0" x2="201" y2="600" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="268" y1="0" x2="268" y2="600" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="335" y1="0" x2="335" y2="600" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="402" y1="0" x2="402" y2="600" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="469" y1="0" x2="469" y2="600" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="536" y1="0" x2="536" y2="600" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="603" y1="0" x2="603" y2="600" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="670" y1="0" x2="670" y2="600" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="737" y1="0" x2="737" y2="600" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="0" x2="800" y2="0" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="67" x2="800" y2="67" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="134" x2="800" y2="134" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="201" x2="800" y2="201" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="268" x2="800" y2="268" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="335" x2="800" y2="335" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="402" x2="800" y2="402" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="469" x2="800" y2="469" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="536" x2="800" y2="536" stroke="#8b5cf6" stroke-width="0.2" opacity="0.15"/>
+
+  <!-- Glow orb -->
+  <circle cx="400" cy="250" r="200" fill="#8b5cf6" opacity="0.06" filter="url(#glow)"/>
+
+  <!-- Module preview illustration: bundle box -->
+  <rect x="120" y="120" width="560" height="265" rx="12" fill="#1a1235" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="145" y="152" fill="#ede9fe" font-size="14" font-weight="bold" font-family="sans-serif">Frequently bought together</text>
+
+  <!-- product 1 -->
+  <rect x="145" y="172" width="12" height="12" rx="3" fill="#8b5cf6"/>
+  <path d="M148 178 l2.5 2.5 l4.5 -5" stroke="#1a1235" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <rect x="165" y="168" width="96" height="96" rx="6" fill="#120c26"/>
+  <rect x="181" y="196" width="64" height="40" rx="5" fill="#2a1f4d"/>
+  <circle cx="213" cy="216" r="13" fill="#8b5cf6" opacity="0.75"/>
+  <rect x="165" y="272" width="80" height="9" rx="2" fill="#2a1f4d"/>
+  <text x="165" y="300" fill="#c4b5fd" font-size="13" font-weight="bold" font-family="sans-serif">$240.00</text>
+
+  <text x="278" y="228" fill="#8b5cf6" font-size="26" font-weight="bold" font-family="sans-serif">+</text>
+
+  <!-- product 2 -->
+  <rect x="310" y="172" width="12" height="12" rx="3" fill="#8b5cf6"/>
+  <path d="M313 178 l2.5 2.5 l4.5 -5" stroke="#1a1235" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <rect x="330" y="168" width="96" height="96" rx="6" fill="#120c26"/>
+  <path d="M348 236 l16 -30 l16 30 z" fill="#2a1f4d"/>
+  <rect x="386" y="206" width="24" height="30" rx="4" fill="#2a1f4d"/>
+  <rect x="330" y="272" width="66" height="9" rx="2" fill="#2a1f4d"/>
+  <text x="330" y="300" fill="#c4b5fd" font-size="13" font-weight="bold" font-family="sans-serif">$36.00</text>
+
+  <text x="443" y="228" fill="#8b5cf6" font-size="26" font-weight="bold" font-family="sans-serif">+</text>
+
+  <!-- product 3 -->
+  <rect x="475" y="172" width="12" height="12" rx="3" fill="none" stroke="#8b5cf6" stroke-width="1.5"/>
+  <rect x="495" y="168" width="96" height="96" rx="6" fill="#120c26"/>
+  <rect x="515" y="192" width="56" height="48" rx="4" fill="#2a1f4d"/>
+  <rect x="524" y="202" width="38" height="6" rx="2" fill="#8b5cf6" opacity="0.5"/>
+  <rect x="495" y="272" width="72" height="9" rx="2" fill="#2a1f4d"/>
+  <text x="495" y="300" fill="#c4b5fd" font-size="13" font-weight="bold" font-family="sans-serif">$18.00</text>
+
+  <!-- total + button -->
+  <text x="145" y="345" fill="#ede9fe" font-size="15" font-family="sans-serif">Total price:</text>
+  <text x="238" y="345" fill="#ffffff" font-size="17" font-weight="bold" font-family="sans-serif">$276.00</text>
+  <rect x="445" y="323" width="210" height="34" rx="6" fill="#8b5cf6"/>
+  <text x="550" y="345" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif">Add selected to cart</text>
+
+  <!-- data source strip -->
+  <rect x="120" y="405" width="560" height="72" rx="10" fill="#161b22" stroke="#2a1f4d" stroke-width="1"/>
+  <text x="145" y="432" fill="#a78bfa" font-size="12" font-weight="bold" font-family="sans-serif">SOURCES</text>
+  <rect x="145" y="444" width="150" height="20" rx="5" fill="#2a1f4d"/>
+  <text x="220" y="458" fill="#ede9fe" font-size="10" text-anchor="middle" font-family="sans-serif">manual picks</text>
+  <rect x="305" y="444" width="190" height="20" rx="5" fill="#2a1f4d"/>
+  <text x="400" y="458" fill="#ede9fe" font-size="10" text-anchor="middle" font-family="sans-serif">order history co-occurrence</text>
+  <rect x="505" y="444" width="150" height="20" rx="5" fill="#2a1f4d"/>
+  <text x="580" y="458" fill="#ede9fe" font-size="10" text-anchor="middle" font-family="sans-serif">cron refreshed cache</text>
+
+  <!-- Label area -->
+  <rect x="0" y="525" width="800" height="75" fill="#161b22"/>
+  <rect x="0" y="525" width="800" height="3" fill="#8b5cf6"/>
+
+  <text x="30" y="552" fill="#f5f3ff" font-size="22" font-weight="bold" font-family="sans-serif">NovaKur Frequently Bought Together</text>
+
+  <rect x="680" y="535" width="90" height="30" rx="6" fill="#2a1f4d"/><text x="725" y="556" fill="#8b5cf6" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif">$34</text>
+
+  <rect x="30" y="562" width="60" height="16" rx="4" fill="#8b5cf6" opacity="0.15"/>
+  <text x="60" y="574" fill="#8b5cf6" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif">MODULE</text>
+</svg>

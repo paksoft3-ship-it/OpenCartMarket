@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+
+  <!-- Grid lines -->
+  <line x1="0" y1="0" x2="0" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="67" y1="0" x2="67" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="134" y1="0" x2="134" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="201" y1="0" x2="201" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="268" y1="0" x2="268" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="335" y1="0" x2="335" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="402" y1="0" x2="402" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="469" y1="0" x2="469" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="536" y1="0" x2="536" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="603" y1="0" x2="603" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="670" y1="0" x2="670" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="737" y1="0" x2="737" y2="600" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="0" x2="800" y2="0" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="67" x2="800" y2="67" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="134" x2="800" y2="134" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="201" x2="800" y2="201" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="268" x2="800" y2="268" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="335" x2="800" y2="335" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="402" x2="800" y2="402" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="469" x2="800" y2="469" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+  <line x1="0" y1="536" x2="800" y2="536" stroke="#10b981" stroke-width="0.2" opacity="0.15"/>
+
+  <!-- Glow orb -->
+  <circle cx="400" cy="250" r="200" fill="#10b981" opacity="0.06" filter="url(#glow)"/>
+
+  <!-- Module preview illustration -->
+  <!-- browser frame -->
+  <rect x="150" y="90" width="500" height="380" rx="10" fill="#0a1f17" stroke="#10b981" stroke-width="1.5"/>
+
+  <!-- pinned header -->
+  <rect x="150" y="90" width="500" height="56" rx="10" fill="#0d2d24"/>
+  <rect x="150" y="136" width="500" height="10" fill="#0d2d24"/>
+  <rect x="150" y="144" width="500" height="2" fill="#10b981" opacity="0.65"/>
+  <circle cx="184" cy="118" r="12" fill="#10b981" opacity="0.35"/>
+  <text x="208" y="123" fill="#f0fdf4" font-size="13" font-weight="bold" font-family="sans-serif">STORE</text>
+  <rect x="300" y="107" width="180" height="22" rx="4" fill="#0a1f17" stroke="#10b981" stroke-width="0.8"/>
+  <circle cx="316" cy="118" r="5" fill="none" stroke="#10b981" stroke-width="1.4"/>
+  <rect x="512" y="107" width="60" height="22" rx="4" fill="#10b981" opacity="0.25"/>
+  <text x="542" y="122" fill="#6ee7b7" font-size="10" text-anchor="middle" font-family="sans-serif">Cart</text>
+  <rect x="586" y="107" width="46" height="22" rx="4" fill="#0a1f17" stroke="#10b981" stroke-width="0.8"/>
+  <text x="609" y="122" fill="#6ee7b7" font-size="10" text-anchor="middle" font-family="sans-serif">Menu</text>
+
+  <text x="662" y="122" fill="#10b981" font-size="11" font-weight="bold" font-family="sans-serif">pinned</text>
+
+  <!-- content scrolling underneath -->
+  <rect x="176" y="168" width="200" height="14" rx="3" fill="#10b981" opacity="0.30"/>
+  <rect x="176" y="192" width="448" height="9" rx="3" fill="#10b981" opacity="0.13"/>
+  <rect x="176" y="208" width="410" height="9" rx="3" fill="#10b981" opacity="0.13"/>
+  <rect x="176" y="234" width="136" height="96" rx="5" fill="#0d2d24" stroke="#10b981" stroke-width="0.7"/>
+  <rect x="332" y="234" width="136" height="96" rx="5" fill="#0d2d24" stroke="#10b981" stroke-width="0.7"/>
+  <rect x="488" y="234" width="136" height="96" rx="5" fill="#0d2d24" stroke="#10b981" stroke-width="0.7"/>
+  <rect x="176" y="346" width="448" height="9" rx="3" fill="#10b981" opacity="0.13"/>
+  <rect x="176" y="362" width="380" height="9" rx="3" fill="#10b981" opacity="0.13"/>
+  <rect x="176" y="388" width="136" height="60" rx="5" fill="#0d2d24" stroke="#10b981" stroke-width="0.7"/>
+  <rect x="332" y="388" width="136" height="60" rx="5" fill="#0d2d24" stroke="#10b981" stroke-width="0.7"/>
+  <rect x="488" y="388" width="136" height="60" rx="5" fill="#0d2d24" stroke="#10b981" stroke-width="0.7"/>
+
+  <!-- scroll arrow -->
+  <line x1="686" y1="200" x2="686" y2="400" stroke="#10b981" stroke-width="2" opacity="0.55"/>
+  <path d="M680 392l6 10 6-10" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="700" y="300" fill="#6ee7b7" font-size="11" font-family="sans-serif" opacity="0.8" transform="rotate(90 700 300)">scroll</text>
+
+  <!-- mode chips -->
+  <rect x="150" y="486" width="118" height="24" rx="12" fill="#10b981" opacity="0.15"/>
+  <text x="209" y="502" fill="#10b981" font-size="10" font-weight="bold" text-anchor="middle" font-family="sans-serif">after offset</text>
+  <rect x="278" y="486" width="118" height="24" rx="12" fill="#10b981" opacity="0.15"/>
+  <text x="337" y="502" fill="#10b981" font-size="10" font-weight="bold" text-anchor="middle" font-family="sans-serif">compact mode</text>
+  <rect x="406" y="486" width="152" height="24" rx="12" fill="#10b981" opacity="0.15"/>
+  <text x="482" y="502" fill="#10b981" font-size="10" font-weight="bold" text-anchor="middle" font-family="sans-serif">hide on scroll down</text>
+
+  <!-- Label area -->
+  <rect x="0" y="525" width="800" height="75" fill="#161b22"/>
+  <rect x="0" y="525" width="800" height="3" fill="#10b981"/>
+
+  <text x="30" y="552" fill="#f0fdf4" font-size="22" font-weight="bold" font-family="sans-serif">NovaKur Sticky Header</text>
+
+  <rect x="680" y="535" width="90" height="30" rx="6" fill="#1a3a2a"/><text x="725" y="556" fill="#10b981" font-size="14" font-weight="bold" text-anchor="middle" font-family="sans-serif">$19</text>
+
+  <rect x="30" y="562" width="60" height="16" rx="4" fill="#10b981" opacity="0.15"/>
+  <text x="60" y="574" fill="#10b981" font-size="9" font-weight="bold" text-anchor="middle" font-family="sans-serif">MODULE</text>
+</svg>
